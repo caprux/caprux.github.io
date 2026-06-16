@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8"/>
@@ -8,23 +8,20 @@
   <style>
     :root {
       --black:  #000000;
-      --s1:     #0d0d0d;
-      --s2:     #1a1a1a;
+      --surface:#0d0d0d;
+      --surf2:  #1a1a1a;
       --grey:   #888888;
-      --greylT: #b0b0b0;
+      --grey-lt:#b0b0b0;
       --white:  #ffffff;
       --green:  #00ff00;
       --glow:   0 0 14px #00ff0099, 0 0 48px #00ff0033;
-      --glow-s: 0 0 8px #00ff0066;
     }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth}
     body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;font-weight:300;overflow-x:hidden}
-
-    /* scrollbar */
     ::-webkit-scrollbar{width:3px}
     ::-webkit-scrollbar-track{background:var(--black)}
-    ::-webkit-scrollbar-thumb{background:var(--green);border-radius:2px}
+    ::-webkit-scrollbar-thumb{background:var(--green)}
 
     /* ══════════════════════════════
        NAV
@@ -39,23 +36,23 @@
     }
     .nav-logo img{
       height:32px;
-      filter:drop-shadow(0 0 6px #00ff0066);
-      transition:filter .3s;
+      filter:drop-shadow(0 0 8px #00ff0066);
+      transition:filter 0.3s;
     }
-    .nav-logo img:hover{filter:drop-shadow(0 0 14px #00ff00cc)}
+    .nav-logo img:hover{filter:drop-shadow(0 0 16px #00ff00cc)}
     .nav-links{display:flex;gap:32px;list-style:none}
     .nav-links a{
-      font-family:'Share Tech Mono',monospace;font-size:.72rem;
-      letter-spacing:.22em;text-transform:uppercase;
-      color:var(--grey);text-decoration:none;transition:color .2s;
+      font-family:'Share Tech Mono',monospace;
+      font-size:0.72rem;letter-spacing:0.22em;text-transform:uppercase;
+      color:var(--grey);text-decoration:none;transition:color 0.2s;
     }
     .nav-links a:hover{color:var(--green)}
     .nav-cta{
-      font-family:'Share Tech Mono',monospace;font-size:.7rem;
-      letter-spacing:.15em;text-transform:uppercase;
+      font-family:'Share Tech Mono',monospace;
+      font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;
       background:transparent;border:1px solid var(--green);
-      color:var(--green);padding:8px 20px;text-decoration:none;
-      transition:background .2s,color .2s,box-shadow .2s;
+      color:var(--green);padding:8px 20px;
+      text-decoration:none;transition:all 0.2s;
     }
     .nav-cta:hover{background:var(--green);color:var(--black);box-shadow:var(--glow)}
 
@@ -63,177 +60,182 @@
        HERO
     ══════════════════════════════ */
     #home{
-      min-height:100vh;display:flex;flex-direction:column;
+      min-height:100vh;
+      display:flex;flex-direction:column;
       justify-content:center;align-items:flex-start;
-      padding:110px 40px 60px;position:relative;overflow:hidden;
+      padding:120px 40px 60px;
+      position:relative;overflow:hidden;
     }
 
-    /* grid bg */
+    /* Grid background */
     .hero-grid{
       position:absolute;inset:0;
       background-image:
-        linear-gradient(rgba(0,255,0,.035) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(0,255,0,.035) 1px,transparent 1px);
-      background-size:64px 64px;pointer-events:none;
+        linear-gradient(rgba(0,255,0,0.035) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(0,255,0,0.035) 1px,transparent 1px);
+      background-size:56px 56px;
+      pointer-events:none;
     }
 
-    /* scanline overlay */
+    /* Scan line sweep */
     .hero-scan{
-      position:absolute;inset:0;pointer-events:none;
-      background:repeating-linear-gradient(
-        to bottom,
-        transparent 0px,
-        transparent 3px,
-        rgba(0,0,0,.18) 3px,
-        rgba(0,0,0,.18) 4px
-      );
+      position:absolute;inset:0;
+      background:linear-gradient(to bottom,transparent 50%,rgba(0,255,0,0.018) 50%);
+      background-size:100% 4px;
+      pointer-events:none;
       animation:scan-move 8s linear infinite;
-      opacity:.5;
     }
     @keyframes scan-move{
       0%{background-position:0 0}
-      100%{background-position:0 200px}
+      100%{background-position:0 100%}
     }
 
-    /* vignette */
-    .hero-vignette{
-      position:absolute;inset:0;pointer-events:none;
-      background:radial-gradient(ellipse at center,transparent 40%,rgba(0,0,0,.85) 100%);
+    /* Noise overlay */
+    .hero-noise{
+      position:absolute;inset:0;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events:none;opacity:0.4;
     }
 
-    /* ambient green orb */
-    .hero-orb{
-      position:absolute;bottom:-120px;right:-80px;
-      width:480px;height:480px;border-radius:50%;
-      background:radial-gradient(circle,rgba(0,255,0,.08) 0%,transparent 70%);
-      pointer-events:none;animation:orb-pulse 4s ease-in-out infinite;
+    /* Corner brackets */
+    #home::before,#home::after{
+      content:'';position:absolute;
+      width:40px;height:40px;
+      border-color:var(--green);
+      border-style:solid;
+      opacity:0.4;
     }
-    @keyframes orb-pulse{
-      0%,100%{transform:scale(1);opacity:.7}
-      50%{transform:scale(1.15);opacity:1}
-    }
+    #home::before{top:90px;left:40px;border-width:1px 0 0 1px}
+    #home::after{bottom:40px;right:40px;border-width:0 1px 1px 0}
 
     .hero-tag{
-      font-family:'Share Tech Mono',monospace;font-size:.7rem;
-      letter-spacing:.3em;color:var(--green);text-transform:uppercase;
-      margin-bottom:28px;position:relative;
+      font-family:'Share Tech Mono',monospace;
+      font-size:0.7rem;letter-spacing:0.32em;color:var(--green);
+      text-transform:uppercase;margin-bottom:28px;position:relative;
     }
     .hero-tag::before{content:'// ';color:var(--grey)}
 
-    /* ── LOGO HERO (text logo besar) ── */
-    .hero-logo-wrap{position:relative;display:inline-block;margin-bottom:24px}
-    .hero-logo-img{
-      width:clamp(280px,65vw,860px);
-      display:block;
-      /* filter: drop-shadow putih + glitch color layers */
-      filter:drop-shadow(0 0 2px #fff) drop-shadow(0 0 20px rgba(0,255,0,.25));
-      animation:logo-breathe 5s ease-in-out infinite;
+    /* LOGO hero — glitch pada PNG */
+    .hero-logo-wrap{
+      position:relative;
+      margin-bottom:32px;
+      display:inline-block;
     }
-    @keyframes logo-breathe{
-      0%,100%{filter:drop-shadow(0 0 2px #fff) drop-shadow(0 0 18px rgba(0,255,0,.2))}
-      50%{filter:drop-shadow(0 0 4px #fff) drop-shadow(0 0 36px rgba(0,255,0,.45))}
+    .hero-logo-wrap img.main-logo{
+      width:min(680px, 85vw);
+      position:relative;z-index:2;
+      filter:drop-shadow(0 0 20px #00ff0055);
     }
-
-    /* glitch duplikat di atas logo */
-    .hero-logo-glitch{
-      position:absolute;top:0;left:0;width:100%;
-      pointer-events:none;
-    }
-    .hero-logo-glitch::before,
-    .hero-logo-glitch::after{
+    /* Glitch layer 1 */
+    .hero-logo-wrap::before{
       content:'';
       position:absolute;inset:0;
-      background:url('logo_text_putih.png') no-repeat left center/contain;
-    }
-    .hero-logo-glitch::before{
+      background:url('logo_text_putih.png') center/contain no-repeat;
       filter:drop-shadow(0 0 0 #00ff00);
-      clip-path:polygon(0 22%,100% 22%,100% 34%,0 34%);
-      mix-blend-mode:screen;
-      animation:glitch-a 3.8s infinite steps(1);
+      clip-path:polygon(0 15%,100% 15%,100% 30%,0 30%);
+      animation:logo-glitch-1 3.8s infinite steps(1);
+      opacity:0;z-index:3;
     }
-    .hero-logo-glitch::after{
-      filter:hue-rotate(180deg) brightness(2);
-      clip-path:polygon(0 58%,100% 58%,100% 70%,0 70%);
-      mix-blend-mode:screen;
-      animation:glitch-b 4.6s infinite steps(1);
+    /* Glitch layer 2 */
+    .hero-logo-wrap::after{
+      content:'';
+      position:absolute;inset:0;
+      background:url('logo_text_putih.png') center/contain no-repeat;
+      clip-path:polygon(0 55%,100% 55%,100% 68%,0 68%);
+      animation:logo-glitch-2 4.4s infinite steps(1);
+      opacity:0;z-index:3;
       left:4px;
     }
-    @keyframes glitch-a{
+    @keyframes logo-glitch-1{
       0%,88%{opacity:0;transform:translateX(0)}
-      89%{opacity:1;transform:translateX(-6px)}
+      89%{opacity:1;transform:translateX(-6px);filter:hue-rotate(90deg) brightness(2)}
       91%{opacity:0}
-      93%{opacity:1;transform:translateX(5px)}
-      95%,100%{opacity:0}
+      93%{opacity:1;transform:translateX(6px)}
+      95%,100%{opacity:0;transform:translateX(0)}
     }
-    @keyframes glitch-b{
+    @keyframes logo-glitch-2{
       0%,82%{opacity:0;transform:translateX(0)}
-      83%{opacity:1;transform:translateX(4px)}
+      83%{opacity:1;transform:translateX(5px);filter:hue-rotate(180deg)}
       86%{opacity:0}
       90%{opacity:1;transform:translateX(-4px)}
       93%,100%{opacity:0}
     }
 
     .hero-sub{
-      max-width:500px;font-size:.98rem;color:var(--grey);
-      line-height:1.8;font-weight:300;position:relative;
+      max-width:480px;font-size:1rem;color:var(--grey);
+      line-height:1.75;font-weight:300;position:relative;
     }
     .hero-sub strong{color:var(--white);font-weight:500}
 
     .hero-mantra{
       margin-top:28px;
-      font-family:'Share Tech Mono',monospace;font-size:.72rem;
-      letter-spacing:.22em;color:var(--green);text-transform:uppercase;
-      position:relative;
+      font-family:'Share Tech Mono',monospace;
+      font-size:0.73rem;letter-spacing:0.22em;
+      color:var(--green);text-transform:uppercase;
+      animation:pulse-text 3s ease-in-out infinite;
+    }
+    @keyframes pulse-text{
+      0%,100%{opacity:1}
+      50%{opacity:0.55}
     }
 
-    .hero-actions{margin-top:40px;display:flex;gap:14px;flex-wrap:wrap;position:relative}
+    .hero-actions{margin-top:44px;display:flex;gap:14px;flex-wrap:wrap}
 
     .btn-primary{
-      font-family:'Share Tech Mono',monospace;font-size:.75rem;
-      letter-spacing:.15em;text-transform:uppercase;
-      background:var(--green);color:var(--black);border:none;
-      padding:14px 32px;cursor:pointer;font-weight:700;
+      font-family:'Share Tech Mono',monospace;font-size:0.76rem;
+      letter-spacing:0.15em;text-transform:uppercase;
+      background:var(--green);color:var(--black);
+      border:none;padding:14px 32px;cursor:pointer;font-weight:700;
       text-decoration:none;display:inline-block;
-      transition:box-shadow .25s,transform .15s;
-      clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,0 100%);
+      position:relative;overflow:hidden;
+      transition:box-shadow 0.2s,transform 0.15s;
+    }
+    .btn-primary::after{
+      content:'';position:absolute;top:0;left:-100%;
+      width:60%;height:100%;
+      background:linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent);
+      animation:btn-shine 3s ease-in-out infinite;
+    }
+    @keyframes btn-shine{
+      0%{left:-100%}60%,100%{left:150%}
     }
     .btn-primary:hover{box-shadow:var(--glow);transform:translateY(-2px)}
 
     .btn-ghost{
-      font-family:'Share Tech Mono',monospace;font-size:.75rem;
-      letter-spacing:.15em;text-transform:uppercase;
+      font-family:'Share Tech Mono',monospace;font-size:0.76rem;
+      letter-spacing:0.15em;text-transform:uppercase;
       background:transparent;color:var(--white);
       border:1px solid #444;padding:14px 32px;
-      cursor:pointer;text-decoration:none;display:inline-block;
-      transition:border-color .2s,color .2s;
-      clip-path:polygon(10px 0,100% 0,100% 100%,0 100%,0 10px);
+      text-decoration:none;display:inline-block;
+      transition:border-color 0.2s,color 0.2s;
     }
     .btn-ghost:hover{border-color:var(--green);color:var(--green)}
 
-    /* scroll hint */
+    /* Scroll hint */
     .scroll-hint{
       position:absolute;bottom:36px;right:40px;
       display:flex;flex-direction:column;align-items:center;gap:8px;
-      font-family:'Share Tech Mono',monospace;font-size:.62rem;
-      letter-spacing:.25em;color:var(--grey);text-transform:uppercase;
+      font-family:'Share Tech Mono',monospace;font-size:0.62rem;
+      letter-spacing:0.25em;color:var(--grey);text-transform:uppercase;
     }
     .scroll-line{
-      width:1px;height:52px;
+      width:1px;height:44px;
       background:linear-gradient(to bottom,var(--green),transparent);
-      animation:scr 2s ease-in-out infinite;
+      animation:s-pulse 2s ease-in-out infinite;
     }
-    @keyframes scr{0%,100%{opacity:1}50%{opacity:.2}}
+    @keyframes s-pulse{0%,100%{opacity:1;transform:scaleY(1)}50%{opacity:0.2;transform:scaleY(0.5)}}
 
     /* ══════════════════════════════
        MARQUEE
     ══════════════════════════════ */
-    .marquee-wrap{background:var(--green);overflow:hidden;padding:11px 0;white-space:nowrap}
-    .marquee-inner{display:inline-flex;animation:marquee 20s linear infinite}
+    .marquee-strip{background:var(--green);overflow:hidden;padding:11px 0;white-space:nowrap}
+    .marquee-inner{display:inline-flex;animation:marquee 16s linear infinite}
     .marquee-inner span{
-      font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.8rem;
-      letter-spacing:.14em;text-transform:uppercase;color:var(--black);padding:0 28px;
+      font-family:'Space Grotesk',sans-serif;font-weight:700;
+      font-size:0.8rem;letter-spacing:0.15em;text-transform:uppercase;
+      color:var(--black);padding:0 28px;
     }
-    .marquee-sep{opacity:.35}
+    .msep{opacity:0.35}
     @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
     /* ══════════════════════════════
@@ -241,69 +243,98 @@
     ══════════════════════════════ */
     section{padding:100px 40px}
     .eyebrow{
-      font-family:'Share Tech Mono',monospace;font-size:.68rem;
-      letter-spacing:.35em;text-transform:uppercase;color:var(--green);margin-bottom:14px;
+      font-family:'Share Tech Mono',monospace;font-size:0.68rem;
+      letter-spacing:0.36em;text-transform:uppercase;color:var(--green);margin-bottom:14px;
     }
     .sec-title{
       font-family:'Space Grotesk',sans-serif;font-weight:900;
-      font-size:clamp(2rem,5.5vw,4.2rem);line-height:1;
-      color:var(--white);margin-bottom:22px;
+      font-size:clamp(2rem,6vw,4.2rem);line-height:1;
+      color:var(--white);margin-bottom:20px;
     }
-    .sec-div{width:56px;height:2px;background:var(--green);margin-bottom:48px;box-shadow:var(--glow-s)}
+    .divider{width:56px;height:2px;background:var(--green);margin-bottom:48px;box-shadow:var(--glow)}
 
     /* ══════════════════════════════
        DROPS
     ══════════════════════════════ */
-    #products{background:var(--s1)}
-    .drops-hdr{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:56px;flex-wrap:wrap;gap:20px}
-    .drops-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:2px}
+    #products{background:var(--surface)}
+    .drops-header{
+      display:flex;align-items:flex-end;justify-content:space-between;
+      margin-bottom:56px;flex-wrap:wrap;gap:20px;
+    }
+    .drops-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(290px,1fr));
+      gap:2px;
+    }
 
     .drop-card{
-      background:var(--s2);position:relative;overflow:hidden;
-      cursor:pointer;aspect-ratio:3/4;display:flex;flex-direction:column;justify-content:flex-end;
+      background:var(--surf2);
+      position:relative;overflow:hidden;
+      cursor:pointer;aspect-ratio:3/4;
+      display:flex;flex-direction:column;justify-content:flex-end;
+      transition:transform 0.4s ease;
     }
-    /* hover border glow */
-    .drop-card::after{
-      content:'';position:absolute;inset:0;
-      border:1px solid transparent;
-      transition:border-color .3s,box-shadow .3s;pointer-events:none;
-    }
-    .drop-card:hover::after{border-color:var(--green);box-shadow:inset 0 0 20px rgba(0,255,0,.07)}
+    .drop-card:hover{transform:scale(1.01)}
 
-    .drop-img{
-      position:absolute;inset:0;width:100%;height:100%;
-      object-fit:cover;opacity:.75;
-      transition:transform .6s ease,opacity .3s;
+    /* Corner accent on hover */
+    .drop-card::before{
+      content:'';position:absolute;top:0;left:0;
+      width:24px;height:24px;
+      border-top:2px solid var(--green);border-left:2px solid var(--green);
+      opacity:0;transition:opacity 0.3s;z-index:5;
     }
-    .drop-card:hover .drop-img{transform:scale(1.06);opacity:.9}
+    .drop-card:hover::before{opacity:1}
 
-    /* placeholder jika belum ada gambar */
+    .drop-card-img{
+      position:absolute;inset:0;
+      display:flex;align-items:center;justify-content:center;
+      overflow:hidden;
+    }
+    .drop-card-img img{
+      width:100%;height:100%;object-fit:cover;
+      transition:transform 0.5s ease,filter 0.3s;
+      filter:grayscale(20%);
+    }
+    .drop-card:hover .drop-card-img img{
+      transform:scale(1.06);
+      filter:grayscale(0%) brightness(1.05);
+    }
+
+    /* Placeholder kalau belum ada foto */
     .drop-placeholder{
-      position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-      font-size:3.5rem;opacity:.1;
+      width:100%;height:100%;
+      background:var(--surf2);
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      gap:12px;
+    }
+    .drop-placeholder span{font-size:3.5rem;opacity:0.15}
+    .drop-placeholder p{
+      font-family:'Share Tech Mono',monospace;font-size:0.62rem;
+      letter-spacing:0.15em;color:#333;text-transform:uppercase;
     }
 
     .drop-body{
-      position:relative;padding:22px;
-      background:linear-gradient(to top,rgba(0,0,0,.97) 55%,transparent);
+      position:relative;z-index:2;
+      padding:24px;
+      background:linear-gradient(to top,rgba(0,0,0,0.97) 55%,transparent);
     }
     .drop-badge{
-      font-family:'Share Tech Mono',monospace;font-size:.62rem;
-      letter-spacing:.2em;color:var(--green);text-transform:uppercase;margin-bottom:6px;
+      font-family:'Share Tech Mono',monospace;font-size:0.62rem;
+      letter-spacing:0.2em;color:var(--green);text-transform:uppercase;margin-bottom:6px;
     }
     .drop-name{
       font-family:'Space Grotesk',sans-serif;font-weight:700;
       font-size:1.25rem;color:var(--white);margin-bottom:4px;
     }
-    .drop-desc{font-size:.78rem;color:var(--grey);margin-bottom:14px;line-height:1.55}
+    .drop-desc{font-size:0.78rem;color:var(--grey);margin-bottom:14px;line-height:1.5}
     .drop-foot{display:flex;align-items:center;justify-content:space-between}
     .drop-price{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.05rem;color:var(--white)}
     .drop-status{
-      font-family:'Share Tech Mono',monospace;font-size:.62rem;
-      letter-spacing:.15em;padding:5px 11px;border:1px solid;text-transform:uppercase;
+      font-family:'Share Tech Mono',monospace;font-size:0.62rem;
+      letter-spacing:0.15em;padding:5px 12px;border:1px solid;text-transform:uppercase;
     }
     .s-soon{color:var(--green);border-color:var(--green)}
-    .s-open{color:var(--white);border-color:var(--white);background:rgba(255,255,255,.05)}
+    .s-open{color:var(--white);border-color:var(--white);background:rgba(255,255,255,0.06)}
     .s-sold{color:var(--grey);border-color:var(--grey)}
 
     /* ══════════════════════════════
@@ -314,159 +345,166 @@
       position:relative;overflow:hidden;
     }
     #philosophy::before{
-      content:'KACAU';
+      content:'CAPRUX';
       position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
       font-family:'Space Grotesk',sans-serif;font-weight:900;
-      font-size:clamp(6rem,20vw,18rem);color:rgba(0,0,0,.06);
-      white-space:nowrap;pointer-events:none;line-height:1;
+      font-size:clamp(6rem,20vw,16rem);
+      color:transparent;
+      -webkit-text-stroke:1px rgba(0,0,0,0.08);
+      white-space:nowrap;pointer-events:none;
     }
     .phil-label{
-      font-family:'Share Tech Mono',monospace;font-size:.7rem;
-      letter-spacing:.35em;text-transform:uppercase;color:rgba(0,0,0,.45);margin-bottom:18px;
+      font-family:'Share Tech Mono',monospace;font-size:0.7rem;
+      letter-spacing:0.35em;text-transform:uppercase;color:rgba(0,0,0,0.45);margin-bottom:18px;
+      position:relative;
     }
-    .phil-q{
+    .phil-quote{
       font-family:'Space Grotesk',sans-serif;font-weight:900;
-      font-size:clamp(2.2rem,7vw,5.5rem);line-height:.95;
-      color:var(--black);letter-spacing:-.03em;position:relative;
+      font-size:clamp(2.2rem,7vw,5.5rem);line-height:0.95;
+      color:var(--black);letter-spacing:-0.03em;position:relative;
     }
     .phil-sub{
-      margin-top:22px;font-family:'Share Tech Mono',monospace;font-size:.76rem;
-      letter-spacing:.2em;color:rgba(0,0,0,.5);text-transform:uppercase;
+      margin-top:22px;
+      font-family:'Share Tech Mono',monospace;font-size:0.78rem;
+      letter-spacing:0.2em;color:rgba(0,0,0,0.5);text-transform:uppercase;
+      position:relative;
     }
 
     /* ══════════════════════════════
        ABOUT
     ══════════════════════════════ */
-    #about{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
-
-    /* icon logo di about */
-    .about-icon{
-      width:72px;margin-bottom:28px;
-      filter:drop-shadow(0 0 10px rgba(0,255,0,.4));
-      animation:icon-spin-slow 12s linear infinite;
+    #about{
+      display:grid;grid-template-columns:1fr 1fr;
+      gap:80px;align-items:center;
     }
-    @keyframes icon-spin-slow{
-      0%{filter:drop-shadow(0 0 8px rgba(0,255,0,.3))}
-      50%{filter:drop-shadow(0 0 20px rgba(0,255,0,.7))}
-      100%{filter:drop-shadow(0 0 8px rgba(0,255,0,.3))}
-    }
-
-    .about-body{font-size:.95rem;color:var(--greylT);line-height:1.85;margin-bottom:22px}
-    .about-body strong{color:var(--white)}
-    .about-vals{margin-top:36px;display:flex;flex-direction:column;gap:14px}
-    .val-item{display:flex;gap:14px;align-items:flex-start}
-    .val-num{font-family:'Share Tech Mono',monospace;font-size:.68rem;color:var(--green);padding-top:2px;flex-shrink:0}
-    .val-txt{font-size:.88rem;color:var(--greylT);line-height:1.6}
-    .val-txt strong{color:var(--white);display:block;margin-bottom:2px}
-
-    .about-right{position:relative}
     .about-visual{
-      background:var(--s2);aspect-ratio:4/5;
-      display:flex;align-items:center;justify-content:center;
+      background:var(--surf2);
+      aspect-ratio:4/5;
       position:relative;overflow:hidden;
+      display:flex;align-items:center;justify-content:center;
     }
-    /* Foto produk di about — ganti src */
-    .about-vis-img{
-      width:80%;object-fit:contain;
-      filter:drop-shadow(0 0 30px rgba(0,255,0,.2));
-      animation:float 6s ease-in-out infinite;
+    /* Logo bohlam mengambang di about */
+    .about-logo-float{
+      width:65%;opacity:0.12;
+      animation:float-logo 6s ease-in-out infinite;
+      filter:drop-shadow(0 0 30px #00ff00);
     }
-    @keyframes float{
-      0%,100%{transform:translateY(0)}
-      50%{transform:translateY(-14px)}
+    @keyframes float-logo{
+      0%,100%{transform:translateY(0) rotate(-3deg)}
+      50%{transform:translateY(-18px) rotate(3deg)}
     }
-    .about-bar{
-      position:absolute;bottom:0;left:0;right:0;height:3px;
-      background:var(--green);box-shadow:var(--glow-s);
+    .about-bottom-line{
+      position:absolute;bottom:-1px;left:-1px;right:-1px;
+      height:3px;background:var(--green);box-shadow:var(--glow);
     }
-    /* corner accent */
-    .corner{position:absolute;width:20px;height:20px}
-    .corner-tl{top:0;left:0;border-top:2px solid var(--green);border-left:2px solid var(--green)}
-    .corner-tr{top:0;right:0;border-top:2px solid var(--green);border-right:2px solid var(--green)}
-    .corner-bl{bottom:0;left:0;border-bottom:2px solid var(--green);border-left:2px solid var(--green)}
-    .corner-br{bottom:0;right:0;border-bottom:2px solid var(--green);border-right:2px solid var(--green)}
+    .about-corner{
+      position:absolute;top:20px;right:20px;
+      font-family:'Share Tech Mono',monospace;font-size:0.6rem;
+      letter-spacing:0.15em;color:rgba(0,255,0,0.3);
+      writing-mode:vertical-rl;
+    }
+    .about-body{font-size:0.95rem;color:var(--grey-lt);line-height:1.85;margin-bottom:20px}
+    .about-body strong{color:var(--white)}
+    .about-values{margin-top:36px;display:flex;flex-direction:column;gap:14px}
+    .val{display:flex;gap:14px;align-items:flex-start}
+    .val-n{font-family:'Share Tech Mono',monospace;font-size:0.66rem;color:var(--green);padding-top:3px;flex-shrink:0}
+    .val-t{font-size:0.88rem;color:var(--grey-lt);line-height:1.6}
+    .val-t strong{color:var(--white);display:block;margin-bottom:2px}
 
     /* ══════════════════════════════
        JOURNEY
     ══════════════════════════════ */
-    #journey{background:var(--s1)}
-    .journey-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:2px;margin-top:52px}
+    #journey{background:var(--surface)}
+    .ep-grid{
+      display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+      gap:2px;margin-top:52px;
+    }
     .ep-card{
-      background:var(--s2);padding:26px 22px;position:relative;
-      border-top:2px solid transparent;transition:border-color .25s,background .25s;
+      background:var(--surf2);padding:26px 22px;
+      position:relative;
+      border-top:2px solid transparent;
+      transition:border-color 0.25s,background 0.25s;
     }
     .ep-card:hover{border-color:var(--green);background:#111}
-    .ep-num{font-family:'Share Tech Mono',monospace;font-size:.62rem;letter-spacing:.2em;color:var(--green);margin-bottom:10px}
-    .ep-title{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.98rem;color:var(--white);margin-bottom:7px;line-height:1.3}
-    .ep-desc{font-size:.77rem;color:var(--grey);line-height:1.6}
-    .ep-dot{position:absolute;top:26px;right:22px;width:8px;height:8px;border-radius:50%}
-    .ep-dot.live{background:var(--green);box-shadow:0 0 10px var(--green);animation:blink 2s ease-in-out infinite}
-    .ep-dot.soon{background:var(--grey)}
-    @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+    .ep-num{font-family:'Share Tech Mono',monospace;font-size:0.62rem;letter-spacing:0.2em;color:var(--green);margin-bottom:10px}
+    .ep-title{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:0.95rem;color:var(--white);margin-bottom:6px;line-height:1.3}
+    .ep-desc{font-size:0.78rem;color:var(--grey);line-height:1.6}
+    .ep-dot{position:absolute;top:26px;right:22px;width:7px;height:7px;border-radius:50%}
+    .ep-dot.live{background:var(--green);box-shadow:0 0 8px var(--green)}
+    .ep-dot.soon{background:#333}
 
     /* ══════════════════════════════
        CONTACT
     ══════════════════════════════ */
     #contact{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
-    .c-intro{font-size:.95rem;color:var(--greylT);line-height:1.85;margin-bottom:36px}
-    .c-links{display:flex;flex-direction:column;gap:10px}
+    .c-intro{font-size:0.95rem;color:var(--grey-lt);line-height:1.85;margin-bottom:36px}
+    .c-links{display:flex;flex-direction:column;gap:0}
     .c-link{
       display:flex;align-items:center;gap:12px;
-      font-family:'Share Tech Mono',monospace;font-size:.78rem;
-      letter-spacing:.1em;color:var(--grey);text-decoration:none;
-      padding-bottom:10px;border-bottom:1px solid #1c1c1c;transition:color .2s;
+      font-family:'Share Tech Mono',monospace;font-size:0.78rem;
+      letter-spacing:0.1em;color:var(--grey);text-decoration:none;
+      padding:14px 0;border-bottom:1px solid #1c1c1c;
+      transition:color 0.2s,padding-left 0.2s;
     }
-    .c-link:hover{color:var(--green)}
-    .c-ico{color:var(--green)}
+    .c-link:hover{color:var(--green);padding-left:6px}
+    .c-icon{color:var(--green);font-size:0.9rem}
     .c-form{display:flex;flex-direction:column;gap:14px}
-    .c-field{display:flex;flex-direction:column;gap:7px}
-    .c-field label{font-family:'Share Tech Mono',monospace;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--grey)}
-    .c-field input,.c-field textarea{
-      background:var(--s2);border:1px solid #252525;color:var(--white);
-      font-family:'Inter',sans-serif;font-size:.88rem;padding:11px 15px;
-      outline:none;transition:border-color .2s;resize:none;
+    .f-field{display:flex;flex-direction:column;gap:7px}
+    .f-field label{font-family:'Share Tech Mono',monospace;font-size:0.65rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--grey)}
+    .f-field input,.f-field textarea{
+      background:var(--surf2);border:1px solid #252525;
+      color:var(--white);font-family:'Inter',sans-serif;font-size:0.88rem;
+      padding:11px 14px;outline:none;transition:border-color 0.2s;resize:none;
     }
-    .c-field input:focus,.c-field textarea:focus{border-color:var(--green)}
-    .c-field textarea{min-height:110px}
+    .f-field input:focus,.f-field textarea:focus{border-color:var(--green)}
+    .f-field textarea{min-height:110px}
 
     /* ══════════════════════════════
        FOOTER
     ══════════════════════════════ */
     footer{
-      background:var(--s1);border-top:1px solid #1a1a1a;
+      background:var(--surface);border-top:1px solid #161616;
       padding:44px 40px;
-      display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;
+      display:flex;align-items:center;justify-content:space-between;
+      flex-wrap:wrap;gap:20px;
     }
-    .f-logo img{height:28px;filter:drop-shadow(0 0 6px rgba(0,255,0,.5))}
-    .f-copy{font-family:'Share Tech Mono',monospace;font-size:.65rem;letter-spacing:.1em;color:var(--grey);text-align:center}
-    .f-soc{display:flex;gap:18px}
-    .f-soc a{font-family:'Share Tech Mono',monospace;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--grey);text-decoration:none;transition:color .2s}
-    .f-soc a:hover{color:var(--green)}
+    .f-logo img{height:28px;filter:drop-shadow(0 0 8px #00ff0055)}
+    .f-copy{
+      font-family:'Share Tech Mono',monospace;font-size:0.65rem;
+      letter-spacing:0.12em;color:var(--grey);text-align:center;line-height:1.8;
+    }
+    .f-socials{display:flex;gap:18px}
+    .f-socials a{
+      font-family:'Share Tech Mono',monospace;font-size:0.65rem;
+      letter-spacing:0.15em;text-transform:uppercase;
+      color:var(--grey);text-decoration:none;transition:color 0.2s;
+    }
+    .f-socials a:hover{color:var(--green)}
 
     /* ══════════════════════════════
        RESPONSIVE
     ══════════════════════════════ */
     @media(max-width:768px){
-      nav{padding:14px 18px}
+      nav{padding:14px 20px}
       .nav-links{display:none}
-      section{padding:72px 20px}
-      #home{padding:96px 20px 56px}
-      #about,#contact{grid-template-columns:1fr;gap:44px}
+      section{padding:80px 20px}
+      #home{padding:100px 20px 60px}
+      #about,#contact{grid-template-columns:1fr;gap:40px}
       .about-right{display:none}
-      footer{padding:28px 20px}
+      footer{padding:32px 20px}
       .scroll-hint{display:none}
-      .drops-hdr{flex-direction:column;align-items:flex-start}
+      .drops-header{flex-direction:column;align-items:flex-start}
+      #home::before{top:80px;left:20px}
+      #home::after{right:20px}
     }
     @media(prefers-reduced-motion:reduce){
-      .hero-logo-glitch::before,.hero-logo-glitch::after,
-      .hero-scan,.marquee-inner,.scroll-line,
-      .hero-logo-img,.about-icon,.ep-dot.live{animation:none}
+      *{animation:none!important;transition:none!important}
     }
   </style>
 </head>
 <body>
 
-<!-- ══ NAV ══ -->
+<!-- ════ NAV ════ -->
 <nav>
   <a href="#home" class="nav-logo">
     <img src="logo_text_putih.png" alt="CAPRUX"/>
@@ -480,1368 +518,291 @@
   <a href="#products" class="nav-cta">Shop Drop</a>
 </nav>
 
-<!-- ══ HERO ══ -->
+<!-- ════ HERO ════ -->
 <section id="home">
   <div class="hero-grid"></div>
   <div class="hero-scan"></div>
-  <div class="hero-vignette"></div>
-  <div class="hero-orb"></div>
+  <div class="hero-noise"></div>
 
   <div class="hero-tag">Sundanese Streetwear · Est. 2024 · Bandung</div>
 
-  <!-- Logo besar + glitch effect -->
+  <!-- Logo utama dengan efek glitch -->
   <div class="hero-logo-wrap">
-    <img class="hero-logo-img" src="logo_text_putih.png" alt="CAPRUX"/>
-    <div class="hero-logo-glitch"></div>
+    <img class="main-logo" src="logo_text_putih.png" alt="CAPRUX"/>
   </div>
 
   <p class="hero-sub">
     Bukan sekadar baju. <strong>Kacau dengan tujuan.</strong><br/>
     Setiap helai benang adalah bukti bahwa hal mustahil bisa terjadi — dengan izin-Nya.
   </p>
-  <p class="hero-mantra">Doing the Impossible, with GOD's Help</p>
+  <p class="hero-mantra">// Doing the Impossible, with GOD's Help</p>
+
   <div class="hero-actions">
     <a href="#products" class="btn-primary">Lihat Drop Terbaru</a>
     <a href="#about" class="btn-ghost">Kenapa CAPRUX?</a>
   </div>
+
   <div class="scroll-hint">
     <div class="scroll-line"></div>
     <span>Scroll</span>
   </div>
 </section>
 
-<!-- ══ MARQUEE ══ -->
-<div class="marquee-wrap" aria-hidden="true">
-  <div class="marquee-inner">
-    <span>CAPRUX</span><span class="marquee-sep">×</span>
-    <span>Kacau Dengan Tujuan</span><span class="marquee-sep">×</span>
-    <span>Sundanese Streetwear</span><span class="marquee-sep">×</span>
-    <span>Doing the Impossible</span><span class="marquee-sep">×</span>
-    <span>with GOD's Help</span><span class="marquee-sep">×</span>
-    <span>Bandung</span><span class="marquee-sep">×</span>
-    <span>CAPRUX</span><span class="marquee-sep">×</span>
-    <span>Kacau Dengan Tujuan</span><span class="marquee-sep">×</span>
-    <span>Sundanese Streetwear</span><span class="marquee-sep">×</span>
-    <span>Doing the Impossible</span><span class="marquee-sep">×</span>
-    <span>with GOD's Help</span><span class="marquee-sep">×</span>
-    <span>Bandung</span><span class="marquee-sep">×</span>
-  </div>
-</div>
-
-<!-- ══ DROPS ══ -->
-<section id="products">
-  <div class="drops-hdr">
-    <div>
-      <p class="eyebrow">// Collections</p>
-      <h2 class="sec-title">DROP 001</h2>
-      <div class="sec-div"></div>
-    </div>
-    <p style="color:var(--grey);font-size:.83rem;max-width:260px;line-height:1.75">
-      Limited. No restock.<br/>Kalau mau — ambil sekarang.
-    </p>
-  </div>
-  <div class="drops-grid">
-
-    <!-- CARD 1 — ganti (foto-chaos-tee).png dengan nama file foto produk kamu -->
-    <div class="drop-card">
-      <img class="drop-img" src="(foto-chaos-tee).png" alt="Chaos Tee V1"/>
-      <div class="drop-body">
-        <div class="drop-badge">// Heavy Cotton · 230gsm</div>
-        <div class="drop-name">CHAOS TEE V1</div>
-        <div class="drop-desc">Oversized fit. Polyflex 3D logo. Sundanese geometry — garis yang tidak bisa dibilang lurus.</div>
-        <div class="drop-foot">
-          <span class="drop-price">Rp 189.000</span>
-          <span class="drop-status s-soon">Coming Soon</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- CARD 2 — ganti (foto-void-hoodie).png -->
-    <div class="drop-card">
-      <img class="drop-img" src="(foto-void-hoodie).png" alt="Void Hoodie"/>
-      <div class="drop-body">
-        <div class="drop-badge">// Fleece · Heavyweight</div>
-        <div class="drop-name">VOID HOODIE</div>
-        <div class="drop-desc">Hitam total. Pocket tersembunyi. Label hijau di hem — kalau tau, pasti tau.</div>
-        <div class="drop-foot">
-          <span class="drop-price">Rp 349.000</span>
-          <span class="drop-status s-soon">Coming Soon</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- CARD 3 — ganti (foto-cap-001).png -->
-    <div class="drop-card">
-      <img class="drop-img" src="(foto-cap-001).png" alt="Cap 001"/>
-      <div class="drop-body">
-        <div class="drop-badge">// 6-Panel · Structured</div>
-        <div class="drop-name">CAP 001</div>
-        <div class="drop-desc">The name on your head. Emboss logo perak. Limited 50 pcs per drop.</div>
-        <div class="drop-foot">
-          <span class="drop-price">Rp 129.000</span>
-          <span class="drop-status s-soon">Coming Soon</span>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ══ PHILOSOPHY ══ -->
-<div id="philosophy">
-  <p class="phil-label">// Brand Philosophy</p>
-  <p class="phil-q">KACAU<br/>DENGAN<br/>TUJUAN</p>
-  <p class="phil-sub">Meaningful Chaos — Bukan asal berbeda. Berbeda karena punya arah.</p>
-</div>
-
-<!-- ══ ABOUT ══ -->
-<section id="about">
-  <div>
-    <!-- Logo bulat di about -->
-    <img class="about-icon" src="LOGO_TRANSPARAN_PUTIH.png" alt="CAPRUX Icon"/>
-    <p class="eyebrow">// Our Story</p>
-    <h2 class="sec-title">Dari Bandung,<br/>Untuk Dunia.</h2>
-    <div class="sec-div"></div>
-    <p class="about-body">
-      CAPRUX lahir dari tangan seorang estimator yang setiap hari menempu satu jam perjalanan —
-      bukan dari studio mewah di Jakarta. <strong>Dari Baleendah ke dunia.</strong>
-    </p>
-    <p class="about-body">
-      Budaya Sunda punya estetika yang belum pernah diangkat dengan benar di dunia streetwear.
-      Geometri, filosofi <strong>"silih asih, silih asah, silih asuh"</strong> —
-      dituangkan ke dalam bahan, potongan, dan setiap detail label.
-    </p>
-    <div class="about-vals">
-      <div class="val-item">
-        <span class="val-num">01</span>
-        <div class="val-txt"><strong>Meaningful Chaos</strong>Setiap keputusan desain punya alasan. Kekacauan yang terencana.</div>
-      </div>
-      <div class="val-item">
-        <span class="val-num">02</span>
-        <div class="val-txt"><strong>Sundanese Root</strong>Akar budaya Sunda bukan dekorasi — ini struktur fundamental brand kami.</div>
-      </div>
-      <div class="val-item">
-        <span class="val-num">03</span>
-        <div class="val-txt"><strong>GOD First</strong>Semua pencapaian ini bukan karena kami pintar. Tapi karena Allah izinkan.</div>
-      </div>
-    </div>
-  </div>
-  <div class="about-right">
-    <div class="about-visual">
-      <!-- ganti (foto-model-about).png dengan foto model / produk utama -->
-      <img class="about-vis-img" src="(foto-model-about).png" alt="CAPRUX Product"/>
-      <div class="corner corner-tl"></div>
-      <div class="corner corner-tr"></div>
-      <div class="corner corner-bl"></div>
-      <div class="corner corner-br"></div>
-      <div class="about-bar"></div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ JOURNEY ══ -->
-<section id="journey">
-  <p class="eyebrow">// Honest Brand Journey</p>
-  <h2 class="sec-title">Documentary<br/>Series</h2>
-  <div class="sec-div"></div>
-  <p style="color:var(--grey);max-width:540px;line-height:1.85;font-size:.92rem">
-    Kami rekam semuanya — dari nol. Tanpa filter, tanpa editan berlebihan.
-    Biweekly di TikTok & Instagram Reels.
-    <span style="color:var(--green)">Allah sebagai produser.</span>
-  </p>
-  <div class="journey-grid">
-    <div class="ep-card">
-      <div class="ep-num">EP. 01</div>
-      <div class="ep-title">Awal Mula Nama & Logo</div>
-      <div class="ep-desc">Kenapa "CAPRUX"? Dari mana kata itu lahir? Proses desain logo pertama kali.</div>
-      <div class="ep-dot live"></div>
-    </div>
-    <div class="ep-card">
-      <div class="ep-num">EP. 02</div>
-      <div class="ep-title">Riset Bahan & Internet</div>
-      <div class="ep-desc">Mencari bahan yang tepat. Gramasi, tekstur, harga — semua dicatat.</div>
-      <div class="ep-dot soon"></div>
-    </div>
-    <div class="ep-card">
-      <div class="ep-num">EP. 03</div>
-      <div class="ep-title">Cari Kain di Toko Kiloan</div>
-      <div class="ep-desc">POV: jalan kaki di Cigondewah nyari kain murah berkualitas.</div>
-      <div class="ep-dot soon"></div>
-    </div>
-    <div class="ep-card">
-      <div class="ep-num">EP. 04</div>
-      <div class="ep-title">Cari Vendor Penjahit</div>
-      <div class="ep-desc">Nego harga, cek kualitas jahitan, dan pilih partner yang tepat.</div>
-      <div class="ep-dot soon"></div>
-    </div>
-    <div class="ep-card">
-      <div class="ep-num">EP. 05</div>
-      <div class="ep-title">Sablon Alat Sederhana</div>
-      <div class="ep-desc">Polyflex, heat press pinjaman, dan eksperimen logo pertama.</div>
-      <div class="ep-dot soon"></div>
-    </div>
-    <div class="ep-card">
-      <div class="ep-num">EP. 06</div>
-      <div class="ep-title">Buka Toko & Riset Pasar</div>
-      <div class="ep-desc">Tokopedia, Shopee, Instagram — semua dibuka. Hari pertama berjualan.</div>
-      <div class="ep-dot soon"></div>
-    </div>
-    <div class="ep-card">
-      <div class="ep-num">EP. 07 →</div>
-      <div class="ep-title">Dan Seterusnya...</div>
-      <div class="ep-desc">Perjalanan ini belum selesai. Ikuti terus update berikutnya.</div>
-      <div class="ep-dot soon"></div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ CONTACT ══ -->
-<section id="contact">
-  <div>
-    <p class="eyebrow">// Get In Touch</p>
-    <h2 class="sec-title">Hubungi<br/>Kami</h2>
-    <div class="sec-div"></div>
-    <p class="c-intro">
-      Mau collab? Mau tau kapan drop berikutnya?<br/>
-      Atau cuma pengen ngobrol soal streetwear Sunda?<br/>
-      Pintu kami selalu terbuka.
-    </p>
-    <div class="c-links">
-      <a href="https://instagram.com/caprux" class="c-link" target="_blank">
-        <span class="c-ico">▶</span> @caprux — Instagram
-      </a>
-      <a href="https://tiktok.com/@caprux" class="c-link" target="_blank">
-        <span class="c-ico">▶</span> @caprux — TikTok
-      </a>
-      <a href="https://github.com/caprux" class="c-link" target="_blank">
-        <span class="c-ico">▶</span> github.com/caprux
-      </a>
-      <a href="mailto:hello@caprux.id" class="c-link">
-        <span class="c-ico">▶</span> hello@caprux.id
-      </a>
-    </div>
-  </div>
-  <div>
-    <div class="c-form">
-      <div class="c-field">
-        <label>Nama kamu</label>
-        <input type="text" placeholder="Tulis nama di sini..."/>
-      </div>
-      <div class="c-field">
-        <label>Email / IG Handle</label>
-        <input type="text" placeholder="@username atau email"/>
-      </div>
-      <div class="c-field">
-        <label>Pesan</label>
-        <textarea placeholder="Ceritain apa yang ada di kepala kamu..."></textarea>
-      </div>
-      <button class="btn-primary" style="align-self:flex-start"
-        onclick="alert('Hubungi via IG @caprux atau email hello@caprux.id 🤙')">
-        Kirim Pesan
-      </button>
-    </div>
-  </div>
-</section>
-
-<!-- ══ FOOTER ══ -->
-<footer>
-  <div class="f-logo">
-    <img src="LOGO_TRANSPARAN_PUTIH.png" alt="CAPRUX"/>
-  </div>
-  <div class="f-copy">
-    © 2024 CAPRUX — Kacau Dengan Tujuan<br/>
-    <span style="color:#333;font-size:.6rem">Made in Bandung · Powered by Iman</span>
-  </div>
-  <div class="f-soc">
-    <a href="https://instagram.com/caprux" target="_blank">IG</a>
-    <a href="https://tiktok.com/@caprux" target="_blank">TT</a>
-    <a href="https://github.com/caprux" target="_blank">GH</a>
-  </div>
-</footer>
-
-</body>
-</html>
-HTMLEOF
-echo "Done"      font-family:'Share Tech Mono',monospace;font-size:.72rem;
-      letter-spacing:.22em;text-transform:uppercase;
-      color:var(--grey);text-decoration:none;transition:color .2s;
-    }
-    .nav-links a:hover{color:var(--green)}
-    .nav-cta{
-      font-family:'Share Tech Mono',monospace;font-size:.7rem;
-      letter-spacing:.15em;text-transform:uppercase;
-      background:transparent;border:1px solid var(--green);
-      color:var(--green);padding:8px 20px;text-decoration:none;
-      transition:background .2s,color .2s,box-shadow .2s;
-    }
-    .nav-cta:hover{background:var(--green);color:var(--black);box-shadow:var(--glow)}
-
-    /* ══════════════════════════════
-       HERO
-    ══════════════════════════════ */
-    #home{
-      min-height:100vh;display:flex;flex-direction:column;
-      justify-content:center;align-items:flex-start;
-      padding:110px 40px 60px;position:relative;overflow:hidden;
-    }
-
-    /* grid bg */
-    .hero-grid{
-      position:absolute;inset:0;
-      background-image:
-        linear-gradient(rgba(0,255,0,.035) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(0,255,0,.035) 1px,transparent 1px);
-      background-size:64px 64px;pointer-events:none;
-    }
-
-    /* scanline overlay */
-    .hero-scan{
-      position:absolute;inset:0;pointer-events:none;
-      background:repeating-linear-gradient(
-        to bottom,
-        transparent 0px,
-        transparent 3px,
-        rgba(0,0,0,.18) 3px,
-        rgba(0,0,0,.18) 4px
-      );
-      animation:scan-move 8s linear infinite;
-      opacity:.5;
-    }
-    @keyframes scan-move{
-      0%{background-position:0 0}
-      100%{background-position:0 200px}
-    }
-
-    /* vignette */
-    .hero-vignette{
-      position:absolute;inset:0;pointer-events:none;
-      background:radial-gradient(ellipse at center,transparent 40%,rgba(0,0,0,.85) 100%);
-    }
-
-    /* ambient green orb */
-    .hero-orb{
-      position:absolute;bottom:-120px;right:-80px;
-      width:480px;height:480px;border-radius:50%;
-      background:radial-gradient(circle,rgba(0,255,0,.08) 0%,transparent 70%);
-      pointer-events:none;animation:orb-pulse 4s ease-in-out infinite;
-    }
-    @keyframes orb-pulse{
-      0%,100%{transform:scale(1);opacity:.7}
-      50%{transform:scale(1.15);opacity:1}
-    }
-
-    .hero-tag{
-      font-family:'Share Tech Mono',monospace;font-size:.7rem;
-      letter-spacing:.3em;color:var(--green);text-transform:uppercase;
-      margin-bottom:28px;position:relative;
-    }
-    .hero-tag::before{content:'// ';color:var(--grey)}
-
-    /* ── LOGO HERO (text logo besar) ── */
-    .hero-logo-wrap{position:relative;display:inline-block;margin-bottom:24px}
-    .hero-logo-img{
-      width:clamp(280px,65vw,860px);
-      display:block;
-      /* filter: drop-shadow putih + glitch color layers */
-      filter:drop-shadow(0 0 2px #fff) drop-shadow(0 0 20px rgba(0,255,0,.25));
-      animation:logo-breathe 5s ease-in-out infinite;
-    }
-    @keyframes logo-breathe{
-      0%,100%{filter:drop-shadow(0 0 2px #fff) drop-shadow(0 0 18px rgba(0,255,0,.2))}
-      50%{filter:drop-shadow(0 0 4px #fff) drop-shadow(0 0 36px rgba(0,255,0,.45))}
-    }
-
-    /* glitch duplikat di atas logo */
-    .hero-logo-glitch{
-      position:absolute;top:0;left:0;width:100%;
-      pointer-events:none;
-    }
-    .hero-logo-glitch::before,
-    .hero-logo-glitch::after{
-      content:'';
-      position:absolute;inset:0;
-      background:url('logo_text_putih.png') no-repeat left center/contain;
-    }
-    .hero-logo-glitch::before{
-      filter:drop-shadow(0 0 0 #00ff00);
-      clip-path:polygon(0 22%,100% 22%,100% 34%,0 34%);
-      mix-blend-mode:screen;
-      animation:glitch-a 3.8s infinite steps(1);
-    }
-    .hero-logo-glitch::after{
-      filter:hue-rotate(180deg) brightness(2);
-      clip-path:polygon(0 58%,100% 58%,100% 70%,0 70%);
-      mix-blend-mode:screen;
-      animation:glitch-b 4.6s infinite steps(1);
-      left:4px;
-    }
-    @keyframes glitch-a{
-      0%,88%{opacity:0;transform:translateX(0)}
-      89%{opacity:1;transform:translateX(-6px)}
-      91%{opacity:0}
-      93%{opacity:1;transform:translateX(5px)}
-      95%,100%{opacity:0}
-    }
-    @keyframes glitch-b{
-      0%,82%{opacity:0;transform:translateX(0)}
-      83%{opacity:1;transform:translateX(4px)}
-      86%{opacity:0}
-      90%{opacity:1;transform:translateX(-4px)}
-      93%,100%{opacity:0}
-    }
-
-    .hero-sub{
-      max-width:500px;font-size:.98rem;color:var(--grey);
-      line-height:1.8;font-weight:300;position:relative;
-    }
-    .hero-sub strong{color:var(--white);font-weight:500}
-
-    .hero-mantra{
-      margin-top:28px;
-      font-family:'Share Tech Mono',monospace;font-size:.72rem;
-      letter-spacing:.22em;color:var(--green);text-transform:uppercase;
-      position:relative;
-    }
-
-    .hero-actions{margin-top:40px;display:flex;gap:14px;flex-wrap:wrap;position:relative}
-
-    .btn-primary{
-      font-family:'Share Tech Mono',monospace;font-size:.75rem;
-      letter-spacing:.15em;text-transform:uppercase;
-      background:var(--green);color:var(--black);border:none;
-      padding:14px 32px;cursor:pointer;font-weight:700;
-      text-decoration:none;display:inline-block;
-      transition:box-shadow .25s,transform .15s;
-      clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,0 100%);
-    }
-    .btn-primary:hover{box-shadow:var(--glow);transform:translateY(-2px)}
-
-    .btn-ghost{
-      font-family:'Share Tech Mono',monospace;font-size:.75rem;
-      letter-spacing:.15em;text-transform:uppercase;
-      background:transparent;color:var(--white);
-      border:1px solid #444;padding:14px 32px;
-      cursor:pointer;text-decoration:none;display:inline-block;
-      transition:border-color .2s,color .2s;
-      clip-path:polygon(10px 0,100% 0,100% 100%,0 100%,0 10px);
-    }
-    .btn-ghost:hover{border-color:var(--green);color:var(--green)}
-
-    /* scroll hint */
-    .scroll-hint{
-      position:absolute;bottom:36px;right:40px;
-      display:flex;flex-direction:column;align-items:center;gap:8px;
-      font-family:'Share Tech Mono',monospace;font-size:.62rem;
-      letter-spacing:.25em;color:var(--grey);text-transform:uppercase;
-    }
-    .scroll-line{
-      width:1px;height:52px;
-      background:linear-gradient(to bottom,var(--green),transparent);
-      animation:scr 2s ease-in-out infinite;
-    }
-    @keyframes scr{0%,100%{opacity:1}50%{opacity:.2}}
-
-    /* ══════════════════════════════
-       MARQUEE
-    ══════════════════════════════ */
-    .marquee-wrap{background:var(--green);overflow:hidden;padding:11px 0;white-space:nowrap}
-    .marquee-inner{display:inline-flex;animation:marquee 20s linear infinite}
-    .marquee-inner span{
-      font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.8rem;
-      letter-spacing:.14em;text-transform:uppercase;color:var(--black);padding:0 28px;
-    }
-    .marquee-sep{opacity:.35}
-    @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-
-    /* ══════════════════════════════
-       SECTIONS COMMON
-    ══════════════════════════════ */
-    section{padding:100px 40px}
-    .eyebrow{
-      font-family:'Share Tech Mono',monospace;font-size:.68rem;
-      letter-spacing:.35em;text-transform:uppercase;color:var(--green);margin-bottom:14px;
-    }
-    .sec-title{
-      font-family:'Space Grotesk',sans-serif;font-weight:900;
-      font-size:clamp(2rem,5.5vw,4.2rem);line-height:1;
-      color:var(--white);margin-bottom:22px;
-    }
-    .sec-div{width:56px;height:2px;background:var(--green);margin-bottom:48px;box-shadow:var(--glow-s)}
-
-    /* ══════════════════════════════
-       DROPS
-    ══════════════════════════════ */
-    #products{background:var(--s1)}
-    .drops-hdr{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:56px;flex-wrap:wrap;gap:20px}
-    .drops-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:2px}
-
-    .drop-card{
-      background:var(--s2);position:relative;overflow:hidden;
-      cursor:pointer;aspect-ratio:3/4;display:flex;flex-direction:column;justify-content:flex-end;
-    }
-    /* hover border glow */
-    .drop-card::after{
-      content:'';position:absolute;inset:0;
-      border:1px solid transparent;
-      transition:border-color .3s,box-shadow .3s;pointer-events:none;
-    }
-    .drop-card:hover::after{border-color:var(--green);box-shadow:inset 0 0 20px rgba(0,255,0,.07)}
-
-    .drop-img{
-      position:absolute;inset:0;width:100%;height:100%;
-      object-fit:cover;opacity:.75;
-      transition:transform .6s ease,opacity .3s;
-    }
-    .drop-card:hover .drop-img{transform:scale(1.06);opacity:.9}
-
-    /* placeholder jika belum ada gambar */
-    .drop-placeholder{
-      position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-      font-size:3.5rem;opacity:.1;
-    }
-
-    .drop-body{
-      position:relative;padding:22px;
-      background:linear-gradient(to top,rgba(0,0,0,.97) 55%,transparent);
-    }
-    .drop-badge{
-      font-family:'Share Tech Mono',monospace;font-size:.62rem;
-      letter-spacing:.2em;color:var(--green);text-transform:uppercase;margin-bottom:6px;
-    }
-    .drop-name{
-      font-family:'Space Grotesk',sans-serif;font-weight:700;
-      font-size:1.25rem;color:var(--white);margin-bottom:4px;
-    }
-    .drop-desc{font-size:.78rem;color:var(--grey);margin-bottom:14px;line-height:1.55}
-    .drop-foot{display:flex;align-items:center;justify-content:space-between}
-    .drop-price{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.05rem;color:var(--white)}
-    .drop-status{
-      font-family:'Share Tech Mono',monospace;font-size:.62rem;
-      letter-spacing:.15em;padding:5px 11px;border:1px solid;text-transform:uppercase;
-    }
-    .s-soon{color:var(--green);border-color:var(--green)}
-    .s-open{color:var(--white);border-color:var(--white);background:rgba(255,255,255,.05)}
-    .s-sold{color:var(--grey);border-color:var(--grey)}
-
-    /* ══════════════════════════════
-       PHILOSOPHY
-    ══════════════════════════════ */
-    #philosophy{
-      background:var(--green);padding:80px 40px;text-align:center;
-      position:relative;overflow:hidden;
-    }
-    #philosophy::before{
-      content:'KACAU';
-      position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-      font-family:'Space Grotesk',sans-serif;font-weight:900;
-      font-size:clamp(6rem,20vw,18rem);color:rgba(0,0,0,.06);
-      white-space:nowrap;pointer-events:none;line-height:1;
-    }
-    .phil-label{
-      font-family:'Share Tech Mono',monospace;font-size:.7rem;
-      letter-spacing:.35em;text-transform:uppercase;color:rgba(0,0,0,.45);margin-bottom:18px;
-    }
-    .phil-q{
-      font-family:'Space Grotesk',sans-serif;font-weight:900;
-      font-size:clamp(2.2rem,7vw,5.5rem);line-height:.95;
-      color:var(--black);letter-spacing:-.03em;position:relative;
-    }
-    .phil-sub{
-      margin-top:22px;font-family:'Share Tech Mono',monospace;font-size:.76rem;
-      letter-spacing:.2em;color:rgba(0,0,0,.5);text-transform:uppercase;
-    }
-
-    /* ══════════════════════════════
-       ABOUT
-    ══════════════════════════════ */
-    #about{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
-
-    /* icon logo di about */
-    .about-icon{
-      width:72px;margin-bottom:28px;
-      filter:drop-shadow(0 0 10px rgba(0,255,0,.4));
-      animation:icon-spin-slow 12s linear infinite;
-    }
-    @keyframes icon-spin-slow{
-      0%{filter:drop-shadow(0 0 8px rgba(0,255,0,.3))}
-      50%{filter:drop-shadow(0 0 20px rgba(0,255,0,.7))}
-      100%{filter:drop-shadow(0 0 8px rgba(0,255,0,.3))}
-    }
-
-    .about-body{font-size:.95rem;color:var(--greylT);line-height:1.85;margin-bottom:22px}
-    .about-body strong{color:var(--white)}
-    .about-vals{margin-top:36px;display:flex;flex-direction:column;gap:14px}
-    .val-item{display:flex;gap:14px;align-items:flex-start}
-    .val-num{font-family:'Share Tech Mono',monospace;font-size:.68rem;color:var(--green);padding-top:2px;flex-shrink:0}
-    .val-txt{font-size:.88rem;color:var(--greylT);line-height:1.6}
-    .val-txt strong{color:var(--white);display:block;margin-bottom:2px}
-
-    .about-right{position:relative}
-    .about-visual{
-      background:var(--s2);aspect-ratio:4/5;
-      display:flex;align-items:center;justify-content:center;
-      position:relative;overflow:hidden;
-    }
-    /* Foto produk di about — ganti src */
-    .about-vis-img{
-      width:80%;object-fit:contain;
-      filter:drop-shadow(0 0 30px rgba(0,255,0,.2));
-      animation:float 6s ease-in-out infinite;
-    }
-    @keyframes float{
-      0%,100%{transform:translateY(0)}
-      50%{transform:translateY(-14px)}
-    }
-    .about-bar{
-      position:absolute;bottom:0;left:0;right:0;height:3px;
-      background:var(--green);box-shadow:var(--glow-s);
-    }
-    /* corner accent */
-    .corner{position:absolute;width:20px;height:20px}
-    .corner-tl{top:0;left:0;border-top:2px solid var(--green);border-left:2px solid var(--green)}
-    .corner-tr{top:0;right:0;border-top:2px solid var(--green);border-right:2px solid var(--green)}
-    .corner-bl{bottom:0;left:0;border-bottom:2px solid var(--green);border-left:2px solid var(--green)}
-    .corner-br{bottom:0;right:0;border-bottom:2px solid var(--green);border-right:2px solid var(--green)}
-
-    /* ══════════════════════════════
-       JOURNEY
-    ══════════════════════════════ */
-    #journey{background:var(--s1)}
-    .journey-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:2px;margin-top:52px}
-    .ep-card{
-      background:var(--s2);padding:26px 22px;position:relative;
-      border-top:2px solid transparent;transition:border-color .25s,background .25s;
-    }
-    .ep-card:hover{border-color:var(--green);background:#111}
-    .ep-num{font-family:'Share Tech Mono',monospace;font-size:.62rem;letter-spacing:.2em;color:var(--green);margin-bottom:10px}
-    .ep-title{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.98rem;color:var(--white);margin-bottom:7px;line-height:1.3}
-    .ep-desc{font-size:.77rem;color:var(--grey);line-height:1.6}
-    .ep-dot{position:absolute;top:26px;right:22px;width:8px;height:8px;border-radius:50%}
-    .ep-dot.live{background:var(--green);box-shadow:0 0 10px var(--green);animation:blink 2s ease-in-out infinite}
-    .ep-dot.soon{background:var(--grey)}
-    @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-
-    /* ══════════════════════════════
-       CONTACT
-    ══════════════════════════════ */
-    #contact{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
-    .c-intro{font-size:.95rem;color:var(--greylT);line-height:1.85;margin-bottom:36px}
-    .c-links{display:flex;flex-direction:column;gap:10px}
-    .c-link{
-      display:flex;align-items:center;gap:12px;
-      font-family:'Share Tech Mono',monospace;font-size:.78rem;
-      letter-spacing:.1em;color:var(--grey);text-decoration:none;
-      padding-bottom:10px;border-bottom:1px solid #1c1c1c;transition:color .2s;
-    }
-    .c-link:hover{color:var(--green)}
-    .c-ico{color:var(--green)}
-    .c-form{display:flex;flex-direction:column;gap:14px}
-    .c-field{display:flex;flex-direction:column;gap:7px}
-    .c-field label{font-family:'Share Tech Mono',monospace;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--grey)}
-    .c-field input,.c-field textarea{
-      background:var(--s2);border:1px solid #252525;color:var(--white);
-      font-family:'Inter',sans-serif;font-size:.88rem;padding:11px 15px;
-      outline:none;transition:border-color .2s;resize:none;
-    }
-    .c-field input:focus,.c-field textarea:focus{border-color:var(--green)}
-    .c-field textarea{min-height:110px}
-
-    /* ══════════════════════════════
-       FOOTER
-    ══════════════════════════════ */
-    footer{
-      background:var(--s1);border-top:1px solid #1a1a1a;
-      padding:44px 40px;
-      display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;
-    }
-    .f-logo img{height:28px;filter:drop-shadow(0 0 6px rgba(0,255,0,.5))}
-    .f-copy{font-family:'Share Tech Mono',monospace;font-size:.65rem;letter-spacing:.1em;color:var(--grey);text-align:center}
-    .f-soc{display:flex;gap:18px}
-    .f-soc a{font-family:'Share Tech Mono',monospace;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--grey);text-decoration:none;transition:color .2s}
-    .f-soc a:hover{color:var(--green)}
-
-    /* ══════════════════════════════
-       RESPONSIVE
-    ══════════════════════════════ */
-    @media(max-width:768px){
-      nav{padding:14px 18px}
-      .nav-links{display:none}
-      section{padding:72px 20px}
-      #home{padding:96px 20px 56px}
-      #about,#contact{grid-template-columns:1fr;gap:44px}
-      .about-right{display:none}
-      footer{padding:28px 20px}
-      .scroll-hint{display:none}
-      .drops-hdr{flex-direction:column;align-items:flex-start}
-    }
-    @media(prefers-reduced-motion:reduce){
-      .hero-logo-glitch::before,.hero-logo-glitch::after,
-      .hero-scan,.marquee-inner,.scroll-line,
-      .hero-logo-img,.about-icon,.ep-dot.live{animation:none}
-    }
-  </style>
-</head>
-<body>
-
-<!-- ══ NAV ══ -->
-<nav>
-  <a href="#home" class="nav-logo">
-    <img src="logo_text_putih.png" alt="CAPRUX"/>
-  </a>
-  <ul class="nav-links">
-    <li><a href="#products">Drops</a></li>
-    <li><a href="#about">Story</a></li>
-    <li><a href="#journey">Journey</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <a href="#products" class="nav-cta">Shop Drop</a>
-</nav>
-
-<!-- ══ HERO ══ -->
-<section id="home">
-  <div class="hero-grid"></div>
-  <div class="hero-scan"></div>
-  <div class="hero-vignette"></div>
-  <div class="hero-orb"></div>
-
-  <div class="hero-tag">Sundanese Streetwear · Est. 2024 · Bandung</div>
-
-  <!-- Logo besar + glitch effect -->
-  <div class="hero-logo-wrap">
-    <img class="hero-logo-img" src="logo_text_putih.png" alt="CAPRUX"/>
-    <div class="hero-logo-glitch"></div>
-  </div>
-
-  <p class="hero-sub">
-    Bukan sekadar baju. <strong>Kacau dengan tujuan.</strong><br/>
-    Setiap helai benang adalah bukti bahwa hal mustahil bisa terjadi — dengan izin-Nya.
-  </p>
-  <p class="hero-mantra">Doing the Impossible, with GOD's Help</p>
-  <div class="hero-actions">
-    <a href="#products" class="btn-primary">Lihat Drop Terbaru</a>
-    <a href="#about" class="btn-ghost">Kenapa CAPRUX?</a>
-  </div>
-  <div class="scroll-hint">
-    <div class="scroll-line"></div>
-    <span>Scroll</span>
-  </div>
-</section>
-
-<!-- ══ MARQUEE ══ -->
-<div class="marquee-wrap" aria-hidden="true">
-  <div class="marquee-inner">
-    <span>CAPRUX</span><span class="marquee-sep">×</span>
-    <span>Kacau Dengan Tujuan</span><span class="marquee-sep">×</span>
-    <span>Sundanese Streetwear</span><span class="marquee-sep">×</span>
-    <span>Doing the Impossible</span><span class="marquee-sep">×</span>
-    <span>with GOD's Help</span><span class="marquee-sep">×</span>
-    <span>Bandung</span><span class="marquee-sep">×</span>
-    <span>CAPRUX</span><span class="marquee-sep">×</span>
-    <span>Kacau Dengan Tujuan</span><span class="marquee-sep">×</span>
-    <span>Sundanese Streetwear</span><span class="marquee-sep">×</span>
-    <span>Doing the Impossible</span><span class="marquee-sep">×</span>
-    <span>with GOD's Help</span><span class="marquee-sep">×</span>
-    <span>Bandung</span><span class="marquee-sep">×</span>
-  </div>
-</div>
-
-<!-- ══ DROPS ══ -->
-<section id="products">
-  <div class="drops-hdr">
-    <div>
-      <p class="eyebrow">// Collections</p>
-      <h2 class="sec-title">DROP 001</h2>
-      <div class="sec-div"></div>
-    </div>
-    <p style="color:var(--grey);font-size:.83rem;max-width:260px;line-height:1.75">
-      Limited. No restock.<br/>Kalau mau — ambil sekarang.
-    </p>
-  </div>
-  <div class="drops-grid">
-
-    <!-- CARD 1 — ganti (foto-chaos-tee).png dengan nama file foto produk kamu -->
-    <div class="drop-card">
-      <img class="drop-img" src="(foto-chaos-tee).png" alt="Chaos Tee V1"/>
-      <div class="drop-body">
-        <div class="drop-badge">// Heavy Cotton · 230gsm</div>
-        <div class="drop-name">CHAOS TEE V1</div>
-        <div class="drop-desc">Oversized fit. Polyflex 3D logo. Sundanese geometry — garis yang tidak bisa dibilang lurus.</div>
-        <div class="drop-foot">
-          <span class="drop-price">Rp 189.000</span>
-          <span class="drop-status s-soon">Coming Soon</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- CARD 2 — ganti (foto-void-hoodie).png -->
-    <div class="drop-card">
-      <img class="drop-img" src="(foto-void-hoodie).png" alt="Void Hoodie"/>
-      <div class="drop-body">
-        <div class="drop-badge">// Fleece · Heavyweight</div>
-        <div class="drop-name">VOID HOODIE</div>
-        <div class="drop-desc">Hitam total. Pocket tersembunyi. Label hijau di hem — kalau tau, pasti tau.</div>
-        <div class="drop-foot">
-          <span class="drop-price">Rp 349.000</span>
-          <span class="drop-status s-soon">Coming Soon</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- CARD 3 — ganti (foto-cap-001).png -->
-    <div class="drop-card">
-      <img class="drop-img" src="(foto-cap-001).png" alt="Cap 001"/>
-      <div class="drop-body">
-        <div class="drop-badge">// 6-Panel · Structured</div>
-        <div class="drop-name">CAP 001</div>
-        <div class="drop-desc">The name on your head. Emboss logo perak. Limited 50 pcs per drop.</div>
-        <div class="drop-foot">
-          <span class="drop-price">Rp 129.000</span>
-          <span class="drop-status s-soon">Coming Soon</span>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ══ PHILOSOPHY ══ -->
-<div id="philosophy">
-  <p class="phil-label">// Brand Philosophy</p>
-  <p class="phil-q">KACAU<br/>DENGAN<br/>TUJUAN</p>
-  <p class="phil-sub">Meaningful Chaos — Bukan asal berbeda. Berbeda karena punya arah.</p>
-</div>
-
-<!-- ══ ABOUT ══ -->
-<section id="about">
-  <div>
-    <!-- Logo bulat di about -->
-    <img class="about-icon" src="LOGO_TRANSPARAN_PUTIH.png" alt="CAPRUX Icon"/>
-    <p class="eyebrow">// Our Story</p>
-    <h2 class="sec-title">Dari Bandung,<br/>Untuk Dunia.</h2>
-    <div class="sec-div"></div>
-    <p class="about-body">
-      CAPRUX lahir dari tangan seorang estimator yang setiap hari menempu satu jam perjalanan —
-      bukan dari studio mewah di Jakarta. <strong>Dari Baleendah ke dunia.</strong>
-    </p>
-    <p class="about-body">
-      Budaya Sunda punya estetika yang belum pernah diangkat dengan benar di dunia streetwear.
-      Geometri, filosofi <strong>"silih asih, silih asah, silih asuh"</strong> —
-      dituangkan ke dalam bahan, potongan, dan setiap detail label.
-    </p>
-    <div class="about-vals">
-      <div class="val-item">
-        <span class="val-num">01</span>
-        <div class="val-txt"><strong>Meaningful Chaos</strong>Setiap keputusan desain punya alasan. Kekacauan yang terencana.</div>
-      </div>
-      <div class="val-item">
-        <span class="val-num">02</span>
-        <div class="val-txt"><strong>Sundanese Root</strong>Akar budaya Sunda bukan dekorasi — ini struktur fundamental brand kami.</div>
-      </div>
-      <div class="val-item">
-        <span class="val-num">03</span>
-        <div class="val-txt"><strong>GOD First</strong>Semua pencapaian ini bukan karena kami pintar. Tapi karena Allah izinkan.</div>
-      </div>
-    </div>
-  </div>
-  <div class="about-right">
-    <div class="about-visual">
-      <!-- ganti (foto-model-about).png dengan foto model / produk utama -->
-      <img class="about-vis-img" src="(foto-model-about).png" alt="CAPRUX Product"/>
-      <div class="corner corner-tl"></div>
-      <div class="corner corner-tr"></div>
-      <div class="corner corner-bl"></div>
-      <div class="corner corner-br"></div>
-      <div class="about-bar"></div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ JOURNEY ══ -->
-<section id="journey">
-  <p class="eyebrow">// Honest Brand Journey</p>
-  <h2 class="sec-title">Documentary<br/>Series</h2>
-  <div class="sec-div"></div>
-  <p style="color:var(--grey);max-width:540px;line-height:1.85;font-size:.92rem">
-    Kami rekam semuanya — dari nol. Tanpa filter, tanpa editan berlebihan.
-    Biweekly di TikTok & Instagram Reels.
-    <span style="color:var(--green)">Allah sebagai produser.</span>
-  </p>
-  <div class="journey-grid">
-    <div class="ep-card">
-      <div class="ep-num">EP. 01</div>
-      <div class="ep-title">Awal Mula Nama & Logo</div>
-      <div class="ep-desc">Kenapa "CAPRUX"? Dari mana kata itu lahir? Proses desain logo pertama kali.</div>
-      <div class="ep-dot live"></div>
-    </div>
-    <div class="ep-card">
-      <div class="ep-num">EP. 02</div>
-      <div class="ep-title">Riset Bahan & Internet</div>
-      <div class="ep-desc">Mencari bahan yang tepat. Gramasi, tekstur, harga — semua dicatat.</div>
-      <div class="ep-dot soon"></div>
-    </div>
-    <div class="ep-card">
-      <div class="ep-num">EP. 03</div>
-      <div class="ep-title">Cari Kain di Toko Kiloan</div>
-      <div class="ep-desc">POV: jalan kaki di Cigondewah nyari kain murah berkualitas.</div>
-      <div class="ep-dot soon"></div>
-    </div>
-    <div class="ep-card">
-      <div class="ep-num">EP. 04</div>
-      <div class="ep-title">Cari Vendor Penjahit</div>
-      <div class="ep-desc">Nego harga, cek kualitas jahitan, dan pilih partner yang tepat.</div>
-      <div class="ep-dot soon"></div>
-    </div>
-    <div class="ep-card">
-      <div class="ep-num">EP. 05</div>
-      <div class="ep-title">Sablon Alat Sederhana</div>
-      <div class="ep-desc">Polyflex, heat press pinjaman, dan eksperimen logo pertama.</div>
-      <div class="ep-dot soon"></div>
-    </div>
-    <div class="ep-card">
-      <div class="ep-num">EP. 06</div>
-      <div class="ep-title">Buka Toko & Riset Pasar</div>
-      <div class="ep-desc">Tokopedia, Shopee, Instagram — semua dibuka. Hari pertama berjualan.</div>
-      <div class="ep-dot soon"></div>
-    </div>
-    <div class="ep-card">
-      <div class="ep-num">EP. 07 →</div>
-      <div class="ep-title">Dan Seterusnya...</div>
-      <div class="ep-desc">Perjalanan ini belum selesai. Ikuti terus update berikutnya.</div>
-      <div class="ep-dot soon"></div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ CONTACT ══ -->
-<section id="contact">
-  <div>
-    <p class="eyebrow">// Get In Touch</p>
-    <h2 class="sec-title">Hubungi<br/>Kami</h2>
-    <div class="sec-div"></div>
-    <p class="c-intro">
-      Mau collab? Mau tau kapan drop berikutnya?<br/>
-      Atau cuma pengen ngobrol soal streetwear Sunda?<br/>
-      Pintu kami selalu terbuka.
-    </p>
-    <div class="c-links">
-      <a href="https://instagram.com/caprux" class="c-link" target="_blank">
-        <span class="c-ico">▶</span> @caprux — Instagram
-      </a>
-      <a href="https://tiktok.com/@caprux" class="c-link" target="_blank">
-        <span class="c-ico">▶</span> @caprux — TikTok
-      </a>
-      <a href="https://github.com/caprux" class="c-link" target="_blank">
-        <span class="c-ico">▶</span> github.com/caprux
-      </a>
-      <a href="mailto:hello@caprux.id" class="c-link">
-        <span class="c-ico">▶</span> hello@caprux.id
-      </a>
-    </div>
-  </div>
-  <div>
-    <div class="c-form">
-      <div class="c-field">
-        <label>Nama kamu</label>
-        <input type="text" placeholder="Tulis nama di sini..."/>
-      </div>
-      <div class="c-field">
-        <label>Email / IG Handle</label>
-        <input type="text" placeholder="@username atau email"/>
-      </div>
-      <div class="c-field">
-        <label>Pesan</label>
-        <textarea placeholder="Ceritain apa yang ada di kepala kamu..."></textarea>
-      </div>
-      <button class="btn-primary" style="align-self:flex-start"
-        onclick="alert('Hubungi via IG @caprux atau email hello@caprux.id 🤙')">
-        Kirim Pesan
-      </button>
-    </div>
-  </div>
-</section>
-
-<!-- ══ FOOTER ══ -->
-<footer>
-  <div class="f-logo">
-    <img src="LOGO_TRANSPARAN_PUTIH.png" alt="CAPRUX"/>
-  </div>
-  <div class="f-copy">
-    © 2024 CAPRUX — Kacau Dengan Tujuan<br/>
-    <span style="color:#333;font-size:.6rem">Made in Bandung · Powered by Iman</span>
-  </div>
-  <div class="f-soc">
-    <a href="https://instagram.com/caprux" target="_blank">IG</a>
-    <a href="https://tiktok.com/@caprux" target="_blank">TT</a>
-    <a href="https://github.com/caprux" target="_blank">GH</a>
-  </div>
-</footer>
-
-</body>
-</html>
-HTMLEOF
-echo "Done"    .hero-tag { font-family: 'Share Tech Mono', monospace; font-size: 0.72rem; letter-spacing: 0.3em; color: var(--green); text-transform: uppercase; margin-bottom: 24px; }
-    .hero-tag::before { content: '// '; color: var(--grey); }
-    .hero-title { font-family: 'Space Grotesk', sans-serif; font-weight: 900; font-size: clamp(5rem, 18vw, 14rem); line-height: 0.88; letter-spacing: -0.03em; color: var(--white); position: relative; user-select: none; }
-    .hero-title::before, .hero-title::after { content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; }
-    .hero-title::before { color: var(--green); clip-path: polygon(0 20%, 100% 20%, 100% 35%, 0 35%); animation: glitch-1 3.5s infinite steps(1); opacity: 0; }
-    .hero-title::after { color: var(--grey); clip-path: polygon(0 60%, 100% 60%, 100% 72%, 0 72%); animation: glitch-2 4.1s infinite steps(1); opacity: 0; left: 3px; }
-    @keyframes glitch-1 { 0%,90% { opacity:0; transform:translateX(0); } 91% { opacity:1; transform:translateX(-4px); } 93% { opacity:0; } 95% { opacity:1; transform:translateX(4px); } 97%,100% { opacity:0; } }
-    @keyframes glitch-2 { 0%,85% { opacity:0; transform:translateX(0); } 86% { opacity:1; transform:translateX(3px); } 89% { opacity:0; } 92% { opacity:1; transform:translateX(-3px); } 95%,100% { opacity:0; } }
-    .hero-sub { margin-top: 32px; max-width: 480px; font-size: 1rem; color: var(--grey); line-height: 1.7; font-weight: 300; }
-    .hero-sub strong { color: var(--white); font-weight: 500; }
-    .hero-mantra { margin-top: 40px; font-family: 'Share Tech Mono', monospace; font-size: 0.75rem; letter-spacing: 0.2em; color: var(--green); text-transform: uppercase; }
-    .hero-actions { margin-top: 48px; display: flex; gap: 16px; flex-wrap: wrap; }
-    .btn-primary { font-family: 'Share Tech Mono', monospace; font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; background: var(--green); color: var(--black); border: none; padding: 14px 32px; cursor: pointer; font-weight: 700; text-decoration: none; display: inline-block; transition: box-shadow 0.2s, transform 0.15s; }
-    .btn-primary:hover { box-shadow: var(--green-glow); transform: translateY(-2px); }
-    .btn-ghost { font-family: 'Share Tech Mono', monospace; font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; background: transparent; color: var(--white); border: 1px solid var(--grey); padding: 14px 32px; cursor: pointer; text-decoration: none; display: inline-block; transition: border-color 0.2s, color 0.2s; }
-    .btn-ghost:hover { border-color: var(--white); color: var(--green); }
-    .hero-scroll-hint { position: absolute; bottom: 40px; right: 40px; display: flex; flex-direction: column; align-items: center; gap: 8px; font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; letter-spacing: 0.25em; color: var(--grey); text-transform: uppercase; }
-    .scroll-line { width: 1px; height: 48px; background: linear-gradient(to bottom, var(--green), transparent); animation: scroll-pulse 2s ease-in-out infinite; }
-    @keyframes scroll-pulse { 0%,100% { opacity:1; transform:scaleY(1); } 50% { opacity:0.3; transform:scaleY(0.6); } }
-
-    .marquee-strip { background: var(--green); overflow: hidden; padding: 12px 0; white-space: nowrap; }
-    .marquee-inner { display: inline-flex; animation: marquee 18s linear infinite; }
-    .marquee-inner span { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.82rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--black); padding: 0 32px; }
-    .marquee-sep { color: var(--black) !important; opacity: 0.4; }
-    @keyframes marquee { 0% { transform:translateX(0); } 100% { transform:translateX(-50%); } }
-
-    section { padding: 100px 40px; }
-    .section-eyebrow { font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--green); margin-bottom: 16px; }
-    .section-title { font-family: 'Space Grotesk', sans-serif; font-weight: 900; font-size: clamp(2.2rem, 6vw, 4.5rem); line-height: 1; color: var(--white); margin-bottom: 24px; }
-    .section-divider { width: 60px; height: 2px; background: var(--green); margin-bottom: 48px; box-shadow: var(--green-glow); }
-
-    #products { background: var(--surface); }
-    .drops-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 64px; flex-wrap: wrap; gap: 24px; }
-    .drops-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2px; }
-    .drop-card { background: var(--surface2); position: relative; overflow: hidden; cursor: pointer; aspect-ratio: 3/4; display: flex; flex-direction: column; justify-content: flex-end; }
-    .drop-card-img { position: absolute; inset: 0; background: var(--surface2); display: flex; align-items: center; justify-content: center; font-size: 4rem; opacity: 0.12; transition: transform 0.5s ease, opacity 0.3s; }
-    .drop-card:hover .drop-card-img { transform: scale(1.05); opacity: 0.22; }
-    .drop-card-body { position: relative; padding: 24px; background: linear-gradient(to top, rgba(0,0,0,0.95) 60%, transparent); }
-    .drop-badge { font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; letter-spacing: 0.2em; color: var(--green); text-transform: uppercase; margin-bottom: 8px; }
-    .drop-name { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.3rem; color: var(--white); margin-bottom: 4px; }
-    .drop-desc { font-size: 0.8rem; color: var(--grey); margin-bottom: 16px; line-height: 1.5; }
-    .drop-footer { display: flex; align-items: center; justify-content: space-between; }
-    .drop-price { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.1rem; color: var(--white); }
-    .drop-status { font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; padding: 5px 12px; border: 1px solid; text-transform: uppercase; }
-    .status-soon { color: var(--green); border-color: var(--green); }
-    .status-sold { color: var(--grey); border-color: var(--grey); }
-    .status-open { color: var(--white); border-color: var(--white); background: rgba(255,255,255,0.05); }
-
-    #about { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-    .about-visual { background: var(--surface2); aspect-ratio: 4/5; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
-    .about-visual-text { font-family: 'Space Grotesk', sans-serif; font-weight: 900; font-size: 7rem; color: transparent; -webkit-text-stroke: 1px rgba(0,255,0,0.2); letter-spacing: -0.05em; line-height: 0.85; text-align: center; user-select: none; }
-    .about-accent { position: absolute; bottom: -1px; left: -1px; right: -1px; height: 3px; background: var(--green); box-shadow: var(--green-glow); }
-    .about-body { font-size: 1rem; color: var(--grey-lt); line-height: 1.8; margin-bottom: 24px; }
-    .about-body strong { color: var(--white); }
-    .about-values { margin-top: 40px; display: flex; flex-direction: column; gap: 16px; }
-    .value-item { display: flex; gap: 16px; align-items: flex-start; }
-    .value-num { font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; color: var(--green); padding-top: 3px; flex-shrink: 0; }
-    .value-text { font-size: 0.9rem; color: var(--grey-lt); line-height: 1.6; }
-    .value-text strong { color: var(--white); display: block; margin-bottom: 2px; }
-
-    #philosophy { background: var(--green); padding: 80px 40px; text-align: center; }
-    .phil-label { font-family: 'Share Tech Mono', monospace; font-size: 0.72rem; letter-spacing: 0.35em; text-transform: uppercase; color: rgba(0,0,0,0.5); margin-bottom: 20px; }
-    .phil-quote { font-family: 'Space Grotesk', sans-serif; font-weight: 900; font-size: clamp(2rem, 6vw, 5rem); line-height: 1; color: var(--black); letter-spacing: -0.03em; }
-    .phil-sub { margin-top: 24px; font-family: 'Share Tech Mono', monospace; font-size: 0.8rem; letter-spacing: 0.2em; color: rgba(0,0,0,0.55); text-transform: uppercase; }
-
-    #journey { background: var(--surface); }
-    .journey-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 2px; margin-top: 56px; }
-    .ep-card { background: var(--surface2); padding: 28px 24px; position: relative; border-top: 2px solid transparent; transition: border-color 0.2s; }
-    .ep-card:hover { border-color: var(--green); }
-    .ep-num { font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; letter-spacing: 0.2em; color: var(--green); margin-bottom: 12px; }
-    .ep-title { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1rem; color: var(--white); margin-bottom: 8px; line-height: 1.3; }
-    .ep-desc { font-size: 0.8rem; color: var(--grey); line-height: 1.6; }
-    .ep-status-dot { position: absolute; top: 28px; right: 24px; width: 8px; height: 8px; border-radius: 50%; background: var(--surface); }
-    .ep-status-dot.live { background: var(--green); box-shadow: 0 0 8px var(--green); }
-    .ep-status-dot.coming { background: var(--grey); }
-
-    #contact { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
-    .contact-intro { font-size: 1rem; color: var(--grey-lt); line-height: 1.8; margin-bottom: 40px; }
-    .contact-links { display: flex; flex-direction: column; gap: 12px; }
-    .contact-link { display: flex; align-items: center; gap: 12px; font-family: 'Share Tech Mono', monospace; font-size: 0.8rem; letter-spacing: 0.1em; color: var(--grey); text-decoration: none; transition: color 0.2s; padding-bottom: 12px; border-bottom: 1px solid #1a1a1a; }
-    .contact-link:hover { color: var(--green); }
-    .contact-link-icon { color: var(--green); font-size: 1rem; }
-    .contact-form { display: flex; flex-direction: column; gap: 16px; }
-    .form-field { display: flex; flex-direction: column; gap: 8px; }
-    .form-field label { font-family: 'Share Tech Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--grey); }
-    .form-field input, .form-field textarea { background: var(--surface2); border: 1px solid #2a2a2a; color: var(--white); font-family: 'Inter', sans-serif; font-size: 0.9rem; padding: 12px 16px; outline: none; transition: border-color 0.2s; resize: none; }
-    .form-field input:focus, .form-field textarea:focus { border-color: var(--green); }
-    .form-field textarea { min-height: 120px; }
-
-    footer { background: var(--surface); border-top: 1px solid #1a1a1a; padding: 48px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px; }
-    .footer-logo { font-family: 'Space Grotesk', sans-serif; font-weight: 900; font-size: 1.2rem; letter-spacing: 0.15em; color: var(--green); text-shadow: var(--green-glow); }
-    .footer-copy { font-family: 'Share Tech Mono', monospace; font-size: 0.68rem; letter-spacing: 0.12em; color: var(--grey); text-align: center; }
-    .footer-socials { display: flex; gap: 20px; }
-    .footer-socials a { font-family: 'Share Tech Mono', monospace; font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--grey); text-decoration: none; transition: color 0.2s; }
-    .footer-socials a:hover { color: var(--green); }
-
-    @media (max-width: 768px) {
-      nav { padding: 16px 20px; }
-      .nav-links { display: none; }
-      section { padding: 80px 20px; }
-      #home { padding: 100px 20px 60px; }
-      #about, #contact { grid-template-columns: 1fr; gap: 48px; }
-      .about-right { display: none; }
-      footer { padding: 32px 20px; }
-      .hero-scroll-hint { display: none; }
-      .drops-header { flex-direction: column; align-items: flex-start; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .hero-title::before, .hero-title::after, .marquee-inner, .scroll-line { animation: none; }
-    }
-  </style>
-</head>
-<body>
-
-<nav>
-  <a href="#home" class="nav-logo">CAPRUX</a>
-  <ul class="nav-links">
-    <li><a href="#products">Drops</a></li>
-    <li><a href="#about">Story</a></li>
-    <li><a href="#journey">Journey</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <a href="#products" class="nav-cta">Shop Drop</a>
-</nav>
-
-<section id="home">
-  <div class="hero-bg-grid"></div>
-  <div class="hero-tag">Sundanese Streetwear · Est. 2024 · Bandung</div>
-  <h1 class="hero-title" data-text="CAPRUX">CAPRUX</h1>
-  <p class="hero-sub">
-    Kami tidak mengatakan "Produk kami sempurna dan premium". <strong>Biarkan anda menilai sendiri.</strong><br/>
-    Dan kami tidak pernah menggunakan yang menurut kami tidak layak untuk produk kami.
-  </p>
-  <p class="hero-mantra">Doing the Impossible, with GOD's Help</p>
-  <div class="hero-actions">
-    <a href="#products" class="btn-primary">Lihat Drop Terbaru</a>
-    <a href="#about" class="btn-ghost">Kenapa CAPRUX?</a>
-  </div>
-  <div class="hero-scroll-hint">
-    <div class="scroll-line"></div>
-    <span>Scroll</span>
-  </div>
-</section>
-
+<!-- ════ MARQUEE ════ -->
 <div class="marquee-strip" aria-hidden="true">
   <div class="marquee-inner">
-    <span>CAPRUX</span><span class="marquee-sep">×</span>
-    <span>Kacau Dengan Tujuan</span><span class="marquee-sep">×</span>
-    <span>Sundanese Streetwear</span><span class="marquee-sep">×</span>
-    <span>Doing the Impossible with GOD's Help</span><span class="marquee-sep">×</span>
-    <span>Bandung</span><span class="marquee-sep">×</span>
+    <span>CAPRUX</span><span class="msep">×</span>
+    <span>Kacau Dengan Tujuan</span><span class="msep">×</span>
+    <span>Sundanese Streetwear</span><span class="msep">×</span>
+    <span>Doing the Impossible</span><span class="msep">×</span>
+    <span>with GOD's Help</span><span class="msep">×</span>
+    <span>Bandung</span><span class="msep">×</span>
+    <span>CAPRUX</span><span class="msep">×</span>
+    <span>Kacau Dengan Tujuan</span><span class="msep">×</span>
+    <span>Sundanese Streetwear</span><span class="msep">×</span>
+    <span>Doing the Impossible</span><span class="msep">×</span>
+    <span>with GOD's Help</span><span class="msep">×</span>
+    <span>Bandung</span><span class="msep">×</span>
   </div>
 </div>
 
+<!-- ════ DROPS ════ -->
 <section id="products">
   <div class="drops-header">
     <div>
-      <p class="section-eyebrow">// Collections</p>
-      <h2 class="section-title">DROP 001</h2>
-      <div class="section-divider"></div>
+      <p class="eyebrow">// Collections</p>
+      <h2 class="sec-title">DROP 001</h2>
+      <div class="divider"></div>
     </div>
-    <p style="color:var(--grey);font-size:0.85rem;max-width:280px;line-height:1.7;">
-      Limited. No restock. Kalau mau — ambil sekarang sebelum terlambat.
+    <p style="color:var(--grey);font-size:0.83rem;max-width:260px;line-height:1.7">
+      Limited. No restock.<br/>Kalau mau — ambil sekarang.
     </p>
   </div>
+
   <div class="drops-grid">
+
+    <!-- CARD 1 -->
     <div class="drop-card">
-      <div class="drop-card-img">👕</div>
-      <div class="drop-card-body">
-        <div class="drop-badge">// Micro Cotton Danbowl </div>
-        <div class="drop-name">THE TROPICAL SOUL</div>
-        <div class="drop-desc">Kaos yang cocok di gunakan di iklim tropis.</div>
-        <div class="drop-footer">
-          <span class="drop-price">Rp 189.750</span>
-          <span class="drop-status status-soon">Coming Soon</span>
+      <div class="drop-card-img">
+        <!-- Ganti dengan foto produk beneran -->
+        <!-- <img src="chaos-tee.png" alt="Chaos Tee V1"/> -->
+        <div class="drop-placeholder">
+          <span>👕</span>
+          <p>chaos-tee.png</p>
+        </div>
+      </div>
+      <div class="drop-body">
+        <div class="drop-badge">// Heavy Cotton · 230gsm</div>
+        <div class="drop-name">CHAOS TEE V1</div>
+        <div class="drop-desc">Oversized fit. Polyflex 3D logo. Sundanese geometry — garis yang tidak bisa dibilang lurus.</div>
+        <div class="drop-foot">
+          <span class="drop-price">Rp 189.000</span>
+          <span class="drop-status s-soon">Coming Soon</span>
         </div>
       </div>
     </div>
+
+    <!-- CARD 2 -->
     <div class="drop-card">
-      <div class="drop-card-img">🧥</div>
-      <div class="drop-card-body">
-        <div class="drop-badge">// Parasit Crincle </div>
-        <div class="drop-name">THE COLL BREAKER</div>
-        <div class="drop-desc">Jaket yang cocok digunakan saat kedinginan.</div>
-        <div class="drop-footer">
-          <span class="drop-price">Rp 235.750</span>
-          <span class="drop-status status-soon">Coming Soon</span>
+      <div class="drop-card-img">
+        <!-- <img src="void-hoodie.png" alt="Void Hoodie"/> -->
+        <div class="drop-placeholder">
+          <span>🧥</span>
+          <p>void-hoodie.png</p>
+        </div>
+      </div>
+      <div class="drop-body">
+        <div class="drop-badge">// Fleece · Heavyweight</div>
+        <div class="drop-name">VOID HOODIE</div>
+        <div class="drop-desc">Hitam total. Pocket tersembunyi. Label hijau di hem — kalau tau, pasti tau.</div>
+        <div class="drop-foot">
+          <span class="drop-price">Rp 349.000</span>
+          <span class="drop-status s-soon">Coming Soon</span>
         </div>
       </div>
     </div>
+
+    <!-- CARD 3 -->
     <div class="drop-card">
-      <div class="drop-card-img">🧢</div>
-      <div class="drop-card-body">
+      <div class="drop-card-img">
+        <!-- <img src="cap-001.png" alt="Cap 001"/> -->
+        <div class="drop-placeholder">
+          <span>🧢</span>
+          <p>cap-001.png</p>
+        </div>
+      </div>
+      <div class="drop-body">
         <div class="drop-badge">// 6-Panel · Structured</div>
         <div class="drop-name">CAP 001</div>
         <div class="drop-desc">The name on your head. Emboss logo perak. Limited 50 pcs per drop.</div>
-        <div class="drop-footer">
+        <div class="drop-foot">
           <span class="drop-price">Rp 129.000</span>
-          <span class="drop-status status-soon">Coming Soon</span>
+          <span class="drop-status s-soon">Coming Soon</span>
         </div>
       </div>
     </div>
+
   </div>
 </section>
 
+<!-- ════ PHILOSOPHY ════ -->
 <div id="philosophy">
   <p class="phil-label">// Brand Philosophy</p>
   <p class="phil-quote">KACAU<br/>DENGAN<br/>TUJUAN</p>
   <p class="phil-sub">Meaningful Chaos — Bukan asal berbeda. Berbeda karena punya arah.</p>
 </div>
 
+<!-- ════ ABOUT ════ -->
 <section id="about">
   <div class="about-left">
-    <p class="section-eyebrow">// Our Story</p>
-    <h2 class="section-title">Dari Bandung,<br/>Untuk Dunia.</h2>
-    <div class="section-divider"></div>
+    <p class="eyebrow">// Our Story</p>
+    <h2 class="sec-title">Dari Bandung,<br/>Untuk Dunia.</h2>
+    <div class="divider"></div>
     <p class="about-body">
-      CAPRUX lahir dari tangan seorang estimator yang setiap hari naik-turun dengan satu jam perjalanan — 
-      bukan dari studio mewah di Jakarta. <strong>Dari Baleendah ke dunia.</strong>
+      CAPRUX lahir dari tangan yang setiap hari menghitung bangunan orang lain — sambil diam-diam membangun mimpinya sendiri.
+      <strong>Dari Baleendah ke dunia.</strong>
     </p>
     <p class="about-body">
-      Kami percaya budaya Sunda punya estetika yang belum pernah diangkat dengan benar di dunia streetwear. 
-      Geometri batik Sunda. Filosofi <strong>"silih asih, silih asah, silih asuh."</strong> 
-      Dituangkan ke dalam bahan, potongan, dan setiap detail label.
+      Budaya Sunda punya estetika yang belum pernah diangkat dengan benar di dunia streetwear.
+      Filosofi <strong>"silih asih, silih asah, silih asuh"</strong> — masuk ke bahan, potongan, dan setiap jahitan.
     </p>
     <div class="about-values">
-      <div class="value-item">
-        <span class="value-num">01</span>
-        <div class="value-text">
-          <strong>Meaningful Chaos</strong>
-          Setiap keputusan desain punya alasan. Kekacauan yang terencana.
-        </div>
+      <div class="val">
+        <span class="val-n">01</span>
+        <div class="val-t"><strong>Meaningful Chaos</strong>Setiap detail punya alasan. Kekacauan yang terencana.</div>
       </div>
-      <div class="value-item">
-        <span class="value-num">02</span>
-        <div class="value-text">
-          <strong>Sundanese Root</strong>
-          Akar budaya Sunda bukan dekorasi — ini struktur fundamental brand kami.
-        </div>
+      <div class="val">
+        <span class="val-n">02</span>
+        <div class="val-t"><strong>Sundanese Root</strong>Akar budaya Sunda bukan dekorasi — ini fondasi brand.</div>
       </div>
-      <div class="value-item">
-        <span class="value-num">03</span>
-        <div class="value-text">
-          <strong>GOD First</strong>
-          Semua pencapaian ini bukan karena kami pintar. Tapi karena Allah izinkan.
-        </div>
+      <div class="val">
+        <span class="val-n">03</span>
+        <div class="val-t"><strong>GOD First</strong>Semua ini bukan karena pintar. Tapi karena Allah izinkan.</div>
       </div>
     </div>
   </div>
   <div class="about-right">
     <div class="about-visual">
-      <div class="about-visual-text">CPX<br/>001<br/>BDG</div>
-      <div class="about-accent"></div>
+      <!-- Logo bohlam mengambang sebagai visual about -->
+      <img class="about-logo-float" src="LOGO_TRANSPARAN_PUTIH.png" alt="CAPRUX Logo"/>
+      <div class="about-bottom-line"></div>
+      <div class="about-corner">CAPRUX · BDG · 2024</div>
     </div>
   </div>
 </section>
 
+<!-- ════ JOURNEY ════ -->
 <section id="journey">
-  <p class="section-eyebrow">// Honest Brand Journey</p>
-  <h2 class="section-title">Documentary<br/>Series</h2>
-  <div class="section-divider"></div>
-  <p style="color:var(--grey);max-width:560px;line-height:1.8;font-size:0.95rem;">
-    Kami rekam semuanya — dari nol. Tanpa filter, tanpa editan berlebihan. 
-    Biweekly di TikTok & Instagram Reels. <span style="color:var(--green)">Allah sebagai produser.</span>
+  <p class="eyebrow">// Honest Brand Journey</p>
+  <h2 class="sec-title">Documentary<br/>Series</h2>
+  <div class="divider"></div>
+  <p style="color:var(--grey);max-width:520px;line-height:1.8;font-size:0.93rem">
+    Kami rekam semuanya — dari nol. Tanpa filter. Biweekly di TikTok & Instagram Reels.
+    <span style="color:var(--green)">Allah sebagai produser. Claude sebagai sutradara.</span>
   </p>
-  <div class="journey-grid">
+  <div class="ep-grid">
     <div class="ep-card">
       <div class="ep-num">EP. 01</div>
       <div class="ep-title">Awal Mula Nama & Logo</div>
-      <div class="ep-desc">Kenapa "CAPRUX"? Dari mana kata itu lahir? Proses desain logo pertama kali.</div>
-      <div class="ep-status-dot live"></div>
+      <div class="ep-desc">Kenapa "CAPRUX"? Proses desain logo bohlam pertama kali.</div>
+      <div class="ep-dot live"></div>
     </div>
     <div class="ep-card">
       <div class="ep-num">EP. 02</div>
       <div class="ep-title">Riset Bahan & Internet</div>
-      <div class="ep-desc">Mencari bahan yang tepat. Gramasi, tekstur, harga — semua dicatat.</div>
-      <div class="ep-status-dot coming"></div>
+      <div class="ep-desc">Gramasi, tekstur, harga — semua dicatat dari nol.</div>
+      <div class="ep-dot soon"></div>
     </div>
     <div class="ep-card">
       <div class="ep-num">EP. 03</div>
       <div class="ep-title">Cari Kain di Toko Kiloan</div>
       <div class="ep-desc">POV: jalan kaki di Cigondewah nyari kain murah berkualitas.</div>
-      <div class="ep-status-dot coming"></div>
+      <div class="ep-dot soon"></div>
     </div>
     <div class="ep-card">
       <div class="ep-num">EP. 04</div>
       <div class="ep-title">Cari Vendor Penjahit</div>
-      <div class="ep-desc">Nego harga, cek kualitas jahitan, dan pilih partner yang tepat.</div>
-      <div class="ep-status-dot coming"></div>
+      <div class="ep-desc">Nego harga, cek kualitas jahitan, pilih partner yang tepat.</div>
+      <div class="ep-dot soon"></div>
     </div>
     <div class="ep-card">
       <div class="ep-num">EP. 05</div>
-      <div class="ep-title">Sablon dengan Alat Sederhana</div>
-      <div class="ep-desc">Polyflex, heat press pinjaman, dan eksperimen logo pertama.</div>
-      <div class="ep-status-dot coming"></div>
+      <div class="ep-title">Sablon Alat Sederhana</div>
+      <div class="ep-desc">Polyflex, heat press pinjaman, eksperimen logo pertama.</div>
+      <div class="ep-dot soon"></div>
     </div>
     <div class="ep-card">
       <div class="ep-num">EP. 06</div>
       <div class="ep-title">Buka Toko & Riset Pasar</div>
-      <div class="ep-desc">Tokopedia, Shopee, Instagram — semua dibuka. Hari pertama berjualan.</div>
-      <div class="ep-status-dot coming"></div>
+      <div class="ep-desc">Tokopedia, Shopee, Instagram — semua dibuka hari yang sama.</div>
+      <div class="ep-dot soon"></div>
     </div>
     <div class="ep-card">
       <div class="ep-num">EP. 07 →</div>
       <div class="ep-title">Dan Seterusnya...</div>
-      <div class="ep-desc">Perjalanan ini belum selesai. Subscribe untuk update episode berikutnya.</div>
-      <div class="ep-status-dot coming"></div>
+      <div class="ep-desc">Perjalanan belum selesai. Follow untuk episode berikutnya.</div>
+      <div class="ep-dot soon"></div>
     </div>
   </div>
 </section>
 
+<!-- ════ CONTACT ════ -->
 <section id="contact">
   <div>
-    <p class="section-eyebrow">// Get In Touch</p>
-    <h2 class="section-title">Hubungi<br/>Kami</h2>
-    <div class="section-divider"></div>
-    <p class="contact-intro">
-      Mau collab? Mau tau kapan drop berikutnya? Atau cuma pengen ngobrol soal streetwear Sunda? 
+    <p class="eyebrow">// Get In Touch</p>
+    <h2 class="sec-title">Hubungi<br/>Kami</h2>
+    <div class="divider"></div>
+    <p class="c-intro">
+      Mau collab? Mau tau kapan drop berikutnya?<br/>
       Pintu kami selalu terbuka.
     </p>
-    <div class="contact-links">
-      <a href="https://instagram.com/caprux" class="contact-link" target="_blank">
-        <span class="contact-link-icon">▶</span> @caprux — Instagram
+    <div class="c-links">
+      <a href="https://instagram.com/caprux" class="c-link" target="_blank">
+        <span class="c-icon">▶</span> @caprux — Instagram
       </a>
-      <a href="https://tiktok.com/@caprux" class="contact-link" target="_blank">
-        <span class="contact-link-icon">▶</span> @caprux — TikTok
+      <a href="https://tiktok.com/@caprux" class="c-link" target="_blank">
+        <span class="c-icon">▶</span> @caprux — TikTok
       </a>
-      <a href="https://github.com/caprux" class="contact-link" target="_blank">
-        <span class="contact-link-icon">▶</span> github.com/caprux
+      <a href="https://github.com/caprux" class="c-link" target="_blank">
+        <span class="c-icon">▶</span> github.com/caprux
       </a>
-      <a href="mailto:hello@caprux.id" class="contact-link">
-        <span class="contact-link-icon">▶</span> hello@caprux.id
+      <a href="mailto:hello@caprux.id" class="c-link">
+        <span class="c-icon">▶</span> hello@caprux.id
       </a>
     </div>
   </div>
   <div>
-    <div class="contact-form">
-      <div class="form-field">
+    <div class="c-form">
+      <div class="f-field">
         <label>Nama kamu</label>
-        <input type="text" placeholder="Tulis nama di sini..." />
+        <input type="text" placeholder="Tulis nama di sini..."/>
       </div>
-      <div class="form-field">
+      <div class="f-field">
         <label>Email / IG Handle</label>
-        <input type="text" placeholder="@username atau email" />
+        <input type="text" placeholder="@username atau email"/>
       </div>
-      <div class="form-field">
+      <div class="f-field">
         <label>Pesan</label>
         <textarea placeholder="Ceritain apa yang ada di kepala kamu..."></textarea>
       </div>
-      <button class="btn-primary" style="align-self:flex-start;" onclick="alert('Form aktif setelah backend terhubung. Hubungi via IG @caprux 🤙')">
+      <button class="btn-primary" style="align-self:flex-start"
+        onclick="alert('Hubungi via IG @caprux 🤙\nForm aktif setelah backend terhubung.')">
         Kirim Pesan
       </button>
     </div>
   </div>
 </section>
 
+<!-- ════ FOOTER ════ -->
 <footer>
-  <div class="footer-logo">CAPRUX</div>
-  <div class="footer-copy">
-    © 2024 CAPRUX — Kacau Dengan Tujuan<br/>
-    <span style="color:#444;font-size:0.62rem;">Made in Bandung · Powered by Iman</span>
+  <div class="f-logo">
+    <img src="logo_text_putih.png" alt="CAPRUX"/>
   </div>
-  <div class="footer-socials">
+  <div class="f-copy">
+    © 2024 CAPRUX — Kacau Dengan Tujuan<br/>
+    <span style="color:#333;font-size:0.6rem">Made in Bandung · Powered by Iman</span>
+  </div>
+  <div class="f-socials">
     <a href="https://instagram.com/caprux" target="_blank">IG</a>
     <a href="https://tiktok.com/@caprux" target="_blank">TT</a>
     <a href="https://github.com/caprux" target="_blank">GH</a>
