@@ -164,7 +164,7 @@
     }
 
     .hero-sub{
-      max-width:clamp(280px,80vw,480px);font-size:clamp(.85rem,1.4vw + .3rem,1rem);
+      max-width:clamp(280px,80vw,520px);font-size:clamp(.85rem,1.4vw + .3rem,1rem);
       color:var(--grey);line-height:1.75;font-weight:300;
     }
     .hero-sub strong{color:var(--white);font-weight:500}
@@ -255,7 +255,7 @@
       display:flex;align-items:flex-end;justify-content:space-between;
       margin-bottom:clamp(32px,5vh,56px);flex-wrap:wrap;gap:16px;
     }
-    .drops-desc{color:var(--grey);font-size:clamp(.78rem,1.1vw,.85rem);max-width:260px;line-height:1.7}
+    .drops-desc{color:var(--grey);font-size:clamp(.78rem,1.1vw,.85rem);max-width:320px;line-height:1.7}
     .drops-grid{
       display:grid;
       grid-template-columns:repeat(auto-fill,minmax(min(290px,100%),1fr));
@@ -422,21 +422,12 @@
        TABLET  (481px – 900px)
     ═══════════════════════════════════════ */
     @media(max-width:900px){
-      /* Nav: hide text links, show hamburger */
       .nav-links,.nav-cta{display:none}
       .hamburger{display:flex}
-
-      /* About: stack */
       #about{grid-template-columns:1fr}
       .about-right{display:none}
-
-      /* Contact: stack */
       #contact{grid-template-columns:1fr}
-
-      /* Hero scroll hint: smaller */
       .scroll-hint{right:var(--pad-x)}
-
-      /* Drops: 2 columns on tablet */
       .drops-grid{grid-template-columns:repeat(2,1fr)}
     }
 
@@ -444,32 +435,17 @@
        MOBILE  (≤ 480px)
     ═══════════════════════════════════════ */
     @media(max-width:480px){
-      /* Drops: single column */
       .drops-grid{grid-template-columns:1fr}
-
-      /* Journey: single column */
       .ep-grid{grid-template-columns:1fr}
-
-      /* Hide scroll hint completely */
       .scroll-hint{display:none}
-
-      /* Corner brackets smaller */
       #home::before,#home::after{width:22px;height:22px}
-
-      /* Hero actions: stack */
       .hero-actions{flex-direction:column;align-items:flex-start}
       .btn-primary,.btn-ghost{width:100%;text-align:center}
-
-      /* Philosophy section: prevent overflow on small screens */
       #philosophy::before{display:none}
-
-      /* Footer: center stack */
       footer{flex-direction:column;align-items:center;text-align:center}
       .f-copy{order:2}
       .f-socials{order:3}
       .f-logo{order:1}
-
-      /* Drop header */
       .drops-header{flex-direction:column;align-items:flex-start}
       .drops-desc{max-width:100%}
     }
@@ -485,11 +461,11 @@
 <body>
 
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#products" onclick="closeMenu()">Drops</a>
-  <a href="#about" onclick="closeMenu()">Story</a>
-  <a href="#journey" onclick="closeMenu()">Journey</a>
-  <a href="#contact" onclick="closeMenu()">Contact</a>
-  <a href="#products" class="m-cta" onclick="closeMenu()">Shop Drop</a>
+  <a href="#products" onclick="closeMenu()">Koleksi</a>
+  <a href="#about" onclick="closeMenu()">Manifesto</a>
+  <a href="#journey" onclick="closeMenu()">Catatan</a>
+  <a href="#contact" onclick="closeMenu()">Kontak</a>
+  <a href="#products" class="m-cta" onclick="closeMenu()">Ambil Keberanian</a>
 </div>
 
 <nav>
@@ -497,12 +473,12 @@
     <img src="logo_text_putih.png" alt="CAPRUX"/>
   </a>
   <ul class="nav-links">
-    <li><a href="#products">Drops</a></li>
-    <li><a href="#about">Story</a></li>
-    <li><a href="#journey">Journey</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#products">Koleksi</a></li>
+    <li><a href="#about">Manifesto</a></li>
+    <li><a href="#journey">Catatan</a></li>
+    <li><a href="#contact">Kontak</a></li>
   </ul>
-  <a href="#products" class="nav-cta">Shop Drop</a>
+  <a href="#products" class="nav-cta">Ambil Keberanian</a>
   <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()">
     <span></span><span></span><span></span>
   </button>
@@ -512,18 +488,17 @@
   <div class="hero-grid"></div>
   <div class="hero-scan"></div>
   <div class="hero-noise"></div>
-  <div class="hero-tag">Ethnic Streetwear · Est. 2024 · Jawabarat</div>
+  <div class="hero-tag">Premium Streetwear · Est. 2024 · Jawabarat</div>
   <div class="hero-logo-wrap">
     <img class="main-logo" src="logo_text_putih.png" alt="CAPRUX"/>
   </div>
   <p class="hero-sub">
-    Anggap saja kita <strong>GILA</strong>.<br/>
-    Sebab di dunia yang membosankan ini, hanya si gila yang punya nyali buat bikin perubahan.
+    Pakaian pelindung untuk kepala yang berantakan. Dirancang rapi, tegas, dan berwibawa agar Anda punya <strong>nyali penuh</strong> saat menaklukkan hari yang melelahkan.
   </p>
   <p class="hero-mantra">// Doing the Impossible, with GOD's Help</p>
   <div class="hero-actions">
-    <a href="#products" class="btn-primary">Masuk Komunitas (Drop)</a>
-    <a href="#about" class="btn-ghost">Manifesto Kami</a>
+    <a href="#products" class="btn-primary">Tingkatkan Pede Lo</a>
+    <a href="#about" class="btn-ghost">Baca Aturan Main</a>
   </div>
   <div class="scroll-hint">
     <div class="scroll-line"></div>
@@ -534,16 +509,16 @@
 <div class="marquee-strip" aria-hidden="true">
   <div class="marquee-inner">
     <span>CAPRUX</span><span class="msep">×</span>
-    <span>Berantakan di kepala Bercahaya di karya</span><span class="msep">×</span>
-    <span>Wadah Si Paling Tak Bisa Diam</span><span class="msep">×</span>
+    <span>Sopan di Perilaku, Liar di Karya</span><span class="msep">×</span>
+    <span>Penjinak Isi Kepala yang Berisik</span><span class="msep">×</span>
     <span>Doing the Impossible with GOD's Help</span><span class="msep">×</span>
-    <span>Born from madness, given to the world.</span><span class="msep">×</span>
+    <span>Bukan Asal Beda, Tapi Tahu Arah.</span><span class="msep">×</span>
     <span>Jawabarat</span><span class="msep">×</span>
     <span>CAPRUX</span><span class="msep">×</span>
-    <span>Berantakan di kepala Bercahaya di karya</span><span class="msep">×</span>
-    <span>Wadah Si Paling Tak Bisa Diam</span><span class="msep">×</span>
+    <span>Sopan di Perilaku, Liar di Karya</span><span class="msep">×</span>
+    <span>Penjinak Isi Kepala yang Berisik</span><span class="msep">×</span>
     <span>Doing the Impossible with GOD's Help</span><span class="msep">×</span>
-    <span>Born from madness, given to the world</span><span class="msep">×</span>
+    <span>Bukan Asal Beda, Tapi Tahu Arah.</span><span class="msep">×</span>
     <span>Jawabarat</span><span class="msep">×</span>
   </div>
 </div>
@@ -551,24 +526,24 @@
 <section id="products">
   <div class="drops-header">
     <div>
-      <p class="eyebrow">// First Drop</p>
-      <h2 class="sec-title">Seragam Komunitas</h2>
+      <p class="eyebrow">// First Gear</p>
+      <h2 class="sec-title">Pakaian Pembuat Pede</h2>
       <div class="divider"></div>
     </div>
     <p class="drops-desc">
-      Rilis terbatas. Tanpa restock.<br/>Dibuat untuk dipakai, bukan sekadar dipajang.<br/>Ambil jika sefrekuensi.
+      Potongan tegas. Kenyamanan tanpa kompromi. Garansi langsung naikin aura wibawa Anda dari detik pertama dipakai kelayapan.
     </p>
   </div>
   <div class="drops-grid">
 
     <a href="kaos-oblong.html" class="drop-card">
       <div class="drop-card-img">
-        <img src="Kaos_Oblong_CAPRUX.png" alt="Chaos Tee V1"/>
+        <img src="Kaos_Oblong_CAPRUX.png" alt="THE TROPICAL SOUL"/>
       </div>
       <div class="drop-body">
         <div class="drop-badge">// Micro Cotton Danbowl</div>
         <div class="drop-name">THE TROPICAL SOUL</div>
-        <div class="drop-desc">Polyflex 3D logo silicon 1mm. Cutting-an pas buat yang aktif bergerak.</div>
+        <div class="drop-desc">Sirkulasi udara maksimal. Bahannya jatuh dan kokoh, bikin pundak tegak pas lagi ngobrol serius atau sekadar santai.</div>
         <div class="drop-foot">
           <span class="drop-price">Rp 189.000</span>
           <span class="drop-status s-soon">Coming Soon</span>
@@ -578,12 +553,12 @@
 
     <a href="jaket-crincle.html" class="drop-card">
       <div class="drop-card-img">
-        <img src="Jaket_Crincle_CAPRUX.png" alt="Void Hoodie"/>
+        <img src="Jaket_Crincle_CAPRUX.png" alt="THE WIND BLOCKER"/>
       </div>
       <div class="drop-body">
         <div class="drop-badge">// Parasut Crincle</div>
         <div class="drop-name">THE WIND BLOCKER</div>
-        <div class="drop-desc">Model Gunung Sporty. Siap nemenin lo kelayapan sampai subuh.</div>
+        <div class="drop-desc">Model Gunung Sporty yang dikemas elegan. Tameng terbaik buat menghalau angin malam Jabar tanpa merusak *style* formal lo.</div>
         <div class="drop-foot">
           <span class="drop-price">Rp 289.750</span>
           <span class="drop-status s-soon">Coming Soon</span>
@@ -593,12 +568,12 @@
 
     <a href="celana-pendek.html" class="drop-card">
       <div class="drop-card-img">
-        <img src="Celana_Pendek_CAPRUX.png" alt="Cap 001"/>
+        <img src="Celana_Pendek_CAPRUX.png" alt="THE SHORT CIRCUIT"/>
       </div>
       <div class="drop-body">
         <div class="drop-badge">// Nilon Ripstop</div>
         <div class="drop-name">THE SHORT CIRCUIT</div>
-        <div class="drop-desc">Bahan tangguh, anti-ribet, saku fungsional untuk si hiperaktif.</div>
+        <div class="drop-desc">Bahan super tangguh tapi fleksibel. Saku fungsional tersembunyi biar barang berharga tetap aman pas lo lagi aktif bergerak.</div>
         <div class="drop-foot">
           <span class="drop-price">Rp 239.750</span>
           <span class="drop-status s-soon">Coming Soon</span>
@@ -610,34 +585,34 @@
 </section>
 
 <div id="philosophy">
-  <p class="phil-label">// Brand Philosophy</p>
+  <p class="phil-label">// Core Principle</p>
   <p class="phil-quote">ONLY<br/>GOD<br/>KNOWS</p>
-  <p class="phil-sub">Bercanda tapi Berisi — Berantakan di Kepala, Bercahaya di Karya.</p>
+  <p class="phil-sub">Berantakan di Kepala, Tetap Elegan dan Bercahaya di Karya.</p>
 </div>
 
 <section id="about">
   <div class="about-left">
     <p class="eyebrow">// Manifesto</p>
-    <h2 class="sec-title">Dari Tongkrongan,<br/>Menolak Diam.</h2>
+    <h2 class="sec-title">Saat Semua Diam,<br/>Isi Kepala Kita Terus Berlari.</h2>
     <div class="divider"></div>
     <p class="about-body">
-      Di setiap lingkaran, pasti ada satu orang yang dianggap paling ngaco, paling berisik, *hyper*, dan nggak bisa diam. Tapi jujur aja—saat tongkrongan mulai sepi dan butuh ide gila, **siapa yang dicari duluan? Kita.**
+      Sering dikira terlalu *hyper*, dicap aneh, atau dikira mikir yang "ngaco" cuma karena kita nggak bisa diam? Wajar. Dunia sering kali bingung menghadapi orang yang punya energi tumpah-tumpah. 
     </p>
     <p class="about-body">
-      CAPRUX adalah wadah untuk energi yang tumpah-tumpah itu. Membawa kultur lokal Jawa Barat lewat pendekatan visual streetwear modern yang berani tampil beda, berlandaskan rasa saling menghargai.
+      Tapi faktanya—saat suasana buntu dan butuh gebrakan nyata, ide dari kepala kita yang paling sering menyelamatkan keadaan. CAPRUX hadir mengemas energi liar itu lewat potongan pakaian *streetwear* modern Jawa Barat yang elegan, rapi, dan disegani.
     </p>
     <div class="about-values">
       <div class="val">
         <span class="val-n">>> >> 01</span>
-        <div class="val-t"><strong>GOD ONLY</strong>Tempat berserah paling logis saat isi kepala sudah terlalu penuh.</div>
+        <div class="val-t"><strong>GOD ONLY</strong>Tempat berserah paling tenang saat ide di kepala sudah mulai terlalu kencang dan berisik.</div>
       </div>
       <div class="val">
         <span class="val-n">>> >> 02</span>
-        <div class="val-t"><strong>ETHNIC ROOT & ADAB</strong>Boleh dikira ngaco dari luar, tapi prinsip etika dan adab tetap nomor satu.</div>
+        <div class="val-t"><strong>ADAB & RESPECT</strong>Liar dalam berpikir dan berinovasi, tapi sopan santun dan etika tetap jadi pondasi utama harga diri.</div>
       </div>
       <div class="val">
         <span class="val-n">>> >> 03</span>
-        <div class="val-t"><strong>MEANINGFUL CHAOS</strong>Bukan asal beda atau cari sensasi. Semua energi liar ini punya arah dan karya nyata.</div>
+        <div class="val-t"><strong>STRUCTURED CHAOS</strong>Bukan asal nyeleneh untuk cari perhatian. Semua energi ini disalurkan menjadi karya nyata yang berkelas.</div>
       </div>
     </div>
   </div>
@@ -651,54 +626,54 @@
 </section>
 
 <section id="journey">
-  <p class="eyebrow">// Honest Brand Journey</p>
-  <h2 class="sec-title">Rekaman<br/>Tanpa Filter</h2>
+  <p class="eyebrow">// Authentic Documentaries</p>
+  <h2 class="sec-title">Catatan Proses<br/>Tanpa Filter</h2>
   <div class="divider"></div>
   <p style="color:var(--grey);max-width:520px;line-height:1.8;font-size:clamp(.82rem,1.2vw,.93rem)">
-    Kami mendokumentasikan perjalanan ini secara telanjang. Dari dicibir sampai mengesekusi ide. 
-    <span style="color:var(--green)">Pantau kegilaan kami setiap dua minggu sekali di TikTok & Reels.</span>
+    Kami tidak jualan bualan. Kami merekam setiap keringat, riset, dan proses pengerjaan kain ini dari nol.
+    <span style="color:var(--green)">Pantau proses kreatif kami yang transparan setiap dua minggu sekali di TikTok & Reels.</span>
   </p>
   <div class="ep-grid">
     <div class="ep-card">
       <div class="ep-num">EP. 01</div>
-      <div class="ep-title">Kenapa Harus "CAPRUX"?</div>
-      <div class="ep-desc">Balik ke akar kata omongan ngaco yang melahirkan konsep logo bohlam pertama.</div>
+      <div class="ep-title">Akar Kata "CAPRUX"</div>
+      <div class="ep-desc">Bagaimana obrolan santai sehari-hari bertransformasi menjadi sebuah simbol logo bohlam yang bernyawa.</div>
       <div class="ep-dot live"></div>
     </div>
     <div class="ep-card">
       <div class="ep-num">EP. 02</div>
-      <div class="ep-title">Eksperimen Karakter Kain</div>
-      <div class="ep-desc">Riset gramasi dan kecocokan material untuk orang yang nggak bisa diam.</div>
+      <div class="ep-title">Riset Karakter Kain</div>
+      <div class="ep-desc">Mencari gramasi material terbaik yang sanggup mengimbangi pergerakan dinamis tubuh kita.</div>
       <div class="ep-dot soon"></div>
     </div>
     <div class="ep-card">
       <div class="ep-num">EP. 03</div>
-      <div class="ep-title">Blusukan Cari Partner</div>
-      <div class="ep-desc">Berburu kain kiloan terbaik langsung ke Cigondewah demi kualitas jujur.</div>
+      <div class="ep-title">Menyusuri Cigondewah</div>
+      <div class="ep-desc">Blusukan langsung berburu material tekstil premium demi kejujuran kualitas produk.</div>
       <div class="ep-dot soon"></div>
     </div>
     <div class="ep-card">
       <div class="ep-num">EP. 04</div>
-      <div class="ep-title">Uji Nyali Potongan & Jahitan</div>
-      <div class="ep-desc">Nego bareng penjahit lokal untuk dapet fitting-an yang tangguh buat *streetwear*.</div>
+      <div class="ep-title">Eksperimen Standar Fitting</div>
+      <div class="ep-desc">Diskusi panjang bersama penjahit lokal untuk menghasilkan potongan pakaian yang tegas dan berwibawa.</div>
       <div class="ep-dot soon"></div>
     </div>
     <div class="ep-card">
       <div class="ep-num">EP. 05</div>
-      <div class="ep-title">Trial Cetak & Aplikasi Detail</div>
-      <div class="ep-desc">Eksperimen aplikasi silikon 3D polyflex pakai alat seadanya.</div>
+      <div class="ep-title">Aplikasi Detail 3D Silikon</div>
+      <div class="ep-desc">Uji coba ketahanan cetak logo dengan ketebalan presisi 1mm agar terlihat berkelas saat disentuh.</div>
       <div class="ep-dot soon"></div>
     </div>
     <div class="ep-card">
       <div class="ep-num">EP. 06</div>
-      <div class="ep-title">Membuka Gerbang Pasar</div>
-      <div class="ep-desc">Mempersiapkan etalase digital. Saatnya pembuktian karya nyata.</div>
+      <div class="ep-title">Gerbang Showcase Digital</div>
+      <div class="ep-desc">Mempersiapkan etalase tempat pembuktian bahwa ide liar kita bisa mewujud dalam bentuk produk elegan.</div>
       <div class="ep-dot soon"></div>
     </div>
     <div class="ep-card">
       <div class="ep-num">EP. 07 →</div>
       <div class="ep-title">Evolusi Berikutnya...</div>
-      <div class="ep-desc">Cerita kolektif ini baru dimulai. Ikuti langkah kami selanjutnya.</div>
+      <div class="ep-desc">Langkah pembuktian diri ini baru saja dimulai. Mari kita lihat seberapa jauh kita bisa berjalan.</div>
       <div class="ep-dot soon"></div>
     </div>
   </div>
@@ -706,12 +681,12 @@
 
 <section id="contact">
   <div>
-    <p class="eyebrow">// Join the Circle</p>
-    <h2 class="sec-title">Masuk<br/>Radar Kami</h2>
+    <p class="eyebrow">// Connect with us</p>
+    <h2 class="sec-title">Diskusikan<br/>Ide Anda</h2>
     <div class="divider"></div>
     <p class="c-intro">
-      Punya ide kolaborasi yang nggak masuk akal? Atau cuma mau tahu info drop sirkel ini?<br/>
-      Pintu kami selalu terbuka.
+      Punya konsep kolaborasi atau butuh pakaian custom dengan standar wibawa yang sama?<br/>
+      Saluran komunikasi kami selalu terbuka untuk obrolan berbobot.
     </p>
     <div class="c-links">
       <a href="https://instagram.com/capruxcloth" class="c-link" target="_blank">
