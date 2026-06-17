@@ -3,83 +3,138 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>THE WIND BLOCKER — CAPRUX</title>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght=400;500;700;900&family=Inter:wght=300;400;500&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
+  <title>The Wind Blocker — CAPRUX</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&family=Inter:wght@300;400;500&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="product.css"/>
 </head>
 <body>
 
 <div class="mobile-menu" id="mobileMenu">
   <a href="index.html#products" onclick="closeMenu()">Koleksi</a>
-  <a href="index.html#about" onclick="closeMenu()">Manifesto</a>
-  <a href="index.html#journey" onclick="closeMenu()">Catatan</a>
-  <a href="index.html#contact" onclick="closeMenu()">Kontak</a>
-  <a href="index.html#products" class="m-cta" onclick="closeMenu()">Ambil Keberanian</a>
+  <a href="index.html#about" onclick="closeMenu()">Story</a>
+  <a href="index.html#journey" onclick="closeMenu()">Journey</a>
+  <a href="index.html#contact" onclick="closeMenu()">Contact</a>
+  <a href="index.html#products" class="m-cta" onclick="closeMenu()">Lihat Produk</a>
 </div>
 
 <nav>
   <a href="index.html" class="nav-logo"><img src="logo_text_putih.png" alt="CAPRUX"/></a>
   <ul class="nav-links">
     <li><a href="index.html#products">Koleksi</a></li>
-    <li><a href="index.html#about">Manifesto</a></li>
-    <li><a href="index.html#journey">Catatan</a></li>
-    <li><a href="index.html#contact">Kontak</a></li>
+    <li><a href="index.html#about">Story</a></li>
+    <li><a href="index.html#journey">Journey</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
   </ul>
-  <a href="index.html#products" class="nav-cta">Ambil Keberanian</a>
-  <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()">
-    <span></span><span></span><span></span>
-  </button>
+  <a href="index.html#products" class="nav-cta">Lihat Produk</a>
+  <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()"><span></span><span></span><span></span></button>
 </nav>
 
-<section class="p-detail">
-  <div class="p-gallery">
-    <div class="p-main-img">
-      <img src="Jaket_Crincle_CAPRUX.png" alt="THE WIND BLOCKER"/>
-    </div>
-  </div>
-  <div class="p-info">
-    <div class="p-meta">// Drop #01 · Premium Outerwear</div>
-    <h1 class="p-title">THE WIND BLOCKER</h1>
-    <div class="p-price">Rp 289.750</div>
-    <div class="p-status-tag">Coming Soon</div>
-    
-    <div class="p-desc">
-      <p>
-        Dibuat khusus sebagai tameng luar untuk lo yang suka kelayapan di bawah dinginnya angin malam Jawa Barat, tapi dituntut tetap terlihat prima dan rapi di depan orang banyak. Jaket model gunung sporty ini kami kemas dengan tekstur crincle yang berbobot.
-      </p>
-      <p style="margin-top: 12px;">
-        Ini bukan jaket biasa yang cuma lewat. Di ruang publik, saat orang melihat detail dan logo yang lo bawa, ada semacam pengakuan instan yang muncul. Lo akan langsung dikenali sebagai orang gila kreatif yang visioner, berwibawa, dan punya selera berkelas yang nggak bisa didebat. 
-      </p>
+<div class="breadcrumb">
+  <a href="index.html">Home</a><span class="bc-sep">›</span>
+  <a href="index.html#products">Koleksi</a><span class="bc-sep">›</span>
+  <span class="bc-cur">The Wind Blocker</span>
+</div>
+
+<div class="product-page">
+  <div class="product-grid">
+
+    <div class="gallery">
+      <div class="gallery-main">
+        <img src="Jaket_Crincle_CAPRUX.png" alt="The Wind Blocker" id="mainImg"/>
+        <div class="g-tag">// CAPRUX · KOLEKSI 002</div>
+      </div>
+      <div class="thumbs">
+        <div class="thumb active" onclick="switchImg(this,'Jaket_Crincle_CAPRUX.png')"><img src="Jaket_Crincle_CAPRUX.png" alt=""/></div>
+        <div class="thumb" onclick="switchImg(this,'Jaket_Crincle_CAPRUX.png')"><img src="Jaket_Crincle_CAPRUX.png" alt=""/></div>
+        <div class="thumb" onclick="switchImg(this,'Jaket_Crincle_CAPRUX.png')"><img src="Jaket_Crincle_CAPRUX.png" alt=""/></div>
+        <div class="thumb" onclick="switchImg(this,'Jaket_Crincle_CAPRUX.png')"><img src="Jaket_Crincle_CAPRUX.png" alt=""/></div>
+      </div>
     </div>
 
-    <div class="p-spec">
-      <div class="spec-item"><span>Material</span><span>Parasut Crincle Premium (Tegas & Windproof)</span></div>
-      <div class="spec-item"><span>Karakter</span><span>Sporty-Elegan (Cocok untuk situasi semi-formal & outdoor)</span></div>
-      <div class="spec-item"><span>Proteksi</span><span>High Collar Protection untuk menghalau angin malam</span></div>
-      <div class="spec-item"><span>Asal</span><span>Didesain & Diriset di Jawabarat</span></div>
+    <div class="prod-info">
+      <div class="prod-eyebrow">// Parasut Crincle · Koleksi 002</div>
+      <h1 class="prod-name">THE WIND<br/>BLOCKER</h1>
+      <div class="prod-type">Jaket Gunung Sporty</div>
+      <div class="divider"></div>
+      <div class="price-row">
+        <span class="price">Rp 289.750</span>
+        <span class="status s-soon">Coming Soon</span>
+      </div>
+      <p class="prod-desc">
+        Ketika angin dingin malam hari di jalanan berpadu dengan dinginnya respons lingkungan terhadap impian besarmu, jaket berbahan <strong>Parasut Crincle</strong> premium ini berdiri sebagai benteng perlindungan mutlak. Menggunakan potongan <strong>model gunung fungsional</strong> berestetika streetwear modern, jaket ini membungkus tubuhmu dengan ketangguhan tinggi. Solusi luar biasa bagi kamu yang tak lagi mau merasa minder karena dipandang sebelah mata; sebuah simbol nyata bahwa motor penggerak sejati tak akan pernah berhenti melaju selama keyakinan di dada bersandar pada <strong>kuasa dan ketetapan ALLOH</strong>.
+      </p>
+      <div class="specs-block">
+        <div class="block-label">// Spesifikasi</div>
+        <table class="specs-tbl">
+          <tr><td>Bahan</td><td>Parasut Crincle Premium</td></tr>
+          <tr><td>Berat</td><td>Ultra Lightweight (Anti-Angin Ekstrem)</td></tr>
+          <tr><td>Fitur</td><td>Zipper YKK Original, Hood Adjustable</td></tr>
+          <tr><td>Logo</td><td>Embroidery High Density + Woven Label</td></tr>
+          <tr><td>Potongan</td><td>Regular Streetwear Fit (Model Gunung Maskulin)</td></tr>
+          <tr><td>Origin</td><td>Made in Jawabarat 🇮🇩</td></tr>
+        </table>
+      </div>
+      <div class="size-block">
+        <div class="block-label">// Pilih Ukuran</div>
+        <div class="size-row">
+          <button class="sz" onclick="pickSize(this)">S</button>
+          <button class="sz" onclick="pickSize(this)">M</button>
+          <button class="sz" onclick="pickSize(this)">L</button>
+          <button class="sz" onclick="pickSize(this)">XL</button>
+          <button class="sz" onclick="pickSize(this)">XXL</button>
+        </div>
+      </div>
+      <div class="action-block">
+        <div class="notify-box">
+          <p class="notify-title">Amankan Identitas Pelindungmu</p>
+          <p class="notify-sub">Kuota perilisan awal sangat terbatas untuk menjaga nilai eksklusivitas pergerakan ini. Daftarkan emailmu sekarang.</p>
+          <div class="notify-form">
+            <input type="email" id="notifyEmail" placeholder="nama@email.com"/>
+            <button class="btn-notify" onclick="handleNotify('THE WIND BLOCKER')">Pantau Peluncuran</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="product-tabs">
+    <div class="tab-nav">
+      <button class="tab active" onclick="switchTab(this,'tab-story')">Visi Produk</button>
+      <button class="tab" onclick="switchTab(this,'tab-size')">Panduan Ukuran</button>
+    </div>
+    <div class="tab-content">
+      <div class="tab-pane active" id="tab-story">
+        <p>
+          Mereka menyebut langkahmu terlalu ekstrem, kami menyebutnya visioner. Jaket Wind Blocker diproduksi untuk menemani perjalanan malam panjangmu, mengeksekusi detail-detail rencana yang dianggap mustahil terwujud. Biarkan mereka terjebak dalam zona nyaman yang membosankan, sementara kamu mendaki puncak realitas barumu bersama keyakinan penuh pada takdir ilahi.
+        </p>
+      </div>
+      <div class="tab-pane" id="tab-size">
+        <p>Pilih ukuran standarmu untuk tampilan fitted yang nyaman, atau naik satu tingkat di atasnya jika kamu menyukai gaya over-layering streetwear.</p>
+      </div>
     </div>
   </div>
-</section>
+</div>
 
-<section class="related-products">
-  <h2 class="rp-title">Gigi Pelengkap Lainnya</h2>
-  <div class="rp-grid">
+<section class="related-section">
+  <div class="r-title">// Amunisi Pelengkap Koleksi</div>
+  <div class="drops-grid">
     <a href="kaos-oblong.html" class="drop-card">
-      <div class="dc-img"><img src="Kaos_Oblong_CAPRUX.png" alt="THE TROPICAL SOUL"/></div>
+      <div class="dc-img"><img src="Kaos_Oblong_CAPRUX.png" alt=""/></div>
       <div class="dc-body">
-        <div class="dc-badge">// Micro Cotton Danbowl</div>
-        <div class="dc-name">THE TROPICAL SOUL</div>
-        <div class="dc-desc">Sirkulasi udara maksimal. Bahannya jatuh dan kokoh, bikin pundak tegak pas lagi ngobrol serius atau sekadar santai.</div>
-        <div class="dc-foot"><span class="dc-price">Rp 189.000</span><span class="status s-soon">Coming Soon</span></div>
+        <div class="drop-badge">// Micro Cotton Danbowl</div>
+        <div class="drop-name">THE TROPICAL SOUL</div>
+        <div class="drop-desc">Polyflex 3D logo silicon 1mm. Penyeimbang suhu internal tubuh terbaik.</div>
+        <div class="drop-foot"><span class="dc-price">Rp 189.000</span><span class="status s-soon">Coming Soon</span></div>
       </div>
     </a>
     <a href="celana-pendek.html" class="drop-card">
-      <div class="dc-img"><img src="Celana_Pendek_CAPRUX.png" alt="THE SHORT CIRCUIT"/></div>
+      <div class="drop-card-img"><img src="Celana_Pendek_CAPRUX.png" alt=""/></div>
       <div class="dc-body">
-        <div class="dc-badge">// Nilon Ripstop</div>
-        <div class="dc-name">THE SHORT CIRCUIT</div>
-        <div class="dc-desc">Bahan super tangguh tapi fleksibel. Saku fungsional tersembunyi biar barang berharga tetap aman pas lo lagi aktif bergerak.</div>
-        <div class="dc-foot"><span class="dc-price">Rp 239.750</span><span class="status s-soon">Coming Soon</span></div>
+        <div class="drop-badge">// The Short Circuit</div>
+        <div class="drop-name">NILON RIPSTOP</div>
+        <div class="drop-desc">For men only. Ketangguhan bawah yang mengimbangi fleksibilitas langkahmu.</div>
+        <div class="drop-foot"><span class="dc-price">Rp 239.750</span><span class="status s-soon">Coming Soon</span></div>
       </div>
     </a>
   </div>
@@ -88,19 +143,12 @@
 <footer>
   <div class="f-logo"><img src="logo_text_putih.png" alt="CAPRUX"/></div>
   <div class="f-copy">© 2024 CAPRUX — Doing the Impossible with GOD's Help<br/><span>Made in Jawabarat · Powered by ENF</span></div>
+  <div class="f-soc">
+    <a href="https://instagram.com/capruxcloth" target="_blank">IG</a>
+    <a href="https://tiktok.com/@capruxcloth" target="_blank">TT</a>
+  </div>
 </footer>
 
-<script>
-  function toggleMenu(){
-    const m=document.getElementById('mobileMenu');
-    const h=document.getElementById('hamburger');
-    m.classList.toggle('open');
-    h.classList.toggle('open');
-  }
-  function closeMenu(){
-    document.getElementById('mobileMenu').classList.remove('open');
-    document.getElementById('hamburger').classList.remove('open');
-  }
-</script>
+<script src="product.js"></script>
 </body>
 </html>
