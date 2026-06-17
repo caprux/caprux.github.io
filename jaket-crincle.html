@@ -10,28 +10,28 @@
 <body>
 
 <div class="mobile-menu" id="mobileMenu">
-  <a href="index.html#products" onclick="closeMenu()">Koleksi</a>
+  <a href="index.html#products" onclick="closeMenu()">Drops</a>
   <a href="index.html#about" onclick="closeMenu()">Story</a>
   <a href="index.html#journey" onclick="closeMenu()">Journey</a>
   <a href="index.html#contact" onclick="closeMenu()">Contact</a>
-  <a href="index.html#products" class="m-cta" onclick="closeMenu()">Lihat Produk</a>
+  <a href="index.html#products" class="m-cta" onclick="closeMenu()">Shop Drop</a>
 </div>
 
 <nav>
   <a href="index.html" class="nav-logo"><img src="logo_text_putih.png" alt="CAPRUX"/></a>
   <ul class="nav-links">
-    <li><a href="index.html#products">Koleksi</a></li>
+    <li><a href="index.html#products">Drops</a></li>
     <li><a href="index.html#about">Story</a></li>
     <li><a href="index.html#journey">Journey</a></li>
     <li><a href="index.html#contact">Contact</a></li>
   </ul>
-  <a href="index.html#products" class="nav-cta">Lihat Produk</a>
+  <a href="index.html#products" class="nav-cta">Shop Drop</a>
   <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()"><span></span><span></span><span></span></button>
 </nav>
 
 <div class="breadcrumb">
   <a href="index.html">Home</a><span class="bc-sep">›</span>
-  <a href="index.html#products">Koleksi</a><span class="bc-sep">›</span>
+  <a href="index.html#products">Drops</a><span class="bc-sep">›</span>
   <span class="bc-cur">The Wind Blocker</span>
 </div>
 
@@ -41,7 +41,7 @@
     <div class="gallery">
       <div class="gallery-main">
         <img src="Jaket_Crincle_CAPRUX.png" alt="The Wind Blocker" id="mainImg"/>
-        <div class="g-tag">// CAPRUX · KOLEKSI 002</div>
+        <div class="g-tag">// CAPRUX · DROP 002</div>
       </div>
       <div class="thumbs">
         <div class="thumb active" onclick="switchImg(this,'Jaket_Crincle_CAPRUX.png')"><img src="Jaket_Crincle_CAPRUX.png" alt=""/></div>
@@ -52,7 +52,7 @@
     </div>
 
     <div class="prod-info">
-      <div class="prod-eyebrow">// Parasut Crincle · Koleksi 002</div>
+      <div class="prod-eyebrow">// Parasut Crincle · Drop 002</div>
       <h1 class="prod-name">THE WIND<br/>BLOCKER</h1>
       <div class="prod-type">Jaket Gunung Sporty</div>
       <div class="divider"></div>
@@ -61,16 +61,16 @@
         <span class="status s-soon">Coming Soon</span>
       </div>
       <p class="prod-desc">
-        Ketika angin dingin malam hari di jalanan berpadu dengan dinginnya respons lingkungan terhadap impian besarmu, jaket berbahan <strong>Parasut Crincle</strong> premium ini berdiri sebagai benteng perlindungan mutlak. Menggunakan potongan <strong>model gunung fungsional</strong> berestetika streetwear modern, jaket ini membungkus tubuhmu dengan ketangguhan tinggi. Solusi luar biasa bagi kamu yang tak lagi mau merasa minder karena dipandang sebelah mata; sebuah simbol nyata bahwa motor penggerak sejati tak akan pernah berhenti melaju selama keyakinan di dada bersandar pada <strong>kuasa dan ketetapan ALLOH</strong>.
+        Jaket outdoor dari bahan <strong>Parasut Crincle</strong> — ringan, tahan angin, dan tetap stylish di jalur gunung maupun jalanan kota. Potongan <strong>model gunung</strong> yang fungsional tanpa kehilangan estetika streetwear CAPRUX.
       </p>
       <div class="specs-block">
         <div class="block-label">// Spesifikasi</div>
         <table class="specs-tbl">
-          <tr><td>Bahan</td><td>Parasut Crincle Premium</td></tr>
-          <tr><td>Berat</td><td>Ultra Lightweight (Anti-Angin Ekstrem)</td></tr>
-          <tr><td>Fitur</td><td>Zipper YKK Original, Hood Adjustable</td></tr>
-          <tr><td>Logo</td><td>Embroidery High Density + Woven Label</td></tr>
-          <tr><td>Potongan</td><td>Regular Streetwear Fit (Model Gunung Maskulin)</td></tr>
+          <tr><td>Bahan</td><td>Parasut Crincle</td></tr>
+          <tr><td>Berat</td><td>Lightweight, anti-angin</td></tr>
+          <tr><td>Fitur</td><td>Zipper YKK, hood adjustable</td></tr>
+          <tr><td>Logo</td><td>Embroidery + woven label</td></tr>
+          <tr><td>Potongan</td><td>Regular fit, model gunung</td></tr>
           <tr><td>Origin</td><td>Made in Jawabarat 🇮🇩</td></tr>
         </table>
       </div>
@@ -83,58 +83,100 @@
           <button class="sz" onclick="pickSize(this)">XL</button>
           <button class="sz" onclick="pickSize(this)">XXL</button>
         </div>
+        <div class="size-note">* Lihat size guide di bawah</div>
       </div>
-      <div class="action-block">
-        <div class="notify-box">
-          <p class="notify-title">Amankan Identitas Pelindungmu</p>
-          <p class="notify-sub">Kuota perilisan awal sangat terbatas untuk menjaga nilai eksklusivitas pergerakan ini. Daftarkan emailmu sekarang.</p>
-          <div class="notify-form">
-            <input type="email" id="notifyEmail" placeholder="nama@email.com"/>
-            <button class="btn-notify" onclick="handleNotify('THE WIND BLOCKER')">Pantau Peluncuran</button>
-          </div>
+      <div class="cta-block">
+        <button class="btn-primary" disabled>⚡ Notify Me — Coming Soon</button>
+        <a href="index.html#products" class="btn-ghost">← Lihat Produk Lain</a>
+      </div>
+      <div class="notify-block">
+        <div class="block-label">// Mau tau saat drop?</div>
+        <div class="notify-row">
+          <input class="notify-in" type="email" placeholder="email@example.com" id="notifyEmail"/>
+          <button class="notify-btn" onclick="handleNotify('The Wind Blocker')">Notify</button>
         </div>
       </div>
-    </div>
-
-  </div>
-
-  <div class="product-tabs">
-    <div class="tab-nav">
-      <button class="tab active" onclick="switchTab(this,'tab-story')">Visi Produk</button>
-      <button class="tab" onclick="switchTab(this,'tab-size')">Panduan Ukuran</button>
-    </div>
-    <div class="tab-content">
-      <div class="tab-pane active" id="tab-story">
-        <p>
-          Mereka menyebut langkahmu terlalu ekstrem, kami menyebutnya visioner. Jaket Wind Blocker diproduksi untuk menemani perjalanan malam panjangmu, mengeksekusi detail-detail rencana yang dianggap mustahil terwujud. Biarkan mereka terjebak dalam zona nyaman yang membosankan, sementara kamu mendaki puncak realitas barumu bersama keyakinan penuh pada takdir ilahi.
-        </p>
-      </div>
-      <div class="tab-pane" id="tab-size">
-        <p>Pilih ukuran standarmu untuk tampilan fitted yang nyaman, atau naik satu tingkat di atasnya jika kamu menyukai gaya over-layering streetwear.</p>
+      <div class="tags">
+        <span class="tag">#streetwear</span><span class="tag">#jaket</span>
+        <span class="tag">#outdoor</span><span class="tag">#jawabarat</span><span class="tag">#caprux</span>
       </div>
     </div>
   </div>
 </div>
 
-<section class="related-section">
-  <div class="r-title">// Amunisi Pelengkap Koleksi</div>
-  <div class="drops-grid">
+<div class="detail-section">
+  <div class="detail-wrap">
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab(this,'t1')">Detail Produk</button>
+      <button class="tab" onclick="switchTab(this,'t2')">Size Guide</button>
+      <button class="tab" onclick="switchTab(this,'t3')">Perawatan</button>
+    </div>
+    <div class="tab-pane active" id="t1">
+      <div class="detail-grid">
+        <div class="d-block"><div class="d-label">// Bahan & Konstruksi</div><ul>
+          <li>Parasut Crincle ringan dan tahan angin</li>
+          <li>Lining mesh tipis untuk sirkulasi udara</li>
+          <li>Jahitan taped seam di area kritis</li>
+          <li>Zipper YKK tahan lama di seluruh bagian</li>
+          <li>Hood adjustable dengan drawcord</li>
+        </ul></div>
+        <div class="d-block"><div class="d-label">// Logo & Branding</div><ul>
+          <li>Embroidery logo di dada kiri</li>
+          <li>Woven label CAPRUX di saku kanan</li>
+          <li>Rubber patch di hem belakang</li>
+          <li>Zipper pull custom CAPRUX</li>
+        </ul></div>
+        <div class="d-block"><div class="d-label">// Filosofi Drop Ini</div><ul>
+          <li>Untuk yang naik gunung tanpa melepas gaya</li>
+          <li>"Wind Blocker" — halangi semua yang mau ngecilin kamu</li>
+          <li>Limited batch, tidak ada restock setelah habis</li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="tab-pane" id="t2">
+      <table class="sg-tbl">
+        <thead><tr><th>Size</th><th>Lingkar Dada (cm)</th><th>Panjang Badan (cm)</th><th>Lebar Bahu (cm)</th><th>Panjang Lengan (cm)</th></tr></thead>
+        <tbody>
+          <tr><td>S</td><td>92–96</td><td>65</td><td>44</td><td>60</td></tr>
+          <tr><td>M</td><td>96–100</td><td>68</td><td>46</td><td>62</td></tr>
+          <tr><td>L</td><td>100–104</td><td>71</td><td>48</td><td>64</td></tr>
+          <tr><td>XL</td><td>104–108</td><td>74</td><td>50</td><td>66</td></tr>
+          <tr><td>XXL</td><td>108–112</td><td>77</td><td>52</td><td>68</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tab-pane" id="t3">
+      <div class="care-grid">
+        <div class="care"><div class="care-ico">🌊</div><div class="care-lbl">// Cuci</div><div class="care-txt">Tangan atau mesin gentle cycle maks 30°C. Jangan diperas terlalu kuat.</div></div>
+        <div class="care"><div class="care-ico">🚫</div><div class="care-lbl">// Jangan Dryer</div><div class="care-txt">Hindari mesin pengering. Bahan crincle bisa menyusut dan merusak lapisan.</div></div>
+        <div class="care"><div class="care-ico">🌡️</div><div class="care-lbl">// Setrika</div><div class="care-txt">Tidak disarankan setrika langsung. Gantung dan biarkan keriput alami yang jadi karakter bahan.</div></div>
+        <div class="care"><div class="care-ico">👕</div><div class="care-lbl">// Jemur</div><div class="care-txt">Gantung terbalik di tempat teduh, angin cukup. Kering sempurna sebelum disimpan.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="related">
+  <p class="eyebrow">// You Might Also Like</p>
+  <h2 class="sec-title">Drop Lainnya</h2>
+  <div class="rel-divider"></div>
+  <div class="rel-grid">
     <a href="kaos-oblong.html" class="drop-card">
       <div class="dc-img"><img src="Kaos_Oblong_CAPRUX.png" alt=""/></div>
       <div class="dc-body">
-        <div class="drop-badge">// Micro Cotton Danbowl</div>
-        <div class="drop-name">THE TROPICAL SOUL</div>
-        <div class="drop-desc">Polyflex 3D logo silicon 1mm. Penyeimbang suhu internal tubuh terbaik.</div>
-        <div class="drop-foot"><span class="dc-price">Rp 189.000</span><span class="status s-soon">Coming Soon</span></div>
+        <div class="dc-badge">// Micro Cotton Danbowl</div>
+        <div class="dc-name">THE TROPICAL SOUL</div>
+        <div class="dc-desc">Polyflex 3D logo silicon 1mm.</div>
+        <div class="dc-foot"><span class="dc-price">Rp 189.000</span><span class="status s-soon">Coming Soon</span></div>
       </div>
     </a>
     <a href="celana-pendek.html" class="drop-card">
-      <div class="drop-card-img"><img src="Celana_Pendek_CAPRUX.png" alt=""/></div>
+      <div class="dc-img"><img src="Celana_Pendek_CAPRUX.png" alt=""/></div>
       <div class="dc-body">
-        <div class="drop-badge">// The Short Circuit</div>
-        <div class="drop-name">NILON RIPSTOP</div>
-        <div class="drop-desc">For men only. Ketangguhan bawah yang mengimbangi fleksibilitas langkahmu.</div>
-        <div class="drop-foot"><span class="dc-price">Rp 239.750</span><span class="status s-soon">Coming Soon</span></div>
+        <div class="dc-badge">// The Short Circuit</div>
+        <div class="dc-name">NILON RIPSTOP</div>
+        <div class="dc-desc">For men only. No Boti.</div>
+        <div class="dc-foot"><span class="dc-price">Rp 239.750</span><span class="status s-soon">Coming Soon</span></div>
       </div>
     </a>
   </div>
@@ -146,9 +188,9 @@
   <div class="f-soc">
     <a href="https://instagram.com/capruxcloth" target="_blank">IG</a>
     <a href="https://tiktok.com/@capruxcloth" target="_blank">TT</a>
+    <a href="https://www.facebook.com/profile.php?id=61570786385157" target="_blank">FB</a>
   </div>
 </footer>
-
 <script src="product.js"></script>
 </body>
 </html>

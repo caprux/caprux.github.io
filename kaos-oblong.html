@@ -10,38 +10,40 @@
 <body>
 
 <div class="mobile-menu" id="mobileMenu">
-  <a href="index.html#products" onclick="closeMenu()">Koleksi</a>
+  <a href="index.html#products" onclick="closeMenu()">Drops</a>
   <a href="index.html#about" onclick="closeMenu()">Story</a>
   <a href="index.html#journey" onclick="closeMenu()">Journey</a>
   <a href="index.html#contact" onclick="closeMenu()">Contact</a>
-  <a href="index.html#products" class="m-cta" onclick="closeMenu()">Lihat Produk</a>
+  <a href="index.html#products" class="m-cta" onclick="closeMenu()">Shop Drop</a>
 </div>
 
 <nav>
   <a href="index.html" class="nav-logo"><img src="logo_text_putih.png" alt="CAPRUX"/></a>
   <ul class="nav-links">
-    <li><a href="index.html#products">Koleksi</a></li>
+    <li><a href="index.html#products">Drops</a></li>
     <li><a href="index.html#about">Story</a></li>
     <li><a href="index.html#journey">Journey</a></li>
     <li><a href="index.html#contact">Contact</a></li>
   </ul>
-  <a href="index.html#products" class="nav-cta">Lihat Produk</a>
+  <a href="index.html#products" class="nav-cta">Shop Drop</a>
   <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()"><span></span><span></span><span></span></button>
 </nav>
 
 <div class="breadcrumb">
   <a href="index.html">Home</a><span class="bc-sep">›</span>
-  <a href="index.html#products">Koleksi</a><span class="bc-sep">›</span>
+  <a href="index.html#products">Drops</a><span class="bc-sep">›</span>
   <span class="bc-cur">The Tropical Soul</span>
 </div>
 
+<!-- ══ PRODUCT MAIN ══ -->
 <div class="product-page">
   <div class="product-grid">
 
+    <!-- GALLERY -->
     <div class="gallery">
       <div class="gallery-main">
         <img src="Kaos_Oblong_CAPRUX.png" alt="The Tropical Soul" id="mainImg"/>
-        <div class="g-tag">// CAPRUX · KOLEKSI 001</div>
+        <div class="g-tag">// CAPRUX · DROP 001</div>
       </div>
       <div class="thumbs">
         <div class="thumb active" onclick="switchImg(this,'Kaos_Oblong_CAPRUX.png')"><img src="Kaos_Oblong_CAPRUX.png" alt=""/></div>
@@ -51,8 +53,9 @@
       </div>
     </div>
 
+    <!-- INFO -->
     <div class="prod-info">
-      <div class="prod-eyebrow">// Micro Cotton Danbowl · Koleksi 001</div>
+      <div class="prod-eyebrow">// Micro Cotton Danbowl · Drop 001</div>
       <h1 class="prod-name">THE TROPICAL<br/>SOUL</h1>
       <div class="prod-type">Kaos Oblong Premium</div>
       <div class="divider"></div>
@@ -61,16 +64,16 @@
         <span class="status s-soon">Coming Soon</span>
       </div>
       <p class="prod-desc">
-        Dibuat khusus sebagai pelindung pertama saat kamu duduk terdiam menahan rasa canggung di tongkrongan. Kaos premium berbahan <strong>Micro Cotton Danbowl</strong> yang luar biasa adem—menjaga kepalamu tetap dingin saat emosimu diuji oleh remehan orang lain. Dilengkapi detail <strong>Polyflex 3D Silicon 1mm</strong> yang tegas menonjol, merepresentasikan bahwa setiap ide gilamu yang dianggap di luar nalar memiliki fondasi nyata yang siap meledak pada waktunya dengan <strong>bantuan ALLOH</strong>.
+        Kaos oblong premium dengan bahan <strong>Micro Cotton Danbowl</strong> — lembut, adem, dan breathable untuk iklim tropis. Logo <strong>Polyflex 3D Silicon 1mm</strong> timbul, bukan sablon biasa. Setiap detail dibuat tanpa kompromi.
       </p>
       <div class="specs-block">
         <div class="block-label">// Spesifikasi</div>
         <table class="specs-tbl">
           <tr><td>Bahan</td><td>Micro Cotton Danbowl</td></tr>
-          <tr><td>Gramasi</td><td>220 gsm (Tebal & Tetap Dingin)</td></tr>
-          <tr><td>Logo</td><td>Polyflex 3D Silicon 1mm (Timbul Presisi)</td></tr>
+          <tr><td>Gramasi</td><td>220 gsm</td></tr>
+          <tr><td>Logo</td><td>Polyflex 3D Silicon 1mm</td></tr>
           <tr><td>Label</td><td>Woven label neon green hem</td></tr>
-          <tr><td>Potongan</td><td>Regular fit (Sempurna Menyembunyikan Ragu)</td></tr>
+          <tr><td>Potongan</td><td>Regular fit</td></tr>
           <tr><td>Origin</td><td>Made in Jawabarat 🇮🇩</td></tr>
         </table>
       </div>
@@ -83,58 +86,102 @@
           <button class="sz" onclick="pickSize(this)">XL</button>
           <button class="sz" onclick="pickSize(this)">XXL</button>
         </div>
+        <div class="size-note">* Lihat size guide di bawah</div>
       </div>
-      <div class="action-block">
-        <div class="notify-box">
-          <p class="notify-title">Jangan Sampai Tertinggal Pembuktian Ini</p>
-          <p class="notify-sub">Masukkan email aktifmu. Kami akan mengirimkan sinyal instan saat produk ini resmi dirilis ke publik.</p>
-          <div class="notify-form">
-            <input type="email" id="notifyEmail" placeholder="nama@email.com"/>
-            <button class="btn-notify" onclick="handleNotify('THE TROPICAL SOUL')">Kabari Saya</button>
-          </div>
+      <div class="cta-block">
+        <button class="btn-primary" disabled>⚡ Notify Me — Coming Soon</button>
+        <a href="index.html#products" class="btn-ghost">← Lihat Produk Lain</a>
+      </div>
+      <div class="notify-block">
+        <div class="block-label">// Mau tau saat drop?</div>
+        <div class="notify-row">
+          <input class="notify-in" type="email" placeholder="email@example.com" id="notifyEmail"/>
+          <button class="notify-btn" onclick="handleNotify('The Tropical Soul')">Notify</button>
         </div>
       </div>
-    </div>
-
-  </div>
-
-  <div class="product-tabs">
-    <div class="tab-nav">
-      <button class="tab active" onclick="switchTab(this,'tab-story')">Filosofi Desain</button>
-      <button class="tab" onclick="switchTab(this,'tab-size')">Panduan Ukuran</button>
-    </div>
-    <div class="tab-content">
-      <div class="tab-pane active" id="tab-story">
-        <p>
-          Banyak orang bangga menjadi pengikut arus, tapi kamu terjebak sendirian menjadi pemikir mandiri. Pakaian ini dirancang sebagai pengakuan atas jam-jam sepi yang kamu lalui saat idemu dianggap aneh. Kami tidak menjual potongan kain; kami memberikan baju zirah bagi kamu yang siap membuktikan bahwa penilaian sepihak mereka salah besar jika Tuhan sudah berkehendak membantu hambanya yang gigih.
-        </p>
-      </div>
-      <div class="tab-pane" id="tab-size">
-        <p>Gunakan ukuran yang biasa kamu pakai dengan rasa percaya diri penuh. Potongan regular kami disesuaikan untuk kenyamanan pergerakan dinamis sehari-hari.</p>
+      <div class="tags">
+        <span class="tag">#streetwear</span><span class="tag">#kaos</span>
+        <span class="tag">#etnicroot</span><span class="tag">#jawabarat</span><span class="tag">#caprux</span>
       </div>
     </div>
   </div>
 </div>
 
-<section class="related-section">
-  <div class="r-title">// Lengkapi Amunisi Visualmu</div>
-  <div class="drops-grid">
+<!-- ══ DETAIL TABS ══ -->
+<div class="detail-section">
+  <div class="detail-wrap">
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab(this,'t1')">Detail Produk</button>
+      <button class="tab" onclick="switchTab(this,'t2')">Size Guide</button>
+      <button class="tab" onclick="switchTab(this,'t3')">Perawatan</button>
+    </div>
+    <div class="tab-pane active" id="t1">
+      <div class="detail-grid">
+        <div class="d-block"><div class="d-label">// Bahan & Konstruksi</div><ul>
+          <li>Micro Cotton Danbowl 220 gsm</li>
+          <li>Pre-shrunk, anti-pilling</li>
+          <li>Jahitan rantai double needle di bahu</li>
+          <li>Kerah ribbed 1×1 dengan elastane</li>
+          <li>Side seam untuk struktur tubuh lebih baik</li>
+        </ul></div>
+        <div class="d-block"><div class="d-label">// Logo & Branding</div><ul>
+          <li>Polyflex 3D Silicon 1mm — timbul, tidak retak</li>
+          <li>Woven label CAPRUX di hem kiri bawah (neon green)</li>
+          <li>Heat transfer size label di leher dalam</li>
+          <li>Tidak ada sablon biasa — semua taktil</li>
+        </ul></div>
+        <div class="d-block"><div class="d-label">// Filosofi Drop Ini</div><ul>
+          <li>Terinspirasi dari panas Baleendah yang menyengat</li>
+          <li>"Tropical Soul" — jiwa yang tahan banting di iklim apapun</li>
+          <li>Limited batch, tidak ada restock setelah habis</li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="tab-pane" id="t2">
+      <table class="sg-tbl">
+        <thead><tr><th>Size</th><th>Lingkar Dada (cm)</th><th>Panjang Badan (cm)</th><th>Lebar Bahu (cm)</th><th>Panjang Lengan (cm)</th></tr></thead>
+        <tbody>
+          <tr><td>S</td><td>88–92</td><td>67</td><td>42</td><td>19</td></tr>
+          <tr><td>M</td><td>92–96</td><td>70</td><td>44</td><td>20</td></tr>
+          <tr><td>L</td><td>96–100</td><td>73</td><td>46</td><td>21</td></tr>
+          <tr><td>XL</td><td>100–104</td><td>76</td><td>48</td><td>22</td></tr>
+          <tr><td>XXL</td><td>104–108</td><td>79</td><td>50</td><td>23</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tab-pane" id="t3">
+      <div class="care-grid">
+        <div class="care"><div class="care-ico">🌊</div><div class="care-lbl">// Cuci</div><div class="care-txt">Mesin cuci maks 30°C. Balik kain sebelum mencuci agar logo tidak tergesek.</div></div>
+        <div class="care"><div class="care-ico">🚫</div><div class="care-lbl">// Jangan Bleach</div><div class="care-txt">Hindari pemutih apapun. Merusak bahan dan warna secara permanen.</div></div>
+        <div class="care"><div class="care-ico">🌡️</div><div class="care-lbl">// Setrika</div><div class="care-txt">Suhu rendah-sedang. Jangan setrika langsung di logo Polyflex — gunakan kain pelapis.</div></div>
+        <div class="care"><div class="care-ico">👕</div><div class="care-lbl">// Jemur</div><div class="care-txt">Terbalik di tempat teduh. Hindari sinar matahari langsung yang terlalu lama.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ RELATED ══ -->
+<section class="related">
+  <p class="eyebrow">// You Might Also Like</p>
+  <h2 class="sec-title">Drop Lainnya</h2>
+  <div class="rel-divider"></div>
+  <div class="rel-grid">
     <a href="jaket-crincle.html" class="drop-card">
       <div class="dc-img"><img src="Jaket_Crincle_CAPRUX.png" alt=""/></div>
       <div class="dc-body">
-        <div class="drop-badge">// Parasut Crincle</div>
-        <div class="drop-name">THE WIND BLOCKER</div>
-        <div class="drop-desc">Model Gunung. Bahan Sporty. Armor penahan badai skeptisisme sekitar.</div>
-        <div class="drop-foot"><span class="dc-price">Rp 289.750</span><span class="status s-soon">Coming Soon</span></div>
+        <div class="dc-badge">// Parasut Crincle</div>
+        <div class="dc-name">THE WIND BLOCKER</div>
+        <div class="dc-desc">Model Gunung. Bahan Sporty.</div>
+        <div class="dc-foot"><span class="dc-price">Rp 289.750</span><span class="status s-soon">Coming Soon</span></div>
       </div>
     </a>
     <a href="celana-pendek.html" class="drop-card">
       <div class="dc-img"><img src="Celana_Pendek_CAPRUX.png" alt=""/></div>
       <div class="dc-body">
-        <div class="drop-badge">// The Short Circuit</div>
-        <div class="drop-name">NILON RIPSTOP</div>
-        <div class="drop-desc">Celana pendek tangguh untuk pergerakan tak terbatas mengejar target nyata.</div>
-        <div class="drop-foot"><span class="dc-price">Rp 239.750</span><span class="status s-soon">Coming Soon</span></div>
+        <div class="dc-badge">// The Short Circuit</div>
+        <div class="dc-name">NILON RIPSTOP</div>
+        <div class="dc-desc">For men only. No Boti.</div>
+        <div class="dc-foot"><span class="dc-price">Rp 239.750</span><span class="status s-soon">Coming Soon</span></div>
       </div>
     </a>
   </div>
@@ -146,9 +193,9 @@
   <div class="f-soc">
     <a href="https://instagram.com/capruxcloth" target="_blank">IG</a>
     <a href="https://tiktok.com/@capruxcloth" target="_blank">TT</a>
+    <a href="https://www.facebook.com/profile.php?id=61570786385157" target="_blank">FB</a>
   </div>
 </footer>
-
 <script src="product.js"></script>
 </body>
 </html>

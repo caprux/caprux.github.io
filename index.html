@@ -248,7 +248,7 @@
     .divider{width:48px;height:2px;background:var(--green);margin-bottom:clamp(32px,5vh,48px);box-shadow:var(--glow)}
 
     /* ═══════════════════════════════════════
-       PRODUCTS (Koleksi menggantikan Drops)
+       DROPS
     ═══════════════════════════════════════ */
     #products{background:var(--surface)}
     .drops-header{
@@ -285,253 +285,464 @@
     .drop-placeholder span{font-size:clamp(2rem,6vw,3.5rem);opacity:.13}
     .drop-placeholder p{font-family:'Share Tech Mono',monospace;font-size:.6rem;letter-spacing:.14em;color:#333;text-transform:uppercase}
     .drop-body{position:relative;z-index:2;padding:clamp(16px,3vw,24px);background:linear-gradient(to top,rgba(0,0,0,.97) 55%,transparent)}
-    .drop-badge{font-family:'Share Tech Mono',monospace;font-size:.6rem;letter-spacing:#18em;color:var(--green);text-transform:uppercase;margin-bottom:5px}
+    .drop-badge{font-family:'Share Tech Mono',monospace;font-size:.6rem;letter-spacing:.18em;color:var(--green);text-transform:uppercase;margin-bottom:5px}
     .drop-name{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(1rem,2.5vw,1.25rem);color:var(--white);margin-bottom:4px}
-    .drop-desc{font-size:clamp(.72rem,1.1vw,.78rem);color:var(--grey);margin-bottom:12px;line-height:1.5;font-weight:300}
-    .drop-foot{display:flex;align-items:center;justify-content:space-between;border-top:1px solid #222;padding-top:10px}
-    .drop-price{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.9rem}
-    .status{font-family:'Share Tech Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;padding:3px 8px;border-radius:2px}
-    .status.s-soon{background:#111;color:var(--grey);border:1px solid #222}
-    .status.s-out{background:#200;color:#ff3333;border:1px solid #400}
+    .drop-desc{font-size:clamp(.72rem,1.1vw,.78rem);color:var(--grey);margin-bottom:12px;line-height:1.5}
+    .drop-foot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+    .drop-price{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(.9rem,1.8vw,1.05rem);color:var(--white)}
+    .drop-status{font-family:'Share Tech Mono',monospace;font-size:.6rem;letter-spacing:.14em;padding:4px 10px;border:1px solid;text-transform:uppercase}
+    .s-soon{color:var(--green);border-color:var(--green)}
+    .s-open{color:var(--white);border-color:var(--white);background:rgba(255,255,255,.06)}
+    .s-sold{color:var(--grey);border-color:var(--grey)}
 
     /* ═══════════════════════════════════════
-       STORY / ABOUT
+       PHILOSOPHY
     ═══════════════════════════════════════ */
-    #about{background:var(--black);border-top:1px solid #0d0d0d;position:relative}
-    .about-layout{display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(40px,6vw,80px);align-items:start}
-    .about-p{font-size:clamp(.9rem,1.4vw,.98rem);color:var(--grey-lt);line-height:1.8;margin-bottom:24px;font-weight:300}
-    .about-p strong{color:var(--white);font-weight:500}
-    .about-p span.hl{color:var(--green);font-family:'Share Tech Mono',monospace;font-size:.85rem;letter-spacing:.05em}
-    .about-stat-box{background:var(--surface);border:1px solid #161616;padding:clamp(20px,4vw,32px);display:grid;grid-template-columns:1fr 1fr;gap:24px}
-    .stat-item{display:flex;flex-direction:column}
-    .stat-num{font-family:'Space Grotesk',sans-serif;font-weight:900;font-size:clamp(1.8rem,4vw,2.6rem);color:var(--green);line-height:1}
-    .stat-lbl{font-family:'Share Tech Mono',monospace;font-size:.58rem;letter-spacing:.14em;color:var(--grey);text-transform:uppercase;margin-top:6px}
+    #philosophy{
+      background:var(--green);padding:clamp(56px,8vh,80px) var(--pad-x);
+      text-align:center;position:relative;overflow:hidden;
+    }
+    #philosophy::before{
+      content:'CAPRUX';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+      font-family:'Space Grotesk',sans-serif;font-weight:900;
+      font-size:clamp(5rem,22vw,16rem);color:transparent;
+      -webkit-text-stroke:1px rgba(0,0,0,.07);white-space:nowrap;pointer-events:none;
+    }
+    .phil-label{
+      font-family:'Share Tech Mono',monospace;font-size:clamp(.62rem,.8vw,.7rem);
+      letter-spacing:.35em;text-transform:uppercase;color:rgba(0,0,0,.45);margin-bottom:16px;position:relative;
+    }
+    .phil-quote{
+      font-family:'Space Grotesk',sans-serif;font-weight:900;
+      font-size:clamp(2rem,7vw,5.5rem);line-height:.95;
+      color:var(--black);letter-spacing:-.03em;position:relative;
+    }
+    .phil-sub{
+      margin-top:18px;font-family:'Share Tech Mono',monospace;
+      font-size:clamp(.62rem,.8vw,.78rem);letter-spacing:.18em;
+      color:rgba(0,0,0,.5);text-transform:uppercase;position:relative;
+    }
 
     /* ═══════════════════════════════════════
-       JOURNEY / TIMELINE
+       ABOUT
     ═══════════════════════════════════════ */
-    #journey{background:var(--surface);position:relative}
-    .timeline{position:relative;max-width:800px;margin:0 left;padding-left:24px}
-    .timeline::before{content:'';position:absolute;left:0;top:8px;bottom:8px;width:1px;background:#222}
-    .tl-item{position:relative;margin-bottom:clamp(32px,5vh,48px)}
-    .tl-item::before{content:'';position:absolute;left:-28px;top:6px;width:9px;height:9px;background:var(--black);border:1px solid #444;border-radius:50%;transition:all .3s}
-    .tl-item:hover::before{background:var(--green);border-color:var(--green);box-shadow:var(--glow)}
-    .tl-time{font-family:'Share Tech Mono',monospace;font-size:.65rem;letter-spacing:.18em;color:var(--green);text-transform:uppercase;margin-bottom:6px}
-    .tl-title{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(1.1rem,2vw,1.4rem);color:var(--white);margin-bottom:6px}
-    .tl-desc{color:var(--grey);font-size:clamp(.78rem,1.1vw,.85rem);line-height:1.6;font-weight:300}
+    #about{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,80px);align-items:center}
+    .about-visual{
+      background:var(--surf2);aspect-ratio:4/5;
+      position:relative;overflow:hidden;
+      display:flex;align-items:center;justify-content:center;
+    }
+    .about-logo-float{
+      width:65%;opacity:.12;
+      animation:float-logo 6s ease-in-out infinite;
+      filter:drop-shadow(0 0 30px #00ff00);
+    }
+    @keyframes float-logo{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-18px) rotate(3deg)}}
+    .about-bottom-line{position:absolute;bottom:-1px;left:-1px;right:-1px;height:3px;background:var(--green);box-shadow:var(--glow)}
+    .about-corner{
+      position:absolute;top:20px;right:20px;
+      font-family:'Share Tech Mono',monospace;font-size:.58rem;letter-spacing:.14em;
+      color:rgba(0,255,0,.3);writing-mode:vertical-rl;
+    }
+    .about-body{font-size:clamp(.82rem,1.2vw,.95rem);color:var(--grey-lt);line-height:1.85;margin-bottom:18px}
+    .about-body strong{color:var(--white)}
+    .about-values{margin-top:clamp(24px,4vh,36px);display:flex;flex-direction:column;gap:14px}
+    .val{display:flex;gap:14px;align-items:flex-start}
+    .val-n{font-family:'Share Tech Mono',monospace;font-size:.64rem;color:var(--green);padding-top:3px;flex-shrink:0}
+    .val-t{font-size:clamp(.8rem,1.1vw,.88rem);color:var(--grey-lt);line-height:1.6}
+    .val-t strong{color:var(--white);display:block;margin-bottom:2px}
 
     /* ═══════════════════════════════════════
-       CONTACT / FOOTER
+       JOURNEY
     ═══════════════════════════════════════ */
-    #contact{background:var(--black);border-top:1px solid #111}
-    .contact-layout{display:grid;grid-template-columns:1.3fr 1fr;gap:clamp(32px,5vw,64px)}
-    .c-info{display:flex;flex-direction:column;gap:18px}
-    .c-text{color:var(--grey);font-size:clamp(.82rem,1.2vw,.9rem);line-height:1.7;font-weight:300}
-    .c-text a{color:var(--white);text-decoration:none;border-bottom:1px solid #333;transition:all .2s}
-    .c-text a:hover{color:var(--green);border-color:var(--green)}
-    
-    footer{background:var(--surface);padding:clamp(24px,4vh,40px) var(--pad-x);border-top:1px solid #161616;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px}
-    .f-logo img{height:clamp(16px,2.5vw,22px);filter:brightness(.4);transition:filter .2s}
-    .f-logo img:hover{filter:brightness(1)}
-    .f-copy{font-family:'Share Tech Mono',monospace;font-size:0.6rem;letter-spacing:.1em;color:var(--grey);line-height:1.6}
+    #journey{background:var(--surface)}
+    .ep-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(min(220px,100%),1fr));
+      gap:2px;margin-top:clamp(32px,5vh,52px);
+    }
+    .ep-card{
+      background:var(--surf2);padding:clamp(18px,3vw,26px) clamp(16px,2.5vw,22px);
+      position:relative;border-top:2px solid transparent;
+      transition:border-color .25s,background .25s;
+    }
+    .ep-card:hover{border-color:var(--green);background:#111}
+    .ep-num{font-family:'Share Tech Mono',monospace;font-size:.6rem;letter-spacing:.2em;color:var(--green);margin-bottom:10px}
+    .ep-title{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(.85rem,1.2vw,.95rem);color:var(--white);margin-bottom:6px;line-height:1.3}
+    .ep-desc{font-size:clamp(.72rem,1vw,.78rem);color:var(--grey);line-height:1.6}
+    .ep-dot{position:absolute;top:clamp(18px,3vw,26px);right:clamp(16px,2.5vw,22px);width:7px;height:7px;border-radius:50%}
+    .ep-dot.live{background:var(--green);box-shadow:0 0 8px var(--green)}
+    .ep-dot.soon{background:#333}
+
+    /* ═══════════════════════════════════════
+       CONTACT
+    ═══════════════════════════════════════ */
+    #contact{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,80px);align-items:start}
+    .c-intro{font-size:clamp(.82rem,1.2vw,.95rem);color:var(--grey-lt);line-height:1.85;margin-bottom:clamp(24px,4vh,36px)}
+    .c-links{display:flex;flex-direction:column}
+    .c-link{
+      display:flex;align-items:center;gap:12px;
+      font-family:'Share Tech Mono',monospace;font-size:clamp(.7rem,1vw,.78rem);
+      letter-spacing:.1em;color:var(--grey);text-decoration:none;
+      padding:clamp(12px,2vh,14px) 0;border-bottom:1px solid #1c1c1c;
+      transition:color .2s,padding-left .2s;
+    }
+    .c-link:hover{color:var(--green);padding-left:6px}
+    .c-icon{color:var(--green);font-size:.9rem;flex-shrink:0}
+    .c-form{display:flex;flex-direction:column;gap:14px}
+    .f-field{display:flex;flex-direction:column;gap:7px}
+    .f-field label{font-family:'Share Tech Mono',monospace;font-size:.63rem;letter-spacing:.22em;text-transform:uppercase;color:var(--grey)}
+    .f-field input,.f-field textarea{
+      background:var(--surf2);border:1px solid #252525;color:var(--white);
+      font-family:'Inter',sans-serif;font-size:clamp(.82rem,1.1vw,.88rem);
+      padding:11px 14px;outline:none;transition:border-color .2s;resize:none;
+      -webkit-appearance:none;border-radius:0;
+    }
+    .f-field input:focus,.f-field textarea:focus{border-color:var(--green)}
+    .f-field textarea{min-height:110px}
+
+    /* ═══════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════ */
+    footer{
+      background:var(--surface);border-top:1px solid #161616;
+      padding:clamp(28px,5vh,44px) var(--pad-x);
+      display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;
+    }
+    .f-logo img{height:clamp(20px,3vw,28px);filter:drop-shadow(0 0 8px #00ff0055)}
+    .f-copy{font-family:'Share Tech Mono',monospace;font-size:clamp(.58rem,.7vw,.65rem);letter-spacing:.1em;color:var(--grey);text-align:center;line-height:1.8}
     .f-socials{display:flex;gap:16px}
-    .f-socials a{font-family:'Share Tech Mono',monospace;font-size:.65rem;letter-spacing:.1em;color:var(--grey);text-decoration:none;transition:color .2s}
+    .f-socials a{
+      font-family:'Share Tech Mono',monospace;font-size:clamp(.6rem,.7vw,.65rem);
+      letter-spacing:.15em;text-transform:uppercase;color:var(--grey);text-decoration:none;transition:color .2s;
+    }
     .f-socials a:hover{color:var(--green)}
 
-    /* Responsive logic */
+    /* ═══════════════════════════════════════
+       TABLET  (481px – 900px)
+    ═══════════════════════════════════════ */
     @media(max-width:900px){
+      /* Nav: hide text links, show hamburger */
       .nav-links,.nav-cta{display:none}
       .hamburger{display:flex}
-      .about-layout,.contact-layout{grid-template-columns:1fr;gap:40px}
+
+      /* About: stack */
+      #about{grid-template-columns:1fr}
+      .about-right{display:none}
+
+      /* Contact: stack */
+      #contact{grid-template-columns:1fr}
+
+      /* Hero scroll hint: smaller */
+      .scroll-hint{right:var(--pad-x)}
+
+      /* Drops: 2 columns on tablet */
+      .drops-grid{grid-template-columns:repeat(2,1fr)}
+    }
+
+    /* ═══════════════════════════════════════
+       MOBILE  (≤ 480px)
+    ═══════════════════════════════════════ */
+    @media(max-width:480px){
+      /* Drops: single column */
+      .drops-grid{grid-template-columns:1fr}
+
+      /* Journey: single column */
+      .ep-grid{grid-template-columns:1fr}
+
+      /* Hide scroll hint completely */
+      .scroll-hint{display:none}
+
+      /* Corner brackets smaller */
+      #home::before,#home::after{width:22px;height:22px}
+
+      /* Hero actions: stack */
+      .hero-actions{flex-direction:column;align-items:flex-start}
+      .btn-primary,.btn-ghost{width:100%;text-align:center}
+
+      /* Philosophy section: prevent overflow on small screens */
+      #philosophy::before{display:none}
+
+      /* Footer: center stack */
+      footer{flex-direction:column;align-items:center;text-align:center}
+      .f-copy{order:2}
+      .f-socials{order:3}
+      .f-logo{order:1}
+
+      /* Drop header */
+      .drops-header{flex-direction:column;align-items:flex-start}
+      .drops-desc{max-width:100%}
+    }
+
+    /* ═══════════════════════════════════════
+       REDUCED MOTION
+    ═══════════════════════════════════════ */
+    @media(prefers-reduced-motion:reduce){
+      *{animation:none!important;transition:none!important}
     }
   </style>
 </head>
 <body>
 
+<!-- ════ MOBILE MENU ════ -->
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#products" onclick="closeMenu()">Koleksi</a>
+  <a href="#products" onclick="closeMenu()">Drops</a>
   <a href="#about" onclick="closeMenu()">Story</a>
   <a href="#journey" onclick="closeMenu()">Journey</a>
   <a href="#contact" onclick="closeMenu()">Contact</a>
-  <a href="#products" class="m-cta" onclick="closeMenu()">Lihat Produk</a>
+  <a href="#products" class="m-cta" onclick="closeMenu()">Shop Drop</a>
 </div>
 
+<!-- ════ NAV ════ -->
 <nav>
-  <a href="index.html" class="nav-logo"><img src="logo_text_putih.png" alt="CAPRUX"/></a>
+  <a href="#home" class="nav-logo">
+    <img src="logo_text_putih.png" alt="CAPRUX"/>
+  </a>
   <ul class="nav-links">
-    <li><a href="#products">Koleksi</a></li>
+    <li><a href="#products">Drops</a></li>
     <li><a href="#about">Story</a></li>
     <li><a href="#journey">Journey</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <a href="#products" class="nav-cta">Lihat Produk</a>
-  <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+  <a href="#products" class="nav-cta">Shop Drop</a>
+  <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
+<!-- ════ HERO ════ -->
 <section id="home">
   <div class="hero-grid"></div>
   <div class="hero-scan"></div>
   <div class="hero-noise"></div>
-  
-  <div class="hero-tag">Sering Dianggap Freak, Tapi Dunia Butuh Ide Gila Kita</div>
+  <div class="hero-tag">Etnic Streetwear · Est. 2024 · Jawabarat</div>
   <div class="hero-logo-wrap">
-    <img src="logo_text_putih.png" alt="CAPRUX" class="main-logo"/>
+    <img class="main-logo" src="logo_text_putih.png" alt="CAPRUX"/>
   </div>
-  <div class="hero-sub">
-    Untuk kamu yang sering dianggap <strong>paling aneh di tongkrongan</strong>, diremehkan karena punya ide di luar nalar, dan kadang menyimpan rasa minder sendirian. Ketahuilah, tanpa ambisi "gila" milikmu, roda perkumpulan tak akan pernah berputar. Bersama <strong>Pertolongan ALLOH</strong>, kita ubah setiap tatapan remeh menjadi pembuktian nyata.
-  </div>
-  <div class="hero-mantra">DOING THE IMPOSSIBLE, WITH GOD'S HELP</div>
+  <p class="hero-sub">
+    Abaikan hujatan dan siap di anggap <strong>GILA</strong><br/>
+    Terima dengan energi positif, dan mulailah dari sini....
+  </p>
+  <p class="hero-mantra">// Doing the Impossible, with GOD's Help</p>
   <div class="hero-actions">
-    <a href="#products" class="btn-primary">Buktikan Sekarang</a>
-    <a href="#about" class="btn-ghost">Baca Manifesto</a>
+    <a href="#products" class="btn-primary">Lihat Drop Terbaru</a>
+    <a href="#about" class="btn-ghost">Kenapa CAPRUX?</a>
   </div>
-
   <div class="scroll-hint">
-    <span>Scroll</span>
     <div class="scroll-line"></div>
+    <span>Scroll</span>
   </div>
 </section>
 
-<div class="marquee-strip">
+<!-- ════ MARQUEE ════ -->
+<div class="marquee-strip" aria-hidden="true">
   <div class="marquee-inner">
-    <span>DIANGGAP FREAK BUKAN BERARTI KALAH <span class="msep">·</span> IDE DI LUAR NALAR ADALAH MOTOR PENGGERAK <span class="msep">·</span> YAKIN KEPADA ALLOH <span class="msep">·</span> DOING THE IMPOSSIBLE <span class="msep">·</span> </span>
-    <span>DIANGGAP FREAK BUKAN BERARTI KALAH <span class="msep">·</span> IDE DI LUAR NALAR ADALAH MOTOR PENGGERAK <span class="msep">·</span> YAKIN KEPADA ALLOH <span class="msep">·</span> DOING THE IMPOSSIBLE <span class="msep">·</span> </span>
+    <span>CAPRUX</span><span class="msep">×</span>
+    <span>Berantakan di kepala Bercahaya di karya</span><span class="msep">×</span>
+    <span>Etnic Streetwear</span><span class="msep">×</span>
+    <span>Doing the Impossible with GOD's Help</span><span class="msep">×</span>
+    <span>Born from madness, given to the world.</span><span class="msep">×</span>
+    <span>Jawabarat</span><span class="msep">×</span>
+    <span>CAPRUX</span><span class="msep">×</span>
+    <span>Berantakan di kepala Bercahaya di karya</span><span class="msep">×</span>
+    <span>Etnic Streetwear</span><span class="msep">×</span>
+    <span>Doing the Impossible with GOD's Help</span><span class="msep">×</span>
+    <span>Born from madness, given to the world</span><span class="msep">×</span>
+    <span>Jawabarat</span><span class="msep">×</span>
   </div>
 </div>
 
+<!-- ════ DROPS ════ -->
 <section id="products">
   <div class="drops-header">
     <div>
-      <div class="eyebrow">// Eksplorasi Produk</div>
-      <h2 class="sec-title">AMUNISI<br/>MEREKA YANG BERANI</h2>
+      <p class="eyebrow">// Collections</p>
+      <h2 class="sec-title">streetwear</h2>
       <div class="divider"></div>
     </div>
-    <div class="drops-desc">
-      Setiap potong pakaian di sini dirancang bukan untuk menyembunyikan keunikanmu, melainkan menjadi identitas pelindung saat kamu bergerak mengeksekusi ide gila yang dibilang mustahil oleh mereka.
-    </div>
+    <p class="drops-desc">
+      Limited wear. No restock.<br/>Kalau mau — ambil sekarang.<br/>Kalau tidak, tidak apa-apa.
+    </p>
   </div>
-
   <div class="drops-grid">
+
     <a href="kaos-oblong.html" class="drop-card">
-      <div class="drop-card-img"><img src="Kaos_Oblong_CAPRUX.png" alt="The Tropical Soul"/></div>
+      <div class="drop-card-img">
+        <img src="Kaos_Oblong_CAPRUX.png" alt="Chaos Tee V1"/>
+      </div>
       <div class="drop-body">
-        <div class="drop-badge">// Koleksi 001 · Kain Micro Cotton Danbowl</div>
+        <div class="drop-badge">// Micro Cotton Danbowl</div>
         <div class="drop-name">THE TROPICAL SOUL</div>
-        <div class="drop-desc">Detail logo timbul 3D silicon 1mm. Nyaman dipakai saat kepalamu sedang panas menyusun strategi tak masuk akal.</div>
+        <div class="drop-desc">Polyflex 3D logo silicon 1mm.</div>
         <div class="drop-foot">
           <span class="drop-price">Rp 189.000</span>
-          <span class="status s-soon">Coming Soon</span>
+          <span class="drop-status s-soon">Coming Soon</span>
         </div>
       </div>
     </a>
 
     <a href="jaket-crincle.html" class="drop-card">
-      <div class="drop-card-img"><img src="Jaket_Crincle_CAPRUX.png" alt="The Wind Blocker"/></div>
+      <div class="drop-card-img">
+        <img src="Jaket_Crincle_CAPRUX.png" alt="Void Hoodie"/>
+      </div>
       <div class="drop-body">
-        <div class="drop-badge">// Koleksi 002 · Parasut Crincle Premium</div>
+        <div class="drop-badge">// Parasut Crincle</div>
         <div class="drop-name">THE WIND BLOCKER</div>
-        <div class="drop-desc">Armor luar tahan angin berestetika streetwear. Pelindung tubuh terbaik saat harus pulang malam demi merealisasikan visi besarmu.</div>
+        <div class="drop-desc">Model Gunung. Bahan Sporty.</div>
         <div class="drop-foot">
           <span class="drop-price">Rp 289.750</span>
-          <span class="status s-soon">Coming Soon</span>
+          <span class="drop-status s-soon">Coming Soon</span>
         </div>
       </div>
     </a>
 
     <a href="celana-pendek.html" class="drop-card">
-      <div class="drop-card-img"><img src="Celana_Pendek_CAPRUX.png" alt="Nilon Ripstop"/></div>
+      <div class="drop-card-img">
+        <img src="Celana_Pendek_CAPRUX.png" alt="Cap 001"/>
+      </div>
       <div class="drop-body">
-        <div class="drop-badge">// Koleksi 003 · Nilon Ripstop Tangguh</div>
-        <div class="drop-name">NILON RIPSTOP</div>
-        <div class="drop-desc">Celana pendek tak mudah sobek untuk pergerakan bebas tak terbatas. Bukti fisik bahwa kamu siap melangkah lebih jauh.</div>
+        <div class="drop-badge">// THE SHORT CIRCUIT</div>
+        <div class="drop-name">Nilon Ripstop</div>
+        <div class="drop-desc">For men only. No Boti.</div>
         <div class="drop-foot">
           <span class="drop-price">Rp 239.750</span>
-          <span class="status s-soon">Coming Soon</span>
+          <span class="drop-status s-soon">Coming Soon</span>
         </div>
       </div>
     </a>
+
   </div>
 </section>
 
+<!-- ════ PHILOSOPHY ════ -->
+<div id="philosophy">
+  <p class="phil-label">// Brand Philosophy</p>
+  <p class="phil-quote">ONLY<br/>GOD<br/>KNOW</p>
+  <p class="phil-sub">Meaningful Chaos — Bukan asal berbeda. Berbeda karena punya arah.</p>
+</div>
+
+<!-- ════ ABOUT ════ -->
 <section id="about">
-  <div class="about-layout">
-    <div>
-      <div class="eyebrow">// Manifesto Realitas</div>
-      <h2 class="sec-title">KAMI MENGERTI<br/>TIAP SUDUT SEPI<br/>DI KEPALAMU.</h2>
-      <div class="divider"></div>
-      <p class="about-p">
-        Pernahkah kamu duduk di tengah keramaian tongkrongan, melempar sebuah ide, lalu disambut tawa remeh dan tatapan seolah kamu adalah makhluk asing? Kami tahu rasanya. Ada kalanya rasa malu dan minder itu menyelinap, membuatmu terdiam dan memilih memendam semuanya sendirian. Kamu dicap <strong>freak</strong> hanya karena cara pandangmu melompat sepuluh langkah ke depan.
-      </p>
-      <p class="about-p">
-        Tapi mari kita buka topeng realitasnya: <strong>kamu adalah motor penggerak yang sesungguhnya.</strong> Tanpa inisiatif gila darimu, tongkrongan itu akan selamanya berjalan di tempat, membosankan, dan tanpa arah. Kamu bukan aneh; kamu hanya melihat apa yang belum sanggup mereka lihat.
-      </p>
-      <p class="about-p">
-        <span class="hl">// BERDIRILAH DENGAN TEGAK.</span><br/>
-        CAPRUX diciptakan bukan sekadar sebagai merek pakaian, melainkan sebagai wadah pengakuan mutlak atas keberadaanmu. Di sini, ketidakmungkinan yang kamu rancang di kamar sepi tidak akan pernah ditertawakan. Sebab kami percaya, sekeras apa pun dunia meremehkan, dengan keyakinan yang tertanam kokoh dan <strong>bantuan serta ridho ALLOH / Tuhan Yang Maha Kuasa</strong>, ide paling mustahil sekalipun akan pecah menjadi kenyataan yang tak terbantahkan.
-      </p>
+  <div class="about-left">
+    <p class="eyebrow">// Our Story</p>
+    <h2 class="sec-title">Dari Jawabarat,<br/>Untuk Dunia.</h2>
+    <div class="divider"></div>
+    <p class="about-body">
+      CAPRUX lahir dari tangan yang setiap hari menghitung bangunan orang lain — sambil diam-diam membangun mimpinya sendiri.
+      <strong>Dari Baleendah ke dunia.</strong>
+    </p>
+    <p class="about-body">
+      Budaya Sunda punya estetika yang belum pernah diangkat dengan benar di dunia streetwear.
+      Filosofi <strong>"silih asih, silih asah, silih asuh"</strong> — masuk ke bahan, potongan, dan setiap jahitan.
+    </p>
+    <div class="about-values">
+      <div class="val">
+        <span class="val-n">>> >> 01</span>
+        <div class="val-t"><strong>GOD ONLY</strong>tempat kembali saat tak ada lagi yang bantu.</div>
+      </div>
+      <div class="val">
+        <span class="val-n">>> >> 02</span>
+        <div class="val-t"><strong>ETNIC ROOT</strong>warisan leluhur yang meninggikan nilai adab.</div>
+      </div>
+      <div class="val">
+        <span class="val-n">>> >> 03</span>
+        <div class="val-t"><strong>MODERN TECHNOLOGY</strong>kadang malas mencoba karna merasa sudah ketinggalan.</div>
+      </div>
     </div>
-    <div class="about-stat-box">
-      <div class="stat-item">
-        <div class="stat-num">100%</div>
-        <div class="stat-lbl">Validasi Keberanian</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">0%</div>
-        <div class="stat-lbl">Kompromi Kata Orang</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">Ide</div>
-        <div class="stat-lbl">Luar Batas Nalar</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">Doa</div>
-        <div class="stat-lbl">Pertolongan ALLOH</div>
-      </div>
+  </div>
+  <div class="about-right">
+    <div class="about-visual">
+      <img class="about-logo-float" src="LOGO_TRANSPARAN_PUTIH.png" alt="CAPRUX Logo"/>
+      <div class="about-bottom-line"></div>
+      <div class="about-corner">CAPRUX · JABAR · 2024</div>
     </div>
   </div>
 </section>
 
+<!-- ════ JOURNEY ════ -->
 <section id="journey">
-  <div class="eyebrow">// Fase Pembuktian</div>
-  <h2 class="sec-title">LINI MASA<br/>PERJALANAN KITA</h2>
+  <p class="eyebrow">// Honest Brand Journey</p>
+  <h2 class="sec-title">Documentary<br/>Series</h2>
   <div class="divider"></div>
-  <div class="timeline">
-    <div class="tl-item">
-      <div class="tl-time">Fase 01 — Penerimaan Diri</div>
-      <div class="tl-title">Menghancurkan Minder Menjadi Bahan Bakar</div>
-      <div class="tl-desc">Berhenti mendengarkan ucapan yang mengecilkan potensimu. Langkah awal dimulai saat kamu berani menerima bahwa isi kepalamu berharga, tak peduli seberapa asingnya itu di telinga mereka.</div>
+  <p style="color:var(--grey);max-width:520px;line-height:1.8;font-size:clamp(.82rem,1.2vw,.93rem)">
+    Kami rekam semuanya — dari nol. Tanpa filter. Biweekly di TikTok & Instagram Reels.
+    <span style="color:var(--green)">Allah sebagai produser. ENF sebagai sutradara.</span>
+  </p>
+  <div class="ep-grid">
+    <div class="ep-card">
+      <div class="ep-num">EP. 01</div>
+      <div class="ep-title">Awal Mula Nama & Logo</div>
+      <div class="ep-desc">Kenapa "CAPRUX"? Proses desain logo bohlam pertama kali.</div>
+      <div class="ep-dot live"></div>
     </div>
-    <div class="tl-item">
-      <div class="tl-time">Fase 02 — Merancang Amunisi</div>
-      <div class="tl-title">Koleksi Fisik Sebagai Kulit Pelindung Visi</div>
-      <div class="tl-desc">Kami meluncurkan tiga produk pertama dengan standar pengerjaan ekstrem tanpa kompromi. Menjadi simbol visual yang menegaskan bahwa kamu siap menggerakkan roda perubahan di lingkunganmu.</div>
+    <div class="ep-card">
+      <div class="ep-num">EP. 02</div>
+      <div class="ep-title">Riset Bahan & Internet</div>
+      <div class="ep-desc">Gramasi, tekstur, harga — semua dicatat dari nol.</div>
+      <div class="ep-dot soon"></div>
     </div>
-    <div class="tl-item">
-      <div class="tl-time">Fase 03 — Menembus Kemustahilan</div>
-      <div class="tl-title">Pasrah Total, Berusaha Maksimal, Menjemput Keberhasilan</div>
-      <div class="tl-desc">Saat usaha fisik bertemu dengan penyerahan total kepada pertolongan Tuhan. Di titik ini, ide yang semula dianggap gila di tongkrongan akan bertransformasi menjadi kesuksesan yang memaksa mereka terdiam.</div>
+    <div class="ep-card">
+      <div class="ep-num">EP. 03</div>
+      <div class="ep-title">Cari Kain di Toko Kiloan</div>
+      <div class="ep-desc">POV: jalan kaki di Cigondewah nyari kain murah berkualitas.</div>
+      <div class="ep-dot soon"></div>
+    </div>
+    <div class="ep-card">
+      <div class="ep-num">EP. 04</div>
+      <div class="ep-title">Cari Vendor Penjahit</div>
+      <div class="ep-desc">Nego harga, cek kualitas jahitan, pilih partner yang tepat.</div>
+      <div class="ep-dot soon"></div>
+    </div>
+    <div class="ep-card">
+      <div class="ep-num">EP. 05</div>
+      <div class="ep-title">Sablon Alat Sederhana</div>
+      <div class="ep-desc">Polyflex, heat press pinjaman, eksperimen logo pertama.</div>
+      <div class="ep-dot soon"></div>
+    </div>
+    <div class="ep-card">
+      <div class="ep-num">EP. 06</div>
+      <div class="ep-title">Buka Toko & Riset Pasar</div>
+      <div class="ep-desc">Tokopedia, Shopee, Instagram — semua dibuka hari yang sama.</div>
+      <div class="ep-dot soon"></div>
+    </div>
+    <div class="ep-card">
+      <div class="ep-num">EP. 07 →</div>
+      <div class="ep-title">Dan Seterusnya...</div>
+      <div class="ep-desc">Perjalanan belum selesai. Follow untuk episode berikutnya.</div>
+      <div class="ep-dot soon"></div>
     </div>
   </div>
 </section>
 
+<!-- ════ CONTACT ════ -->
 <section id="contact">
-  <div class="contact-layout">
-    <div>
-      <div class="eyebrow">// Hubungi Markas</div>
-      <h2 class="sec-title">KIRIM PESAN<br/>KE KEPALA KAMI</h2>
-      <div class="divider"></div>
-      <p class="c-text">
-        Punya ide gila, kolaborasi yang menembus batas nalar, atau sekadar ingin berbagi cerita perjuanganmu keluar dari rasa minder? Pintu komunikasi kami selalu terbuka tanpa batasan formalitas baku.
-      </p>
-      <p class="c-text">
-        Langsung terhubung via <a href="https://instagram.com/capruxcloth" target="_blank">Instagram Direct Message</a> atau layangkan surat digitalmu ke alamat email resmi manajemen kami.
-      </p>
+  <div>
+    <p class="eyebrow">// Get In Touch</p>
+    <h2 class="sec-title">Hubungi<br/>Kami</h2>
+    <div class="divider"></div>
+    <p class="c-intro">
+      Mau collab? Mau tau kapan drop berikutnya?<br/>
+      Pintu kami selalu terbuka.
+    </p>
+    <div class="c-links">
+      <a href="https://instagram.com/capruxcloth" class="c-link" target="_blank">
+        <span class="c-icon">▶</span> @capruxcloth — Instagram
+      </a>
+      <a href="https://www.tiktok.com/@capruxcloth" class="c-link" target="_blank">
+        <span class="c-icon">▶</span> @capruxcloth — TikTok
+      </a>
+      <a href="https://www.facebook.com/profile.php?id=61570786385157" class="c-link" target="_blank">
+        <span class="c-icon">▶</span> CAPRUX — Facebook
+      </a>
     </div>
   </div>
 </section>
 
+<!-- ════ FOOTER ════ -->
 <footer>
-  <div class="f-logo"><img src="logo_text_putih.png" alt="CAPRUX"/></div>
+  <div class="f-logo">
+    <img src="logo_text_putih.png" alt="CAPRUX"/>
+  </div>
   <div class="f-copy">
     © 2024 CAPRUX — Doing the Impossible with GOD's Help<br/>
     <span style="color:#333;font-size:.58rem">Made in Jawabarat · Powered by ENF</span>
@@ -543,10 +754,11 @@
   </div>
 </footer>
 
+<!--Start of Tawk.to Script-->
 <script type="text/javascript">
 var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
 (function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName(\"script\")[0];
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
 s1.async=true;
 s1.src='https://embed.tawk.to/6a30f2f6b319cc1d4d431aec/1jr7ja5d7';
 s1.charset='UTF-8';
@@ -554,6 +766,8 @@ s1.setAttribute('crossorigin','*');
 s0.parentNode.insertBefore(s1,s0);
 })();
 </script>
+<!--End of Tawk.to Script-->
+
 <script>
   function toggleMenu(){
     const m=document.getElementById('mobileMenu');
@@ -567,7 +781,10 @@ s0.parentNode.insertBefore(s1,s0);
     document.getElementById('hamburger').classList.remove('open');
     document.body.style.overflow='';
   }
-  window.addEventListener('resize',()=>{if(window.innerWidth>900)closeMenu()});
+  // Close menu on resize ke desktop
+  window.addEventListener('resize',()=>{
+    if(window.innerWidth>900) closeMenu();
+  });
 </script>
 </body>
 </html>
