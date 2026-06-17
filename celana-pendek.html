@@ -3,83 +3,138 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>THE SHORT CIRCUIT — CAPRUX</title>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght=400;500;700;900&family=Inter:wght=300;400;500&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
+  <title>Nilon Ripstop — CAPRUX</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&family=Inter:wght@300;400;500&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="product.css"/>
 </head>
 <body>
 
 <div class="mobile-menu" id="mobileMenu">
   <a href="index.html#products" onclick="closeMenu()">Koleksi</a>
-  <a href="index.html#about" onclick="closeMenu()">Manifesto</a>
-  <a href="index.html#journey" onclick="closeMenu()">Catatan</a>
-  <a href="index.html#contact" onclick="closeMenu()">Kontak</a>
-  <a href="index.html#products" class="m-cta" onclick="closeMenu()">Ambil Keberanian</a>
+  <a href="index.html#about" onclick="closeMenu()">Story</a>
+  <a href="index.html#journey" onclick="closeMenu()">Journey</a>
+  <a href="index.html#contact" onclick="closeMenu()">Contact</a>
+  <a href="index.html#products" class="m-cta" onclick="closeMenu()">Lihat Produk</a>
 </div>
 
 <nav>
   <a href="index.html" class="nav-logo"><img src="logo_text_putih.png" alt="CAPRUX"/></a>
   <ul class="nav-links">
     <li><a href="index.html#products">Koleksi</a></li>
-    <li><a href="index.html#about">Manifesto</a></li>
-    <li><a href="index.html#journey">Catatan</a></li>
-    <li><a href="index.html#contact">Kontak</a></li>
+    <li><a href="index.html#about">Story</a></li>
+    <li><a href="index.html#journey">Journey</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
   </ul>
-  <a href="index.html#products" class="nav-cta">Ambil Keberanian</a>
-  <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()">
-    <span></span><span></span><span></span>
-  </button>
+  <a href="index.html#products" class="nav-cta">Lihat Produk</a>
+  <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()"><span></span><span></span><span></span></button>
 </nav>
 
-<section class="p-detail">
-  <div class="p-gallery">
-    <div class="p-main-img">
-      <img src="Celana_Pendek_CAPRUX.png" alt="THE SHORT CIRCUIT"/>
-    </div>
-  </div>
-  <div class="p-info">
-    <div class="p-meta">// Drop #01 · Technical Bottoms</div>
-    <h1 class="p-title">THE SHORT CIRCUIT</h1>
-    <div class="p-price">Rp 239.750</div>
-    <div class="p-status-tag">Coming Soon</div>
-    
-    <div class="p-desc">
-      <p>
-        Banyak orang aktif bergerak tapi kehilangan sentuhan elegannya saat memakai celana pendek. Kami tidak mau itu terjadi sama lo. Menggunakan basis material ripstop yang super tangguh, celana ini dirancang khusus untuk mengimbangi manuver lo yang cepat dan tidak bisa diam.
-      </p>
-      <p style="margin-top: 12px;">
-        Ketika lo memadukannya dengan koleksi CAPRUX lainnya, lo tidak sedang berdandan untuk pamer. Lo sedang memposisikan diri lo sebagai pribadi yang berkelas. Orang-orang yang paham arti logo di celana lo akan langsung tahu: di balik gayanya yang santai dan <em>friendly</em>, tersimpan isi kepala yang tajam, kritis, dan "gila" dalam mengejar standar karya terbaik.
-      </p>
+<div class="breadcrumb">
+  <a href="index.html">Home</a><span class="bc-sep">›</span>
+  <a href="index.html#products">Koleksi</a><span class="bc-sep">›</span>
+  <span class="bc-cur">Nilon Ripstop</span>
+</div>
+
+<div class="product-page">
+  <div class="product-grid">
+
+    <div class="gallery">
+      <div class="gallery-main">
+        <img src="Celana_Pendek_CAPRUX.png" alt="Nilon Ripstop" id="mainImg"/>
+        <div class="g-tag">// CAPRUX · KOLEKSI 003</div>
+      </div>
+      <div class="thumbs">
+        <div class="thumb active" onclick="switchImg(this,'Celana_Pendek_CAPRUX.png')"><img src="Celana_Pendek_CAPRUX.png" alt=""/></div>
+        <div class="thumb" onclick="switchImg(this,'Celana_Pendek_CAPRUX.png')"><img src="Celana_Pendek_CAPRUX.png" alt=""/></div>
+        <div class="thumb" onclick="switchImg(this,'Celana_Pendek_CAPRUX.png')"><img src="Celana_Pendek_CAPRUX.png" alt=""/></div>
+        <div class="thumb" onclick="switchImg(this,'Celana_Pendek_CAPRUX.png')"><img src="Celana_Pendek_CAPRUX.png" alt=""/></div>
+      </div>
     </div>
 
-    <div class="p-spec">
-      <div class="spec-item"><span>Material</span><span>Nilon Ripstop Premium (Sangat Kuat & Fleksibel)</span></div>
-      <div class="spec-item"><span>Utility</span><span>Saku fungsional tersembunyi yang aman dan rapi</span></div>
-      <div class="spec-item"><span>Design</span><span>Sleek-Tech Techwear (Potongan bersih dan tidak gombrang)</span></div>
-      <div class="spec-item"><span>Asal</span><span>Didesain & Diriset di Jawabarat</span></div>
+    <div class="prod-info">
+      <div class="prod-eyebrow">// The Short Circuit · Koleksi 003</div>
+      <h1 class="prod-name">NILON<br/>RIPSTOP</h1>
+      <div class="prod-type">Celana Pendek Men's</div>
+      <div class="divider"></div>
+      <div class="price-row">
+        <span class="price">Rp 239.750</span>
+        <span class="status s-soon">Coming Soon</span>
+      </div>
+      <p class="prod-desc">
+        Mobilitas ekstrem menuntut kekuatan material tanpa kompromi. Celana pendek dari bahan kain premium <strong>Nilon Ripstop</strong> ini dirancang berbobot ringan namun memiliki struktur anyaman kotak anti-sobek yang sangat tangguh. Menjadi representasi nyata atas ketahanan mentalmu yang tak hancur meskipun terus dihujani kritik miring di kumpulan pertemanan. Konstruksi saku dalam yang fungsional berpadu bebas gerak, memastikan bahwa sang motor penggerak tongkrongan selalu siap melangkah paling depan mengeksekusi visi rahasia yang mustahil di mata manusia, namun sangat mungkin terwujud atas izin dan <strong>bantuan ALLOH</strong>.
+      </p>
+      <div class="specs-block">
+        <div class="block-label">// Spesifikasi</div>
+        <table class="specs-tbl">
+          <tr><td>Bahan</td><td>Nilon Ripstop Tekstur Grid</td></tr>
+          <tr><td>Fitur</td><td>Quick-dry, High Tensile Strength (Anti-Sobek)</td></tr>
+          <tr><td>Saku</td><td>2 Saku Samping Ergonomis + 1 Saku Belakang Aman</td></tr>
+          <tr><td>Ikat Pinggang</td><td>Heavy-duty Drawstring + Velcro Adjuster</td></tr>
+          <tr><td>Potongan</td><td>Regular Fit Streetwear, Panjang di Atas Lutut</td></tr>
+          <tr><td>Origin</td><td>Made in Jawabarat 🇮🇩</td></tr>
+        </table>
+      </div>
+      <div class="size-block">
+        <div class="block-label">// Pilih Ukuran</div>
+        <div class="size-row">
+          <button class="sz" onclick="pickSize(this)">S</button>
+          <button class="sz" onclick="pickSize(this)">M</button>
+          <button class="sz" onclick="pickSize(this)">L</button>
+          <button class="sz" onclick="pickSize(this)">XL</button>
+          <button class="sz" onclick="pickSize(this)">XXL</button>
+        </div>
+      </div>
+      <div class="action-block">
+        <div class="notify-box">
+          <p class="notify-title">Klaim Hak Akses Pertamamu</p>
+          <p class="notify-sub">Setiap helai pakaian diproduksi dengan idealisme tinggi untuk kamu yang berani tampil berbeda. Masukkan emailmu.</p>
+          <div class="notify-form">
+            <input type="email" id="notifyEmail" placeholder="nama@email.com"/>
+            <button class="btn-notify" onclick="handleNotify('NILON RIPSTOP')">Dapatkan Sinyal Rilis</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="product-tabs">
+    <div class="tab-nav">
+      <button class="tab active" onclick="switchTab(this,'tab-story')">Latar Belakang</button>
+      <button class="tab" onclick="switchTab(this,'tab-size')">Panduan Ukuran</button>
+    </div>
+    <div class="tab-content">
+      <div class="tab-pane active" id="tab-story">
+        <p>
+          Banyak yang memilih bersembunyi di balik zona aman karena takut dibilang aneh. Celana Nilon Ripstop ini dibuat khusus untuk memfasilitasi langkah berani keluar dari bayang-bayang keraguan tersebut. Ketika kamu bergerak, material ini mengikuti fleksibilitas manuvermu, membuktikan bahwa keyakinan kuat tidak akan pernah bisa dihentikan oleh narasi pesimistis dari sekelilingmu.
+        </p>
+      </div>
+      <div class="tab-pane" id="tab-size">
+        <p>Potongan di atas lutut memberikan ruang ventilasi dan fleksibilitas maksimal. Silakan pilih varian ukuran pinggang standar yang biasa kamu gunakan.</p>
+      </div>
     </div>
   </div>
-</section>
+</div>
 
-<section class="related-products">
-  <h2 class="rp-title">Gigi Pelengkap Lainnya</h2>
-  <div class="rp-grid">
+<section class="related-section">
+  <div class="r-title">// Sinergi Amunisi Visual</div>
+  <div class="drops-grid">
     <a href="kaos-oblong.html" class="drop-card">
-      <div class="dc-img"><img src="Kaos_Oblong_CAPRUX.png" alt="THE TROPICAL SOUL"/></div>
+      <div class="dc-img"><img src="Kaos_Oblong_CAPRUX.png" alt=""/></div>
       <div class="dc-body">
-        <div class="dc-badge">// Micro Cotton Danbowl</div>
-        <div class="dc-name">THE TROPICAL SOUL</div>
-        <div class="dc-desc">Sirkulasi udara maksimal. Bahannya jatuh dan kokoh, bikin pundak tegak pas lagi ngobrol serius atau sekadar santai.</div>
-        <div class="dc-foot"><span class="dc-price">Rp 189.000</span><span class="status s-soon">Coming Soon</span></div>
+        <div class="drop-badge">// Micro Cotton Danbowl</div>
+        <div class="drop-name">THE TROPICAL SOUL</div>
+        <div class="drop-desc">Polyflex 3D logo silicon 1mm. Lapisan dasar penunjang fokus isi kepalamu.</div>
+        <div class="drop-foot"><span class="dc-price">Rp 189.000</span><span class="status s-soon">Coming Soon</span></div>
       </div>
     </a>
     <a href="jaket-crincle.html" class="drop-card">
-      <div class="dc-img"><img src="Jaket_Crincle_CAPRUX.png" alt="THE WIND BLOCKER"/></div>
+      <div class="drop-card-img"><img src="Jaket_Crincle_CAPRUX.png" alt=""/></div>
       <div class="dc-body">
-        <div class="dc-badge">// Parasut Crincle</div>
-        <div class="dc-name">THE WIND BLOCKER</div>
-        <div class="dc-desc">Model Gunung Sporty yang dikemas elegan. Tameng terbaik buat menghalau angin malam Jabar tanpa merusak style formal lo.</div>
-        <div class="dc-foot"><span class="dc-price">Rp 289.750</span><span class="status s-soon">Coming Soon</span></div>
+        <div class="drop-badge">// Parasut Crincle</div>
+        <div class="drop-name">THE WIND BLOCKER</div>
+        <div class="drop-desc">Model Gunung. Bahan Sporty. Armor luar mutlak pelindung dari badai skeptis sekitar.</div>
+        <div class="drop-foot"><span class="dc-price">Rp 289.750</span><span class="status s-soon">Coming Soon</span></div>
       </div>
     </a>
   </div>
@@ -88,19 +143,12 @@
 <footer>
   <div class="f-logo"><img src="logo_text_putih.png" alt="CAPRUX"/></div>
   <div class="f-copy">© 2024 CAPRUX — Doing the Impossible with GOD's Help<br/><span>Made in Jawabarat · Powered by ENF</span></div>
+  <div class="f-soc">
+    <a href="https://instagram.com/capruxcloth" target="_blank">IG</a>
+    <a href="https://tiktok.com/@capruxcloth" target="_blank">TT</a>
+  </div>
 </footer>
 
-<script>
-  function toggleMenu(){
-    const m=document.getElementById('mobileMenu');
-    const h=document.getElementById('hamburger');
-    m.classList.toggle('open');
-    h.classList.toggle('open');
-  }
-  function closeMenu(){
-    document.getElementById('mobileMenu').classList.remove('open');
-    document.getElementById('hamburger').classList.remove('open');
-  }
-</script>
+<script src="product.js"></script>
 </body>
 </html>
