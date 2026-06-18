@@ -192,3 +192,12 @@ footer{background:var(--surface);padding:clamp(24px,3.5vh,36px) var(--pad);borde
   .f-copy{order:2}.f-soc{order:3}.f-logo{order:1}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+
+/* CAPRUX refresh effects */
+.product-page::before{content:'';position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 15% 20%,rgba(0,255,0,.08),transparent 30%),radial-gradient(circle at 90% 40%,rgba(0,255,0,.05),transparent 28%);z-index:-1}
+.gallery-main::after{content:'';position:absolute;inset:0;background:linear-gradient(120deg,transparent 35%,rgba(0,255,0,.12),transparent 65%);transform:translateX(-120%);animation:capruxSweep 5s ease-in-out infinite}
+@keyframes capruxSweep{0%,55%{transform:translateX(-120%)}85%,100%{transform:translateX(120%)}}
+.prod-name{letter-spacing:-.03em}
+.specs-tbl tr:hover td{color:var(--white)}
+.tag:hover{color:var(--green);border-color:rgba(0,255,0,.35)}
