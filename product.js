@@ -48,6 +48,6 @@ function handleNotify(productName){
     return;
   }
   // TODO: sambungkan ke Mailchimp / Google Form / backend
-  alert('Siap! Kamu akan dapat notif saat "'+productName+'" tersedia.\nبسم الله — terima kasih sudah menunggu.');
+  alert('Siap! Kamu akan dapat notif saat "'+productName+'" drop.\nبسم الله — terima kasih sudah menunggu.');
   input.value='';
 }
