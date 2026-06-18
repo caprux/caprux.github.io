@@ -1,8 +1,7 @@
 /* ══════════════════════════════════════════
    CAPRUX — product.css
    Dipakai oleh SEMUA halaman produk.
-   Jangan edit kecuali mau ubah semua halaman.
-══════════════════════════════════════════ */
+   ═════════════════════════════════════════ */
 
 :root{
   --black:#000;--surface:#0d0d0d;--surf2:#1a1a1a;
@@ -18,6 +17,30 @@ img{max-width:100%;height:auto;display:block}
 ::-webkit-scrollbar{width:3px}
 ::-webkit-scrollbar-track{background:var(--black)}
 ::-webkit-scrollbar-thumb{background:var(--green)}
+
+/* ── INDUSTRIAL NOISE OVERLAY ── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: overlay;
+}
+
+/* ── INDUSTRIAL GRID OVERLAY ── */
+.product-page::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(0,255,0,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,255,0,0.015) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
 
 /* ── NAV ── */
 nav{position:fixed;top:0;left:0;width:100%;z-index:999;display:flex;align-items:center;justify-content:space-between;padding:12px var(--pad);background:rgba(0,0,0,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid #1c1c1c}
@@ -47,15 +70,72 @@ nav{position:fixed;top:0;left:0;width:100%;z-index:999;display:flex;align-items:
 .bc-cur{font-family:'Share Tech Mono',monospace;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--green)}
 
 /* ── PRODUCT GRID ── */
-.product-page{padding-top:clamp(106px,13vh,124px)}
-.product-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,72px);padding:clamp(28px,4vh,56px) var(--pad) clamp(56px,7vh,88px);max-width:1200px;margin:0 auto}
+.product-page{padding-top:clamp(106px,13vh,124px);position:relative}
+.product-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,72px);padding:clamp(28px,4vh,56px) var(--pad) clamp(56px,7vh,88px);max-width:1200px;margin:0 auto;position:relative;z-index:1}
 
 /* ── GALLERY ── */
 .gallery{display:flex;flex-direction:column;gap:4px}
 .gallery-main{background:var(--surf2);aspect-ratio:3/4;overflow:hidden;position:relative}
 .gallery-main img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
 .gallery-main:hover img{transform:scale(1.04)}
-.g-tag{position:absolute;top:14px;left:14px;font-family:'Share Tech Mono',monospace;font-size:.56rem;letter-spacing:.16em;color:rgba(0,255,0,.4);text-transform:uppercase}
+
+/* ── INDUSTRIAL SCANLINE ── */
+.gallery-main::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 3px,
+    rgba(0,255,0,0.03) 3px,
+    rgba(0,255,0,0.03) 4px
+  );
+  pointer-events: none;
+  z-index: 2;
+  animation: scanlineMove 6s linear infinite;
+}
+@keyframes scanlineMove {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 40px; }
+}
+
+/* ── INDUSTRIAL OIL LEAK BORDER ── */
+.gallery-main::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid transparent;
+  background: linear-gradient(135deg, rgba(0,255,0,0.1), transparent 40%, transparent 60%, rgba(0,255,0,0.05)) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 3;
+  animation: oilLeak 4s ease-in-out infinite alternate;
+}
+@keyframes oilLeak {
+  0% { opacity: 0.3; transform: scale(1); }
+  100% { opacity: 0.8; transform: scale(1.01); }
+}
+
+.g-tag{
+  position:absolute;
+  top:14px;
+  left:14px;
+  padding:4px 8px;
+  border-left:2px solid var(--green);
+  border-top:2px solid var(--green);
+  background:rgba(0,0,0,0.6);
+  font-family:'Share Tech Mono',monospace;
+  font-size:.5rem;
+  letter-spacing:.16em;
+  color:rgba(0,255,0,0.5);
+  text-transform:uppercase;
+  z-index:4;
+}
+
 .thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
 .thumb{background:var(--surf2);aspect-ratio:1;overflow:hidden;cursor:pointer;border:1px solid transparent;transition:border-color .2s}
 .thumb:hover,.thumb.active{border-color:var(--green)}
@@ -70,17 +150,53 @@ nav{position:fixed;top:0;left:0;width:100%;z-index:999;display:flex;align-items:
 .divider{width:48px;height:2px;background:var(--green);box-shadow:var(--glow)}
 .price-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 .price{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(1.5rem,3vw,2rem);color:var(--white)}
-.status{font-family:'Share Tech Mono',monospace;font-size:.58rem;letter-spacing:.14em;padding:5px 12px;border:1px solid;text-transform:uppercase}
+
+/* ── INDUSTRIAL GAUGE STATUS ── */
+.status{font-family:'Share Tech Mono',monospace;font-size:.58rem;letter-spacing:.14em;padding:5px 12px 5px 28px;border:1px solid;text-transform:uppercase;position:relative}
+.status::before {
+  content: '';
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  animation: gaugePulse 1.5s ease-in-out infinite;
+}
 .s-soon{color:var(--green);border-color:var(--green)}
+.s-soon::before{background:var(--green);box-shadow:0 0 8px var(--green)}
 .s-open{color:var(--white);border-color:var(--white);background:rgba(255,255,255,.06)}
+.s-open::before{background:var(--white)}
 .s-sold{color:var(--grey);border-color:var(--grey)}
+.s-sold::before{background:var(--grey)}
+@keyframes gaugePulse {
+  0%, 100% { opacity: 1; transform: translateY(-50%) scale(1); }
+  50% { opacity: 0.3; transform: translateY(-50%) scale(0.7); }
+}
+
 .prod-desc{font-size:clamp(.84rem,1.2vw,.95rem);color:var(--grey-lt);line-height:1.85}
 .prod-desc strong{color:var(--white);font-weight:500}
 
 /* Specs */
 .block-label{font-family:'Share Tech Mono',monospace;font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--green);margin-bottom:12px}
 .specs-tbl{width:100%;border-collapse:collapse}
-.specs-tbl tr{border-bottom:1px solid #1c1c1c}
+.specs-tbl tr{border-bottom:1px solid rgba(0,255,0,0.08);position:relative}
+.specs-tbl tr::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 20%;
+  height: 1px;
+  background: var(--green);
+  opacity: 0.3;
+  transition: width 0.3s, opacity 0.3s;
+}
+.specs-tbl tr:hover::after {
+  width: 100%;
+  opacity: 0.6;
+}
 .specs-tbl tr:last-child{border-bottom:none}
 .specs-tbl td{padding:9px 0;font-size:clamp(.78rem,1.1vw,.84rem);vertical-align:top}
 .specs-tbl td:first-child{color:var(--grey);font-family:'Share Tech Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;width:36%;padding-right:10px}
@@ -93,10 +209,21 @@ nav{position:fixed;top:0;left:0;width:100%;z-index:999;display:flex;align-items:
 .sz:disabled{opacity:.22;cursor:not-allowed}
 .size-note{font-family:'Share Tech Mono',monospace;font-size:.56rem;letter-spacing:.12em;color:var(--grey);text-transform:uppercase}
 
-/* CTA */
+/* ── CTA ── */
 .cta-block{display:flex;flex-direction:column;gap:10px}
 .btn-primary{font-family:'Share Tech Mono',monospace;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;background:var(--green);color:var(--black);border:none;padding:14px 24px;cursor:pointer;font-weight:700;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:10px;transition:box-shadow .2s,transform .15s;position:relative;overflow:hidden}
 .btn-primary::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.28),transparent);animation:shine 3s ease-in-out infinite}
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: var(--green);
+  filter: blur(12px);
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: -1;
+}
+.btn-primary:hover::before { opacity: 0.2; }
 @keyframes shine{0%{left:-100%}60%,100%{left:150%}}
 .btn-primary:hover{box-shadow:var(--glow);transform:translateY(-2px)}
 .btn-primary:disabled{opacity:.38;cursor:not-allowed;transform:none}
@@ -108,7 +235,18 @@ nav{position:fixed;top:0;left:0;width:100%;z-index:999;display:flex;align-items:
 .notify-in{flex:1;background:var(--surf2);border:1px solid #2c2c2c;color:var(--white);font-family:'Share Tech Mono',monospace;font-size:.66rem;letter-spacing:.1em;padding:12px 13px;outline:none;transition:border-color .2s}
 .notify-in::placeholder{color:#3c3c3c}
 .notify-in:focus{border-color:var(--green)}
-.notify-btn{font-family:'Share Tech Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;background:transparent;border:1px solid var(--green);color:var(--green);padding:12px 15px;cursor:pointer;white-space:nowrap;transition:background .2s,color .2s}
+.notify-btn{font-family:'Share Tech Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;background:transparent;border:1px solid var(--green);color:var(--green);padding:12px 15px;cursor:pointer;white-space:nowrap;transition:background .2s,color .2s;position:relative}
+.notify-btn::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: var(--green);
+  filter: blur(12px);
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: -1;
+}
+.notify-btn:hover::before { opacity: 0.15; }
 .notify-btn:hover{background:var(--green);color:var(--black)}
 
 /* Tags */
@@ -146,8 +284,8 @@ nav{position:fixed;top:0;left:0;width:100%;z-index:999;display:flex;align-items:
 .care-lbl{font-family:'Share Tech Mono',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--green)}
 .care-txt{font-size:.82rem;color:var(--grey);line-height:1.65}
 
-/* ── RELATED ── */
-.related{padding:clamp(44px,6vh,72px) var(--pad)}
+/* ── RELATED PRODUCTS ── */
+.related{padding:clamp(44px,6vh,72px) var(--pad);position:relative;z-index:1}
 .eyebrow{font-family:'Share Tech Mono',monospace;font-size:clamp(.6rem,.75vw,.68rem);letter-spacing:.36em;text-transform:uppercase;color:var(--green);margin-bottom:10px}
 .sec-title{font-family:'Space Grotesk',sans-serif;font-weight:900;font-size:clamp(1.8rem,5vw,4.2rem);line-height:1;color:var(--white);margin-bottom:16px}
 .rel-divider{width:48px;height:2px;background:var(--green);margin-bottom:clamp(28px,4vh,44px);box-shadow:var(--glow)}
@@ -155,10 +293,53 @@ nav{position:fixed;top:0;left:0;width:100%;z-index:999;display:flex;align-items:
 
 /* Related cards */
 a.drop-card{text-decoration:none;color:inherit}
-.drop-card{background:var(--surf2);position:relative;overflow:hidden;cursor:pointer;aspect-ratio:3/4;display:flex;flex-direction:column;justify-content:flex-end;transition:transform .4s ease}
+.drop-card{
+  background:var(--surf2);
+  position:relative;
+  overflow:hidden;
+  cursor:pointer;
+  aspect-ratio:3/4;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  transition:transform .4s ease;
+}
 .drop-card:hover{transform:scale(1.01)}
-.drop-card::before{content:'';position:absolute;top:0;left:0;width:22px;height:22px;border-top:2px solid var(--green);border-left:2px solid var(--green);opacity:0;transition:opacity .3s;z-index:5}
-.drop-card:hover::before{opacity:1}
+
+/* ── INDUSTRIAL WELDING SPARK ── */
+.drop-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at var(--mx, 50%) var(--my, 50%),
+    rgba(0,255,0,0.12) 0%,
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 3;
+}
+.drop-card:hover::after { opacity: 1; }
+
+/* ── INDUSTRIAL RIVET ── */
+.drop-card::before {
+  content: '✦';
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 12px;
+  color: rgba(0,255,0,0.15);
+  z-index: 4;
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s;
+}
+.drop-card:hover::before {
+  opacity: 1;
+  transform: rotate(180deg);
+}
+
 .dc-img{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .dc-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease,filter .3s;filter:grayscale(18%)}
 .drop-card:hover .dc-img img{transform:scale(1.06);filter:grayscale(0%) brightness(1.05)}
@@ -168,6 +349,7 @@ a.drop-card{text-decoration:none;color:inherit}
 .dc-desc{font-size:clamp(.7rem,1vw,.76rem);color:var(--grey);margin-bottom:11px;line-height:1.5}
 .dc-foot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
 .dc-price{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(.88rem,1.6vw,1rem);color:var(--white)}
+.dc-foot .status { font-size: 0.5rem; padding: 3px 10px 3px 22px; }
 
 /* ── FOOTER ── */
 footer{background:var(--surface);padding:clamp(24px,3.5vh,36px) var(--pad);border-top:1px solid #111;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
@@ -185,10 +367,14 @@ footer{background:var(--surface);padding:clamp(24px,3.5vh,36px) var(--pad);borde
   .hamburger{display:flex}
   .product-grid{grid-template-columns:1fr}
   .prod-info{position:static}
+  .product-page::before { background-size: 30px 30px; }
 }
 @media(max-width:480px){
   .tabs{overflow-x:auto;-webkit-overflow-scrolling:touch}
   footer{flex-direction:column;align-items:center;text-align:center}
   .f-copy{order:2}.f-soc{order:3}.f-logo{order:1}
+  .product-page::before { background-size: 20px 20px; }
+  .status { padding: 4px 8px 4px 22px; font-size: 0.5rem; }
+  .status::before { left: 6px; width: 5px; height: 5px; }
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}

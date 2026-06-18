@@ -25,6 +25,19 @@
     ::-webkit-scrollbar-thumb{background:var(--green)}
 
     /* ═══════════════════════════════════════
+       INDUSTRIAL NOISE OVERLAY
+    ═══════════════════════════════════════ */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      mix-blend-mode: overlay;
+    }
+
+    /* ═══════════════════════════════════════
        NAV
     ═══════════════════════════════════════ */
     nav{
@@ -42,7 +55,6 @@
     }
     .nav-logo img:hover{filter:drop-shadow(0 0 16px #00ff00cc)}
 
-    /* Desktop links */
     .nav-links{display:flex;gap:clamp(16px,3vw,32px);list-style:none}
     .nav-links a{
       font-family:'Share Tech Mono',monospace;
@@ -58,7 +70,6 @@
     }
     .nav-cta:hover{background:var(--green);color:var(--black);box-shadow:var(--glow)}
 
-    /* Hamburger (mobile) */
     .hamburger{
       display:none;flex-direction:column;justify-content:center;gap:5px;
       width:36px;height:36px;cursor:pointer;background:none;border:none;padding:4px;
@@ -68,7 +79,6 @@
     .hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
     .hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
 
-    /* Mobile menu drawer */
     .mobile-menu{
       display:none;position:fixed;top:0;left:0;width:100%;height:100vh;
       background:rgba(0,0,0,0.97);z-index:998;
@@ -131,7 +141,6 @@
     }
     .hero-tag::before{content:'// ';color:var(--grey)}
 
-    /* Logo glitch */
     .hero-logo-wrap{
       position:relative;margin-bottom:clamp(20px,4vh,32px);display:inline-block;
       max-width:100%;
@@ -422,21 +431,12 @@
        TABLET  (481px – 900px)
     ═══════════════════════════════════════ */
     @media(max-width:900px){
-      /* Nav: hide text links, show hamburger */
       .nav-links,.nav-cta{display:none}
       .hamburger{display:flex}
-
-      /* About: stack */
       #about{grid-template-columns:1fr}
       .about-right{display:none}
-
-      /* Contact: stack */
       #contact{grid-template-columns:1fr}
-
-      /* Hero scroll hint: smaller */
       .scroll-hint{right:var(--pad-x)}
-
-      /* Drops: 2 columns on tablet */
       .drops-grid{grid-template-columns:repeat(2,1fr)}
     }
 
@@ -444,32 +444,17 @@
        MOBILE  (≤ 480px)
     ═══════════════════════════════════════ */
     @media(max-width:480px){
-      /* Drops: single column */
       .drops-grid{grid-template-columns:1fr}
-
-      /* Journey: single column */
       .ep-grid{grid-template-columns:1fr}
-
-      /* Hide scroll hint completely */
       .scroll-hint{display:none}
-
-      /* Corner brackets smaller */
       #home::before,#home::after{width:22px;height:22px}
-
-      /* Hero actions: stack */
       .hero-actions{flex-direction:column;align-items:flex-start}
       .btn-primary,.btn-ghost{width:100%;text-align:center}
-
-      /* Philosophy section: prevent overflow on small screens */
       #philosophy::before{display:none}
-
-      /* Footer: center stack */
       footer{flex-direction:column;align-items:center;text-align:center}
       .f-copy{order:2}
       .f-socials{order:3}
       .f-logo{order:1}
-
-      /* Drop header */
       .drops-header{flex-direction:column;align-items:flex-start}
       .drops-desc{max-width:100%}
     }
@@ -566,53 +551,8 @@
       Stok terbatas tanpa restok.<br/>Untuk di pakai bukan di pajang.<br/>Minat langsung beli.
     </p>
   </div>
-  <div class="drops-grid">
-
-    <a href="kaos-oblong.html" class="drop-card">
-      <div class="drop-card-img">
-        <img src="Kaos_Oblong_CAPRUX.png" alt="Chaos Tee V1"/>
-      </div>
-      <div class="drop-body">
-        <div class="drop-badge">// Micro Cotton Danbowl</div>
-        <div class="drop-name">THE TROPICAL SOUL</div>
-        <div class="drop-desc">Polyflex 3D logo silicon 1mm.</div>
-        <div class="drop-foot">
-          <span class="drop-price">Rp 189.000</span>
-          <span class="drop-status s-soon">Coming Soon</span>
-        </div>
-      </div>
-    </a>
-
-    <a href="jaket-crincle.html" class="drop-card">
-      <div class="drop-card-img">
-        <img src="Jaket_Crincle_CAPRUX.png" alt="Void Hoodie"/>
-      </div>
-      <div class="drop-body">
-        <div class="drop-badge">// Parasut Crincle</div>
-        <div class="drop-name">THE WIND BLOCKER</div>
-        <div class="drop-desc">Model Gunung. Bahan Sporty.</div>
-        <div class="drop-foot">
-          <span class="drop-price">Rp 289.750</span>
-          <span class="drop-status s-soon">Coming Soon</span>
-        </div>
-      </div>
-    </a>
-
-    <a href="celana-pendek.html" class="drop-card">
-      <div class="drop-card-img">
-        <img src="Celana_Pendek_CAPRUX.png" alt="Cap 001"/>
-      </div>
-      <div class="drop-body">
-        <div class="drop-badge">// THE SHORT CIRCUIT</div>
-        <div class="drop-name">Nilon Ripstop</div>
-        <div class="drop-desc">For men only. No Boti.</div>
-        <div class="drop-foot">
-          <span class="drop-price">Rp 239.750</span>
-          <span class="drop-status s-soon">Coming Soon</span>
-        </div>
-      </div>
-    </a>
-
+  <div class="drops-grid" id="productGrid">
+    <!-- Produk akan di-render oleh JavaScript -->
   </div>
 </section>
 
@@ -724,7 +664,7 @@
     <div class="divider"></div>
     <p class="c-intro">
       Kirimkan berisiknya kepalamu,<br/>
-	  karna CAPRUX menerima ide gilamu.
+      karna CAPRUX menerima ide gilamu.
     </p>
     <div class="c-links">
       <a href="https://instagram.com/capruxcloth" class="c-link" target="_blank">
@@ -771,6 +711,9 @@ s0.parentNode.insertBefore(s1,s0);
 <!--End of Tawk.to Script-->
 
 <script>
+  // ============================================================
+  // NAV MOBILE
+  // ============================================================
   function toggleMenu(){
     const m=document.getElementById('mobileMenu');
     const h=document.getElementById('hamburger');
@@ -783,10 +726,92 @@ s0.parentNode.insertBefore(s1,s0);
     document.getElementById('hamburger').classList.remove('open');
     document.body.style.overflow='';
   }
-  // Close menu on resize ke desktop
   window.addEventListener('resize',()=>{
     if(window.innerWidth>900) closeMenu();
   });
+
+  // ============================================================
+  // DATA PRODUK (untuk halaman utama)
+  // ============================================================
+  const products = [
+    {
+      id: 'kaos-oblong',
+      name: 'THE TROPICAL SOUL',
+      badge: '// Micro Cotton Danbowl',
+      desc: 'Polyflex 3D logo silicon 1mm.',
+      price: 'Rp 189.000',
+      status: 'soon',
+      image: 'Kaos_Oblong_CAPRUX.png'
+    },
+    {
+      id: 'jaket-crincle',
+      name: 'THE WIND BLOCKER',
+      badge: '// Parasut Crincle',
+      desc: 'Model Gunung. Bahan Sporty.',
+      price: 'Rp 289.750',
+      status: 'soon',
+      image: 'Jaket_Crincle_CAPRUX.png'
+    },
+    {
+      id: 'celana-pendek',
+      name: 'NILON RIPSTOP',
+      badge: '// The Short Circuit',
+      desc: 'For men only. No Boti.',
+      price: 'Rp 239.750',
+      status: 'soon',
+      image: 'Celana_Pendek_CAPRUX.png'
+    }
+    // ============================================================
+    // ✨ TAMBAHKAN PRODUK BARU DI SINI ✨
+    // Copy-paste blok di bawah, sesuaikan datanya
+    // ============================================================
+    // {
+    //   id: 'nama-file-html',
+    //   name: 'NAMA PRODUK',
+    //   badge: '// Bahan',
+    //   desc: 'Deskripsi singkat',
+    //   price: 'Rp 999.000',
+    //   status: 'soon',
+    //   image: 'gambar_produk.png'
+    // }
+  ];
+
+  // ============================================================
+  // RENDER PRODUCT GRID
+  // ============================================================
+  function renderProducts() {
+    const grid = document.getElementById('productGrid');
+    if (!grid) return;
+
+    grid.innerHTML = products.map(p => {
+      const statusMap = {
+        'soon': 'Coming Soon',
+        'open': 'Tersedia',
+        'sold': 'Habis'
+      };
+      return `
+        <a href="${p.id}.html" class="drop-card">
+          <div class="drop-card-img">
+            <img src="${p.image}" alt="${p.name}"/>
+          </div>
+          <div class="drop-body">
+            <div class="drop-badge">${p.badge}</div>
+            <div class="drop-name">${p.name}</div>
+            <div class="drop-desc">${p.desc}</div>
+            <div class="drop-foot">
+              <span class="drop-price">${p.price}</span>
+              <span class="drop-status s-${p.status}">${statusMap[p.status] || p.status}</span>
+            </div>
+          </div>
+        </a>
+      `;
+    }).join('');
+  }
+
+  // ============================================================
+  // INISIALISASI
+  // ============================================================
+  document.addEventListener('DOMContentLoaded', renderProducts);
 </script>
 </body>
 </html>

@@ -9,6 +9,7 @@
 </head>
 <body>
 
+<!-- Mobile Menu -->
 <div class="mobile-menu" id="mobileMenu">
   <a href="index.html#products" onclick="closeMenu()">Produk</a>
   <a href="index.html#about" onclick="closeMenu()">Story</a>
@@ -17,6 +18,7 @@
   <a href="index.html#products" class="m-cta" onclick="closeMenu()">Pembelian Produk</a>
 </div>
 
+<!-- Nav -->
 <nav>
   <a href="index.html" class="nav-logo"><img src="logo_text_putih.png" alt="CAPRUX"/></a>
   <ul class="nav-links">
@@ -26,18 +28,23 @@
     <li><a href="index.html#contact">Contact</a></li>
   </ul>
   <a href="index.html#products" class="nav-cta">Pembelian Produk</a>
-  <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+  <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
+<!-- Breadcrumb -->
 <div class="breadcrumb">
   <a href="index.html">Home</a><span class="bc-sep">›</span>
   <a href="index.html#products">Produk</a><span class="bc-sep">›</span>
   <span class="bc-cur">Nilon Ripstop</span>
 </div>
 
+<!-- Product Page -->
 <div class="product-page">
   <div class="product-grid">
 
+    <!-- Gallery -->
     <div class="gallery">
       <div class="gallery-main">
         <img src="Celana_Pendek_CAPRUX.png" alt="Nilon Ripstop" id="mainImg"/>
@@ -51,8 +58,9 @@
       </div>
     </div>
 
+    <!-- Product Info -->
     <div class="prod-info">
-      <div class="prod-eyebrow">// The Short Circuit · Produk 003</div>
+      <div class="prod-eyebrow">// The Short Circuit · PRODUK 003</div>
       <h1 class="prod-name">NILON<br/>RIPSTOP</h1>
       <div class="prod-type">Celana Pendek Men's</div>
       <div class="divider"></div>
@@ -60,19 +68,10 @@
         <span class="price">Rp 239.750</span>
         <span class="status s-soon">Coming Soon</span>
       </div>
-      <p class="prod-desc">
-        Celana pendek dari bahan <strong>Nilon Ripstop</strong> — kuat, tahan sobek, dan ringan. Dibuat khusus untuk pria yang bergerak. <strong>For men only. No Boti.</strong> Saku dalam yang fungsional, potongan yang tidak membatasi gerak.
-      </p>
+      <p class="prod-desc">Celana pendek dari bahan <strong>Nilon Ripstop</strong> — kuat, tahan sobek, dan ringan. Dibuat khusus untuk pria yang bergerak. <strong>For men only. No Boti.</strong> Saku dalam yang fungsional, potongan yang tidak membatasi gerak.</p>
       <div class="specs-block">
         <div class="block-label">// Spesifikasi</div>
-        <table class="specs-tbl">
-          <tr><td>Bahan</td><td>Nilon Ripstop</td></tr>
-          <tr><td>Fitur</td><td>Quick-dry, anti-sobek</td></tr>
-          <tr><td>Saku</td><td>2 saku samping + 1 saku belakang</td></tr>
-          <tr><td>Ikat Pinggang</td><td>Drawstring + velcro adjuster</td></tr>
-          <tr><td>Potongan</td><td>Regular fit, panjang di atas lutut</td></tr>
-          <tr><td>Origin</td><td>Made in Jawabarat 🇮🇩</td></tr>
-        </table>
+        <table class="specs-tbl"></table>
       </div>
       <div class="size-block">
         <div class="block-label">// Pilih Ukuran</div>
@@ -96,14 +95,12 @@
           <button class="notify-btn" onclick="handleNotify('Nilon Ripstop')">Notify</button>
         </div>
       </div>
-      <div class="tags">
-        <span class="tag">#streetwear</span><span class="tag">#celana</span>
-        <span class="tag">#outdoor</span><span class="tag">#jawabarat</span><span class="tag">#caprux</span>
-      </div>
+      <div class="tags"></div>
     </div>
   </div>
 </div>
 
+<!-- Detail Section -->
 <div class="detail-section">
   <div class="detail-wrap">
     <div class="tabs">
@@ -112,75 +109,29 @@
       <button class="tab" onclick="switchTab(this,'t3')">Perawatan</button>
     </div>
     <div class="tab-pane active" id="t1">
-      <div class="detail-grid">
-        <div class="d-block"><div class="d-label">// Bahan & Konstruksi</div><ul>
-          <li>Nilon Ripstop — ringan dan tahan sobek</li>
-          <li>Quick-dry, cocok untuk aktivitas luar ruangan</li>
-          <li>Jahitan reinforced di area tarikan tinggi</li>
-          <li>Elastis pinggang dengan drawstring external</li>
-          <li>Kaki celana dengan flat seam finishing</li>
-        </ul></div>
-        <div class="d-block"><div class="d-label">// Logo & Branding</div><ul>
-          <li>Embroidery patch CAPRUX di paha kiri</li>
-          <li>Woven label di saku belakang (neon green)</li>
-          <li>Rubber tab di ikat pinggang kanan</li>
-        </ul></div>
-        <div class="d-block"><div class="d-label">// Filosofi Produk Ini</div><ul>
-          <li>"Short Circuit" — jalan pintas untuk yang bergerak cepat</li>
-          <li>Dibuat untuk pria yang tidak berhenti bergerak</li>
-          <li>Limited batch, tidak ada restock setelah habis</li>
-        </ul></div>
-      </div>
+      <div class="detail-grid"></div>
     </div>
     <div class="tab-pane" id="t2">
       <table class="sg-tbl">
-        <thead><tr><th>Size</th><th>Lingkar Pinggang (cm)</th><th>Lingkar Pinggul (cm)</th><th>Panjang Celana (cm)</th><th>Paha (cm)</th></tr></thead>
-        <tbody>
-          <tr><td>S</td><td>70–74</td><td>88–92</td><td>48</td><td>56</td></tr>
-          <tr><td>M</td><td>74–78</td><td>92–96</td><td>50</td><td>58</td></tr>
-          <tr><td>L</td><td>78–82</td><td>96–100</td><td>52</td><td>60</td></tr>
-          <tr><td>XL</td><td>82–86</td><td>100–104</td><td>54</td><td>62</td></tr>
-          <tr><td>XXL</td><td>86–90</td><td>104–108</td><td>56</td><td>64</td></tr>
-        </tbody>
+        <thead></thead>
+        <tbody></tbody>
       </table>
     </div>
     <div class="tab-pane" id="t3">
-      <div class="care-grid">
-        <div class="care"><div class="care-ico">🌊</div><div class="care-lbl">// Cuci</div><div class="care-txt">Mesin cuci gentle cycle atau tangan, maks 30°C. Kosongkan saku sebelum mencuci.</div></div>
-        <div class="care"><div class="care-ico">🚫</div><div class="care-lbl">// Jangan Bleach</div><div class="care-txt">Bahan nilon sensitif terhadap bahan kimia keras. Hindari pemutih dan fabric softener berbasis silikon.</div></div>
-        <div class="care"><div class="care-ico">🌡️</div><div class="care-lbl">// Setrika</div><div class="care-txt">Tidak perlu disetrika — bahan nilon akan menjadi rata secara alami setelah dijemur dan dipakai.</div></div>
-        <div class="care"><div class="care-ico">👕</div><div class="care-lbl">// Jemur</div><div class="care-txt">Gantung di tempat teduh. Quick-dry — biasanya kering dalam 1–2 jam di angin terbuka.</div></div>
-      </div>
+      <div class="care-grid"></div>
     </div>
   </div>
 </div>
 
+<!-- Related Products -->
 <section class="related">
   <p class="eyebrow">// You Might Also Like</p>
   <h2 class="sec-title">Produk Lainnya</h2>
   <div class="rel-divider"></div>
-  <div class="rel-grid">
-    <a href="kaos-oblong.html" class="drop-card">
-      <div class="dc-img"><img src="Kaos_Oblong_CAPRUX.png" alt=""/></div>
-      <div class="dc-body">
-        <div class="dc-badge">// Micro Cotton Danbowl</div>
-        <div class="dc-name">THE TROPICAL SOUL</div>
-        <div class="dc-desc">Polyflex 3D logo silicon 1mm.</div>
-        <div class="dc-foot"><span class="dc-price">Rp 189.000</span><span class="status s-soon">Coming Soon</span></div>
-      </div>
-    </a>
-    <a href="jaket-crincle.html" class="drop-card">
-      <div class="dc-img"><img src="Jaket_Crincle_CAPRUX.png" alt=""/></div>
-      <div class="dc-body">
-        <div class="dc-badge">// Parasut Crincle</div>
-        <div class="dc-name">THE WIND BLOCKER</div>
-        <div class="dc-desc">Model Gunung. Bahan Sporty.</div>
-        <div class="dc-foot"><span class="dc-price">Rp 289.750</span><span class="status s-soon">Coming Soon</span></div>
-      </div>
-    </a>
-  </div>
+  <div class="rel-grid"></div>
 </section>
 
+<!-- Footer -->
 <footer>
   <div class="f-logo"><img src="logo_text_putih.png" alt="CAPRUX"/></div>
   <div class="f-copy">© 2024 CAPRUX — Doing the Impossible with GOD's Help<br/><span>Made in Jawabarat · Powered by ENF</span></div>
@@ -190,6 +141,8 @@
     <a href="https://www.facebook.com/profile.php?id=61570786385157" target="_blank">FB</a>
   </div>
 </footer>
+
+<script src="product-data.js"></script>
 <script src="product.js"></script>
 </body>
 </html>
