@@ -3,478 +3,29 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="CAPRUX — Etnic Streetwear dari Jawabarat. Bukan untuk semua orang. Doing the Impossible with GOD's Help."/>
+  <meta property="og:title" content="CAPRUX — Etnic Streetwear Jawabarat"/>
+  <meta property="og:description" content="Capruk lain gelo. Capruk nu apal caranyah."/>
+  <meta property="og:image" content="https://caprux.github.io/logo_text_putih.png"/>
+  <meta name="theme-color" content="#000000"/>
   <title>CAPRUX — Doing the Impossible, with GOD's Help</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&family=Inter:wght@300;400;500&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
-  <style>
-    /* ═══════════════════════════════════════
-       TOKENS
-    ═══════════════════════════════════════ */
-    :root{
-      --black:#000;--surface:#0d0d0d;--surf2:#1a1a1a;
-      --grey:#888;--grey-lt:#b0b0b0;--white:#fff;
-      --green:#00ff00;
-      --glow:0 0 14px #00ff0099,0 0 48px #00ff0033;
-      --pad-x:clamp(16px,5vw,60px);
-    }
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-    body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;font-weight:300;overflow-x:hidden;-webkit-font-smoothing:antialiased}
-    img{max-width:100%;height:auto;display:block}
-    ::-webkit-scrollbar{width:3px}
-    ::-webkit-scrollbar-track{background:var(--black)}
-    ::-webkit-scrollbar-thumb{background:var(--green)}
 
-    /* ═══════════════════════════════════════
-       INDUSTRIAL NOISE OVERLAY
-    ═══════════════════════════════════════ */
-    body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 9999;
-      mix-blend-mode: overlay;
-    }
-
-    /* ═══════════════════════════════════════
-       NAV
-    ═══════════════════════════════════════ */
-    nav{
-      position:fixed;top:0;left:0;width:100%;z-index:999;
-      display:flex;align-items:center;justify-content:space-between;
-      padding:12px var(--pad-x);
-      background:rgba(0,0,0,0.92);
-      backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-      border-bottom:1px solid #1c1c1c;
-    }
-    .nav-logo img{
-      height:clamp(24px,4vw,32px);
-      filter:drop-shadow(0 0 8px #00ff0066);
-      transition:filter .3s;
-    }
-    .nav-logo img:hover{filter:drop-shadow(0 0 16px #00ff00cc)}
-
-    .nav-links{display:flex;gap:clamp(16px,3vw,32px);list-style:none}
-    .nav-links a{
-      font-family:'Share Tech Mono',monospace;
-      font-size:clamp(0.6rem,1.2vw,0.72rem);letter-spacing:.2em;text-transform:uppercase;
-      color:var(--grey);text-decoration:none;transition:color .2s;white-space:nowrap;
-    }
-    .nav-links a:hover{color:var(--green)}
-    .nav-cta{
-      font-family:'Share Tech Mono',monospace;
-      font-size:clamp(0.6rem,1.2vw,0.7rem);letter-spacing:.15em;text-transform:uppercase;
-      background:transparent;border:1px solid var(--green);color:var(--green);
-      padding:7px clamp(12px,2vw,20px);text-decoration:none;transition:all .2s;white-space:nowrap;
-    }
-    .nav-cta:hover{background:var(--green);color:var(--black);box-shadow:var(--glow)}
-
-    .hamburger{
-      display:none;flex-direction:column;justify-content:center;gap:5px;
-      width:36px;height:36px;cursor:pointer;background:none;border:none;padding:4px;
-    }
-    .hamburger span{display:block;width:22px;height:1.5px;background:var(--green);transition:all .3s;transform-origin:center}
-    .hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
-    .hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
-    .hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
-
-    .mobile-menu{
-      display:none;position:fixed;top:0;left:0;width:100%;height:100vh;
-      background:rgba(0,0,0,0.97);z-index:998;
-      flex-direction:column;align-items:center;justify-content:center;gap:32px;
-    }
-    .mobile-menu.open{display:flex}
-    .mobile-menu a{
-      font-family:'Space Grotesk',sans-serif;font-weight:700;
-      font-size:clamp(1.6rem,8vw,2.4rem);letter-spacing:.1em;text-transform:uppercase;
-      color:var(--white);text-decoration:none;transition:color .2s;
-    }
-    .mobile-menu a:hover{color:var(--green)}
-    .mobile-menu .m-cta{
-      margin-top:12px;
-      font-family:'Share Tech Mono',monospace;font-size:0.78rem;letter-spacing:.2em;
-      border:1px solid var(--green);color:var(--green);padding:12px 32px;
-    }
-
-    /* ═══════════════════════════════════════
-       HERO
-    ═══════════════════════════════════════ */
-    #home{
-      min-height:100svh;
-      display:flex;flex-direction:column;
-      justify-content:center;align-items:flex-start;
-      padding:clamp(80px,12vh,140px) var(--pad-x) clamp(60px,8vh,80px);
-      position:relative;overflow:hidden;
-    }
-    .hero-grid{
-      position:absolute;inset:0;
-      background-image:
-        linear-gradient(rgba(0,255,0,.035) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(0,255,0,.035) 1px,transparent 1px);
-      background-size:clamp(32px,6vw,56px) clamp(32px,6vw,56px);
-      pointer-events:none;
-    }
-    .hero-scan{
-      position:absolute;inset:0;
-      background:linear-gradient(to bottom,transparent 50%,rgba(0,255,0,.016) 50%);
-      background-size:100% 4px;pointer-events:none;
-      animation:scan-move 8s linear infinite;
-    }
-    @keyframes scan-move{0%{background-position:0 0}100%{background-position:0 100%}}
-    .hero-noise{
-      position:absolute;inset:0;
-      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events:none;opacity:.4;
-    }
-    #home::before,#home::after{
-      content:'';position:absolute;width:32px;height:32px;
-      border-color:var(--green);border-style:solid;opacity:.4;
-    }
-    #home::before{top:clamp(70px,10vh,100px);left:var(--pad-x);border-width:1px 0 0 1px}
-    #home::after{bottom:32px;right:var(--pad-x);border-width:0 1px 1px 0}
-
-    .hero-tag{
-      font-family:'Share Tech Mono',monospace;
-      font-size:clamp(.6rem,.9vw + .3rem,.72rem);letter-spacing:.28em;
-      color:var(--green);text-transform:uppercase;margin-bottom:clamp(16px,3vh,28px);
-    }
-    .hero-tag::before{content:'// ';color:var(--grey)}
-
-    .hero-logo-wrap{
-      position:relative;margin-bottom:clamp(20px,4vh,32px);display:inline-block;
-      max-width:100%;
-    }
-    .hero-logo-wrap img.main-logo{
-      width:clamp(220px,72vw,680px);position:relative;z-index:2;
-      filter:drop-shadow(0 0 20px #00ff0055);
-    }
-    .hero-logo-wrap::before{
-      content:'';position:absolute;inset:0;
-      background:url('logo_text_putih.png') center/contain no-repeat;
-      clip-path:polygon(0 15%,100% 15%,100% 30%,0 30%);
-      animation:logo-g1 3.8s infinite steps(1);opacity:0;z-index:3;
-    }
-    .hero-logo-wrap::after{
-      content:'';position:absolute;inset:0;left:4px;
-      background:url('logo_text_putih.png') center/contain no-repeat;
-      clip-path:polygon(0 55%,100% 55%,100% 68%,0 68%);
-      animation:logo-g2 4.4s infinite steps(1);opacity:0;z-index:3;
-    }
-    @keyframes logo-g1{
-      0%,88%{opacity:0;transform:translateX(0)}
-      89%{opacity:1;transform:translateX(-6px);filter:hue-rotate(90deg) brightness(2)}
-      91%{opacity:0}93%{opacity:1;transform:translateX(6px)}95%,100%{opacity:0}
-    }
-    @keyframes logo-g2{
-      0%,82%{opacity:0;transform:translateX(0)}
-      83%{opacity:1;transform:translateX(5px);filter:hue-rotate(180deg)}
-      86%{opacity:0}90%{opacity:1;transform:translateX(-4px)}93%,100%{opacity:0}
-    }
-
-    .hero-sub{
-      max-width:clamp(280px,80vw,480px);font-size:clamp(.85rem,1.4vw + .3rem,1rem);
-      color:var(--grey);line-height:1.75;font-weight:300;
-    }
-    .hero-sub strong{color:var(--white);font-weight:500}
-
-    .hero-mantra{
-      margin-top:clamp(18px,3vh,28px);
-      font-family:'Share Tech Mono',monospace;
-      font-size:clamp(.62rem,.8vw + .2rem,.73rem);letter-spacing:.2em;
-      color:var(--green);text-transform:uppercase;
-      animation:pulse-txt 3s ease-in-out infinite;
-    }
-    @keyframes pulse-txt{0%,100%{opacity:1}50%{opacity:.5}}
-
-    .hero-actions{
-      margin-top:clamp(28px,5vh,44px);
-      display:flex;gap:12px;flex-wrap:wrap;
-    }
-    .btn-primary{
-      font-family:'Share Tech Mono',monospace;font-size:clamp(.68rem,.9vw,.76rem);
-      letter-spacing:.15em;text-transform:uppercase;
-      background:var(--green);color:var(--black);
-      border:none;padding:clamp(11px,2vh,14px) clamp(20px,4vw,32px);
-      cursor:pointer;font-weight:700;text-decoration:none;display:inline-block;
-      position:relative;overflow:hidden;transition:box-shadow .2s,transform .15s;
-    }
-    .btn-primary::after{
-      content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;
-      background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);
-      animation:btn-shine 3s ease-in-out infinite;
-    }
-    @keyframes btn-shine{0%{left:-100%}60%,100%{left:150%}}
-    .btn-primary:hover{box-shadow:var(--glow);transform:translateY(-2px)}
-    .btn-ghost{
-      font-family:'Share Tech Mono',monospace;font-size:clamp(.68rem,.9vw,.76rem);
-      letter-spacing:.15em;text-transform:uppercase;
-      background:transparent;color:var(--white);
-      border:1px solid #444;padding:clamp(11px,2vh,14px) clamp(20px,4vw,32px);
-      text-decoration:none;display:inline-block;transition:border-color .2s,color .2s;
-    }
-    .btn-ghost:hover{border-color:var(--green);color:var(--green)}
-
-    .scroll-hint{
-      position:absolute;bottom:28px;right:var(--pad-x);
-      display:flex;flex-direction:column;align-items:center;gap:8px;
-      font-family:'Share Tech Mono',monospace;font-size:.6rem;
-      letter-spacing:.25em;color:var(--grey);text-transform:uppercase;
-    }
-    .scroll-line{
-      width:1px;height:40px;
-      background:linear-gradient(to bottom,var(--green),transparent);
-      animation:s-pulse 2s ease-in-out infinite;
-    }
-    @keyframes s-pulse{0%,100%{opacity:1;transform:scaleY(1)}50%{opacity:.2;transform:scaleY(.5)}}
-
-    /* ═══════════════════════════════════════
-       MARQUEE
-    ═══════════════════════════════════════ */
-    .marquee-strip{background:var(--green);overflow:hidden;padding:10px 0;white-space:nowrap}
-    .marquee-inner{display:inline-flex;animation:marquee 18s linear infinite}
-    .marquee-inner span{
-      font-family:'Space Grotesk',sans-serif;font-weight:700;
-      font-size:clamp(.7rem,.9vw,.82rem);letter-spacing:.14em;text-transform:uppercase;
-      color:var(--black);padding:0 clamp(16px,2.5vw,28px);
-    }
-    .msep{opacity:.3}
-    @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-
-    /* ═══════════════════════════════════════
-       SECTION COMMON
-    ═══════════════════════════════════════ */
-    section{padding:clamp(60px,8vh,100px) var(--pad-x)}
-    .eyebrow{
-      font-family:'Share Tech Mono',monospace;font-size:clamp(.6rem,.75vw,.68rem);
-      letter-spacing:.36em;text-transform:uppercase;color:var(--green);margin-bottom:12px;
-    }
-    .sec-title{
-      font-family:'Space Grotesk',sans-serif;font-weight:900;
-      font-size:clamp(1.8rem,5vw,4.2rem);line-height:1;
-      color:var(--white);margin-bottom:18px;
-    }
-    .divider{width:48px;height:2px;background:var(--green);margin-bottom:clamp(32px,5vh,48px);box-shadow:var(--glow)}
-
-    /* ═══════════════════════════════════════
-       PRODUK
-    ═══════════════════════════════════════ */
-    #products{background:var(--surface)}
-    .drops-header{
-      display:flex;align-items:flex-end;justify-content:space-between;
-      margin-bottom:clamp(32px,5vh,56px);flex-wrap:wrap;gap:16px;
-    }
-    .drops-desc{color:var(--grey);font-size:clamp(.78rem,1.1vw,.85rem);max-width:260px;line-height:1.7}
-    .drops-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fill,minmax(min(290px,100%),1fr));
-      gap:2px;
-    }
-    a.drop-card{text-decoration:none;color:inherit}
-    .drop-card{
-      background:var(--surf2);position:relative;overflow:hidden;
-      cursor:pointer;aspect-ratio:3/4;
-      display:flex;flex-direction:column;justify-content:flex-end;
-      transition:transform .4s ease;
-    }
-    .drop-card:hover{transform:scale(1.01)}
-    .drop-card::before{
-      content:'';position:absolute;top:0;left:0;width:24px;height:24px;
-      border-top:2px solid var(--green);border-left:2px solid var(--green);
-      opacity:0;transition:opacity .3s;z-index:5;
-    }
-    .drop-card:hover::before{opacity:1}
-    .drop-card-img{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;overflow:hidden}
-    .drop-card-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease,filter .3s;filter:grayscale(20%)}
-    .drop-card:hover .drop-card-img img{transform:scale(1.06);filter:grayscale(0%) brightness(1.05)}
-    .drop-placeholder{
-      width:100%;height:100%;background:var(--surf2);
-      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
-    }
-    .drop-placeholder span{font-size:clamp(2rem,6vw,3.5rem);opacity:.13}
-    .drop-placeholder p{font-family:'Share Tech Mono',monospace;font-size:.6rem;letter-spacing:.14em;color:#333;text-transform:uppercase}
-    .drop-body{position:relative;z-index:2;padding:clamp(16px,3vw,24px);background:linear-gradient(to top,rgba(0,0,0,.97) 55%,transparent)}
-    .drop-badge{font-family:'Share Tech Mono',monospace;font-size:.6rem;letter-spacing:.18em;color:var(--green);text-transform:uppercase;margin-bottom:5px}
-    .drop-name{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(1rem,2.5vw,1.25rem);color:var(--white);margin-bottom:4px}
-    .drop-desc{font-size:clamp(.72rem,1.1vw,.78rem);color:var(--grey);margin-bottom:12px;line-height:1.5}
-    .drop-foot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
-    .drop-price{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(.9rem,1.8vw,1.05rem);color:var(--white)}
-    .drop-status{font-family:'Share Tech Mono',monospace;font-size:.6rem;letter-spacing:.14em;padding:4px 10px;border:1px solid;text-transform:uppercase}
-    .s-soon{color:var(--green);border-color:var(--green)}
-    .s-open{color:var(--white);border-color:var(--white);background:rgba(255,255,255,.06)}
-    .s-sold{color:var(--grey);border-color:var(--grey)}
-
-    /* ═══════════════════════════════════════
-       PHILOSOPHY
-    ═══════════════════════════════════════ */
-    #philosophy{
-      background:var(--green);padding:clamp(56px,8vh,80px) var(--pad-x);
-      text-align:center;position:relative;overflow:hidden;
-    }
-    #philosophy::before{
-      content:'CAPRUX';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-      font-family:'Space Grotesk',sans-serif;font-weight:900;
-      font-size:clamp(5rem,22vw,16rem);color:transparent;
-      -webkit-text-stroke:1px rgba(0,0,0,.07);white-space:nowrap;pointer-events:none;
-    }
-    .phil-label{
-      font-family:'Share Tech Mono',monospace;font-size:clamp(.62rem,.8vw,.7rem);
-      letter-spacing:.35em;text-transform:uppercase;color:rgba(0,0,0,.45);margin-bottom:16px;position:relative;
-    }
-    .phil-quote{
-      font-family:'Space Grotesk',sans-serif;font-weight:900;
-      font-size:clamp(2rem,7vw,5.5rem);line-height:.95;
-      color:var(--black);letter-spacing:-.03em;position:relative;
-    }
-    .phil-sub{
-      margin-top:18px;font-family:'Share Tech Mono',monospace;
-      font-size:clamp(.62rem,.8vw,.78rem);letter-spacing:.18em;
-      color:rgba(0,0,0,.5);text-transform:uppercase;position:relative;
-    }
-
-    /* ═══════════════════════════════════════
-       ABOUT
-    ═══════════════════════════════════════ */
-    #about{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,80px);align-items:center}
-    .about-visual{
-      background:var(--surf2);aspect-ratio:4/5;
-      position:relative;overflow:hidden;
-      display:flex;align-items:center;justify-content:center;
-    }
-    .about-logo-float{
-      width:65%;opacity:.12;
-      animation:float-logo 6s ease-in-out infinite;
-      filter:drop-shadow(0 0 30px #00ff00);
-    }
-    @keyframes float-logo{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-18px) rotate(3deg)}}
-    .about-bottom-line{position:absolute;bottom:-1px;left:-1px;right:-1px;height:3px;background:var(--green);box-shadow:var(--glow)}
-    .about-corner{
-      position:absolute;top:20px;right:20px;
-      font-family:'Share Tech Mono',monospace;font-size:.58rem;letter-spacing:.14em;
-      color:rgba(0,255,0,.3);writing-mode:vertical-rl;
-    }
-    .about-body{font-size:clamp(.82rem,1.2vw,.95rem);color:var(--grey-lt);line-height:1.85;margin-bottom:18px}
-    .about-body strong{color:var(--white)}
-    .about-values{margin-top:clamp(24px,4vh,36px);display:flex;flex-direction:column;gap:14px}
-    .val{display:flex;gap:14px;align-items:flex-start}
-    .val-n{font-family:'Share Tech Mono',monospace;font-size:.64rem;color:var(--green);padding-top:3px;flex-shrink:0}
-    .val-t{font-size:clamp(.8rem,1.1vw,.88rem);color:var(--grey-lt);line-height:1.6}
-    .val-t strong{color:var(--white);display:block;margin-bottom:2px}
-
-    /* ═══════════════════════════════════════
-       JOURNEY
-    ═══════════════════════════════════════ */
-    #journey{background:var(--surface)}
-    .ep-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fill,minmax(min(220px,100%),1fr));
-      gap:2px;margin-top:clamp(32px,5vh,52px);
-    }
-    .ep-card{
-      background:var(--surf2);padding:clamp(18px,3vw,26px) clamp(16px,2.5vw,22px);
-      position:relative;border-top:2px solid transparent;
-      transition:border-color .25s,background .25s;
-    }
-    .ep-card:hover{border-color:var(--green);background:#111}
-    .ep-num{font-family:'Share Tech Mono',monospace;font-size:.6rem;letter-spacing:.2em;color:var(--green);margin-bottom:10px}
-    .ep-title{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(.85rem,1.2vw,.95rem);color:var(--white);margin-bottom:6px;line-height:1.3}
-    .ep-desc{font-size:clamp(.72rem,1vw,.78rem);color:var(--grey);line-height:1.6}
-    .ep-dot{position:absolute;top:clamp(18px,3vw,26px);right:clamp(16px,2.5vw,22px);width:7px;height:7px;border-radius:50%}
-    .ep-dot.live{background:var(--green);box-shadow:0 0 8px var(--green)}
-    .ep-dot.soon{background:#333}
-
-    /* ═══════════════════════════════════════
-       CONTACT
-    ═══════════════════════════════════════ */
-    #contact{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,80px);align-items:start}
-    .c-intro{font-size:clamp(.82rem,1.2vw,.95rem);color:var(--grey-lt);line-height:1.85;margin-bottom:clamp(24px,4vh,36px)}
-    .c-links{display:flex;flex-direction:column}
-    .c-link{
-      display:flex;align-items:center;gap:12px;
-      font-family:'Share Tech Mono',monospace;font-size:clamp(.7rem,1vw,.78rem);
-      letter-spacing:.1em;color:var(--grey);text-decoration:none;
-      padding:clamp(12px,2vh,14px) 0;border-bottom:1px solid #1c1c1c;
-      transition:color .2s,padding-left .2s;
-    }
-    .c-link:hover{color:var(--green);padding-left:6px}
-    .c-icon{color:var(--green);font-size:.9rem;flex-shrink:0}
-    .c-form{display:flex;flex-direction:column;gap:14px}
-    .f-field{display:flex;flex-direction:column;gap:7px}
-    .f-field label{font-family:'Share Tech Mono',monospace;font-size:.63rem;letter-spacing:.22em;text-transform:uppercase;color:var(--grey)}
-    .f-field input,.f-field textarea{
-      background:var(--surf2);border:1px solid #252525;color:var(--white);
-      font-family:'Inter',sans-serif;font-size:clamp(.82rem,1.1vw,.88rem);
-      padding:11px 14px;outline:none;transition:border-color .2s;resize:none;
-      -webkit-appearance:none;border-radius:0;
-    }
-    .f-field input:focus,.f-field textarea:focus{border-color:var(--green)}
-    .f-field textarea{min-height:110px}
-
-    /* ═══════════════════════════════════════
-       FOOTER
-    ═══════════════════════════════════════ */
-    footer{
-      background:var(--surface);border-top:1px solid #161616;
-      padding:clamp(28px,5vh,44px) var(--pad-x);
-      display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;
-    }
-    .f-logo img{height:clamp(20px,3vw,28px);filter:drop-shadow(0 0 8px #00ff0055)}
-    .f-copy{font-family:'Share Tech Mono',monospace;font-size:clamp(.58rem,.7vw,.65rem);letter-spacing:.1em;color:var(--grey);text-align:center;line-height:1.8}
-    .f-socials{display:flex;gap:16px}
-    .f-socials a{
-      font-family:'Share Tech Mono',monospace;font-size:clamp(.6rem,.7vw,.65rem);
-      letter-spacing:.15em;text-transform:uppercase;color:var(--grey);text-decoration:none;transition:color .2s;
-    }
-    .f-socials a:hover{color:var(--green)}
-
-    /* ═══════════════════════════════════════
-       TABLET  (481px – 900px)
-    ═══════════════════════════════════════ */
-    @media(max-width:900px){
-      .nav-links,.nav-cta{display:none}
-      .hamburger{display:flex}
-      #about{grid-template-columns:1fr}
-      .about-right{display:none}
-      #contact{grid-template-columns:1fr}
-      .scroll-hint{right:var(--pad-x)}
-      .drops-grid{grid-template-columns:repeat(2,1fr)}
-    }
-
-    /* ═══════════════════════════════════════
-       MOBILE  (≤ 480px)
-    ═══════════════════════════════════════ */
-    @media(max-width:480px){
-      .drops-grid{grid-template-columns:1fr}
-      .ep-grid{grid-template-columns:1fr}
-      .scroll-hint{display:none}
-      #home::before,#home::after{width:22px;height:22px}
-      .hero-actions{flex-direction:column;align-items:flex-start}
-      .btn-primary,.btn-ghost{width:100%;text-align:center}
-      #philosophy::before{display:none}
-      footer{flex-direction:column;align-items:center;text-align:center}
-      .f-copy{order:2}
-      .f-socials{order:3}
-      .f-logo{order:1}
-      .drops-header{flex-direction:column;align-items:flex-start}
-      .drops-desc{max-width:100%}
-    }
-
-    /* ═══════════════════════════════════════
-       REDUCED MOTION
-    ═══════════════════════════════════════ */
-    @media(prefers-reduced-motion:reduce){
-      *{animation:none!important;transition:none!important}
-    }
-  </style>
+  <!-- ✏️ CSS utama — edit style.css untuk tampilan -->
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
 <!-- ════ MOBILE MENU ════ -->
 <div class="mobile-menu" id="mobileMenu">
   <a href="#products" onclick="closeMenu()">Produk</a>
-  <a href="#about" onclick="closeMenu()">Story</a>
-  <a href="#journey" onclick="closeMenu()">Journey</a>
-  <a href="#contact" onclick="closeMenu()">Contact</a>
+  <a href="#about"    onclick="closeMenu()">Story</a>
+  <a href="#journey"  onclick="closeMenu()">Journey</a>
+  <a href="#contact"  onclick="closeMenu()">Contact</a>
   <a href="#products" class="m-cta" onclick="closeMenu()">Pembelian Produk</a>
 </div>
 
@@ -497,49 +48,60 @@
 
 <!-- ════ HERO ════ -->
 <section id="home">
-  <div class="hero-grid"></div>
-  <div class="hero-scan"></div>
-  <div class="hero-noise"></div>
-  <div class="hero-tag">Etnic Streetwear · Est. 2024 · Jawabarat</div>
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="hero-scan" aria-hidden="true"></div>
+  <div class="hero-noise" aria-hidden="true"></div>
+
+  <!-- ✏️ Edit teks hero di sini -->
+  <p class="hero-tag">Etnic Streetwear · Est. 2024 · Jawabarat</p>
+
   <div class="hero-logo-wrap">
     <img class="main-logo" src="logo_text_putih.png" alt="CAPRUX"/>
   </div>
+
   <p class="hero-sub">
-    Zona tenang para pemilik<strong>IDE GILA</strong><br/>
-    yang selalu mengubah sekitar jadi berwarna.
+    Zona tenang para pemilik <strong>IDE GILA</strong><br/>
+    nu ngajadikeun tonggoh jadi berwarna.
   </p>
-  <p class="hero-mantra">// Doing the Impossible, with GOD's Help</p>
+
+  <!-- ✏️ Mantra di bawah logo — akan di-glitch oleh JS -->
+  <p class="hero-mantra">// Capruk lain gelo. Capruk nu apal caranyah.</p>
+
   <div class="hero-actions">
     <a href="#products" class="btn-primary">Lihat Produk Terbaru</a>
-    <a href="#about" class="btn-ghost">Kenapa CAPRUX?</a>
+    <a href="#about"    class="btn-ghost">Kenapa CAPRUX?</a>
   </div>
-  <div class="scroll-hint">
+
+  <div class="scroll-hint" aria-hidden="true">
     <div class="scroll-line"></div>
     <span>Scroll</span>
   </div>
 </section>
 
 <!-- ════ MARQUEE ════ -->
+<!-- ✏️ Edit teks marquee di sini -->
 <div class="marquee-strip" aria-hidden="true">
   <div class="marquee-inner">
     <span>CAPRUX</span><span class="msep">×</span>
-    <span>Dari diam untuk yang berisik</span><span class="msep">×</span>
-    <span>Berantakan di kepala Bercahaya di karya</span><span class="msep">×</span>
+    <span>Capruk lain gelo</span><span class="msep">×</span>
+    <span>Heureuy tapi serius</span><span class="msep">×</span>
     <span>Etnic Streetwear</span><span class="msep">×</span>
     <span>Doing the Impossible with GOD's Help</span><span class="msep">×</span>
-    <span>Born from madness, given to the world.</span><span class="msep">×</span>
+    <span>Urang Bandung Resep Heureuy</span><span class="msep">×</span>
     <span>Jawabarat</span><span class="msep">×</span>
+    <!-- Duplikat untuk loop seamless -->
     <span>CAPRUX</span><span class="msep">×</span>
-    <span>Dari diam untuk yang berisik</span><span class="msep">×</span>
-    <span>Berantakan di kepala Bercahaya di karya</span><span class="msep">×</span>
+    <span>Capruk lain gelo</span><span class="msep">×</span>
+    <span>Heureuy tapi serius</span><span class="msep">×</span>
     <span>Etnic Streetwear</span><span class="msep">×</span>
     <span>Doing the Impossible with GOD's Help</span><span class="msep">×</span>
-    <span>Born from madness, given to the world</span><span class="msep">×</span>
+    <span>Urang Bandung Resep Heureuy</span><span class="msep">×</span>
     <span>Jawabarat</span><span class="msep">×</span>
   </div>
 </div>
 
 <!-- ════ PRODUK ════ -->
+<!-- ✏️ Data produk ada di main.js — array PRODUCTS -->
 <section id="products">
   <div class="drops-header">
     <div>
@@ -548,47 +110,61 @@
       <div class="divider"></div>
     </div>
     <p class="drops-desc">
-      Stok terbatas tanpa restok.<br/>Untuk di pakai bukan di pajang.<br/>Minat langsung beli.
+      Stok terbatas tanpa restok.<br/>
+      Kanggo dipaké, lain dipajang.<br/>
+      Minat langsung beli.
     </p>
   </div>
-  <div class="drops-grid" id="productGrid">
-    <!-- Produk akan di-render oleh JavaScript -->
-  </div>
+  <!-- Produk di-render oleh main.js -->
+  <div class="drops-grid" id="productGrid"></div>
 </section>
 
 <!-- ════ PHILOSOPHY ════ -->
+<!-- ✏️ Edit kutipan filosofi di sini -->
 <div id="philosophy">
   <p class="phil-label">// Brand Philosophy</p>
   <p class="phil-quote">ONLY<br/>GOD<br/>KNOW</p>
-  <p class="phil-sub">Meaningful Chaos — Bukan asal berbeda. Berbeda karena punya arah.</p>
+  <p class="phil-sub">Meaningful Chaos — Bukan asal béda. Béda karena boga arah.</p>
 </div>
 
 <!-- ════ ABOUT ════ -->
+<!-- ✏️ Edit cerita brand di sini -->
 <section id="about">
   <div class="about-left">
     <p class="eyebrow">// Our Story</p>
-    <h2 class="sec-title">Dari Sebuah Kamar,<br/>Untuk Dunia.</h2>
+    <h2 class="sec-title">Dari Sebuah<br/>Kamar,<br/>Kanggo Dunia.</h2>
     <div class="divider"></div>
     <p class="about-body">
-      CAPRUX lahir dari tangan orang yang setiap hari membangun mimpi orang lain — tapi sekarang sedang mencoba membangun mimpinya sendiri demi kebahagiaan istirnya, orangtuanya, dan orang lain.
-      <strong>Dari sini semua bermula.</strong>
+      CAPRUX lahir tina leungeun jalma nu unggal poé ngawangun impian batur —
+      tapi ayeuna keur nyoba ngawangun impiana sorangan pikeun kabagjaan
+      pamajikanana, kolotna, jeung batur séjén.
+      <strong>Ti dieu sadayana dimimitian.</strong>
     </p>
     <p class="about-body">
-      Perpaduan Ide gila, Religi, Budaya dan Teknologi.
-      Dasar <strong>"nu dilamunan engke pasti ka alaman"</strong> jadi sebuah pegangan.
+      Perpaduan Idé gila, Religi, Budaya, sareng Téknologi.
+      Dasar <strong>"nu dilamunan engké pasti ka alaman"</strong> jadi sebuah pegangan.
     </p>
     <div class="about-values">
       <div class="val">
-        <span class="val-n">>> >> 01</span>
-        <div class="val-t"><strong>GOD ONLY</strong>yang akan mendengar dan mengerti siapa hebatnya kamu.</div>
+        <span class="val-n">&gt;&gt; 01</span>
+        <div class="val-t">
+          <strong>GOD ONLY</strong>
+          nu bakal ngadéngé sareng ngarti saha hebatnya kamu.
+        </div>
       </div>
       <div class="val">
-        <span class="val-n">>> >> 02</span>
-        <div class="val-t"><strong>ETNIC ROOT</strong>pondasi kuat tanpa mengubah dunia luar.</div>
+        <span class="val-n">&gt;&gt; 02</span>
+        <div class="val-t">
+          <strong>ETNIC ROOT</strong>
+          pondasi kuat tanpa mengubah dunia luar.
+        </div>
       </div>
       <div class="val">
-        <span class="val-n">>> >> 03</span>
-        <div class="val-t"><strong>TECHNOLOGY</strong>seperti pisau, bisa berguna dan bisa juga berbahaya.</div>
+        <span class="val-n">&gt;&gt; 03</span>
+        <div class="val-t">
+          <strong>TECHNOLOGY</strong>
+          kawas peso, bisa mangpaat bisa ogé bahaya.
+        </div>
       </div>
     </div>
   </div>
@@ -602,78 +178,89 @@
 </section>
 
 <!-- ════ JOURNEY ════ -->
+<!-- ✏️ Tambah / edit episode di sini -->
 <section id="journey">
   <p class="eyebrow">// Honest Brand Journey</p>
   <h2 class="sec-title">Documentary<br/>Series</h2>
   <div class="divider"></div>
   <p style="color:var(--grey);max-width:520px;line-height:1.8;font-size:clamp(.82rem,1.2vw,.93rem)">
-    Kami rekam semuanya — dari nol. Tanpa filter. Biweekly di TikTok & Instagram Reels.
+    Kami rekam semuanya — ti nol. Tanpa filter. Biweekly di TikTok &amp; Instagram Reels.<br/>
     <span style="color:var(--green)">Allah sebagai produser. ENF sebagai sutradara.</span>
   </p>
   <div class="ep-grid">
+
+    <!-- ✏️ ep-dot class: live = sudah tayang | soon = belum -->
     <div class="ep-card">
       <div class="ep-num">EP. 01</div>
-      <div class="ep-title">Awal Mula Nama & Logo</div>
-      <div class="ep-desc">Kenapa "CAPRUX"? Proses desain logo bohlam pertama kali.</div>
+      <div class="ep-title">Naha Ngaranna CAPRUX?</div>
+      <div class="ep-desc">Capruk = ngaco dalam Sunda. Proses desain logo bohlam pertama kali.</div>
       <div class="ep-dot live"></div>
     </div>
+
     <div class="ep-card">
       <div class="ep-num">EP. 02</div>
       <div class="ep-title">Riset Bahan & Internet</div>
-      <div class="ep-desc">Gramasi, tekstur, harga — semua dicatat dari nol.</div>
+      <div class="ep-desc">Gramasi, tekstur, harga — sadayana dicatat ti nol.</div>
       <div class="ep-dot soon"></div>
     </div>
+
     <div class="ep-card">
       <div class="ep-num">EP. 03</div>
-      <div class="ep-title">Cari Kain di Toko Kiloan</div>
-      <div class="ep-desc">POV: jalan kaki di Cigondewah nyari kain murah berkualitas.</div>
+      <div class="ep-title">Cari Kain di Cigondewah</div>
+      <div class="ep-desc">POV: leumpang di pasar kain kiloan nyari kualitas terbaik.</div>
       <div class="ep-dot soon"></div>
     </div>
+
     <div class="ep-card">
       <div class="ep-num">EP. 04</div>
       <div class="ep-title">Cari Vendor Penjahit</div>
       <div class="ep-desc">Nego harga, cek kualitas jahitan, pilih partner yang tepat.</div>
       <div class="ep-dot soon"></div>
     </div>
+
     <div class="ep-card">
       <div class="ep-num">EP. 05</div>
-      <div class="ep-title">Sablon Alat Sederhana</div>
-      <div class="ep-desc">Polyflex, heat press pinjaman, eksperimen logo pertama.</div>
+      <div class="ep-title">Sablon Polyflex Pertama</div>
+      <div class="ep-desc">Heat press pinjaman, eksperimen logo, gagal, coba lagi.</div>
       <div class="ep-dot soon"></div>
     </div>
+
     <div class="ep-card">
       <div class="ep-num">EP. 06</div>
       <div class="ep-title">Buka Toko & Riset Pasar</div>
-      <div class="ep-desc">Tokopedia, Shopee, Instagram — semua dibuka hari yang sama.</div>
+      <div class="ep-desc">Tokopedia, Shopee, Instagram — sadayana dibuka hari yang sama.</div>
       <div class="ep-dot soon"></div>
     </div>
+
     <div class="ep-card">
       <div class="ep-num">EP. 07 →</div>
-      <div class="ep-title">Dan Seterusnya...</div>
-      <div class="ep-desc">Perjalanan belum selesai. Follow untuk episode berikutnya.</div>
+      <div class="ep-title">Perjalanan Teu Acan Réngsé...</div>
+      <div class="ep-desc">Follow @capruxcloth untuk episode selanjutnya.</div>
       <div class="ep-dot soon"></div>
     </div>
+
   </div>
 </section>
 
 <!-- ════ CONTACT ════ -->
+<!-- ✏️ Edit link sosmed di sini -->
 <section id="contact">
   <div>
     <p class="eyebrow">// Get In Touch</p>
     <h2 class="sec-title">Hubungi<br/>Kami</h2>
     <div class="divider"></div>
     <p class="c-intro">
-      Kirimkan berisiknya kepalamu,<br/>
-      karna CAPRUX menerima ide gilamu.
+      Kirimkeun berisiknya kepalamu,<br/>
+      karna CAPRUX narima idé gilamu.
     </p>
     <div class="c-links">
-      <a href="https://instagram.com/capruxcloth" class="c-link" target="_blank">
+      <a href="https://instagram.com/capruxcloth" class="c-link" target="_blank" rel="noopener">
         <span class="c-icon">▶</span> @capruxcloth — Instagram
       </a>
-      <a href="https://www.tiktok.com/@capruxcloth" class="c-link" target="_blank">
+      <a href="https://www.tiktok.com/@capruxcloth" class="c-link" target="_blank" rel="noopener">
         <span class="c-icon">▶</span> @capruxcloth — TikTok
       </a>
-      <a href="https://www.facebook.com/profile.php?id=61570786385157" class="c-link" target="_blank">
+      <a href="https://www.facebook.com/profile.php?id=61570786385157" class="c-link" target="_blank" rel="noopener">
         <span class="c-icon">▶</span> CAPRUX — Facebook
       </a>
     </div>
@@ -686,132 +273,30 @@
     <img src="logo_text_putih.png" alt="CAPRUX"/>
   </div>
   <div class="f-copy">
-    © 2024 CAPRUX — Doing the Impossible with GOD's Help<br/>
+    © 2025 CAPRUX — Doing the Impossible with GOD's Help<br/>
     <span style="color:#333;font-size:.58rem">Made in Jawabarat · Powered by ENF</span>
   </div>
   <div class="f-socials">
-    <a href="https://instagram.com/capruxcloth" target="_blank">IG</a>
-    <a href="https://tiktok.com/@capruxcloth" target="_blank">TT</a>
-    <a href="https://www.facebook.com/profile.php?id=61570786385157" target="_blank">FB</a>
+    <a href="https://instagram.com/capruxcloth"  target="_blank" rel="noopener">IG</a>
+    <a href="https://tiktok.com/@capruxcloth"    target="_blank" rel="noopener">TT</a>
+    <a href="https://www.facebook.com/profile.php?id=61570786385157" target="_blank" rel="noopener">FB</a>
   </div>
 </footer>
 
-<!--Start of Tawk.to Script-->
+<!-- ════ TAWK.TO LIVE CHAT ════ -->
 <script type="text/javascript">
 var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
 (function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/6a30f2f6b319cc1d4d431aec/1jr7ja5d7';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
+  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+  s1.async=true;
+  s1.src='https://embed.tawk.to/6a30f2f6b319cc1d4d431aec/1jr7ja5d7';
+  s1.charset='UTF-8';
+  s1.setAttribute('crossorigin','*');
+  s0.parentNode.insertBefore(s1,s0);
 })();
 </script>
-<!--End of Tawk.to Script-->
 
-<script>
-  // ============================================================
-  // NAV MOBILE
-  // ============================================================
-  function toggleMenu(){
-    const m=document.getElementById('mobileMenu');
-    const h=document.getElementById('hamburger');
-    m.classList.toggle('open');
-    h.classList.toggle('open');
-    document.body.style.overflow=m.classList.contains('open')?'hidden':'';
-  }
-  function closeMenu(){
-    document.getElementById('mobileMenu').classList.remove('open');
-    document.getElementById('hamburger').classList.remove('open');
-    document.body.style.overflow='';
-  }
-  window.addEventListener('resize',()=>{
-    if(window.innerWidth>900) closeMenu();
-  });
-
-  // ============================================================
-  // DATA PRODUK (untuk halaman utama)
-  // ============================================================
-  const products = [
-    {
-      id: 'kaos-oblong',
-      name: 'THE TROPICAL SOUL',
-      badge: '// Micro Cotton Danbowl',
-      desc: 'Polyflex 3D logo silicon 1mm.',
-      price: 'Rp 189.000',
-      status: 'soon',
-      image: 'Kaos_Oblong_CAPRUX.png'
-    },
-    {
-      id: 'jaket-crincle',
-      name: 'THE WIND BLOCKER',
-      badge: '// Parasut Crincle',
-      desc: 'Model Gunung. Bahan Sporty.',
-      price: 'Rp 289.750',
-      status: 'soon',
-      image: 'Jaket_Crincle_CAPRUX.png'
-    },
-    {
-      id: 'celana-pendek',
-      name: 'NILON RIPSTOP',
-      badge: '// The Short Circuit',
-      desc: 'For men only. No Boti.',
-      price: 'Rp 239.750',
-      status: 'soon',
-      image: 'Celana_Pendek_CAPRUX.png'
-    }
-    // ============================================================
-    // ✨ TAMBAHKAN PRODUK BARU DI SINI ✨
-    // Copy-paste blok di bawah, sesuaikan datanya
-    // ============================================================
-    // {
-    //   id: 'nama-file-html',
-    //   name: 'NAMA PRODUK',
-    //   badge: '// Bahan',
-    //   desc: 'Deskripsi singkat',
-    //   price: 'Rp 999.000',
-    //   status: 'soon',
-    //   image: 'gambar_produk.png'
-    // }
-  ];
-
-  // ============================================================
-  // RENDER PRODUCT GRID
-  // ============================================================
-  function renderProducts() {
-    const grid = document.getElementById('productGrid');
-    if (!grid) return;
-
-    grid.innerHTML = products.map(p => {
-      const statusMap = {
-        'soon': 'Coming Soon',
-        'open': 'Tersedia',
-        'sold': 'Habis'
-      };
-      return `
-        <a href="${p.id}.html" class="drop-card">
-          <div class="drop-card-img">
-            <img src="${p.image}" alt="${p.name}"/>
-          </div>
-          <div class="drop-body">
-            <div class="drop-badge">${p.badge}</div>
-            <div class="drop-name">${p.name}</div>
-            <div class="drop-desc">${p.desc}</div>
-            <div class="drop-foot">
-              <span class="drop-price">${p.price}</span>
-              <span class="drop-status s-${p.status}">${statusMap[p.status] || p.status}</span>
-            </div>
-          </div>
-        </a>
-      `;
-    }).join('');
-  }
-
-  // ============================================================
-  // INISIALISASI
-  // ============================================================
-  document.addEventListener('DOMContentLoaded', renderProducts);
-</script>
+<!-- ✏️ JS utama — edit main.js untuk produk dan efek -->
+<script src="main.js"></script>
 </body>
 </html>
