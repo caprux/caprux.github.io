@@ -170,11 +170,189 @@
   </div>
   <div class="about-right">
     <div class="about-visual">
-      <img class="about-logo-float" src="LOGO_TRANSPARAN_PUTIH.png" alt="CAPRUX Logo"/>
+
+      <!-- Glow ring luar -->
+      <div class="cpx-ring cpx-ring-1" aria-hidden="true"></div>
+      <div class="cpx-ring cpx-ring-2" aria-hidden="true"></div>
+      <div class="cpx-ring cpx-ring-3" aria-hidden="true"></div>
+
+      <!-- Scan line overlay -->
+      <div class="cpx-scan" aria-hidden="true"></div>
+
+      <!-- Rotating dashed orbit -->
+      <div class="cpx-orbit" aria-hidden="true"></div>
+
+      <!-- Logo utama -->
+      <div class="cpx-logo-wrap">
+        <img class="about-logo-float" src="LOGO_TRANSPARAN_PUTIH.png" alt="CAPRUX Logo"/>
+        <!-- Glitch duplikat -->
+        <img class="cpx-glitch-r" src="LOGO_TRANSPARAN_PUTIH.png" alt="" aria-hidden="true"/>
+        <img class="cpx-glitch-g" src="LOGO_TRANSPARAN_PUTIH.png" alt="" aria-hidden="true"/>
+      </div>
+
+      <!-- Corner dots -->
+      <span class="cpx-dot cpx-dot-tl" aria-hidden="true"></span>
+      <span class="cpx-dot cpx-dot-tr" aria-hidden="true"></span>
+      <span class="cpx-dot cpx-dot-bl" aria-hidden="true"></span>
+      <span class="cpx-dot cpx-dot-br" aria-hidden="true"></span>
+
+      <!-- Ticker bawah -->
       <div class="about-bottom-line"></div>
       <div class="about-corner">CAPRUX · JABAR · 2024</div>
     </div>
   </div>
+
+  <style>
+    /* ── Container ── */
+    .about-visual {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 340px;
+      height: 340px;
+      margin: 0 auto;
+    }
+
+    /* ── Rings ── */
+    .cpx-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid #00FF00;
+      animation: cpx-pulse 3s ease-in-out infinite;
+    }
+    .cpx-ring-1 { width: 280px; height: 280px; opacity: 0.55; animation-delay: 0s; }
+    .cpx-ring-2 { width: 310px; height: 310px; opacity: 0.25; animation-delay: 0.6s; }
+    .cpx-ring-3 { width: 336px; height: 336px; opacity: 0.10; animation-delay: 1.2s; }
+
+    @keyframes cpx-pulse {
+      0%,100% { transform: scale(1); opacity: var(--op, .5); }
+      50%      { transform: scale(1.04); opacity: calc(var(--op, .5) * 1.8); }
+    }
+    .cpx-ring-1 { --op: 0.55; }
+    .cpx-ring-2 { --op: 0.25; }
+    .cpx-ring-3 { --op: 0.10; }
+
+    /* ── Orbit (dashed rotating) ── */
+    .cpx-orbit {
+      position: absolute;
+      width: 294px;
+      height: 294px;
+      border-radius: 50%;
+      border: 1px dashed rgba(0,255,0,0.35);
+      animation: cpx-spin 12s linear infinite;
+    }
+    @keyframes cpx-spin { to { transform: rotate(360deg); } }
+
+    /* ── Scanline ── */
+    .cpx-scan {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      width: 280px;
+      height: 280px;
+      margin: auto;
+      overflow: hidden;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 3px,
+        rgba(0,255,0,0.025) 3px,
+        rgba(0,255,0,0.025) 4px
+      );
+      animation: cpx-scanmove 6s linear infinite;
+    }
+    @keyframes cpx-scanmove {
+      0%   { background-position: 0 0; }
+      100% { background-position: 0 280px; }
+    }
+
+    /* ── Logo wrap ── */
+    .cpx-logo-wrap {
+      position: relative;
+      z-index: 2;
+      width: 200px;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      filter: drop-shadow(0 0 18px rgba(0,255,0,0.65))
+              drop-shadow(0 0 40px rgba(0,255,0,0.30));
+      animation: cpx-breathe 4s ease-in-out infinite;
+    }
+    @keyframes cpx-breathe {
+      0%,100% { filter: drop-shadow(0 0 14px rgba(0,255,0,.55)) drop-shadow(0 0 32px rgba(0,255,0,.25)); transform: scale(1); }
+      50%      { filter: drop-shadow(0 0 26px rgba(0,255,0,.90)) drop-shadow(0 0 60px rgba(0,255,0,.45)); transform: scale(1.04); }
+    }
+
+    /* Logo utama */
+    .about-logo-float {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      object-fit: contain;
+      z-index: 2;
+    }
+
+    /* Glitch layer merah (channel R) */
+    .cpx-glitch-r {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      object-fit: contain;
+      z-index: 1;
+      mix-blend-mode: screen;
+      opacity: 0;
+      animation: cpx-glitch-r 5s step-end infinite;
+      filter: hue-rotate(-90deg) saturate(3);
+    }
+    @keyframes cpx-glitch-r {
+      0%,89%,100% { opacity:0; transform:translate(0,0); }
+      90%          { opacity:.7; transform:translate(-4px, 1px) skewX(-2deg); }
+      92%          { opacity:.5; transform:translate(3px, -1px); }
+      94%          { opacity:0; }
+    }
+
+    /* Glitch layer hijau (channel G) */
+    .cpx-glitch-g {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      object-fit: contain;
+      z-index: 1;
+      mix-blend-mode: screen;
+      opacity: 0;
+      animation: cpx-glitch-g 5s step-end infinite;
+      filter: hue-rotate(60deg) saturate(3);
+    }
+    @keyframes cpx-glitch-g {
+      0%,89%,100% { opacity:0; transform:translate(0,0); }
+      91%          { opacity:.6; transform:translate(4px, -1px) skewX(1.5deg); }
+      93%          { opacity:.4; transform:translate(-2px, 2px); }
+      95%          { opacity:0; }
+    }
+
+    /* ── Corner dots ── */
+    .cpx-dot {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #00FF00;
+      box-shadow: 0 0 8px 2px rgba(0,255,0,0.8);
+      animation: cpx-blink 2s ease-in-out infinite;
+    }
+    .cpx-dot-tl { top: 28px;  left: 28px;  animation-delay: 0s; }
+    .cpx-dot-tr { top: 28px;  right: 28px; animation-delay: 0.5s; }
+    .cpx-dot-bl { bottom: 50px; left: 28px;  animation-delay: 1.0s; }
+    .cpx-dot-br { bottom: 50px; right: 28px; animation-delay: 1.5s; }
+
+    @keyframes cpx-blink {
+      0%,100% { opacity:1; transform:scale(1); }
+      50%      { opacity:0.2; transform:scale(0.6); }
+    }
+  </style>
 </section>
 
 <!-- ════ JOURNEY ════ -->
