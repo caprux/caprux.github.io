@@ -580,7 +580,7 @@ a.drop-card { text-decoration: none; color: inherit; }
 .s-sold { color: var(--grey); border-color: var(--grey); }
 
 /* ───────────────────────────────────────────
-   PHILOSOPHY — FIXED (Watermark di BELAKANG)
+   PHILOSOPHY — Watermark di BELAKANG, LEBIH TERLIHAT
    ─────────────────────────────────────────── */
 #philosophy {
   background: var(--green);
@@ -595,7 +595,6 @@ a.drop-card { text-decoration: none; color: inherit; }
   justify-content: center;
 }
 
-/* WATERMARK — di BELAKANG (z-index: 0) */
 #philosophy .phil-watermark {
   position: absolute;
   top: 50%;
@@ -603,8 +602,8 @@ a.drop-card { text-decoration: none; color: inherit; }
   transform: translate(-50%, -50%);
   font-family: var(--font-head);
   font-weight: 900;
-  font-size: clamp(6rem, 25vw, 18rem);
-  color: rgba(0, 0, 0, 0.05);
+  font-size: clamp(4rem, 20vw, 14rem);
+  color: rgba(0, 0, 0, 0.12);
   white-space: nowrap;
   pointer-events: none;
   user-select: none;
@@ -612,7 +611,6 @@ a.drop-card { text-decoration: none; color: inherit; }
   z-index: 0;
 }
 
-/* Semua konten di ATAS watermark (z-index: 1) */
 #philosophy .phil-label,
 #philosophy .phil-quote,
 #philosophy .phil-sub {
@@ -646,7 +644,7 @@ a.drop-card { text-decoration: none; color: inherit; }
 }
 
 /* ───────────────────────────────────────────
-   ABOUT
+   ABOUT — Logo JELAS & TIDAK KEPOTONG
    ─────────────────────────────────────────── */
 #about {
   display: grid;
@@ -662,11 +660,12 @@ a.drop-card { text-decoration: none; color: inherit; }
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 20px;
 }
 
-/* LOGO — LEBIH JELAS */
 .about-logo-float {
-  width: 65%;
+  width: 70%;
+  max-width: 300px;
   opacity: 0.85;
   animation: float-logo 6s ease-in-out infinite;
   filter: drop-shadow(0 0 30px rgba(0,255,0,0.2));
@@ -1384,7 +1383,24 @@ a.drop-card { text-decoration: none; color: inherit; }
   #home::before, #home::after { width: 22px; height: 22px; }
   .hero-actions { flex-direction: column; align-items: flex-start; }
   .btn-primary, .btn-ghost { width: 100%; text-align: center; }
-  .phil-watermark { display: none; }
+  
+  /* PHILOSOPHY - watermark lebih kecil di ponsel */
+  #philosophy .phil-watermark {
+    font-size: clamp(3rem, 15vw, 6rem);
+    color: rgba(0, 0, 0, 0.10);
+  }
+  
+  /* ABOUT - logo tidak kepotong di ponsel */
+  .about-visual {
+    aspect-ratio: 1/1;
+    padding: 30px;
+    min-height: 200px;
+  }
+  .about-logo-float {
+    width: 60%;
+    max-width: 180px;
+  }
+  
   footer { flex-direction: column; align-items: center; text-align: center; }
   .f-copy { order: 2; }
   .f-socials { order: 3; }
