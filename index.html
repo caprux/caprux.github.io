@@ -1,39 +1,26 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="CAPRUX — Etnic Streetwear dari Jawabarat. Bukan untuk semua orang. Doing the Impossible with GOD's Help."/>
-  <meta property="og:title" content="CAPRUX — Etnic Streetwear Jawabarat"/>
-  <meta property="og:description" content="Capruk lain gelo. Capruk nu apal caranyah."/>
-  <meta property="og:image" content="https://caprux.github.io/logo_text_putih.png"/>
-  <meta name="theme-color" content="#000000"/>
-  <title>CAPRUX — Doing the Impossible, with GOD's Help</title>
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&family=Inter:wght@300;400;500&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
-
-  <!-- ✏️ CSS utama — edit style.css untuk tampilan -->
-  <link rel="stylesheet" href="style.css"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CAPRUX — Streetwear</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&family=Inter:wght@300;400;500&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- ════ MOBILE MENU ════ -->
+<!-- Mobile Menu -->
 <div class="mobile-menu" id="mobileMenu">
   <a href="#products" onclick="closeMenu()">Produk</a>
-  <a href="#about"    onclick="closeMenu()">Story</a>
-  <a href="#journey"  onclick="closeMenu()">Journey</a>
-  <a href="#contact"  onclick="closeMenu()">Contact</a>
+  <a href="#about" onclick="closeMenu()">Story</a>
+  <a href="#journey" onclick="closeMenu()">Journey</a>
+  <a href="#contact" onclick="closeMenu()">Contact</a>
   <a href="#products" class="m-cta" onclick="closeMenu()">Pembelian Produk</a>
 </div>
 
-<!-- ════ NAV ════ -->
+<!-- Nav -->
 <nav>
-  <a href="#home" class="nav-logo">
-    <img src="logo_text_putih.png" alt="CAPRUX"/>
-  </a>
+  <a href="index.html" class="nav-logo"><img src="logo_text_putih.png" alt="CAPRUX"></a>
   <ul class="nav-links">
     <li><a href="#products">Produk</a></li>
     <li><a href="#about">Story</a></li>
@@ -41,422 +28,150 @@
     <li><a href="#contact">Contact</a></li>
   </ul>
   <a href="#products" class="nav-cta">Pembelian Produk</a>
-  <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()">
-    <span></span><span></span><span></span>
-  </button>
+  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 
-<!-- ════ HERO ════ -->
+<!-- Hero -->
 <section id="home">
-  <div class="hero-grid" aria-hidden="true"></div>
-  <div class="hero-scan" aria-hidden="true"></div>
-  <div class="hero-noise" aria-hidden="true"></div>
-
-  <!-- ✏️ Edit teks hero di sini -->
-  <p class="hero-tag">Etnic Streetwear · Est. 2024 · Jawabarat</p>
-
+  <div class="hero-grid"></div>
+  <div class="hero-scan"></div>
+  <div class="hero-noise"></div>
+  <div class="hero-tag">Etnic Streetwear · Est. 2024 · Jawabarat</div>
   <div class="hero-logo-wrap">
-    <img class="main-logo" src="logo_text_putih.png" alt="CAPRUX"/>
+    <img class="main-logo" src="logo_text_putih.png" alt="CAPRUX">
   </div>
-
-  <p class="hero-sub">
-    Zona explore para pemilik <strong>IDE GILA</strong><br/>
-    yang ingin mencapai ketenangan.
-  </p>
-
-  <!-- ✏️ Mantra di bawah logo — akan di-glitch oleh JS -->
-  <p class="hero-mantra">// Kegilaan ide yang terarah.</p>
-
+  <p class="hero-sub">Zona tenang para pemilik <strong>IDE GILA</strong><br>yang selalu mengubah sekitar jadi berwarna.</p>
+  <p class="hero-mantra">// Doing the Impossible, with GOD's Help</p>
   <div class="hero-actions">
-    <a href="#products" class="btn-primary">Produk Terbaru</a>
-    <a href="#about"    class="btn-ghost">Why must CAPRUX.?</a>
+    <a href="#products" class="btn-primary">Lihat Produk Terbaru</a>
+    <a href="#about" class="btn-ghost">Kenapa CAPRUX?</a>
   </div>
-
-  <div class="scroll-hint" aria-hidden="true">
+  <div class="scroll-hint">
     <div class="scroll-line"></div>
     <span>Scroll</span>
   </div>
 </section>
 
-<!-- ════ MARQUEE ════ -->
-<!-- ✏️ Edit teks marquee di sini -->
+<!-- Marquee -->
 <div class="marquee-strip" aria-hidden="true">
   <div class="marquee-inner">
     <span>CAPRUX</span><span class="msep">×</span>
-    <span>Happy with GOD plan</span><span class="msep">×</span>
-    <span>Etnic Streetware</span><span class="msep">×</span>
-    <span>Welcome to the real man</span><span class="msep">×</span>
+    <span>Dari diam untuk yang berisik</span><span class="msep">×</span>
+    <span>Berantakan di kepala Bercahaya di karya</span><span class="msep">×</span>
+    <span>Etnic Streetwear</span><span class="msep">×</span>
     <span>Doing the Impossible with GOD's Help</span><span class="msep">×</span>
-    <span>Man can't stop work</span><span class="msep">×</span>
+    <span>Born from madness, given to the world.</span><span class="msep">×</span>
     <span>Jawabarat</span><span class="msep">×</span>
-    <!-- Duplikat untuk loop seamless -->
     <span>CAPRUX</span><span class="msep">×</span>
-    <span>Happy with GOD plan</span><span class="msep">×</span>
-    <span>Etnic Streetware</span><span class="msep">×</span>
-    <span>Welcome to the real man</span><span class="msep">×</span>
+    <span>Dari diam untuk yang berisik</span><span class="msep">×</span>
+    <span>Berantakan di kepala Bercahaya di karya</span><span class="msep">×</span>
+    <span>Etnic Streetwear</span><span class="msep">×</span>
     <span>Doing the Impossible with GOD's Help</span><span class="msep">×</span>
-    <span>Man can't stop work</span><span class="msep">×</span>
+    <span>Born from madness, given to the world</span><span class="msep">×</span>
     <span>Jawabarat</span><span class="msep">×</span>
   </div>
 </div>
 
-<!-- ════ PRODUK ════ -->
-<!-- ✏️ Data produk ada di main.js — array PRODUCTS -->
+<!-- Products -->
 <section id="products">
   <div class="drops-header">
     <div>
       <p class="eyebrow">// Collections</p>
-      <h2 class="sec-title">STREETWARE</h2>
+      <h2 class="sec-title">streetwear</h2>
       <div class="divider"></div>
     </div>
-    <p class="drops-desc">
-      Stok terbatas tanpa restok.<br/>
-      Dipakai di semua aktifitas cowok.<br/>
-    </p>
+    <p class="drops-desc">Stok terbatas tanpa restok.<br>Untuk di pakai bukan di pajang.<br>Minat langsung beli.</p>
   </div>
-  <!-- Produk di-render oleh main.js -->
   <div class="drops-grid" id="productGrid"></div>
 </section>
 
-<!-- ════ PHILOSOPHY ════ -->
-<!-- ✏️ Edit kutipan filosofi di sini -->
-<div id="philosophy">
+<!-- Philosophy -->
+<section id="philosophy">
   <p class="phil-label">// Brand Philosophy</p>
-  <p class="phil-quote">ONLY<br/>GOD<br/>KNOW</p>
-  <p class="phil-sub">Cowok — Gila - Beriman - Pantang menyerah</p>
-</div>
+  <p class="phil-quote">ONLY<br>GOD<br>KNOW</p>
+  <p class="phil-sub">Meaningful Chaos — Bukan asal berbeda. Berbeda karena punya arah.</p>
+</section>
 
-<!-- ════ ABOUT ════ -->
-<!-- ✏️ Edit cerita brand di sini -->
+<!-- About -->
 <section id="about">
   <div class="about-left">
     <p class="eyebrow">// Our Story</p>
-    <h2 class="sec-title">Dari Sebuah<br/>Kamar,<br/>Tercipta kegilaan.</h2>
+    <h2 class="sec-title">Dari Sebuah Kamar,<br>Untuk Dunia.</h2>
     <div class="divider"></div>
-    <p class="about-body">
-      CAPRUX hanya carita manusia sebagai seorang 
-      <strong>Cowok </strong>
-    </p>
-    <p class="about-body">
-      yang menikmati god plan yang indah.
-    </p>
+    <p class="about-body">CAPRUX lahir dari tangan orang yang setiap hari membangun mimpi orang lain — tapi sekarang sedang mencoba membangun mimpinya sendiri demi kebahagiaan istirnya, orangtuanya, dan orang lain. <strong>Dari sini semua bermula.</strong></p>
+    <p class="about-body">Perpaduan Ide gila, Religi, Budaya dan Teknologi. Dasar <strong>"nu dilamunan engke pasti ka alaman"</strong> jadi sebuah pegangan.</p>
     <div class="about-values">
-      <div class="val">
-        <span class="val-n">&gt;&gt; 01</span>
-        <div class="val-t">
-          <strong>GOD</strong>
-          >> Hope.
-        </div>
-      </div>
-      <div class="val">
-        <span class="val-n">&gt;&gt; 02</span>
-        <div class="val-t">
-          <strong>ETNIC</strong>
-          >> Rules.
-        </div>
-      </div>
-      <div class="val">
-        <span class="val-n">&gt;&gt; 03</span>
-        <div class="val-t">
-          <strong>LIFE</strong>
-          >> Game.
-        </div>
-      </div>
+      <div class="val"><span class="val-n">>> >> 01</span><div class="val-t"><strong>GOD ONLY</strong>yang akan mendengar dan mengerti siapa hebatnya kamu.</div></div>
+      <div class="val"><span class="val-n">>> >> 02</span><div class="val-t"><strong>ETNIC ROOT</strong>pondasi kuat tanpa mengubah dunia luar.</div></div>
+      <div class="val"><span class="val-n">>> >> 03</span><div class="val-t"><strong>TECHNOLOGY</strong>seperti pisau, bisa berguna dan bisa juga berbahaya.</div></div>
     </div>
   </div>
   <div class="about-right">
     <div class="about-visual">
-
-      <!-- Glow ring luar -->
-      <div class="cpx-ring cpx-ring-1" aria-hidden="true"></div>
-      <div class="cpx-ring cpx-ring-2" aria-hidden="true"></div>
-      <div class="cpx-ring cpx-ring-3" aria-hidden="true"></div>
-
-      <!-- Scan line overlay -->
-      <div class="cpx-scan" aria-hidden="true"></div>
-
-      <!-- Rotating dashed orbit -->
-      <div class="cpx-orbit" aria-hidden="true"></div>
-
-      <!-- Logo utama -->
-      <div class="cpx-logo-wrap">
-        <img class="about-logo-float" src="LOGO_TRANSPARAN_PUTIH.png" alt="CAPRUX Logo"/>
-        <!-- Glitch duplikat -->
-        <img class="cpx-glitch-r" src="LOGO_TRANSPARAN_PUTIH.png" alt="" aria-hidden="true"/>
-        <img class="cpx-glitch-g" src="LOGO_TRANSPARAN_PUTIH.png" alt="" aria-hidden="true"/>
-      </div>
-
-      <!-- Corner dots -->
-      <span class="cpx-dot cpx-dot-tl" aria-hidden="true"></span>
-      <span class="cpx-dot cpx-dot-tr" aria-hidden="true"></span>
-      <span class="cpx-dot cpx-dot-bl" aria-hidden="true"></span>
-      <span class="cpx-dot cpx-dot-br" aria-hidden="true"></span>
-
-      <!-- Ticker bawah -->
+      <img class="about-logo-float" src="LOGO_TRANSPARAN_PUTIH.png" alt="CAPRUX Logo">
       <div class="about-bottom-line"></div>
       <div class="about-corner">CAPRUX · JABAR · 2024</div>
     </div>
   </div>
-
-  <style>
-    /* ── Container ── */
-    .about-visual {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 340px;
-      height: 340px;
-      margin: 0 auto;
-    }
-
-    /* ── Rings ── */
-    .cpx-ring {
-      position: absolute;
-      border-radius: 50%;
-      border: 1px solid #00FF00;
-      animation: cpx-pulse 3s ease-in-out infinite;
-    }
-    .cpx-ring-1 { width: 280px; height: 280px; opacity: 0.55; animation-delay: 0s; }
-    .cpx-ring-2 { width: 310px; height: 310px; opacity: 0.25; animation-delay: 0.6s; }
-    .cpx-ring-3 { width: 336px; height: 336px; opacity: 0.10; animation-delay: 1.2s; }
-
-    @keyframes cpx-pulse {
-      0%,100% { transform: scale(1); opacity: var(--op, .5); }
-      50%      { transform: scale(1.04); opacity: calc(var(--op, .5) * 1.8); }
-    }
-    .cpx-ring-1 { --op: 0.55; }
-    .cpx-ring-2 { --op: 0.25; }
-    .cpx-ring-3 { --op: 0.10; }
-
-    /* ── Orbit (dashed rotating) ── */
-    .cpx-orbit {
-      position: absolute;
-      width: 294px;
-      height: 294px;
-      border-radius: 50%;
-      border: 1px dashed rgba(0,255,0,0.35);
-      animation: cpx-spin 12s linear infinite;
-    }
-    @keyframes cpx-spin { to { transform: rotate(360deg); } }
-
-    /* ── Scanline ── */
-    .cpx-scan {
-      position: absolute;
-      inset: 0;
-      border-radius: 50%;
-      width: 280px;
-      height: 280px;
-      margin: auto;
-      overflow: hidden;
-      pointer-events: none;
-      background: repeating-linear-gradient(
-        to bottom,
-        transparent 0px,
-        transparent 3px,
-        rgba(0,255,0,0.025) 3px,
-        rgba(0,255,0,0.025) 4px
-      );
-      animation: cpx-scanmove 6s linear infinite;
-    }
-    @keyframes cpx-scanmove {
-      0%   { background-position: 0 0; }
-      100% { background-position: 0 280px; }
-    }
-
-    /* ── Logo wrap ── */
-    .cpx-logo-wrap {
-      position: relative;
-      z-index: 2;
-      width: 200px;
-      height: 200px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      filter: drop-shadow(0 0 18px rgba(0,255,0,0.65))
-              drop-shadow(0 0 40px rgba(0,255,0,0.30));
-      animation: cpx-breathe 4s ease-in-out infinite;
-    }
-    @keyframes cpx-breathe {
-      0%,100% { filter: drop-shadow(0 0 14px rgba(0,255,0,.55)) drop-shadow(0 0 32px rgba(0,255,0,.25)); transform: scale(1); }
-      50%      { filter: drop-shadow(0 0 26px rgba(0,255,0,.90)) drop-shadow(0 0 60px rgba(0,255,0,.45)); transform: scale(1.04); }
-    }
-
-    /* Logo utama */
-    .about-logo-float {
-      position: relative;
-      width: 200px;
-      height: 200px;
-      object-fit: contain;
-      z-index: 2;
-    }
-
-    /* Glitch layer merah (channel R) */
-    .cpx-glitch-r {
-      position: absolute;
-      width: 200px;
-      height: 200px;
-      object-fit: contain;
-      z-index: 1;
-      mix-blend-mode: screen;
-      opacity: 0;
-      animation: cpx-glitch-r 5s step-end infinite;
-      filter: hue-rotate(-90deg) saturate(3);
-    }
-    @keyframes cpx-glitch-r {
-      0%,89%,100% { opacity:0; transform:translate(0,0); }
-      90%          { opacity:.7; transform:translate(-4px, 1px) skewX(-2deg); }
-      92%          { opacity:.5; transform:translate(3px, -1px); }
-      94%          { opacity:0; }
-    }
-
-    /* Glitch layer hijau (channel G) */
-    .cpx-glitch-g {
-      position: absolute;
-      width: 200px;
-      height: 200px;
-      object-fit: contain;
-      z-index: 1;
-      mix-blend-mode: screen;
-      opacity: 0;
-      animation: cpx-glitch-g 5s step-end infinite;
-      filter: hue-rotate(60deg) saturate(3);
-    }
-    @keyframes cpx-glitch-g {
-      0%,89%,100% { opacity:0; transform:translate(0,0); }
-      91%          { opacity:.6; transform:translate(4px, -1px) skewX(1.5deg); }
-      93%          { opacity:.4; transform:translate(-2px, 2px); }
-      95%          { opacity:0; }
-    }
-
-    /* ── Corner dots ── */
-    .cpx-dot {
-      position: absolute;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #00FF00;
-      box-shadow: 0 0 8px 2px rgba(0,255,0,0.8);
-      animation: cpx-blink 2s ease-in-out infinite;
-    }
-    .cpx-dot-tl { top: 28px;  left: 28px;  animation-delay: 0s; }
-    .cpx-dot-tr { top: 28px;  right: 28px; animation-delay: 0.5s; }
-    .cpx-dot-bl { bottom: 50px; left: 28px;  animation-delay: 1.0s; }
-    .cpx-dot-br { bottom: 50px; right: 28px; animation-delay: 1.5s; }
-
-    @keyframes cpx-blink {
-      0%,100% { opacity:1; transform:scale(1); }
-      50%      { opacity:0.2; transform:scale(0.6); }
-    }
-  </style>
 </section>
 
-<!-- ════ JOURNEY ════ -->
-<!-- ✏️ Tambah / edit episode di sini -->
+<!-- Journey -->
 <section id="journey">
   <p class="eyebrow">// Honest Brand Journey</p>
-  <h2 class="sec-title">Documentary<br/>Series</h2>
+  <h2 class="sec-title">Documentary<br>Series</h2>
   <div class="divider"></div>
-  <p style="color:var(--grey);max-width:520px;line-height:1.8;font-size:clamp(.82rem,1.2vw,.93rem)">
-    Kami rekam semuanya — ti nol. Tanpa filter. Biweekly di TikTok &amp; Instagram Reels.<br/>
-    <span style="color:var(--green)">Allah sebagai produser. ENF sebagai sutradara.</span>
-  </p>
+  <p style="color:var(--grey);max-width:520px;line-height:1.8;font-size:clamp(.82rem,1.2vw,.93rem)">Kami rekam semuanya — dari nol. Tanpa filter. Biweekly di TikTok & Instagram Reels. <span style="color:var(--green)">Allah sebagai produser. ENF sebagai sutradara.</span></p>
   <div class="ep-grid">
-
-    <!-- ✏️ ep-dot class: live = sudah tayang | soon = belum -->
-    <div class="ep-card">
-      <div class="ep-num">EP. 01</div>
-      <div class="ep-title">Why</div>
-      <div class="ep-desc">Sejarah pemikiran nama dan logo.</div>
-      <div class="ep-dot live"></div>
-    </div>
-
-    <div class="ep-card">
-      <div class="ep-num">EP. 02</div>
-      <div class="ep-title">Learn and Trush</div>
-      <div class="ep-desc">Memulai dari nol.</div>
-      <div class="ep-dot soon"></div>
-    </div>
-
-    <div class="ep-card">
-      <div class="ep-num">EP. 03</div>
-      <div class="ep-title">Find</div>
-      <div class="ep-desc">Mencari bahan.</div>
-      <div class="ep-dot soon"></div>
-    </div>
-
-    <div class="ep-card">
-      <div class="ep-num">EP. 04</div>
-      <div class="ep-title">Connect</div>
-      <div class="ep-desc">Mencari koneksi.</div>
-      <div class="ep-dot soon"></div>
-    </div>
-
-    <div class="ep-card">
-      <div class="ep-num">EP. 05</div>
-      <div class="ep-title">Play</div>
-      <div class="ep-desc">Perjalanan panjang.</div>
-      <div class="ep-dot soon"></div>
-    </div>
-
+    <div class="ep-card"><div class="ep-num">EP. 01</div><div class="ep-title">Awal Mula Nama & Logo</div><div class="ep-desc">Kenapa "CAPRUX"? Proses desain logo bohlam pertama kali.</div><div class="ep-dot live"></div></div>
+    <div class="ep-card"><div class="ep-num">EP. 02</div><div class="ep-title">Riset Bahan & Internet</div><div class="ep-desc">Gramasi, tekstur, harga — semua dicatat dari nol.</div><div class="ep-dot soon"></div></div>
+    <div class="ep-card"><div class="ep-num">EP. 03</div><div class="ep-title">Cari Kain di Toko Kiloan</div><div class="ep-desc">POV: jalan kaki di Cigondewah nyari kain murah berkualitas.</div><div class="ep-dot soon"></div></div>
+    <div class="ep-card"><div class="ep-num">EP. 04</div><div class="ep-title">Cari Vendor Penjahit</div><div class="ep-desc">Nego harga, cek kualitas jahitan, pilih partner yang tepat.</div><div class="ep-dot soon"></div></div>
+    <div class="ep-card"><div class="ep-num">EP. 05</div><div class="ep-title">Sablon Alat Sederhana</div><div class="ep-desc">Polyflex, heat press pinjaman, eksperimen logo pertama.</div><div class="ep-dot soon"></div></div>
+    <div class="ep-card"><div class="ep-num">EP. 06</div><div class="ep-title">Buka Toko & Riset Pasar</div><div class="ep-desc">Tokopedia, Shopee, Instagram — semua dibuka hari yang sama.</div><div class="ep-dot soon"></div></div>
+    <div class="ep-card"><div class="ep-num">EP. 07 →</div><div class="ep-title">Dan Seterusnya...</div><div class="ep-desc">Perjalanan belum selesai. Follow untuk episode berikutnya.</div><div class="ep-dot soon"></div></div>
   </div>
 </section>
 
-<!-- ════ CONTACT ════ -->
-<!-- ✏️ Edit link sosmed di sini -->
+<!-- Contact -->
 <section id="contact">
   <div>
     <p class="eyebrow">// Get In Touch</p>
-    <h2 class="sec-title">Hubungi<br/>Kami</h2>
+    <h2 class="sec-title">Hubungi<br>Kami</h2>
     <div class="divider"></div>
-    <p class="c-intro">
-      Kirim berisiknya kepalamu,<br/>
-      CAPRUX butuh idé gilamu.
-    </p>
+    <p class="c-intro">Kirimkan berisiknya kepalamu,<br>karna CAPRUX menerima ide gilamu.</p>
     <div class="c-links">
-      <a href="https://instagram.com/caprux.cloth" class="c-link" target="_blank" rel="noopener">
-        <span class="c-icon">▶</span> @capruxcloth — Instagram
-      </a>
-      <a href="https://www.tiktok.com/@caprux.cloth" class="c-link" target="_blank" rel="noopener">
-        <span class="c-icon">▶</span> @capruxcloth — TikTok
-      </a>
-      <a href="https://www.facebook.com/profile.php?id=61570786385157" class="c-link" target="_blank" rel="noopener">
-        <span class="c-icon">▶</span> CAPRUX — Facebook
-      </a>
+      <a href="https://instagram.com/capruxcloth" class="c-link" target="_blank"><span class="c-icon">▶</span> @capruxcloth — Instagram</a>
+      <a href="https://www.tiktok.com/@capruxcloth" class="c-link" target="_blank"><span class="c-icon">▶</span> @capruxcloth — TikTok</a>
+      <a href="https://www.facebook.com/profile.php?id=61570786385157" class="c-link" target="_blank"><span class="c-icon">▶</span> CAPRUX — Facebook</a>
     </div>
   </div>
 </section>
 
-<!-- ════ FOOTER ════ -->
+<!-- Footer -->
 <footer>
-  <div class="f-logo">
-    <img src="logo_text_putih.png" alt="CAPRUX"/>
-  </div>
-  <div class="f-copy">
-    © 2024 CAPRUX — Doing the Impossible with GOD's Help<br/>
-    <span style="color:#333;font-size:.58rem">Life in Jawabarat · Powered by ENF</span>
-  </div>
+  <div class="f-logo"><img src="logo_text_putih.png" alt="CAPRUX"></div>
+  <div class="f-copy">© 2024 CAPRUX — Doing the Impossible with GOD's Help<br><span style="color:#333;font-size:.58rem">Made in Jawabarat · Powered by ENF</span></div>
   <div class="f-socials">
-    <a href="https://instagram.com/caprux.cloth"  target="_blank" rel="noopener">IG</a>
-    <a href="https://tiktok.com/@caprux.cloth"    target="_blank" rel="noopener">TT</a>
-    <a href="https://www.facebook.com/profile.php?id=61570786385157" target="_blank" rel="noopener">FB</a>
+    <a href="https://instagram.com/capruxcloth" target="_blank">IG</a>
+    <a href="https://tiktok.com/@capruxcloth" target="_blank">TT</a>
+    <a href="https://www.facebook.com/profile.php?id=61570786385157" target="_blank">FB</a>
   </div>
 </footer>
 
-<!-- ════ TAWK.TO LIVE CHAT ════ -->
+<!-- Tawk.to -->
 <script type="text/javascript">
 var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
 (function(){
-  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-  s1.async=true;
-  s1.src='https://embed.tawk.to/6a30f2f6b319cc1d4d431aec/1jr7ja5d7';
-  s1.charset='UTF-8';
-  s1.setAttribute('crossorigin','*');
-  s0.parentNode.insertBefore(s1,s0);
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/6a30f2f6b319cc1d4d431aec/1jr7ja5d7';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
 })();
 </script>
 
-<!-- ✏️ JS utama — edit main.js untuk produk dan efek -->
-<script src="main.js"></script>
+<!-- Script Utama -->
+<script src="script.js"></script>
 </body>
 </html>
