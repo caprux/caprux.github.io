@@ -4,7 +4,7 @@
    ================================================================ */
 
 /* ───────────────────────────────────────────
-   TOKENS — Edit warna & font di sini
+   TOKENS
    ─────────────────────────────────────────── */
 :root {
   --black:    #000000;
@@ -49,7 +49,6 @@ img {
 }
 a { text-decoration: none; color: inherit; }
 
-/* Scrollbar */
 ::-webkit-scrollbar { width: 3px; }
 ::-webkit-scrollbar-track { background: var(--black); }
 ::-webkit-scrollbar-thumb { background: var(--green); }
@@ -117,7 +116,6 @@ nav.scrolled {
   box-shadow: var(--glow);
 }
 
-/* Hamburger */
 .hamburger {
   display: none;
   flex-direction: column;
@@ -139,7 +137,6 @@ nav.scrolled {
 .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
 .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
-/* Mobile Menu */
 .mobile-menu {
   display: none;
   position: fixed;
@@ -311,9 +308,6 @@ nav.scrolled {
   position: relative; z-index: 2;
 }
 
-/* ───────────────────────────────────────────
-   BUTTONS
-   ─────────────────────────────────────────── */
 .btn-primary {
   font-family: var(--font-mono);
   font-size: clamp(.68rem, .9vw, .76rem);
@@ -580,7 +574,7 @@ a.drop-card { text-decoration: none; color: inherit; }
 .s-sold { color: var(--grey); border-color: var(--grey); }
 
 /* ───────────────────────────────────────────
-   PHILOSOPHY — Watermark di BELAKANG, LEBIH TERLIHAT
+   PHILOSOPHY
    ─────────────────────────────────────────── */
 #philosophy {
   background: var(--green);
@@ -644,7 +638,7 @@ a.drop-card { text-decoration: none; color: inherit; }
 }
 
 /* ───────────────────────────────────────────
-   ABOUT — Logo JELAS & TIDAK KEPOTONG
+   ABOUT
    ─────────────────────────────────────────── */
 #about {
   display: grid;
@@ -1141,7 +1135,6 @@ footer {
   padding: 4px 10px;
 }
 
-/* DETAIL TABS */
 .detail-section {
   background: var(--surface);
   padding: clamp(44px, 6vh, 72px) var(--pad-x);
@@ -1261,7 +1254,6 @@ footer {
   line-height: 1.65;
 }
 
-/* RELATED */
 .related {
   padding: clamp(44px, 6vh, 72px) var(--pad-x);
 }
@@ -1361,7 +1353,7 @@ a.drop-card { text-decoration: none; color: inherit; }
 }
 
 /* ───────────────────────────────────────────
-   RESPONSIVE — TABLET (≤ 900px)
+   RESPONSIVE
    ─────────────────────────────────────────── */
 @media (max-width: 900px) {
   .nav-links, .nav-cta { display: none; }
@@ -1373,9 +1365,6 @@ a.drop-card { text-decoration: none; color: inherit; }
   .prod-info { position: static; }
 }
 
-/* ───────────────────────────────────────────
-   RESPONSIVE — MOBILE (≤ 480px)
-   ─────────────────────────────────────────── */
 @media (max-width: 480px) {
   .drops-grid { grid-template-columns: 1fr; }
   .ep-grid { grid-template-columns: 1fr; }
@@ -1384,13 +1373,11 @@ a.drop-card { text-decoration: none; color: inherit; }
   .hero-actions { flex-direction: column; align-items: flex-start; }
   .btn-primary, .btn-ghost { width: 100%; text-align: center; }
   
-  /* PHILOSOPHY - watermark lebih kecil di ponsel */
   #philosophy .phil-watermark {
     font-size: clamp(3rem, 15vw, 6rem);
     color: rgba(0, 0, 0, 0.10);
   }
   
-  /* ABOUT - logo tidak kepotong di ponsel */
   .about-visual {
     aspect-ratio: 1/1;
     padding: 30px;
@@ -1412,9 +1399,6 @@ a.drop-card { text-decoration: none; color: inherit; }
   .care-grid { grid-template-columns: 1fr; }
 }
 
-/* ───────────────────────────────────────────
-   REDUCED MOTION
-   ─────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation: none !important;
