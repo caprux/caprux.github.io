@@ -16,6 +16,12 @@ const PRODUCTS = [
     price: 'Rp 189.000',
     status: 'soon',
     image: 'Kaos_Oblong_CAPRUX.png',
+    images: [
+      'Kaos_Oblong_CAPRUX.png',
+      'Kaos_Oblong_CAPRUX_2.png',
+      'Kaos_Oblong_CAPRUX_3.png',
+      'Kaos_Oblong_CAPRUX_4.png'
+    ],
     type: 'Kaos Oblong Premium',
     tag: '// Micro Cotton Danbowl · PRODUK 001',
     fullDesc: 'Kaos oblong premium dengan bahan <strong>Micro Cotton Danbowl</strong> — lembut, adem, dan breathable untuk iklim tropis. Logo <strong>Polyflex 3D Silicon 1mm</strong> timbul, bukan sablon biasa. Setiap detail dibuat tanpa kompromi.',
@@ -74,6 +80,12 @@ const PRODUCTS = [
     price: 'Rp 289.750',
     status: 'soon',
     image: 'Jaket_Crincle_CAPRUX.png',
+    images: [
+      'Jaket_Crincle_CAPRUX.png',
+      'Jaket_Crincle_CAPRUX_2.png',
+      'Jaket_Crincle_CAPRUX_3.png',
+      'Jaket_Crincle_CAPRUX_4.png'
+    ],
     type: 'Jaket Gunung Sporty',
     tag: '// Parasut Crincle · PRODUK 002',
     fullDesc: 'Jaket outdoor dari bahan <strong>Parasut Crincle</strong> — ringan, tahan angin, dan tetap stylish di jalur gunung maupun jalanan kota. Potongan <strong>model gunung</strong> yang fungsional tanpa kehilangan estetika streetwear CAPRUX.',
@@ -132,6 +144,12 @@ const PRODUCTS = [
     price: 'Rp 239.750',
     status: 'soon',
     image: 'Celana_Pendek_CAPRUX.png',
+    images: [
+      'Celana_Pendek_CAPRUX.png',
+      'Celana_Pendek_CAPRUX_2.png',
+      'Celana_Pendek_CAPRUX_3.png',
+      'Celana_Pendek_CAPRUX_4.png'
+    ],
     type: 'Celana Pendek Men\'s',
     tag: '// The Short Circuit · Produk 003',
     fullDesc: 'Celana pendek dari bahan <strong>Nilon Ripstop</strong> — kuat, tahan sobek, dan ringan. Dibuat khusus untuk pria yang bergerak. <strong>For men only. No Boti.</strong> Saku dalam yang fungsional, potongan yang tidak membatasi gerak.',
@@ -194,6 +212,12 @@ const PRODUCTS = [
   //   price: 'Rp 999.000',
   //   status: 'soon',
   //   image: 'nama_gambar.png',
+  //   images: [
+  //     'nama_gambar.png',
+  //     'nama_gambar_2.png',
+  //     'nama_gambar_3.png',
+  //     'nama_gambar_4.png'
+  //   ],
   //   type: 'Jenis Produk',
   //   tag: '// Bahan · PRODUK 004',
   //   fullDesc: 'Deskripsi lengkap dengan <strong>HTML</strong>.',
@@ -267,7 +291,7 @@ function renderProducts() {
 }
 
 // ================================================================
-// RENDER PRODUCT DETAIL (product.html)
+// RENDER PRODUCT DETAIL (product.html) — DENGAN MULTIPLE IMAGES
 // ================================================================
 function renderProductDetail() {
   const params = new URLSearchParams(window.location.search);
@@ -285,17 +309,21 @@ function renderProductDetail() {
     return;
   }
   
-  // Title
   document.title = `${product.name} — CAPRUX`;
   
   // Breadcrumb
   const bcCur = document.querySelector('.bc-cur');
   if (bcCur) bcCur.textContent = product.name;
   
-  // Gallery
+  // ============================================================
+  // GALLERY — support multiple images
+  // ============================================================
+  const images = product.images || [product.image];
+  
+  // Main image
   const mainImg = document.getElementById('mainImg');
   if (mainImg) {
-    mainImg.src = product.image;
+    mainImg.src = images[0] || product.image;
     mainImg.alt = product.name;
   }
   
@@ -306,14 +334,18 @@ function renderProductDetail() {
   const thumbs = document.querySelectorAll('.thumb');
   thumbs.forEach((thumb, i) => {
     const img = thumb.querySelector('img');
+    const imgSrc = images[i % images.length] || images[0] || product.image;
     if (img) {
-      img.src = product.image;
+      img.src = imgSrc;
       img.alt = product.name;
     }
-    thumb.onclick = function() { switchImg(this, product.image); };
+    thumb.className = 'thumb' + (i === 0 ? ' active' : '');
+    thumb.onclick = function() { switchImg(this, imgSrc); };
   });
   
-  // Info
+  // ============================================================
+  // INFO
+  // ============================================================
   const eyebrow = document.querySelector('.prod-eyebrow');
   if (eyebrow) eyebrow.textContent = product.tag;
   
@@ -427,7 +459,7 @@ function closeMenu() {
 }
 
 // ================================================================
-// GALLERY
+// GALLERY — Switch gambar
 // ================================================================
 function switchImg(thumb, src) {
   const mainImg = document.getElementById('mainImg');
@@ -474,7 +506,7 @@ function handleNotify() {
 }
 
 // ================================================================
-// INIT — JALANKAN SAAT DOM SIAP
+// INIT
 // ================================================================
 document.addEventListener('DOMContentLoaded', function() {
   const isProductPage = window.location.pathname.includes('product.html');
