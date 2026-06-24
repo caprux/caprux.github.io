@@ -13,7 +13,7 @@ const PRODUCTS = [
     name: 'THE TROPICAL SOUL',
     badge: '// Micro Cotton Danbowl',
     desc: 'Polyflex 3D logo silicon 1mm.',
-    price: 'Rp 189.000',
+    price: 'Rp 175.750',
     status: 'soon',
     image: 'Kaos_Oblong_CAPRUX.png',
     images: [
@@ -56,11 +56,9 @@ const PRODUCTS = [
     sizeGuide: {
       headers: ['Size', 'Lingkar Dada (cm)', 'Panjang Badan (cm)', 'Lebar Bahu (cm)', 'Panjang Lengan (cm)'],
       rows: [
-        ['S', '88–92', '67', '42', '19'],
         ['M', '92–96', '70', '44', '20'],
         ['L', '96–100', '73', '46', '21'],
-        ['XL', '100–104', '76', '48', '22'],
-        ['XXL', '104–108', '79', '50', '23']
+        ['XL', '100–104', '76', '48', '22']
       ]
     },
     care: [
@@ -74,7 +72,7 @@ const PRODUCTS = [
   },
   {
     id: 'jaket-crincle',
-    name: 'THE WIND BLOCKER',
+    name: 'THE VOLCANIC SOUL',
     badge: '// Parasut Crincle',
     desc: 'Model Gunung. Bahan Sporty.',
     price: 'Rp 289.750',
@@ -120,11 +118,9 @@ const PRODUCTS = [
     sizeGuide: {
       headers: ['Size', 'Lingkar Dada (cm)', 'Panjang Badan (cm)', 'Lebar Bahu (cm)', 'Panjang Lengan (cm)'],
       rows: [
-        ['S', '92–96', '65', '44', '60'],
         ['M', '96–100', '68', '46', '62'],
         ['L', '100–104', '71', '48', '64'],
-        ['XL', '104–108', '74', '50', '66'],
-        ['XXL', '108–112', '77', '52', '68']
+        ['XL', '104–108', '74', '50', '66']
       ]
     },
     care: [
@@ -138,10 +134,10 @@ const PRODUCTS = [
   },
   {
     id: 'celana-pendek',
-    name: 'NILON RIPSTOP',
-    badge: '// The Short Circuit',
+    name: 'THE ARCHIPELAGO SOUL',
+    badge: '// Nillon Ripstop',
     desc: 'For men only. No Boti.',
-    price: 'Rp 239.750',
+    price: 'Rp 225.750',
     status: 'soon',
     image: 'Celana_Pendek_CAPRUX.png',
     images: [
@@ -183,11 +179,9 @@ const PRODUCTS = [
     sizeGuide: {
       headers: ['Size', 'Lingkar Pinggang (cm)', 'Lingkar Pinggul (cm)', 'Panjang Celana (cm)', 'Paha (cm)'],
       rows: [
-        ['S', '70–74', '88–92', '48', '56'],
         ['M', '74–78', '92–96', '50', '58'],
         ['L', '78–82', '96–100', '52', '60'],
-        ['XL', '82–86', '100–104', '54', '62'],
-        ['XXL', '86–90', '104–108', '56', '64']
+        ['XL', '82–86', '100–104', '54', '62']
       ]
     },
     care: [
