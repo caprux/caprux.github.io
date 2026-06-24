@@ -588,19 +588,60 @@ a.drop-card { text-decoration: none; color: inherit; }
   text-align: center;
   position: relative;
   overflow: hidden;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
-#philosophy::before {
-  content: 'CAPRUX';
+
+/* Background watermark "CAPRUX" */
+#philosophy .phil-watermark {
   position: absolute;
-  top: 50%; left: 50%;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
   font-family: var(--font-head);
   font-weight: 900;
-  font-size: clamp(5rem, 22vw, 16rem);
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(0,0,0,.07);
+  font-size: clamp(6rem, 25vw, 18rem);
+  color: rgba(0, 0, 0, 0.06);
   white-space: nowrap;
   pointer-events: none;
+  user-select: none;
+  letter-spacing: 0.05em;
+  z-index: 0;
+}
+
+#philosophy .phil-label,
+#philosophy .phil-quote,
+#philosophy .phil-sub {
+  position: relative;
+  z-index: 1;
+}
+
+.phil-label {
+  font-family: var(--font-mono);
+  font-size: clamp(.62rem, .8vw, .7rem);
+  letter-spacing: .35em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,.45);
+  margin-bottom: 16px;
+}
+.phil-quote {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: clamp(2rem, 7vw, 5.5rem);
+  line-height: .95;
+  color: var(--black);
+  letter-spacing: -.03em;
+}
+.phil-sub {
+  margin-top: 18px;
+  font-family: var(--font-mono);
+  font-size: clamp(.62rem, .8vw, .78rem);
+  letter-spacing: .18em;
+  color: rgba(0,0,0,.5);
+  text-transform: uppercase;
 }
 .phil-label {
   font-family: var(--font-mono);
