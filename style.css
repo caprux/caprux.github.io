@@ -609,7 +609,7 @@ a.drop-card { text-decoration: none; color: inherit; }
   pointer-events: none;
   user-select: none;
   letter-spacing: 0.05em;
-  z-index: 0; /* ← DI BELAKANG */
+  z-index: 0;
 }
 
 /* Semua konten di ATAS watermark (z-index: 1) */
@@ -617,7 +617,7 @@ a.drop-card { text-decoration: none; color: inherit; }
 #philosophy .phil-quote,
 #philosophy .phil-sub {
   position: relative;
-  z-index: 1; /* ← DI ATAS */
+  z-index: 1;
 }
 
 .phil-label {
@@ -663,12 +663,19 @@ a.drop-card { text-decoration: none; color: inherit; }
   align-items: center;
   justify-content: center;
 }
+
+/* LOGO — LEBIH JELAS */
 .about-logo-float {
   width: 65%;
-  opacity: .12;
+  opacity: 0.85;
   animation: float-logo 6s ease-in-out infinite;
-  filter: drop-shadow(0 0 30px #00ff00);
+  filter: drop-shadow(0 0 30px rgba(0,255,0,0.2));
+  transition: opacity 0.3s ease;
 }
+.about-logo-float:hover {
+  opacity: 1;
+}
+
 @keyframes float-logo {
   0%, 100% { transform: translateY(0) rotate(-3deg); }
   50%       { transform: translateY(-18px) rotate(3deg); }
@@ -1377,7 +1384,7 @@ a.drop-card { text-decoration: none; color: inherit; }
   #home::before, #home::after { width: 22px; height: 22px; }
   .hero-actions { flex-direction: column; align-items: flex-start; }
   .btn-primary, .btn-ghost { width: 100%; text-align: center; }
-  #philosophy::before { display: none; }
+  .phil-watermark { display: none; }
   footer { flex-direction: column; align-items: center; text-align: center; }
   .f-copy { order: 2; }
   .f-socials { order: 3; }
