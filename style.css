@@ -580,7 +580,7 @@ a.drop-card { text-decoration: none; color: inherit; }
 .s-sold { color: var(--grey); border-color: var(--grey); }
 
 /* ───────────────────────────────────────────
-   PHILOSOPHY
+   PHILOSOPHY — FIXED (Watermark di BELAKANG)
    ─────────────────────────────────────────── */
 #philosophy {
   background: var(--green);
@@ -595,7 +595,7 @@ a.drop-card { text-decoration: none; color: inherit; }
   justify-content: center;
 }
 
-/* Background watermark "CAPRUX" */
+/* WATERMARK — di BELAKANG (z-index: 0) */
 #philosophy .phil-watermark {
   position: absolute;
   top: 50%;
@@ -604,19 +604,20 @@ a.drop-card { text-decoration: none; color: inherit; }
   font-family: var(--font-head);
   font-weight: 900;
   font-size: clamp(6rem, 25vw, 18rem);
-  color: rgba(0, 0, 0, 0.06);
+  color: rgba(0, 0, 0, 0.05);
   white-space: nowrap;
   pointer-events: none;
   user-select: none;
   letter-spacing: 0.05em;
-  z-index: 0;
+  z-index: 0; /* ← DI BELAKANG */
 }
 
+/* Semua konten di ATAS watermark (z-index: 1) */
 #philosophy .phil-label,
 #philosophy .phil-quote,
 #philosophy .phil-sub {
   position: relative;
-  z-index: 1;
+  z-index: 1; /* ← DI ATAS */
 }
 
 .phil-label {
@@ -642,33 +643,6 @@ a.drop-card { text-decoration: none; color: inherit; }
   letter-spacing: .18em;
   color: rgba(0,0,0,.5);
   text-transform: uppercase;
-}
-.phil-label {
-  font-family: var(--font-mono);
-  font-size: clamp(.62rem, .8vw, .7rem);
-  letter-spacing: .35em;
-  text-transform: uppercase;
-  color: rgba(0,0,0,.45);
-  margin-bottom: 16px;
-  position: relative;
-}
-.phil-quote {
-  font-family: var(--font-head);
-  font-weight: 900;
-  font-size: clamp(2rem, 7vw, 5.5rem);
-  line-height: .95;
-  color: var(--black);
-  letter-spacing: -.03em;
-  position: relative;
-}
-.phil-sub {
-  margin-top: 18px;
-  font-family: var(--font-mono);
-  font-size: clamp(.62rem, .8vw, .78rem);
-  letter-spacing: .18em;
-  color: rgba(0,0,0,.5);
-  text-transform: uppercase;
-  position: relative;
 }
 
 /* ───────────────────────────────────────────
