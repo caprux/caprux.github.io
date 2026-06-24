@@ -12,25 +12,25 @@ const PRODUCTS = [
     name:   'THE TROPICAL SOUL',
     badge:  '// Micro Cotton Danbowl',
     desc:   'Polyflex 3D logo silicon 1mm.',
-    price:  'Rp 189.000',
+    price:  'Rp 135.750',
     status: 'soon',                        // 'soon' | 'open' | 'sold'
     image:  'Kaos_Oblong_CAPRUX.png'
   },
   {
     id:     'jaket-crincle',
-    name:   'THE WIND BLOCKER',
+    name:   'THE VOLCANIC SOUL',
     badge:  '// Parasut Crincle',
     desc:   'Model Gunung. Bahan Sporty.',
-    price:  'Rp 289.750',
+    price:  'Rp 245.750',
     status: 'soon',
     image:  'Jaket_Crincle_CAPRUX.png'
   },
   {
     id:     'celana-pendek',
-    name:   'NILON RIPSTOP',
-    badge:  '// The Short Circuit',
+    name:   'The ARCHIPELAGO SOUL',
+    badge:  '// Nilon Ripstop',
     desc:   'For men only. No Boti.',
-    price:  'Rp 239.750',
+    price:  'Rp 185.750',
     status: 'soon',
     image:  'Celana_Pendek_CAPRUX.png'
   }
