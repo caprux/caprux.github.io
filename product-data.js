@@ -63,7 +63,7 @@ const products = [
 
   {
     id: 'jaket-crincle',
-    name: 'THE WIND BLOCKER',
+    name: 'THE VOLCANIC SOUL',
     type: 'Jaket Gunung Sporty',
     tag: '// Parasut Crincle · PRODUK 002',
     price: 'Rp 289.750',
