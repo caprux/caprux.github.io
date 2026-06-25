@@ -14,7 +14,8 @@ const PRODUCTS = [
     badge: '// Micro Cotton Danbowl',
     desc: 'Polyflex 3D logo silicon 1mm.',
     price: 'Rp 175.750',
-    status: 'soon',
+    status: 'open',
+    shopeeUrl: 'https://id.shp.ee/kc8YJcLh',
     image: 'Kaos_Oblong_CAPRUX.png',
     images: [
       'Kaos_Oblong_CAPRUX.png',
@@ -245,7 +246,7 @@ const PRODUCTS = [
 // ================================================================
 const STATUS_LABEL = {
   soon: 'Coming Soon',
-  open: 'Tersedia',
+  open: '✓ Tersedia',
   sold: 'Habis'
 };
 
@@ -356,6 +357,29 @@ function renderProductDetail() {
   if (statusEl) {
     statusEl.textContent = STATUS_LABEL[product.status] || product.status;
     statusEl.className = `status s-${product.status}`;
+  }
+  
+  // CTA — kalau open & ada shopeeUrl, aktifkan tombol beli ke Shopee
+  const ctaBtn = document.querySelector('.cta-block .btn-primary');
+  if (ctaBtn) {
+    if (product.status === 'open' && product.shopeeUrl) {
+      ctaBtn.textContent = '🛒 Beli Sekarang di Shopee';
+      ctaBtn.removeAttribute('disabled');
+      ctaBtn.style.cursor = 'pointer';
+      ctaBtn.onclick = function() { window.open(product.shopeeUrl, '_blank'); };
+    } else if (product.status === 'sold') {
+      ctaBtn.textContent = '✕ Stok Habis';
+      ctaBtn.setAttribute('disabled', 'true');
+    } else {
+      ctaBtn.textContent = '⚡ Notify Me — Coming Soon';
+      ctaBtn.setAttribute('disabled', 'true');
+    }
+  }
+  
+  // Sembunyikan notify block kalau produk sudah open
+  const notifyBlock = document.querySelector('.notify-block');
+  if (notifyBlock && product.status === 'open') {
+    notifyBlock.style.display = 'none';
   }
   
   const descEl = document.querySelector('.prod-desc');

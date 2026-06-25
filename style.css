@@ -621,7 +621,7 @@ a.drop-card { text-decoration: none; color: inherit; }
   margin-bottom: 16px;
 }
 .phil-quote {
-  font-family: var(--font-head);
+  font-family: var(--font-mono);
   font-weight: 900;
   font-size: clamp(2rem, 7vw, 5.5rem);
   line-height: .95;
