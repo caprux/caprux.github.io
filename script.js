@@ -26,8 +26,8 @@ const PRODUCTS = [
     tag: '// Micro Cotton Danbowl · PRODUK 001',
     fullDesc: 'Kaos oblong premium dengan bahan <strong>Micro Cotton Danbowl</strong> — lembut, adem, dan breathable untuk iklim tropis. Logo <strong>Polyflex 3D Silicon 1mm</strong> timbul, bukan sablon biasa. Setiap detail dibuat tanpa kompromi.',
     specs: [
-      { label: 'Bahan', value: 'Micro Cotton Danbowl' },
-      { label: 'Gramasi', value: '220 gsm' },
+      { label: 'Bahan', value: 'Micro Cotton' },
+      { label: 'Gramasi', value: '210 gsm' },
       { label: 'Logo', value: 'Polyflex 3D Silicon 1mm' },
       { label: 'Label', value: 'Woven label neon green hem' },
       { label: 'Potongan', value: 'Regular fit' },
@@ -35,8 +35,8 @@ const PRODUCTS = [
     ],
     details: [
       { title: '// Bahan & Konstruksi', items: [
-        'Micro Cotton Danbowl 220 gsm',
-        'Pre-shrunk, anti-pilling',
+        'Micro Cotton Danbowl 210 gsm',
+        'Lembut, Nyaman, Anti Gerah',
         'Jahitan rantai double needle di bahu',
         'Kerah ribbed 1×1 dengan elastane',
         'Side seam untuk struktur tubuh lebih baik'
@@ -45,20 +45,20 @@ const PRODUCTS = [
         'Polyflex 3D Silicon 1mm — timbul, tidak retak',
         'Woven label CAPRUX di hem kiri bawah (neon green)',
         'Heat transfer size label di leher dalam',
-        'Tidak ada sablon biasa — semua taktil'
+        'Disablon DTF manual'
       ]},
       { title: '// Filosofi Produk Ini', items: [
-        'Terinspirasi dari panas Baleendah yang menyengat',
-        '"Tropical Soul" — jiwa yang tahan banting di iklim apapun',
-        'Limited batch, tidak ada restock setelah habis'
+        'Terinspirasi dari panas Bumi yang menyengat',
+        '"The Tropical Soul" — sensasi alam indonesia pinggir pantai',
+        'Limited product, tidak ada restock setelah habis'
       ]}
     ],
     sizeGuide: {
-      headers: ['Size', 'Lingkar Dada (cm)', 'Panjang Badan (cm)', 'Lebar Bahu (cm)', 'Panjang Lengan (cm)'],
+      headers: ['Size', 'Panjang Badan (cm)', 'Lebar Bahu (cm)','Panjang Lengan (cm)'],
       rows: [
-        ['M', '92–96', '70', '44', '20'],
-        ['L', '96–100', '73', '46', '21'],
-        ['XL', '100–104', '76', '48', '22']
+        ['M', '70', '52', '20'],
+        ['L', '72', '53', '21'],
+        ['XL', '74', '54', '22']
       ]
     },
     care: [
