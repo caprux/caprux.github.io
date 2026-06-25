@@ -18,10 +18,10 @@ const PRODUCTS = [
     shopeeUrl: 'https://id.shp.ee/kc8YJcLh',
     image: 'Kaos_Oblong_CAPRUX.png',
     images: [
-      'Kaos_Oblong_CAPRUX.png',
-      'Kaos_Oblong_CAPRUX_2.png',
-      'Kaos_Oblong_CAPRUX_3.png',
-      'Kaos_Oblong_CAPRUX_4.png'
+      'CPRX-06-SB.png',
+      'CPRX-06-BK.png',
+      'CPRX-04-SB.png',
+      'CPRX-04-BK.png'
     ],
     type: 'Kaos Oblong Premium',
     tag: '// Micro Cotton Danbowl · PRODUK 001',
