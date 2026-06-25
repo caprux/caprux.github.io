@@ -16,7 +16,7 @@ const PRODUCTS = [
     price: 'Rp 175.750',
     status: 'open',
     shopeeUrl: 'https://id.shp.ee/kc8YJcLh',
-    image: 'Kaos_Oblong_CAPRUX.png',
+    image: 'CPRX-06-SB.png',
     images: [
       'CPRX-06-SB.png',
       'CPRX-06-BK.png',
