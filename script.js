@@ -553,21 +553,4 @@ document.addEventListener('DOMContentLoaded', function() {
   window.addEventListener('resize', function() {
     if (window.innerWidth > 900) closeMenu();
   });
-
-  // ── INTRO VIDEO ──
-  const introOverlay = document.getElementById('introOverlay');
-  const introVideo   = document.getElementById('introVideo');
-  const introSkip    = document.getElementById('introSkip');
-
-  if (introOverlay && introVideo) {
-    function dismissIntro() {
-      introOverlay.classList.add('fade-out');
-      setTimeout(function() {
-        introOverlay.remove();
-      }, 800);
-    }
-    introVideo.addEventListener('ended', dismissIntro);
-    if (introSkip) introSkip.addEventListener('click', dismissIntro);
-    introVideo.addEventListener('error', dismissIntro);
-  }
 });
