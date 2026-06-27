@@ -554,17 +554,109 @@ document.addEventListener('DOMContentLoaded', function() {
     if (window.innerWidth > 900) closeMenu();
   });
 
-  // ── INTRO OVERLAY ──
-  const introOverlay = document.getElementById('introOverlay');
-  const introSkip    = document.getElementById('introSkip');
+  // ── LIGHTNING INTRO ──
+  (function() {
+    var overlay  = document.getElementById('introOverlay');
+    var cnv      = document.getElementById('introCanvas');
+    var fl       = document.getElementById('introFlash');
+    var skipBtn  = document.getElementById('introSkip');
+    if (!overlay || !cnv) return;
 
-  function dismissIntro() {
-    if (!introOverlay) return;
-    introOverlay.classList.add('fade-out');
-    setTimeout(function() { introOverlay.remove(); }, 950);
-  }
+    var ctx = cnv.getContext('2d');
+    var dismissed = false;
+    var startTime = Date.now();
+    var totalDur  = 6200;
 
-  if (introSkip) introSkip.addEventListener('click', dismissIntro);
-  // Auto dismiss setelah 6 detik (0.8s delay + 5s progress)
-  setTimeout(dismissIntro, 6000);
+    function resize() {
+      cnv.width  = overlay.offsetWidth;
+      cnv.height = overlay.offsetHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    function rnd(a, b) { return a + Math.random() * (b - a); }
+
+    function drawBolt(x1, y1, x2, y2, rough, depth, alpha, w) {
+      if (depth <= 0) return;
+      var mx = (x1 + x2) / 2 + rnd(-rough, rough);
+      var my = (y1 + y2) / 2 + rnd(-rough, rough);
+      if (depth === 1) {
+        ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(mx, my); ctx.lineTo(x2, y2);
+        ctx.strokeStyle = 'rgba(0,255,0,' + alpha + ')';
+        ctx.lineWidth   = w;
+        ctx.shadowColor = '#00ff00';
+        ctx.shadowBlur  = w * 7;
+        ctx.stroke();
+        ctx.shadowBlur  = 0;
+        if (Math.random() < 0.4) {
+          var bx = mx + rnd(-70, 70), by = my + rnd(20, 90);
+          ctx.beginPath(); ctx.moveTo(mx, my); ctx.lineTo(bx, by);
+          ctx.strokeStyle = 'rgba(0,255,0,' + (alpha * 0.45) + ')';
+          ctx.lineWidth   = w * 0.4;
+          ctx.shadowBlur  = 4; ctx.shadowColor = '#00ff00';
+          ctx.stroke(); ctx.shadowBlur = 0;
+        }
+      } else {
+        drawBolt(x1, y1, mx, my, rough / 1.6, depth - 1, alpha, w);
+        drawBolt(mx, my, x2, y2, rough / 1.6, depth - 1, alpha, w);
+      }
+    }
+
+    function doFlash(str) {
+      fl.style.transition = 'opacity 0.03s';
+      fl.style.opacity = String(Math.min(str * 0.13, 0.18));
+      setTimeout(function() { fl.style.transition = 'opacity 0.2s'; fl.style.opacity = '0'; }, 55);
+    }
+
+    function strike(intensity) {
+      ctx.clearRect(0, 0, cnv.width, cnv.height);
+      var cx    = cnv.width / 2;
+      var count = 1 + Math.floor(intensity * 3);
+      for (var i = 0; i < count; i++) {
+        var side = Math.random() < 0.5 ? -1 : 1;
+        var sx   = cx + side * rnd(60, 200);
+        var ex   = cx + rnd(-60, 60);
+        var ey   = cnv.height / 2 + rnd(-40, 40);
+        var al   = rnd(0.7, 1);
+        var w    = rnd(0.8 + intensity, 1.8 + intensity * 1.5);
+        drawBolt(sx, 0, ex, ey, rnd(40, 100), 5, al, w);
+      }
+      if (intensity > 0.45 && Math.random() < intensity * 0.65) {
+        drawBolt(cx + rnd(-20, 20), 0, cx + rnd(-10, 10), cnv.height / 2 + rnd(-10, 10), rnd(30, 70), 5, 0.95, 1.2 + intensity);
+      }
+      doFlash(intensity);
+      var fade = 1;
+      var fadeOut = function() {
+        fade -= 0.07 + intensity * 0.04;
+        if (fade > 0) { ctx.globalAlpha = fade; requestAnimationFrame(fadeOut); }
+        else { ctx.globalAlpha = 1; ctx.clearRect(0, 0, cnv.width, cnv.height); }
+      };
+      setTimeout(function() { requestAnimationFrame(fadeOut); }, 60 + Math.floor((1 - intensity) * 60));
+    }
+
+    function scheduleNext() {
+      if (dismissed) return;
+      var t = Math.min((Date.now() - startTime) / totalDur, 1);
+      var minD = t < 0.3 ? 1400 : t < 0.6 ? 800 : t < 0.85 ? 280 : 80;
+      var maxD = t < 0.3 ? 2400 : t < 0.6 ? 1400 : t < 0.85 ? 550 : 180;
+      setTimeout(function() {
+        if (!dismissed) { strike(t); scheduleNext(); }
+      }, rnd(minD, maxD));
+    }
+
+    function dismiss() {
+      if (dismissed) return;
+      dismissed = true;
+      strike(1); strike(1); strike(1);
+      doFlash(1);
+      setTimeout(function() {
+        overlay.classList.add('fade-out');
+        setTimeout(function() { overlay.remove(); }, 1000);
+      }, 100);
+    }
+
+    setTimeout(scheduleNext, 800);
+    setTimeout(dismiss, totalDur);
+    skipBtn.addEventListener('click', dismiss);
+  })();
 });
