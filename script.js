@@ -553,4 +553,18 @@ document.addEventListener('DOMContentLoaded', function() {
   window.addEventListener('resize', function() {
     if (window.innerWidth > 900) closeMenu();
   });
+
+  // ── INTRO OVERLAY ──
+  const introOverlay = document.getElementById('introOverlay');
+  const introSkip    = document.getElementById('introSkip');
+
+  function dismissIntro() {
+    if (!introOverlay) return;
+    introOverlay.classList.add('fade-out');
+    setTimeout(function() { introOverlay.remove(); }, 950);
+  }
+
+  if (introSkip) introSkip.addEventListener('click', dismissIntro);
+  // Auto dismiss setelah 6 detik (0.8s delay + 5s progress)
+  setTimeout(dismissIntro, 6000);
 });
