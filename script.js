@@ -267,28 +267,17 @@ function renderProducts() {
   // ── Legacy grid untuk product.html ──
   const grid = document.getElementById('productGrid');
   if (grid) {
-    grid.innerHTML = PRODUCTS.map(p => `
-      <a href="product.html?id=${p.id}" class="drop-card">
-        <div class="drop-card-img">
-          <img src="${p.image}" alt="${p.name}" loading="lazy">
-        </div>
-        <div class="drop-body">
-          <div class="drop-badge">${p.badge}</div>
-          <div class="drop-name">${p.name}</div>
-          <div class="drop-desc">${p.desc}</div>
-          <div class="drop-foot">
-            <span class="drop-price">${p.price}</span>
-            <span class="drop-status s-${p.status}">${STATUS_LABEL[p.status] || p.status}</span>
-          </div>
-        </div>
-      </a>
-    `).join('');
+    grid.style.display = 'none'; // sembunyikan grid lama, carousel yang tampil
   }
 
   // ── Carousel untuk index.html ──
   const outer    = document.getElementById('productCarousel');
   const dotsWrap = document.getElementById('carouselDots');
   if (!outer || !dotsWrap) return;
+
+  // Tampilkan wrapper carousel
+  const carouselWrap = outer.closest('.carousel-wrap');
+  if (carouselWrap) carouselWrap.style.display = 'flex';
 
   let activeIdx = 0;
 
