@@ -11,9 +11,9 @@ const PRODUCTS = [
   {
     id: 'kaos-oblong',
     name: 'THE TROPICAL SOUL',
-    badge: '// Micro Cotton Danbowl',
+    badge: '// Micro Cotton',
     desc: 'Polyflex 3D logo silicon 1mm.',
-    price: 'Rp 175.750',
+    price: 'Rp 148.600 - Rp 156.600 ',
     status: 'open',
     shopeeUrl: 'https://id.shp.ee/kc8YJcLh',
     image: 'CPRX-06-SB.png',
@@ -24,19 +24,19 @@ const PRODUCTS = [
       'CPRX-04-BK.png'
     ],
     type: 'Kaos Oblong Premium',
-    tag: '// Micro Cotton Danbowl · PRODUK 001',
-    fullDesc: 'Kaos oblong premium dengan bahan <strong>Micro Cotton Danbowl</strong> — lembut, adem, dan breathable untuk iklim tropis. Logo <strong>Polyflex 3D Silicon 1mm</strong> timbul, bukan sablon biasa. Setiap detail dibuat tanpa kompromi.',
+    tag: '// Micro Cotton · PRODUK 001',
+    fullDesc: 'Kaos basic dengan bahan <strong>Micro Cotton</strong> — lembut, adem, dan breathable untuk iklim tropis. Logo <strong>Polyflex 3D Silicon 1mm</strong> timbul, bukan sablon biasa. Setiap detail dibuat tanpa kompromi.',
     specs: [
       { label: 'Bahan', value: 'Micro Cotton' },
       { label: 'Gramasi', value: '210 gsm' },
       { label: 'Logo', value: 'Polyflex 3D Silicon 1mm' },
       { label: 'Label', value: 'Woven label neon green hem' },
-      { label: 'Potongan', value: 'Regular fit' },
+      { label: 'Potongan', value: 'Regular Basic' },
       { label: 'Origin', value: 'Made in Jawabarat 🇮🇩' }
     ],
     details: [
       { title: '// Bahan & Konstruksi', items: [
-        'Micro Cotton Danbowl 210 gsm',
+        'Micro Cotton 210 gsm',
         'Lembut, Nyaman, Anti Gerah',
         'Jahitan rantai double needle di bahu',
         'Kerah ribbed 1×1 dengan elastane',
