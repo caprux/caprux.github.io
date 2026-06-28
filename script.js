@@ -264,7 +264,7 @@ function getRelatedProducts(id) {
 // RENDER PRODUCT GRID (index.html)
 // ================================================================
 function renderProducts() {
-  // Legacy grid (product pages etc)
+  // ── Legacy grid untuk product.html ──
   const grid = document.getElementById('productGrid');
   if (grid) {
     grid.innerHTML = PRODUCTS.map(p => `
@@ -285,120 +285,89 @@ function renderProducts() {
     `).join('');
   }
 
-  // ── CAROUSEL (index.html) ──
-  const track = document.getElementById('productCarousel');
+  // ── Carousel untuk index.html ──
+  const outer    = document.getElementById('productCarousel');
   const dotsWrap = document.getElementById('carouselDots');
-  if (!track || !dotsWrap) return;
+  if (!outer || !dotsWrap) return;
 
-  let activeIdx = Math.floor(PRODUCTS.length / 2);
+  let activeIdx = 0;
 
-  function getCardClass(i) {
-    const d = Math.abs(i - activeIdx);
+  function getClass(i) {
+    const d = i - activeIdx;
     if (d === 0) return 'active';
-    if (d === 1) return 'side';
+    if (d === 1 || d === -1) return 'side';
     return 'far';
   }
 
-  function buildCards() {
-    track.innerHTML = PRODUCTS.map((p, i) => `
-      <div class="pcard ${getCardClass(i)}" data-idx="${i}">
-        ${p.image
-          ? `<img class="pcard-img" src="${p.image}" alt="${p.name}" loading="lazy">`
-          : `<div class="pcard-placeholder"><span>CPX</span></div>`
-        }
-        <div class="pcard-body">
-          <div class="pcard-badge">${p.badge}</div>
-          <div class="pcard-name">${p.name}</div>
-          <div class="pcard-price">${p.price}</div>
-        </div>
+  // Build HTML
+  outer.innerHTML = PRODUCTS.map((p, i) => `
+    <div class="pcard ${getClass(i)}" data-idx="${i}">
+      ${p.image
+        ? `<img class="pcard-img" src="${p.image}" alt="${p.name}" loading="lazy">`
+        : `<div class="pcard-placeholder"><span>CPX</span></div>`}
+      <div class="pcard-body">
+        <div class="pcard-badge">${p.badge}</div>
+        <div class="pcard-name">${p.name}</div>
+        <div class="pcard-price">${p.price}</div>
       </div>
-    `).join('');
+    </div>
+  `).join('');
 
-    dotsWrap.innerHTML = PRODUCTS.map((_, i) =>
-      `<div class="carousel-dot ${i === activeIdx ? 'active' : ''}" data-idx="${i}"></div>`
-    ).join('');
-
-    bindCarouselEvents();
-  }
+  dotsWrap.innerHTML = PRODUCTS.map((_, i) =>
+    `<div class="carousel-dot${i === activeIdx ? ' active' : ''}" data-idx="${i}"></div>`
+  ).join('');
 
   function setActive(idx) {
+    const prev = activeIdx;
     activeIdx = Math.max(0, Math.min(PRODUCTS.length - 1, idx));
-    const cards = track.querySelectorAll('.pcard');
-    const dots  = dotsWrap.querySelectorAll('.carousel-dot');
+    if (prev === activeIdx) return;
 
-    cards.forEach((c, i) => {
-      c.className = 'pcard ' + getCardClass(i);
+    outer.querySelectorAll('.pcard').forEach((c, i) => {
+      c.className = 'pcard ' + getClass(i);
     });
-    dots.forEach((d, i) => {
+    dotsWrap.querySelectorAll('.carousel-dot').forEach((d, i) => {
       d.classList.toggle('active', i === activeIdx);
     });
-
-    scrollToActive(cards[activeIdx]);
-
-    // navigate on active click
-    const p = PRODUCTS[activeIdx];
-    if (p && p.id) {
-      cards[activeIdx].onclick = () => { window.location.href = 'product.html?id=' + p.id; };
-    }
   }
 
-  function scrollToActive(card) {
-    if (!card) return;
-    const outer = track.parentElement;
-    const outerW = outer.offsetWidth;
-    const cardL  = card.offsetLeft;
-    const cardW  = card.offsetWidth;
-    const target = cardL - (outerW / 2) + (cardW / 2);
-    track.style.transition = 'transform .5s cubic-bezier(0.25,0.46,0.45,0.94)';
-    track.style.transform  = `translateX(${-target}px)`;
-  }
-
-  function bindCarouselEvents() {
-    // click on card
-    track.querySelectorAll('.pcard').forEach((c, i) => {
-      c.addEventListener('click', () => {
-        if (i === activeIdx) {
-          const p = PRODUCTS[i];
-          if (p && p.id) window.location.href = 'product.html?id=' + p.id;
-        } else {
-          setActive(i);
-        }
-      });
-    });
-
-    // dot click
-    dotsWrap.querySelectorAll('.carousel-dot').forEach((d, i) => {
-      d.addEventListener('click', () => setActive(i));
-    });
-
-    // drag / swipe
-    let startX = 0, dragging = false;
-    const outer = track.parentElement;
-
-    outer.addEventListener('mousedown', e => {
-      dragging = true; startX = e.clientX;
-      track.style.transition = 'none';
-    });
-    document.addEventListener('mousemove', e => {
-      if (!dragging) return;
-      if (Math.abs(e.clientX - startX) > 44) {
-        dragging = false;
-        e.clientX - startX < 0 ? setActive(activeIdx + 1) : setActive(activeIdx - 1);
+  // Click cards
+  outer.querySelectorAll('.pcard').forEach((c, i) => {
+    c.addEventListener('click', () => {
+      if (i !== activeIdx) {
+        setActive(i);
+      } else {
+        const p = PRODUCTS[i];
+        if (p && p.id) window.location.href = 'product.html?id=' + p.id;
       }
     });
-    document.addEventListener('mouseup', () => { dragging = false; });
+  });
 
-    let tStart = 0;
-    outer.addEventListener('touchstart', e => { tStart = e.touches[0].clientX; }, { passive: true });
-    outer.addEventListener('touchend',   e => {
-      const dx = e.changedTouches[0].clientX - tStart;
-      if (Math.abs(dx) > 44) dx < 0 ? setActive(activeIdx + 1) : setActive(activeIdx - 1);
-    }, { passive: true });
-  }
+  // Click dots
+  dotsWrap.querySelectorAll('.carousel-dot').forEach((d, i) => {
+    d.addEventListener('click', () => setActive(i));
+  });
 
-  buildCards();
-  setTimeout(() => setActive(activeIdx), 80);
+  // Touch swipe
+  let tStart = 0;
+  outer.addEventListener('touchstart', e => { tStart = e.touches[0].clientX; }, { passive: true });
+  outer.addEventListener('touchend',   e => {
+    const dx = e.changedTouches[0].clientX - tStart;
+    if (Math.abs(dx) > 36) dx < 0 ? setActive(activeIdx + 1) : setActive(activeIdx - 1);
+  }, { passive: true });
+
+  // Mouse drag
+  let mStart = 0, dragging = false;
+  outer.addEventListener('mousedown', e => { dragging = true; mStart = e.clientX; });
+  document.addEventListener('mousemove', e => {
+    if (!dragging) return;
+    if (Math.abs(e.clientX - mStart) > 36) {
+      dragging = false;
+      e.clientX - mStart < 0 ? setActive(activeIdx + 1) : setActive(activeIdx - 1);
+    }
+  });
+  document.addEventListener('mouseup', () => { dragging = false; });
 }
+
 
 // ================================================================
 // RENDER PRODUCT DETAIL (product.html) — DENGAN MULTIPLE IMAGES
@@ -676,7 +645,6 @@ document.addEventListener('DOMContentLoaded', function() {
     var fl      = document.getElementById('introFlash');
     var skipBtn = document.getElementById('introSkip');
     if (!overlay || !cnv) return;
-
     var ctx = cnv.getContext('2d');
     var dismissed = false;
     var startTime = Date.now();
@@ -686,83 +654,62 @@ document.addEventListener('DOMContentLoaded', function() {
     resize();
     window.addEventListener('resize', resize);
 
-    function rnd(a, b) { return a + Math.random() * (b - a); }
+    function rnd(a,b){ return a + Math.random()*(b-a); }
 
-    function drawBolt(x1, y1, x2, y2, rough, depth, alpha, w) {
-      if (depth <= 0) return;
-      var mx = (x1 + x2) / 2 + rnd(-rough, rough);
-      var my = (y1 + y2) / 2 + rnd(-rough, rough);
-      if (depth === 1) {
-        ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(mx, my); ctx.lineTo(x2, y2);
-        ctx.strokeStyle = 'rgba(0,255,0,' + alpha + ')';
-        ctx.lineWidth   = w;
-        ctx.shadowColor = '#00ff00';
-        ctx.shadowBlur  = w * 7;
-        ctx.stroke();
-        ctx.shadowBlur  = 0;
-        if (Math.random() < 0.4) {
-          var bx = mx + rnd(-70, 70), by = my + rnd(20, 90);
-          ctx.beginPath(); ctx.moveTo(mx, my); ctx.lineTo(bx, by);
-          ctx.strokeStyle = 'rgba(0,255,0,' + (alpha * 0.45) + ')';
-          ctx.lineWidth   = w * 0.4;
-          ctx.shadowBlur  = 4; ctx.shadowColor = '#00ff00';
-          ctx.stroke(); ctx.shadowBlur = 0;
+    function drawBolt(x1,y1,x2,y2,rough,depth,alpha,w) {
+      if (depth<=0) return;
+      var mx=(x1+x2)/2+rnd(-rough,rough), my=(y1+y2)/2+rnd(-rough,rough);
+      if (depth===1) {
+        ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(mx,my); ctx.lineTo(x2,y2);
+        ctx.strokeStyle='rgba(0,255,0,'+alpha+')'; ctx.lineWidth=w;
+        ctx.shadowColor='#00ff00'; ctx.shadowBlur=w*7; ctx.stroke(); ctx.shadowBlur=0;
+        if (Math.random()<0.4) {
+          var bx=mx+rnd(-70,70), by=my+rnd(20,90);
+          ctx.beginPath(); ctx.moveTo(mx,my); ctx.lineTo(bx,by);
+          ctx.strokeStyle='rgba(0,255,0,'+(alpha*0.45)+')'; ctx.lineWidth=w*0.4;
+          ctx.shadowBlur=4; ctx.shadowColor='#00ff00'; ctx.stroke(); ctx.shadowBlur=0;
         }
       } else {
-        drawBolt(x1, y1, mx, my, rough / 1.6, depth - 1, alpha, w);
-        drawBolt(mx, my, x2, y2, rough / 1.6, depth - 1, alpha, w);
+        drawBolt(x1,y1,mx,my,rough/1.6,depth-1,alpha,w);
+        drawBolt(mx,my,x2,y2,rough/1.6,depth-1,alpha,w);
       }
     }
 
     function doFlash(str) {
-      fl.style.transition = 'opacity 0.03s';
-      fl.style.opacity = String(Math.min(str * 0.13, 0.18));
-      setTimeout(function() { fl.style.transition = 'opacity 0.2s'; fl.style.opacity = '0'; }, 55);
+      fl.style.transition='opacity 0.03s'; fl.style.opacity=String(Math.min(str*0.13,0.18));
+      setTimeout(function(){ fl.style.transition='opacity 0.2s'; fl.style.opacity='0'; },55);
     }
 
     function strike(intensity) {
-      ctx.clearRect(0, 0, cnv.width, cnv.height);
-      var cx = cnv.width / 2;
-      var count = 1 + Math.floor(intensity * 3);
-      for (var i = 0; i < count; i++) {
-        var side = Math.random() < 0.5 ? -1 : 1;
-        var sx = cx + side * rnd(60, 200);
-        var ex = cx + rnd(-60, 60);
-        var ey = cnv.height / 2 + rnd(-40, 40);
-        drawBolt(sx, 0, ex, ey, rnd(40, 100), 5, rnd(0.7, 1), rnd(0.8 + intensity, 1.8 + intensity * 1.5));
+      ctx.clearRect(0,0,cnv.width,cnv.height);
+      var cx=cnv.width/2, count=1+Math.floor(intensity*3);
+      for (var i=0;i<count;i++) {
+        var side=Math.random()<0.5?-1:1;
+        drawBolt(cx+side*rnd(60,200),0,cx+rnd(-60,60),cnv.height/2+rnd(-40,40),rnd(40,100),5,rnd(0.7,1),rnd(0.8+intensity,1.8+intensity*1.5));
       }
-      if (intensity > 0.45 && Math.random() < intensity * 0.65) {
-        drawBolt(cx + rnd(-20, 20), 0, cx + rnd(-10, 10), cnv.height / 2 + rnd(-10, 10), rnd(30, 70), 5, 0.95, 1.2 + intensity);
-      }
+      if (intensity>0.45&&Math.random()<intensity*0.65)
+        drawBolt(cx+rnd(-20,20),0,cx+rnd(-10,10),cnv.height/2+rnd(-10,10),rnd(30,70),5,0.95,1.2+intensity);
       doFlash(intensity);
-      var fade = 1;
-      var fadeOut = function() {
-        fade -= 0.07 + intensity * 0.04;
-        if (fade > 0) { ctx.globalAlpha = fade; requestAnimationFrame(fadeOut); }
-        else { ctx.globalAlpha = 1; ctx.clearRect(0, 0, cnv.width, cnv.height); }
-      };
-      setTimeout(function() { requestAnimationFrame(fadeOut); }, 60 + Math.floor((1 - intensity) * 60));
+      var fade=1;
+      var fo=function(){ fade-=0.07+intensity*0.04; if(fade>0){ctx.globalAlpha=fade;requestAnimationFrame(fo);}else{ctx.globalAlpha=1;ctx.clearRect(0,0,cnv.width,cnv.height);} };
+      setTimeout(function(){ requestAnimationFrame(fo); },60+Math.floor((1-intensity)*60));
     }
 
     function scheduleNext() {
       if (dismissed) return;
-      var t = Math.min((Date.now() - startTime) / totalDur, 1);
-      var minD = t < 0.3 ? 1400 : t < 0.6 ? 800 : t < 0.85 ? 280 : 80;
-      var maxD = t < 0.3 ? 2400 : t < 0.6 ? 1400 : t < 0.85 ? 550 : 180;
-      setTimeout(function() {
-        if (!dismissed) { strike(t); scheduleNext(); }
-      }, rnd(minD, maxD));
+      var t=Math.min((Date.now()-startTime)/totalDur,1);
+      var minD=t<0.3?1400:t<0.6?800:t<0.85?280:80;
+      var maxD=t<0.3?2400:t<0.6?1400:t<0.85?550:180;
+      setTimeout(function(){ if(!dismissed){strike(t);scheduleNext();} },rnd(minD,maxD));
     }
 
     function dismiss() {
-      if (dismissed) return;
-      dismissed = true;
-      strike(1); strike(1); strike(1);
-      doFlash(1);
-      setTimeout(function() {
+      if (dismissed) return; dismissed=true;
+      strike(1); strike(1); strike(1); doFlash(1);
+      setTimeout(function(){
         overlay.classList.add('fade-out');
-        setTimeout(function() { overlay.remove(); }, 1000);
-      }, 100);
+        setTimeout(function(){ overlay.remove(); },1000);
+      },100);
     }
 
     setTimeout(scheduleNext, 800);
