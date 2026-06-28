@@ -17,9 +17,10 @@
   --glow:     0 0 14px #00ff0099, 0 0 48px #00ff0033;
   --glow-sm:  0 0 8px #00ff0066;
   --pad-x:    clamp(16px, 5vw, 60px);
-  --font-head: 'Space Grotesk', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  --font-head: 'Rajdhani', sans-serif;
+  --font-body: 'Exo 2', sans-serif;
   --font-mono: 'Share Tech Mono', monospace;
+  --font-logo: 'Orbitron', sans-serif;
 }
 
 /* ───────────────────────────────────────────
@@ -57,49 +58,35 @@ a { text-decoration: none; color: inherit; }
    INTRO LIGHTNING OVERLAY
    ─────────────────────────────────────────── */
 .intro-overlay {
-  position: fixed;
-  inset: 0;
+  position: fixed; inset: 0;
   background: #000;
   z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: flex; align-items: center; justify-content: center;
   overflow: hidden;
   transition: opacity 1s ease;
 }
-.intro-overlay.fade-out {
-  opacity: 0;
-  pointer-events: none;
-}
+.intro-overlay.fade-out { opacity: 0; pointer-events: none; }
 .intro-grid {
-  position: absolute;
-  inset: 0;
+  position: absolute; inset: 0;
   background-image:
     linear-gradient(rgba(0,255,0,0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(0,255,0,0.03) 1px, transparent 1px);
   background-size: 48px 48px;
-  opacity: 0;
-  animation: iGridIn .6s ease forwards;
+  opacity: 0; animation: iGridIn .6s ease forwards;
 }
 @keyframes iGridIn { to { opacity: 1; } }
 .intro-scan {
-  position: absolute;
-  left: 0; right: 0;
+  position: absolute; left: 0; right: 0;
   height: 1px;
   background: linear-gradient(90deg, transparent, #00ff00, transparent);
   animation: iScan 2.2s linear infinite;
-  opacity: 0.2;
-  top: 0;
+  opacity: 0.2; top: 0;
 }
 @keyframes iScan { 0% { top: -2px; } 100% { top: 100%; } }
 .intro-corner {
-  position: absolute;
-  width: 28px;
-  height: 28px;
-  border-color: var(--green);
-  border-style: solid;
-  opacity: 0;
-  animation: iCorner .4s .3s ease forwards;
+  position: absolute; width: 28px; height: 28px;
+  border-color: var(--green); border-style: solid;
+  opacity: 0; animation: iCorner .4s .3s ease forwards;
 }
 .intro-corner.tl { top: 20px; left: 20px; border-width: 1.5px 0 0 1.5px; }
 .intro-corner.tr { top: 20px; right: 20px; border-width: 1.5px 1.5px 0 0; }
@@ -107,75 +94,48 @@ a { text-decoration: none; color: inherit; }
 .intro-corner.br { bottom: 48px; right: 20px; border-width: 0 1.5px 1.5px 0; }
 @keyframes iCorner { to { opacity: 1; } }
 .intro-canvas {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  width: 100%;
-  height: 100%;
+  position: absolute; inset: 0;
+  pointer-events: none; width: 100%; height: 100%;
 }
 .intro-flash {
-  position: absolute;
-  inset: 0;
-  background: #00ff00;
-  opacity: 0;
-  pointer-events: none;
-  z-index: 5;
+  position: absolute; inset: 0;
+  background: #00ff00; opacity: 0;
+  pointer-events: none; z-index: 5;
 }
 .intro-logo {
-  font-family: var(--font-head);
-  font-size: clamp(58px, 11vw, 100px);
+  font-family: var(--font-logo);
+  font-size: clamp(48px, 10vw, 96px);
   font-weight: 900;
-  letter-spacing: -0.02em;
+  letter-spacing: .06em;
   color: var(--white);
   line-height: 1;
   opacity: 0;
   transform: scale(0.88);
   animation: iLogoIn .7s .7s cubic-bezier(0.16,1,0.3,1) forwards;
-  position: relative;
-  z-index: 2;
+  position: relative; z-index: 2;
+  text-transform: uppercase;
 }
 .intro-logo span { color: var(--green); }
 @keyframes iLogoIn { to { opacity: 1; transform: scale(1); } }
 .intro-skip {
-  position: absolute;
-  bottom: 18px;
-  right: 20px;
+  position: absolute; bottom: 18px; right: 20px;
   background: rgba(255,255,255,0.05);
   border: 1px solid rgba(255,255,255,0.15);
   color: rgba(255,255,255,0.4);
   font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  padding: 7px 16px;
-  cursor: pointer;
-  opacity: 0;
-  animation: iFadeUp .5s 1.6s ease forwards;
+  font-size: 9px; letter-spacing: .18em; text-transform: uppercase;
+  padding: 7px 16px; cursor: pointer;
+  opacity: 0; animation: iFadeUp .5s 1.6s ease forwards;
   transition: border-color .2s, color .2s, background .2s;
 }
-.intro-skip:hover {
-  border-color: var(--green);
-  color: var(--green);
-  background: rgba(0,255,0,0.07);
-}
+.intro-skip:hover { border-color: var(--green); color: var(--green); background: rgba(0,255,0,0.07); }
 .intro-progress {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 2px;
-  background: var(--green);
-  width: 0;
+  position: absolute; bottom: 0; left: 0;
+  height: 2px; background: var(--green); width: 0;
   animation: iProgress 6s .5s linear forwards;
 }
-@keyframes iProgress {
-  0%   { width: 0; opacity: 1; }
-  95%  { width: 100%; opacity: 1; }
-  100% { width: 100%; opacity: 0; }
-}
-@keyframes iFadeUp {
-  from { opacity: 0; transform: translateY(6px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
+@keyframes iProgress { 0% { width:0; opacity:1; } 95% { width:100%; opacity:1; } 100% { width:100%; opacity:0; } }
+@keyframes iFadeUp { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
 
 /* ───────────────────────────────────────────
    NAV
@@ -549,9 +509,11 @@ section { padding: clamp(60px, 8vh, 100px) var(--pad-x); }
 }
 .sec-title {
   font-family: var(--font-head);
-  font-weight: 900;
+  font-weight: 700;
   font-size: clamp(1.8rem, 5vw, 4.2rem);
-  line-height: 1;
+  line-height: 1.05;
+  letter-spacing: .06em;
+  text-transform: uppercase;
   color: var(--white);
   margin-bottom: 18px;
 }
@@ -582,10 +544,143 @@ section { padding: clamp(60px, 8vh, 100px) var(--pad-x); }
   line-height: 1.7;
 }
 .drops-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(290px, 100%), 1fr));
-  gap: 2px;
+  display: none; /* replaced by carousel */
 }
+
+/* ── PRODUCT CAROUSEL ── */
+.carousel-outer {
+  overflow: hidden;
+  width: 100%;
+  padding: 8px 0 20px;
+  cursor: grab;
+}
+.carousel-outer:active { cursor: grabbing; }
+.carousel-track {
+  display: flex;
+  gap: 16px;
+  padding: 4px 12px;
+  will-change: transform;
+}
+.pcard {
+  flex: 0 0 auto;
+  position: relative;
+  overflow: hidden;
+  background: var(--surf2);
+  aspect-ratio: 3/4;
+  cursor: pointer;
+  transition:
+    width .5s cubic-bezier(0.25,0.46,0.45,0.94),
+    opacity .5s ease,
+    filter .5s ease,
+    box-shadow .5s ease;
+}
+.pcard.active {
+  width: clamp(200px, 30vw, 280px);
+  opacity: 1;
+  filter: none;
+  box-shadow: 0 0 32px rgba(0,255,0,0.12);
+}
+.pcard.side {
+  width: clamp(100px, 16vw, 150px);
+  opacity: .45;
+  filter: grayscale(55%);
+}
+.pcard.far {
+  width: clamp(64px, 10vw, 96px);
+  opacity: .18;
+  filter: grayscale(85%);
+}
+/* corner brackets on active */
+.pcard.active::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 22px; height: 22px;
+  border-top: 1.5px solid var(--green);
+  border-left: 1.5px solid var(--green);
+  z-index: 5;
+}
+.pcard.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 22px; height: 22px;
+  border-bottom: 1.5px solid var(--green);
+  border-right: 1.5px solid var(--green);
+  z-index: 5;
+}
+.pcard-img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform .5s ease, filter .3s;
+  filter: grayscale(20%);
+}
+.pcard.active .pcard-img { filter: grayscale(0%); }
+.pcard-placeholder {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--surf2);
+}
+.pcard-placeholder span {
+  font-family: var(--font-logo);
+  font-size: 22px;
+  color: #1e1e1e;
+  letter-spacing: .1em;
+}
+.pcard.active .pcard-placeholder span { color: #222; font-size: 28px; }
+.pcard-body {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 14px 12px 12px;
+  background: linear-gradient(to top, rgba(0,0,0,.97) 55%, transparent);
+  transition: opacity .4s ease;
+  z-index: 2;
+}
+.pcard.side .pcard-body,
+.pcard.far  .pcard-body { opacity: 0; }
+.pcard-badge {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: .2em;
+  color: var(--green);
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+.pcard-name {
+  font-family: var(--font-head);
+  font-size: clamp(14px, 2vw, 17px);
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--white);
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+.pcard-price {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(255,255,255,.6);
+  letter-spacing: .06em;
+}
+.carousel-dots {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  margin-top: 16px;
+}
+.carousel-dot {
+  width: 20px; height: 2px;
+  background: rgba(255,255,255,.15);
+  border-radius: 1px;
+  cursor: pointer;
+  transition: width .3s ease, background .3s ease;
+}
+.carousel-dot.active {
+  width: 32px;
+  background: var(--green);
+}
+
 a.ep-card {
   color: inherit;
   text-decoration: none;

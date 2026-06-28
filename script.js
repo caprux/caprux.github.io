@@ -264,25 +264,140 @@ function getRelatedProducts(id) {
 // RENDER PRODUCT GRID (index.html)
 // ================================================================
 function renderProducts() {
+  // Legacy grid (product pages etc)
   const grid = document.getElementById('productGrid');
-  if (!grid) return;
-  
-  grid.innerHTML = PRODUCTS.map(p => `
-    <a href="product.html?id=${p.id}" class="drop-card">
-      <div class="drop-card-img">
-        <img src="${p.image}" alt="${p.name}" loading="lazy">
-      </div>
-      <div class="drop-body">
-        <div class="drop-badge">${p.badge}</div>
-        <div class="drop-name">${p.name}</div>
-        <div class="drop-desc">${p.desc}</div>
-        <div class="drop-foot">
-          <span class="drop-price">${p.price}</span>
-          <span class="drop-status s-${p.status}">${STATUS_LABEL[p.status] || p.status}</span>
+  if (grid) {
+    grid.innerHTML = PRODUCTS.map(p => `
+      <a href="product.html?id=${p.id}" class="drop-card">
+        <div class="drop-card-img">
+          <img src="${p.image}" alt="${p.name}" loading="lazy">
+        </div>
+        <div class="drop-body">
+          <div class="drop-badge">${p.badge}</div>
+          <div class="drop-name">${p.name}</div>
+          <div class="drop-desc">${p.desc}</div>
+          <div class="drop-foot">
+            <span class="drop-price">${p.price}</span>
+            <span class="drop-status s-${p.status}">${STATUS_LABEL[p.status] || p.status}</span>
+          </div>
+        </div>
+      </a>
+    `).join('');
+  }
+
+  // ── CAROUSEL (index.html) ──
+  const track = document.getElementById('productCarousel');
+  const dotsWrap = document.getElementById('carouselDots');
+  if (!track || !dotsWrap) return;
+
+  let activeIdx = Math.floor(PRODUCTS.length / 2);
+
+  function getCardClass(i) {
+    const d = Math.abs(i - activeIdx);
+    if (d === 0) return 'active';
+    if (d === 1) return 'side';
+    return 'far';
+  }
+
+  function buildCards() {
+    track.innerHTML = PRODUCTS.map((p, i) => `
+      <div class="pcard ${getCardClass(i)}" data-idx="${i}">
+        ${p.image
+          ? `<img class="pcard-img" src="${p.image}" alt="${p.name}" loading="lazy">`
+          : `<div class="pcard-placeholder"><span>CPX</span></div>`
+        }
+        <div class="pcard-body">
+          <div class="pcard-badge">${p.badge}</div>
+          <div class="pcard-name">${p.name}</div>
+          <div class="pcard-price">${p.price}</div>
         </div>
       </div>
-    </a>
-  `).join('');
+    `).join('');
+
+    dotsWrap.innerHTML = PRODUCTS.map((_, i) =>
+      `<div class="carousel-dot ${i === activeIdx ? 'active' : ''}" data-idx="${i}"></div>`
+    ).join('');
+
+    bindCarouselEvents();
+  }
+
+  function setActive(idx) {
+    activeIdx = Math.max(0, Math.min(PRODUCTS.length - 1, idx));
+    const cards = track.querySelectorAll('.pcard');
+    const dots  = dotsWrap.querySelectorAll('.carousel-dot');
+
+    cards.forEach((c, i) => {
+      c.className = 'pcard ' + getCardClass(i);
+    });
+    dots.forEach((d, i) => {
+      d.classList.toggle('active', i === activeIdx);
+    });
+
+    scrollToActive(cards[activeIdx]);
+
+    // navigate on active click
+    const p = PRODUCTS[activeIdx];
+    if (p && p.id) {
+      cards[activeIdx].onclick = () => { window.location.href = 'product.html?id=' + p.id; };
+    }
+  }
+
+  function scrollToActive(card) {
+    if (!card) return;
+    const outer = track.parentElement;
+    const outerW = outer.offsetWidth;
+    const cardL  = card.offsetLeft;
+    const cardW  = card.offsetWidth;
+    const target = cardL - (outerW / 2) + (cardW / 2);
+    track.style.transition = 'transform .5s cubic-bezier(0.25,0.46,0.45,0.94)';
+    track.style.transform  = `translateX(${-target}px)`;
+  }
+
+  function bindCarouselEvents() {
+    // click on card
+    track.querySelectorAll('.pcard').forEach((c, i) => {
+      c.addEventListener('click', () => {
+        if (i === activeIdx) {
+          const p = PRODUCTS[i];
+          if (p && p.id) window.location.href = 'product.html?id=' + p.id;
+        } else {
+          setActive(i);
+        }
+      });
+    });
+
+    // dot click
+    dotsWrap.querySelectorAll('.carousel-dot').forEach((d, i) => {
+      d.addEventListener('click', () => setActive(i));
+    });
+
+    // drag / swipe
+    let startX = 0, dragging = false;
+    const outer = track.parentElement;
+
+    outer.addEventListener('mousedown', e => {
+      dragging = true; startX = e.clientX;
+      track.style.transition = 'none';
+    });
+    document.addEventListener('mousemove', e => {
+      if (!dragging) return;
+      if (Math.abs(e.clientX - startX) > 44) {
+        dragging = false;
+        e.clientX - startX < 0 ? setActive(activeIdx + 1) : setActive(activeIdx - 1);
+      }
+    });
+    document.addEventListener('mouseup', () => { dragging = false; });
+
+    let tStart = 0;
+    outer.addEventListener('touchstart', e => { tStart = e.touches[0].clientX; }, { passive: true });
+    outer.addEventListener('touchend',   e => {
+      const dx = e.changedTouches[0].clientX - tStart;
+      if (Math.abs(dx) > 44) dx < 0 ? setActive(activeIdx + 1) : setActive(activeIdx - 1);
+    }, { passive: true });
+  }
+
+  buildCards();
+  setTimeout(() => setActive(activeIdx), 80);
 }
 
 // ================================================================
@@ -556,10 +671,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // ── LIGHTNING INTRO ──
   (function() {
-    var overlay  = document.getElementById('introOverlay');
-    var cnv      = document.getElementById('introCanvas');
-    var fl       = document.getElementById('introFlash');
-    var skipBtn  = document.getElementById('introSkip');
+    var overlay = document.getElementById('introOverlay');
+    var cnv     = document.getElementById('introCanvas');
+    var fl      = document.getElementById('introFlash');
+    var skipBtn = document.getElementById('introSkip');
     if (!overlay || !cnv) return;
 
     var ctx = cnv.getContext('2d');
@@ -567,10 +682,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var startTime = Date.now();
     var totalDur  = 6200;
 
-    function resize() {
-      cnv.width  = overlay.offsetWidth;
-      cnv.height = overlay.offsetHeight;
-    }
+    function resize() { cnv.width = overlay.offsetWidth; cnv.height = overlay.offsetHeight; }
     resize();
     window.addEventListener('resize', resize);
 
@@ -610,16 +722,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function strike(intensity) {
       ctx.clearRect(0, 0, cnv.width, cnv.height);
-      var cx    = cnv.width / 2;
+      var cx = cnv.width / 2;
       var count = 1 + Math.floor(intensity * 3);
       for (var i = 0; i < count; i++) {
         var side = Math.random() < 0.5 ? -1 : 1;
-        var sx   = cx + side * rnd(60, 200);
-        var ex   = cx + rnd(-60, 60);
-        var ey   = cnv.height / 2 + rnd(-40, 40);
-        var al   = rnd(0.7, 1);
-        var w    = rnd(0.8 + intensity, 1.8 + intensity * 1.5);
-        drawBolt(sx, 0, ex, ey, rnd(40, 100), 5, al, w);
+        var sx = cx + side * rnd(60, 200);
+        var ex = cx + rnd(-60, 60);
+        var ey = cnv.height / 2 + rnd(-40, 40);
+        drawBolt(sx, 0, ex, ey, rnd(40, 100), 5, rnd(0.7, 1), rnd(0.8 + intensity, 1.8 + intensity * 1.5));
       }
       if (intensity > 0.45 && Math.random() < intensity * 0.65) {
         drawBolt(cx + rnd(-20, 20), 0, cx + rnd(-10, 10), cnv.height / 2 + rnd(-10, 10), rnd(30, 70), 5, 0.95, 1.2 + intensity);
@@ -657,6 +767,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     setTimeout(scheduleNext, 800);
     setTimeout(dismiss, totalDur);
-    skipBtn.addEventListener('click', dismiss);
+    if (skipBtn) skipBtn.addEventListener('click', dismiss);
   })();
 });
