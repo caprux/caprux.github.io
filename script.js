@@ -627,31 +627,31 @@ document.addEventListener('DOMContentLoaded', function() {
     if (window.innerWidth > 900) closeMenu();
   });
 
-  // ── VISITOR COUNTER (CountAPI) ──
+  // ── VISITOR COUNTER (countapi.mileshilliard.com — pengganti countapi.xyz) ──
   (function() {
     var numEl  = document.getElementById('visitorCount');
     var noteEl = document.getElementById('visitorNote');
     if (!numEl) return;
 
-    // Namespace & key unik untuk CAPRUX — jangan ganti setelah live
-    var NAMESPACE = 'caprux-id';
-    var KEY       = 'visitor-total';
+    // Key unik CAPRUX — jangan ganti setelah live, counter tersimpan di sini
+    var KEY = 'caprux-id_visitor-total-2025';
 
     numEl.classList.add('loading');
 
-    // Hit endpoint: tambah 1 dan ambil nilai terbaru
-    fetch('https://api.countapi.xyz/hit/' + NAMESPACE + '/' + KEY)
+    fetch('https://countapi.mileshilliard.com/api/v1/hit/' + KEY)
       .then(function(r) { return r.json(); })
       .then(function(data) {
-        if (data && typeof data.value === 'number') {
-          var val = data.value;
+        // API mengembalikan { key, value } — value bisa string atau number
+        var raw = data && (data.value !== undefined ? data.value : null);
+        var val = (raw !== null) ? parseInt(raw, 10) : NaN;
+
+        if (!isNaN(val)) {
           numEl.classList.remove('loading');
 
           // Animasi count-up singkat
           var start = Math.max(0, val - Math.min(val, 60));
-          var dur   = 900;
           var step  = 16;
-          var steps = Math.ceil(dur / step);
+          var steps = Math.ceil(900 / step);
           var inc   = (val - start) / steps;
           var cur   = start;
           var timer = setInterval(function() {
@@ -662,6 +662,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
           if (noteEl) noteEl.textContent = 'Terhitung sejak website diluncurkan · real-time';
         } else {
+          numEl.classList.remove('loading');
+          numEl.textContent = '—';
           if (noteEl) noteEl.textContent = 'Data tidak tersedia saat ini';
         }
       })
