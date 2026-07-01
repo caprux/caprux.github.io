@@ -627,7 +627,50 @@ document.addEventListener('DOMContentLoaded', function() {
     if (window.innerWidth > 900) closeMenu();
   });
 
-  // ── LIGHTNING INTRO ──
+  // ── VISITOR COUNTER (CountAPI) ──
+  (function() {
+    var numEl  = document.getElementById('visitorCount');
+    var noteEl = document.getElementById('visitorNote');
+    if (!numEl) return;
+
+    // Namespace & key unik untuk CAPRUX — jangan ganti setelah live
+    var NAMESPACE = 'caprux-id';
+    var KEY       = 'visitor-total';
+
+    numEl.classList.add('loading');
+
+    // Hit endpoint: tambah 1 dan ambil nilai terbaru
+    fetch('https://api.countapi.xyz/hit/' + NAMESPACE + '/' + KEY)
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (data && typeof data.value === 'number') {
+          var val = data.value;
+          numEl.classList.remove('loading');
+
+          // Animasi count-up singkat
+          var start = Math.max(0, val - Math.min(val, 60));
+          var dur   = 900;
+          var step  = 16;
+          var steps = Math.ceil(dur / step);
+          var inc   = (val - start) / steps;
+          var cur   = start;
+          var timer = setInterval(function() {
+            cur += inc;
+            if (cur >= val) { cur = val; clearInterval(timer); }
+            numEl.textContent = Math.floor(cur).toLocaleString('id-ID');
+          }, step);
+
+          if (noteEl) noteEl.textContent = 'Terhitung sejak website diluncurkan · real-time';
+        } else {
+          if (noteEl) noteEl.textContent = 'Data tidak tersedia saat ini';
+        }
+      })
+      .catch(function() {
+        numEl.classList.remove('loading');
+        numEl.textContent = '—';
+        if (noteEl) noteEl.textContent = 'Gagal memuat data pengunjung';
+      });
+  })();
   (function() {
     var overlay = document.getElementById('introOverlay');
     var cnv     = document.getElementById('introCanvas');

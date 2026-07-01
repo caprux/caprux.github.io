@@ -1359,6 +1359,71 @@ a.drop-card { text-decoration: none; color: inherit; }
 }
 
 /* ───────────────────────────────────────────
+   VISITOR COUNTER
+   ─────────────────────────────────────────── */
+.visitor-counter {
+  margin-top: clamp(32px, 5vh, 48px);
+  padding: clamp(18px, 3vw, 28px) clamp(20px, 3.5vw, 32px);
+  border: 1px solid #1e1e1e;
+  background: var(--surf2);
+  display: inline-flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: clamp(220px, 40vw, 320px);
+  position: relative;
+  overflow: hidden;
+}
+.visitor-counter::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 22px; height: 22px;
+  border-top: 2px solid var(--green);
+  border-left: 2px solid var(--green);
+}
+.vc-label {
+  font-family: var(--font-mono);
+  font-size: .58rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--green);
+}
+.vc-display {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.vc-icon {
+  font-size: 1rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 6px #00ff0099);
+}
+.vc-number {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  color: var(--white);
+  letter-spacing: -.02em;
+  line-height: 1;
+  transition: opacity .4s;
+}
+.vc-number.loading { opacity: .25; }
+.vc-unit {
+  font-family: var(--font-mono);
+  font-size: .62rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+.vc-note {
+  font-family: var(--font-mono);
+  font-size: .54rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #3a3a3a;
+}
+
+/* ───────────────────────────────────────────
    CAROUSEL PRODUK — LINEAR FOCUS/DEFOCUS
    selected = besar di tengah, lainnya kecil di samping, semua sejajar vertikal
    ─────────────────────────────────────────── */
