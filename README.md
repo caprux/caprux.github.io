@@ -4,7 +4,7 @@
 
 **Doing the Impossible, with GOD's Help**
 
-Website resmi **CAPRUX**, brand streetwear pria berbasis di Baleendah, Kabupaten Bandung, Jawa Barat. Dibangun dan di-hosting dengan GitHub Pages di [caprux.id](https://caprux.id) / [caprux.github.io](https://caprux.github.io).
+Website resmi **CAPRUX**, brand streetwear pria berbasis di Baleendah, Kabupaten Bandung, Jawa Barat. Dibangun dan di-hosting dengan GitHub Pages di [caprux.github.io](https://caprux.github.io).
 
 ---
 
