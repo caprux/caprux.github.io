@@ -621,6 +621,59 @@ document.addEventListener('DOMContentLoaded', function() {
       nav.classList.toggle('scrolled', window.scrollY > 60);
     }, { passive: true });
   }
+
+  // ==============================================================
+  // HERO PARALLAX — scroll depth + mouse-tilt lampu logo
+  // ==============================================================
+  (function heroParallax() {
+    const hero = document.getElementById('home');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!hero || reduceMotion) return;
+
+    const grid = hero.querySelector('.hero-grid');
+    const scan = hero.querySelector('.hero-scan');
+    const logo = hero.querySelector('.main-logo');
+    const root = document.documentElement;
+
+    // --- Scroll parallax: layer bergerak beda kecepatan ---
+    let ticking = false;
+    function updateScrollParallax() {
+      const y = window.scrollY;
+      const heroH = hero.offsetHeight || 1;
+      const progress = Math.min(y / heroH, 1.4);
+      if (grid) grid.style.setProperty('--px-grid', (progress * 40) + 'px');
+      if (scan) scan.style.setProperty('--px-scan', (progress * 70) + 'px');
+      if (logo) root.style.setProperty('--px-logo', (progress * 26) + 'px');
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) {
+        requestAnimationFrame(updateScrollParallax);
+        ticking = true;
+      }
+    }, { passive: true });
+    updateScrollParallax();
+
+    // --- Mouse-tilt: logo "nyala" ngikutin cahaya kursor (desktop only) ---
+    if (logo && window.matchMedia('(pointer: fine)').matches) {
+      let rafId = null;
+      hero.addEventListener('mousemove', function(e) {
+        const rect = hero.getBoundingClientRect();
+        const relX = (e.clientX - rect.left) / rect.width - 0.5;
+        const relY = (e.clientY - rect.top) / rect.height - 0.5;
+        if (rafId) return;
+        rafId = requestAnimationFrame(function() {
+          root.style.setProperty('--tilt-x', (relX * 8).toFixed(2) + 'deg');
+          root.style.setProperty('--tilt-y', (-relY * 6).toFixed(2) + 'deg');
+          rafId = null;
+        });
+      });
+      hero.addEventListener('mouseleave', function() {
+        root.style.setProperty('--tilt-x', '0deg');
+        root.style.setProperty('--tilt-y', '0deg');
+      });
+    }
+  })();
   
   // Close mobile menu on resize
   window.addEventListener('resize', function() {
