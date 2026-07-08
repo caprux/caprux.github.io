@@ -633,9 +633,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const grid = hero.querySelector('.hero-grid');
     const scan = hero.querySelector('.hero-scan');
     const logo = hero.querySelector('.main-logo');
+    const sub = hero.querySelector('.hero-sub');
+    const actions = hero.querySelector('.hero-actions');
     const root = document.documentElement;
 
-    // --- Scroll parallax: layer bergerak beda kecepatan ---
+    // --- Scroll parallax: layer bergerak beda kecepatan (depth of field) ---
     let ticking = false;
     function updateScrollParallax() {
       const y = window.scrollY;
@@ -644,6 +646,8 @@ document.addEventListener('DOMContentLoaded', function() {
       if (grid) grid.style.setProperty('--px-grid', (progress * 40) + 'px');
       if (scan) scan.style.setProperty('--px-scan', (progress * 70) + 'px');
       if (logo) root.style.setProperty('--px-logo', (progress * 26) + 'px');
+      if (sub) sub.style.setProperty('--px-sub', (progress * 14) + 'px');
+      if (actions) actions.style.setProperty('--px-actions', (progress * 8) + 'px');
       ticking = false;
     }
     window.addEventListener('scroll', function() {
@@ -674,7 +678,199 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     }
   })();
-  
+
+  // ==============================================================
+  // SCROLL PROGRESS BAR — garis neon di atas nav, isi seiring scroll
+  // ==============================================================
+  (function scrollProgressBar() {
+    const bar = document.getElementById('scrollProgress');
+    if (!bar) return;
+    let ticking = false;
+    function update() {
+      const doc = document.documentElement;
+      const max = (doc.scrollHeight - doc.clientHeight) || 1;
+      const pct = Math.min(100, Math.max(0, (window.scrollY / max) * 100));
+      bar.style.width = pct + '%';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(update); ticking = true; }
+    }, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  })();
+
+  // ==============================================================
+  // CURSOR GLOW — cahaya lembut ngikutin kursor, dengan lerp halus
+  // ==============================================================
+  (function cursorGlow() {
+    const glow = document.getElementById('cursorGlow');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!glow || reduceMotion || !window.matchMedia('(pointer: fine)').matches) return;
+
+    let targetX = -420, targetY = -420;
+    let curX = -420, curY = -420;
+    let active = false;
+
+    window.addEventListener('mousemove', function(e) {
+      targetX = e.clientX;
+      targetY = e.clientY;
+      if (!active) { active = true; glow.classList.add('active'); }
+    }, { passive: true });
+
+    document.addEventListener('mouseleave', function() {
+      active = false;
+      glow.classList.remove('active');
+    });
+
+    function loop() {
+      curX += (targetX - curX) * 0.12;
+      curY += (targetY - curY) * 0.12;
+      glow.style.setProperty('--cx', curX + 'px');
+      glow.style.setProperty('--cy', curY + 'px');
+      requestAnimationFrame(loop);
+    }
+    requestAnimationFrame(loop);
+  })();
+
+  // ==============================================================
+  // SCROLL REVEAL — fade/slide/scale-in saat elemen masuk viewport
+  // ==============================================================
+  (function scrollReveal() {
+    const targets = document.querySelectorAll('.reveal, .reveal-scale, .reveal-left, .reveal-right');
+    if (!targets.length) return;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      targets.forEach(function(el) { el.classList.add('in-view'); });
+      return;
+    }
+    const io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+    targets.forEach(function(el) { io.observe(el); });
+  })();
+
+  // ==============================================================
+  // MAGNETIC TILT — drop-card & about-visual "ngikutin" kursor (3D)
+  // ==============================================================
+  (function tiltCards() {
+    if (!window.matchMedia('(pointer: fine)').matches) return;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) return;
+
+    function attachTilt(el, maxDeg, scaleVar) {
+      let rafId = null;
+      el.addEventListener('mousemove', function(e) {
+        const rect = el.getBoundingClientRect();
+        const relX = (e.clientX - rect.left) / rect.width - 0.5;
+        const relY = (e.clientY - rect.top) / rect.height - 0.5;
+        if (rafId) return;
+        rafId = requestAnimationFrame(function() {
+          el.style.setProperty('--tilt-rx', (relX * maxDeg).toFixed(2) + 'deg');
+          el.style.setProperty('--tilt-ry', (-relY * maxDeg).toFixed(2) + 'deg');
+          if (scaleVar) el.style.setProperty(scaleVar, '1.025');
+          rafId = null;
+        });
+      });
+      el.addEventListener('mouseleave', function() {
+        el.style.setProperty('--tilt-rx', '0deg');
+        el.style.setProperty('--tilt-ry', '0deg');
+        if (scaleVar) el.style.setProperty(scaleVar, '1');
+      });
+    }
+
+    // Drop cards muncul lagi setelah render — pakai delegasi via MutationObserver ringan
+    function initDropCardTilt() {
+      document.querySelectorAll('.drop-card').forEach(function(card) {
+        if (card.dataset.tiltBound) return;
+        card.dataset.tiltBound = '1';
+        attachTilt(card, 6, '--tilt-scale');
+      });
+    }
+    initDropCardTilt();
+    const relGrid = document.querySelector('.rel-grid');
+    if (relGrid) {
+      new MutationObserver(initDropCardTilt).observe(relGrid, { childList: true });
+    }
+
+    // About visual — tilt lembut mengikuti kursor di dalam section
+    const aboutVisual = document.querySelector('.about-visual');
+    if (aboutVisual) {
+      let rafId = null;
+      aboutVisual.addEventListener('mousemove', function(e) {
+        const rect = aboutVisual.getBoundingClientRect();
+        const relX = (e.clientX - rect.left) / rect.width - 0.5;
+        const relY = (e.clientY - rect.top) / rect.height - 0.5;
+        if (rafId) return;
+        rafId = requestAnimationFrame(function() {
+          aboutVisual.style.setProperty('--about-rx', (relX * 10).toFixed(2) + 'deg');
+          aboutVisual.style.setProperty('--about-ry', (-relY * 8).toFixed(2) + 'deg');
+          rafId = null;
+        });
+      });
+      aboutVisual.addEventListener('mouseleave', function() {
+        aboutVisual.style.setProperty('--about-rx', '0deg');
+        aboutVisual.style.setProperty('--about-ry', '0deg');
+      });
+    }
+  })();
+
+  // ==============================================================
+  // PHILOSOPHY PARALLAX — watermark bergerak beda kecepatan dari scroll
+  // ==============================================================
+  (function philosophyParallax() {
+    const phil = document.getElementById('philosophy');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!phil || reduceMotion) return;
+    let ticking = false;
+    function update() {
+      const rect = phil.getBoundingClientRect();
+      const vh = window.innerHeight || 1;
+      const centered = (rect.top + rect.height / 2 - vh / 2) / vh; // -ish range
+      const offset = Math.max(-1, Math.min(1, -centered)) * 44;
+      phil.style.setProperty('--phil-px', offset.toFixed(1) + 'px');
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(update); ticking = true; }
+    }, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  })();
+
+  // ==============================================================
+  // MARQUEE SKEW — sedikit miring saat scroll cepat, balik halus
+  // ==============================================================
+  (function marqueeSkew() {
+    const strip = document.querySelector('.marquee-strip');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!strip || reduceMotion) return;
+    let lastY = window.scrollY;
+    let ticking = false;
+    let resetTimer = null;
+    window.addEventListener('scroll', function() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function() {
+        const y = window.scrollY;
+        const delta = y - lastY;
+        lastY = y;
+        const skew = Math.max(-3.5, Math.min(3.5, delta * 0.25));
+        strip.style.setProperty('--marquee-skew', skew.toFixed(2) + 'deg');
+        clearTimeout(resetTimer);
+        resetTimer = setTimeout(function() {
+          strip.style.setProperty('--marquee-skew', '0deg');
+        }, 180);
+        ticking = false;
+      });
+    }, { passive: true });
+  })();
+
   // Close mobile menu on resize
   window.addEventListener('resize', function() {
     if (window.innerWidth > 900) closeMenu();

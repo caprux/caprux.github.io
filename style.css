@@ -314,6 +314,8 @@ nav.scrolled {
   line-height: 1.75;
   font-weight: 300;
   position: relative; z-index: 2;
+  transform: translateY(var(--px-sub, 0px));
+  will-change: transform;
 }
 .hero-sub strong { color: var(--white); font-weight: 500; }
 
@@ -338,6 +340,8 @@ nav.scrolled {
   gap: 12px;
   flex-wrap: wrap;
   position: relative; z-index: 2;
+  transform: translateY(var(--px-actions, 0px));
+  will-change: transform;
 }
 
 .btn-primary {
@@ -421,6 +425,9 @@ nav.scrolled {
   overflow: hidden;
   padding: 10px 0;
   white-space: nowrap;
+  transform: skewY(var(--marquee-skew, 0deg));
+  transition: transform .35s cubic-bezier(.16,1,.3,1);
+  will-change: transform;
 }
 .marquee-inner {
   display: inline-flex;
@@ -509,9 +516,13 @@ a.drop-card { text-decoration: none; color: inherit; }
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  transition: transform .4s ease;
+  transform: perspective(1000px) rotateX(var(--tilt-ry, 0deg)) rotateY(var(--tilt-rx, 0deg)) scale(var(--tilt-scale, 1));
+  transition: transform .45s cubic-bezier(.16,1,.3,1);
+  will-change: transform;
 }
-.drop-card:hover { transform: scale(1.01); }
+@media (hover: hover) and (pointer: fine) {
+  .drop-card:hover { --tilt-scale: 1.025; }
+}
 
 .drop-card::before {
   content: '';
@@ -629,7 +640,8 @@ a.drop-card { text-decoration: none; color: inherit; }
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(calc(-50% + var(--phil-px, 0px)), -50%);
+  will-change: transform;
   font-family: var(--font-head);
   font-weight: 900;
   font-size: clamp(4rem, 20vw, 14rem);
@@ -692,6 +704,9 @@ a.drop-card { text-decoration: none; color: inherit; }
   padding: clamp(24px, 4vw, 40px);
   aspect-ratio: 1/1;
   max-height: 460px;
+  transform: perspective(1000px) rotateX(var(--about-ry, 0deg)) rotateY(var(--about-rx, 0deg));
+  transition: transform .5s cubic-bezier(.16,1,.3,1);
+  will-change: transform;
 }
 
 .about-logo-float {
@@ -1256,9 +1271,13 @@ a.drop-card { text-decoration: none; color: inherit; }
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  transition: transform .4s ease;
+  transform: perspective(1000px) rotateX(var(--tilt-ry, 0deg)) rotateY(var(--tilt-rx, 0deg)) scale(var(--tilt-scale, 1));
+  transition: transform .45s cubic-bezier(.16,1,.3,1);
+  will-change: transform;
 }
-.drop-card:hover { transform: scale(1.01); }
+@media (hover: hover) and (pointer: fine) {
+  .drop-card:hover { --tilt-scale: 1.025; }
+}
 .drop-card::before {
   content: '';
   position: absolute;
@@ -1449,6 +1468,11 @@ a.drop-card { text-decoration: none; color: inherit; }
   border-color: var(--green);
   box-shadow: 0 0 0 1px rgba(0,255,0,.2), 0 12px 40px rgba(0,0,0,.7);
   z-index: 3;
+  animation: pcard-breathe 3.4s ease-in-out infinite;
+}
+@keyframes pcard-breathe {
+  0%, 100% { box-shadow: 0 0 0 1px rgba(0,255,0,.2), 0 12px 40px rgba(0,0,0,.7); }
+  50%       { box-shadow: 0 0 0 1px rgba(0,255,0,.5), 0 16px 52px rgba(0,0,0,.8), 0 0 34px rgba(0,255,0,.18); }
 }
 .pcard.side {
   width:  clamp(160px, 22vw, 240px);
@@ -1694,4 +1718,91 @@ a.drop-card { text-decoration: none; color: inherit; }
 
 @media (prefers-reduced-motion: reduce) {
   .email-fab-ping { animation: none; }
+}
+
+/* ================================================================
+   SCROLL PROGRESS BAR — garis neon tipis di atas nav, isi seiring scroll
+   ================================================================ */
+.scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--green), #7dffb0, var(--green));
+  background-size: 200% 100%;
+  z-index: 1001;
+  box-shadow: 0 0 10px #00ff00aa;
+  will-change: width;
+  pointer-events: none;
+}
+
+/* ================================================================
+   CURSOR GLOW — cahaya lembut ngikutin kursor (desktop only)
+   ================================================================ */
+.cursor-glow {
+  position: fixed;
+  top: 0; left: 0;
+  width: 420px; height: 420px;
+  margin-left: -210px; margin-top: -210px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,255,0,.10), rgba(0,255,0,.03) 45%, transparent 72%);
+  pointer-events: none;
+  z-index: 4;
+  transform: translate3d(var(--cx, -420px), var(--cy, -420px), 0);
+  opacity: 0;
+  transition: opacity .4s ease;
+  mix-blend-mode: screen;
+  will-change: transform;
+}
+.cursor-glow.active { opacity: 1; }
+@media (pointer: coarse), (hover: none) {
+  .cursor-glow { display: none; }
+}
+
+/* ================================================================
+   SCROLL-REVEAL SYSTEM — elemen masuk halus saat kena viewport
+   Dipicu oleh IntersectionObserver di script.js (.in-view ditambahkan)
+   ================================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(38px);
+  transition: opacity .85s cubic-bezier(.16,1,.3,1), transform .85s cubic-bezier(.16,1,.3,1);
+  transition-delay: var(--reveal-delay, 0s);
+  will-change: opacity, transform;
+}
+.reveal.in-view { opacity: 1; transform: translateY(0); }
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(.94);
+  transition: opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1);
+  transition-delay: var(--reveal-delay, 0s);
+  will-change: opacity, transform;
+}
+.reveal-scale.in-view { opacity: 1; transform: scale(1); }
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-46px);
+  transition: opacity .85s cubic-bezier(.16,1,.3,1), transform .85s cubic-bezier(.16,1,.3,1);
+  transition-delay: var(--reveal-delay, 0s);
+  will-change: opacity, transform;
+}
+.reveal-left.in-view { opacity: 1; transform: translateX(0); }
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(46px);
+  transition: opacity .85s cubic-bezier(.16,1,.3,1), transform .85s cubic-bezier(.16,1,.3,1);
+  transition-delay: var(--reveal-delay, 0s);
+  will-change: opacity, transform;
+}
+.reveal-right.in-view { opacity: 1; transform: translateX(0); }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .reveal-scale, .reveal-left, .reveal-right {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .scroll-progress, .cursor-glow { display: none; }
 }

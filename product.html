@@ -9,6 +9,10 @@
 </head>
 <body>
 
+<!-- Scroll Progress + Cursor Glow -->
+<div class="scroll-progress" id="scrollProgress"></div>
+<div class="cursor-glow" id="cursorGlow"></div>
+
 <!-- Mobile Menu -->
 <div class="mobile-menu" id="mobileMenu">
   <a href="index.html#products" onclick="closeMenu()">Produk</a>
@@ -41,7 +45,7 @@
   <div class="product-grid">
 
     <!-- Gallery -->
-    <div class="gallery">
+    <div class="gallery reveal-left">
       <div class="gallery-main">
         <img src="" alt="Product" id="mainImg">
         <div class="g-tag">// CAPRUX</div>
@@ -55,7 +59,7 @@
     </div>
 
     <!-- Info -->
-    <div class="prod-info">
+    <div class="prod-info reveal-right" style="--reveal-delay:.1s">
       <div class="prod-eyebrow">// Product</div>
       <h1 class="prod-name">PRODUCT<br>NAME</h1>
       <div class="prod-type">Type</div>
@@ -101,7 +105,7 @@
 
 <!-- Detail Tabs -->
 <div class="detail-section">
-  <div class="detail-wrap">
+  <div class="detail-wrap reveal">
     <div class="tabs">
       <button class="tab active" onclick="switchTab(this,'t1')">Detail Produk</button>
       <button class="tab" onclick="switchTab(this,'t2')">Size Guide</button>
@@ -121,14 +125,14 @@
 
 <!-- Related -->
 <section class="related">
-  <p class="eyebrow">// You Might Also Like</p>
-  <h2 class="sec-title">Produk Lainnya</h2>
-  <div class="rel-divider"></div>
-  <div class="rel-grid"></div>
+  <p class="eyebrow reveal">// You Might Also Like</p>
+  <h2 class="sec-title reveal">Produk Lainnya</h2>
+  <div class="rel-divider reveal"></div>
+  <div class="rel-grid reveal-scale" style="--reveal-delay:.1s"></div>
 </section>
 
 <!-- Footer -->
-<footer>
+<footer class="reveal">
   <div class="f-logo"><img src="logo_text_putih.png" alt="CAPRUX"></div>
   <div class="f-copy">© 2024 CAPRUX — Doing the Impossible with GOD's Help<br><span style="color:#333;font-size:.58rem">Made in Jawabarat · Powered by ENF</span></div>
   <div class="f-socials">
