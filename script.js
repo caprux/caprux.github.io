@@ -821,6 +821,23 @@ document.addEventListener('DOMContentLoaded', function() {
   })();
 
   // ==============================================================
+  // ABOUT LOGO TOUCH-GLOW — nyala saat disentuh (semua device, termasuk mobile)
+  // ==============================================================
+  (function aboutLogoTouchGlow() {
+    const aboutLogo = document.querySelector('.about-logo-float');
+    if (!aboutLogo) return;
+    aboutLogo.addEventListener('touchstart', function() {
+      aboutLogo.classList.add('touched');
+    }, { passive: true });
+    aboutLogo.addEventListener('touchend', function() {
+      aboutLogo.classList.remove('touched');
+    }, { passive: true });
+    aboutLogo.addEventListener('touchcancel', function() {
+      aboutLogo.classList.remove('touched');
+    }, { passive: true });
+  })();
+
+  // ==============================================================
   // PHILOSOPHY PARALLAX — watermark bergerak beda kecepatan dari scroll
   // ==============================================================
   (function philosophyParallax() {
