@@ -289,18 +289,22 @@ function renderProducts() {
   }
 
   // Build HTML
-  outer.innerHTML = PRODUCTS.map((p, i) => `
-    <div class="pcard ${getClass(i)}" data-idx="${i}">
+  outer.innerHTML = PRODUCTS.map((p, i) => {
+    const locked = p.status !== 'open'; // 'open' = ready/tersedia dibeli. Selain itu (soon/sold) = terkunci.
+    return `
+    <div class="pcard ${getClass(i)}${locked ? ' locked' : ''}" data-idx="${i}">
       ${p.image
         ? `<img class="pcard-img" src="${p.image}" alt="${p.name}" loading="lazy">`
         : `<div class="pcard-placeholder"><span>CPX</span></div>`}
+      ${locked ? `<div class="pcard-lock">🔒 ${STATUS_LABEL[p.status] || 'Segera Hadir'}</div>` : ''}
       <div class="pcard-body">
         <div class="pcard-badge">${p.badge}</div>
         <div class="pcard-name">${p.name}</div>
         <div class="pcard-price">${p.price}</div>
       </div>
     </div>
-  `).join('');
+  `;
+  }).join('');
 
   dotsWrap.innerHTML = PRODUCTS.map((_, i) =>
     `<div class="carousel-dot${i === activeIdx ? ' active' : ''}" data-idx="${i}"></div>`
@@ -312,22 +316,32 @@ function renderProducts() {
     if (prev === activeIdx) return;
 
     outer.querySelectorAll('.pcard').forEach((c, i) => {
-      c.className = 'pcard ' + getClass(i);
+      const locked = PRODUCTS[i].status !== 'open';
+      c.className = 'pcard ' + getClass(i) + (locked ? ' locked' : '');
     });
     dotsWrap.querySelectorAll('.carousel-dot').forEach((d, i) => {
       d.classList.toggle('active', i === activeIdx);
     });
   }
 
-  // Click cards
+  // Click cards — kartu locked (belum ready/coming soon) tetap bisa digeser ke tengah,
+  // tapi TIDAK bisa diteruskan ke halaman produk.
   outer.querySelectorAll('.pcard').forEach((c, i) => {
     c.addEventListener('click', () => {
       if (i !== activeIdx) {
         setActive(i);
-      } else {
-        const p = PRODUCTS[i];
-        if (p && p.id) window.location.href = 'product.html?id=' + p.id;
+        return;
       }
+      const p = PRODUCTS[i];
+      if (!p || !p.id) return;
+      if (p.status !== 'open') {
+        // Feedback visual: goyang sebentar, kasih tau belum bisa dibuka
+        c.classList.remove('shake');
+        void c.offsetWidth; // restart animasi
+        c.classList.add('shake');
+        return;
+      }
+      window.location.href = 'product.html?id=' + p.id;
     });
   });
 
@@ -509,9 +523,14 @@ function renderProductDetail() {
   const relGrid = document.querySelector('.rel-grid');
   if (relGrid) {
     if (relatedProducts.length > 0) {
-      relGrid.innerHTML = relatedProducts.map(p => `
-        <a href="product.html?id=${p.id}" class="drop-card">
+      relGrid.innerHTML = relatedProducts.map(p => {
+        const locked = p.status !== 'open'; // 'open' = ready/tersedia. Selain itu = terkunci.
+        const tag = locked ? 'div' : 'a';
+        const hrefAttr = locked ? '' : `href="product.html?id=${p.id}"`;
+        return `
+        <${tag} ${hrefAttr} class="drop-card${locked ? ' locked' : ''}">
           <div class="dc-img"><img src="${p.image}" alt="${p.name}"></div>
+          ${locked ? `<div class="pcard-lock">🔒 ${STATUS_LABEL[p.status] || 'Segera Hadir'}</div>` : ''}
           <div class="dc-body">
             <div class="dc-badge">${p.badge}</div>
             <div class="dc-name">${p.name}</div>
@@ -521,8 +540,9 @@ function renderProductDetail() {
               <span class="status s-${p.status}">${STATUS_LABEL[p.status] || p.status}</span>
             </div>
           </div>
-        </a>
-      `).join('');
+        </${tag}>
+      `;
+      }).join('');
     } else {
       relGrid.innerHTML = `<p style="color:var(--grey);padding:20px;">Tidak ada produk terkait.</p>`;
     }
