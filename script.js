@@ -13,7 +13,7 @@ const PRODUCTS = [
     name: 'THE TROPICAL SOUL',
     badge: '// Micro Cotton Danbowl',
     desc: 'Polyflex 3D logo silicon 1mm.',
-    price: 'Rp 148.600 ~ Rp 156.600',
+    price: 'Rp 175.750',
     status: 'open',
     shopeeUrl: 'https://id.shp.ee/kc8YJcLh',
     image: 'CPRX-06-SB.png',
@@ -76,7 +76,7 @@ const PRODUCTS = [
     name: 'THE VOLCANIC SOUL',
     badge: '// Parasut Crincle',
     desc: 'Model Gunung. Bahan Sporty.',
-    price: 'Rp. 0',
+    price: 'Rp 289.750',
     status: 'soon',
     image: 'Jaket_Crincle_CAPRUX.png',
     images: [
@@ -138,7 +138,7 @@ const PRODUCTS = [
     name: 'THE ARCHIPELAGO SOUL',
     badge: '// Nillon Ripstop',
     desc: 'For men only. No Boti.',
-    price: 'Rp 0',
+    price: 'Rp 225.750',
     status: 'soon',
     image: 'Celana_Pendek_CAPRUX.png',
     images: [
