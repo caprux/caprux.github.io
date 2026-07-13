@@ -694,6 +694,12 @@ a.drop-card { text-decoration: none; color: inherit; }
   gap: clamp(32px, 6vw, 80px);
   align-items: center;
 }
+.about-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(20px, 3vw, 32px);
+}
 .about-visual {
   background: transparent;
   position: relative;
@@ -748,12 +754,6 @@ a.drop-card { text-decoration: none; color: inherit; }
   text-decoration-color: rgba(255,90,90,.55);
   text-decoration-thickness: 3px;
 }
-.kenapa-wrap {
-  display: grid;
-  grid-template-columns: 1.6fr 1fr;
-  gap: clamp(32px, 6vw, 64px);
-  align-items: start;
-}
 .kenapa-closing {
   color: var(--white);
   font-weight: 500;
@@ -767,8 +767,8 @@ a.drop-card { text-decoration: none; color: inherit; }
   flex-direction: column;
   align-items: center;
   gap: 14px;
-  position: sticky;
-  top: 110px;
+  width: 100%;
+  max-width: 300px;
 }
 .kx-row { display: flex; flex-direction: column; align-items: center; gap: 6px; }
 .kx-label-old {
@@ -820,10 +820,6 @@ a.drop-card { text-decoration: none; color: inherit; }
   border-top: 1px solid rgba(0,255,0,.14);
 }
 
-@media (max-width: 900px) {
-  .kenapa-wrap { grid-template-columns: 1fr; }
-  .kx-badge { position: static; }
-}
 .about-values {
   margin-top: clamp(24px, 4vh, 36px);
   display: flex;
