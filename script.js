@@ -861,7 +861,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // PHILOSOPHY PARALLAX — watermark bergerak beda kecepatan dari scroll
   // ==============================================================
   (function philosophyParallax() {
-    const phil = document.getElementById('philosophy');
+    const phil = document.querySelector('.about-phil-banner');
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (!phil || reduceMotion) return;
     let ticking = false;

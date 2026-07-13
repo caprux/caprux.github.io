@@ -621,22 +621,25 @@ a.drop-card { text-decoration: none; color: inherit; }
 .s-sold { color: var(--grey); border-color: var(--grey); }
 
 /* ───────────────────────────────────────────
-   PHILOSOPHY
+   ABOUT & PHILOSOPHY (digabung)
    ─────────────────────────────────────────── */
-#philosophy {
+#about { position: relative; }
+
+.about-phil-banner {
   background: var(--green);
-  padding: clamp(56px, 8vh, 80px) var(--pad-x);
+  padding: clamp(48px, 7vh, 72px) var(--pad-x);
+  margin: calc(-1 * clamp(60px, 8vh, 100px)) calc(var(--pad-x) * -1) clamp(48px, 6vh, 64px);
   text-align: center;
   position: relative;
   overflow: hidden;
-  min-height: 300px;
+  min-height: 260px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-#philosophy .phil-watermark {
+.about-phil-banner .phil-watermark {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -653,9 +656,9 @@ a.drop-card { text-decoration: none; color: inherit; }
   z-index: 0;
 }
 
-#philosophy .phil-label,
-#philosophy .phil-quote,
-#philosophy .phil-sub {
+.about-phil-banner .phil-label,
+.about-phil-banner .phil-quote,
+.about-phil-banner .phil-sub {
   position: relative;
   z-index: 1;
 }
@@ -671,7 +674,7 @@ a.drop-card { text-decoration: none; color: inherit; }
 .phil-quote {
   font-family: var(--font-mono);
   font-weight: 900;
-  font-size: clamp(2rem, 7vw, 5.5rem);
+  font-size: clamp(1.8rem, 6vw, 4.6rem);
   line-height: .95;
   color: var(--black);
   letter-spacing: -.03em;
@@ -685,10 +688,7 @@ a.drop-card { text-decoration: none; color: inherit; }
   text-transform: uppercase;
 }
 
-/* ───────────────────────────────────────────
-   ABOUT
-   ─────────────────────────────────────────── */
-#about {
+.about-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: clamp(32px, 6vw, 80px);
@@ -1723,7 +1723,7 @@ a.drop-card { text-decoration: none; color: inherit; }
 @media (max-width: 900px) {
   .nav-links, .nav-cta { display: none; }
   .hamburger { display: flex; }
-  #about { grid-template-columns: 1fr; }
+  .about-grid { grid-template-columns: 1fr; }
   .about-visual { height: auto; aspect-ratio: 16/9; max-height: 280px; }
   .drops-grid { grid-template-columns: repeat(2, 1fr); }
   .product-grid { grid-template-columns: 1fr; }
@@ -1738,7 +1738,7 @@ a.drop-card { text-decoration: none; color: inherit; }
   .hero-actions { flex-direction: column; align-items: flex-start; }
   .btn-primary, .btn-ghost { width: 100%; text-align: center; }
   
-  #philosophy .phil-watermark {
+  .about-phil-banner .phil-watermark {
     font-size: clamp(3rem, 15vw, 6rem);
     color: rgba(0, 0, 0, 0.10);
   }
