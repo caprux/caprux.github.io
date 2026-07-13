@@ -754,11 +754,6 @@ a.drop-card { text-decoration: none; color: inherit; }
   text-decoration-color: rgba(255,90,90,.55);
   text-decoration-thickness: 3px;
 }
-.kenapa-closing {
-  color: var(--white);
-  font-weight: 500;
-  margin-bottom: 0;
-}
 .kx-badge {
   background: var(--surf2);
   border: 1px solid rgba(0,255,0,.16);
