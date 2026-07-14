@@ -147,7 +147,7 @@ const PRODUCTS = [
       'Celana_Pendek_CAPRUX_3.png',
       'Celana_Pendek_CAPRUX_4.png'
     ],
-    type: 'Celana Pendek Men's',
+    type: 'Celana Pendek Men\'s',
     tag: '// The Short Circuit · Produk 003',
     fullDesc: 'Celana pendek dari bahan <strong>Nilon Ripstop</strong> — kuat, tahan sobek, dan ringan. Dibuat khusus untuk pria yang bergerak. <strong>For men only. No Boti.</strong> Saku dalam yang fungsional, potongan yang tidak membatasi gerak.',
     specs: [
@@ -194,6 +194,51 @@ const PRODUCTS = [
     tags: ['#streetwear', '#celana', '#outdoor', '#jawabarat', '#caprux'],
     related: ['kaos-oblong', 'jaket-crincle']
   }
+
+  // ============================================================
+  // ✨ TAMBAH PRODUK BARU DI SINI ✨
+  // Copy blok di bawah, sesuaikan datanya
+  // ============================================================
+  // {
+  //   id: 'nama-produk',
+  //   name: 'NAMA PRODUK',
+  //   badge: '// Bahan',
+  //   desc: 'Deskripsi singkat.',
+  //   price: 'Rp 999.000',
+  //   status: 'soon',
+  //   image: 'nama_gambar.png',
+  //   images: [
+  //     'nama_gambar.png',
+  //     'nama_gambar_2.png',
+  //     'nama_gambar_3.png',
+  //     'nama_gambar_4.png'
+  //   ],
+  //   type: 'Jenis Produk',
+  //   tag: '// Bahan · PRODUK 004',
+  //   fullDesc: 'Deskripsi lengkap dengan <strong>HTML</strong>.',
+  //   specs: [
+  //     { label: 'Bahan', value: '...' },
+  //     { label: 'Fitur', value: '...' },
+  //     { label: 'Origin', value: 'Made in Jawabarat 🇮🇩' }
+  //   ],
+  //   details: [
+  //     { title: '// Judul 1', items: ['Item 1', 'Item 2'] },
+  //     { title: '// Judul 2', items: ['Item 1', 'Item 2'] }
+  //   ],
+  //   sizeGuide: {
+  //     headers: ['Size', 'Dada (cm)', 'Panjang (cm)'],
+  //     rows: [
+  //       ['S', '88–92', '67'],
+  //       ['M', '92–96', '70']
+  //     ]
+  //   },
+  //   care: [
+  //     { icon: '🌊', label: '// Cuci', text: '...' },
+  //     { icon: '🚫', label: '// Jangan', text: '...' }
+  //   ],
+  //   tags: ['#tag1', '#tag2'],
+  //   related: ['kaos-oblong', 'jaket-crincle']
+  // }
 ];
 
 // ================================================================
@@ -219,15 +264,18 @@ function getRelatedProducts(id) {
 // RENDER PRODUCT GRID (index.html)
 // ================================================================
 function renderProducts() {
+  // ── Legacy grid untuk product.html ──
   const grid = document.getElementById('productGrid');
   if (grid) {
     grid.style.display = 'none'; // sembunyikan grid lama, carousel yang tampil
   }
 
+  // ── Carousel untuk index.html ──
   const outer    = document.getElementById('productCarousel');
   const dotsWrap = document.getElementById('carouselDots');
   if (!outer || !dotsWrap) return;
 
+  // Tampilkan wrapper carousel
   const carouselWrap = outer.closest('.carousel-wrap');
   if (carouselWrap) carouselWrap.style.display = 'flex';
 
@@ -240,8 +288,9 @@ function renderProducts() {
     return 'far';
   }
 
+  // Build HTML
   outer.innerHTML = PRODUCTS.map((p, i) => {
-    const locked = p.status !== 'open'; 
+    const locked = p.status !== 'open'; // 'open' = ready/tersedia dibeli. Selain itu (soon/sold) = terkunci.
     return `
     <div class="pcard ${getClass(i)}${locked ? ' locked' : ''}" data-idx="${i}">
       ${p.image
@@ -275,6 +324,8 @@ function renderProducts() {
     });
   }
 
+  // Click cards — kartu locked (belum ready/coming soon) tetap bisa digeser ke tengah,
+  // tapi TIDAK bisa diteruskan ke halaman produk.
   outer.querySelectorAll('.pcard').forEach((c, i) => {
     c.addEventListener('click', () => {
       if (i !== activeIdx) {
@@ -284,8 +335,9 @@ function renderProducts() {
       const p = PRODUCTS[i];
       if (!p || !p.id) return;
       if (p.status !== 'open') {
+        // Feedback visual: goyang sebentar, kasih tau belum bisa dibuka
         c.classList.remove('shake');
-        void c.offsetWidth;
+        void c.offsetWidth; // restart animasi
         c.classList.add('shake');
         return;
       }
@@ -293,10 +345,12 @@ function renderProducts() {
     });
   });
 
+  // Click dots
   dotsWrap.querySelectorAll('.carousel-dot').forEach((d, i) => {
     d.addEventListener('click', () => setActive(i));
   });
 
+  // Touch swipe
   let tStart = 0;
   outer.addEventListener('touchstart', e => { tStart = e.touches[0].clientX; }, { passive: true });
   outer.addEventListener('touchend',   e => {
@@ -304,6 +358,7 @@ function renderProducts() {
     if (Math.abs(dx) > 36) dx < 0 ? setActive(activeIdx + 1) : setActive(activeIdx - 1);
   }, { passive: true });
 
+  // Mouse drag
   let mStart = 0, dragging = false;
   outer.addEventListener('mousedown', e => { dragging = true; mStart = e.clientX; });
   document.addEventListener('mousemove', e => {
@@ -316,8 +371,9 @@ function renderProducts() {
   document.addEventListener('mouseup', () => { dragging = false; });
 }
 
+
 // ================================================================
-// RENDER PRODUCT DETAIL (product.html)
+// RENDER PRODUCT DETAIL (product.html) — DENGAN MULTIPLE IMAGES
 // ================================================================
 function renderProductDetail() {
   const params = new URLSearchParams(window.location.search);
@@ -328,8 +384,8 @@ function renderProductDetail() {
     document.body.innerHTML = `
       <div style="display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;background:#000;color:#fff;font-family:monospace;">
         <h1 style="font-size:3rem;color:#00ff00;">404</h1>
-        <p>Produk tidak ditemukan</p>
-        <a href="index.html" style="color:#00ff00;text-decoration:underline;">← Kembali ke Beranda</a>
+        <p>Waduh, produk ini nggak ketemu.</p>
+        <a href="index.html" style="color:#00ff00;text-decoration:underline;">← Balik ke Home</a>
       </div>
     `;
     return;
@@ -337,10 +393,16 @@ function renderProductDetail() {
   
   document.title = `${product.name} — CAPRUX`;
   
+  // Breadcrumb
   const bcCur = document.querySelector('.bc-cur');
   if (bcCur) bcCur.textContent = product.name;
   
+  // ============================================================
+  // GALLERY — support multiple images
+  // ============================================================
   const images = product.images || [product.image];
+  
+  // Main image
   const mainImg = document.getElementById('mainImg');
   if (mainImg) {
     mainImg.src = images[0] || product.image;
@@ -350,6 +412,7 @@ function renderProductDetail() {
   const gTag = document.querySelector('.g-tag');
   if (gTag) gTag.textContent = `// CAPRUX · ${product.tag.replace('//', '').trim()}`;
   
+  // Thumbs
   const thumbs = document.querySelectorAll('.thumb');
   thumbs.forEach((thumb, i) => {
     const img = thumb.querySelector('img');
@@ -362,6 +425,9 @@ function renderProductDetail() {
     thumb.onclick = function() { switchImg(this, imgSrc); };
   });
   
+  // ============================================================
+  // INFO
+  // ============================================================
   const eyebrow = document.querySelector('.prod-eyebrow');
   if (eyebrow) eyebrow.textContent = product.tag;
   
@@ -380,6 +446,7 @@ function renderProductDetail() {
     statusEl.className = `status s-${product.status}`;
   }
   
+  // CTA — kalau open & ada shopeeUrl, aktifkan tombol beli ke Shopee
   const ctaBtn = document.querySelector('.cta-block .btn-primary');
   if (ctaBtn) {
     if (product.status === 'open' && product.shopeeUrl) {
@@ -396,6 +463,7 @@ function renderProductDetail() {
     }
   }
   
+  // Sembunyikan notify block kalau produk sudah open
   const notifyBlock = document.querySelector('.notify-block');
   if (notifyBlock && product.status === 'open') {
     notifyBlock.style.display = 'none';
@@ -404,6 +472,7 @@ function renderProductDetail() {
   const descEl = document.querySelector('.prod-desc');
   if (descEl) descEl.innerHTML = product.fullDesc;
   
+  // Specs
   const specsTbl = document.querySelector('.specs-tbl');
   if (specsTbl) {
     specsTbl.innerHTML = product.specs.map(s => `
@@ -411,6 +480,7 @@ function renderProductDetail() {
     `).join('');
   }
   
+  // Details tabs
   const detailGrid = document.querySelector('#t1 .detail-grid');
   if (detailGrid) {
     detailGrid.innerHTML = product.details.map(d => `
@@ -421,6 +491,7 @@ function renderProductDetail() {
     `).join('');
   }
   
+  // Size Guide
   const sgTbl = document.querySelector('.sg-tbl');
   if (sgTbl) {
     sgTbl.innerHTML = `
@@ -429,6 +500,7 @@ function renderProductDetail() {
     `;
   }
   
+  // Care
   const careGrid = document.querySelector('.care-grid');
   if (careGrid) {
     careGrid.innerHTML = product.care.map(c => `
@@ -440,17 +512,19 @@ function renderProductDetail() {
     `).join('');
   }
   
+  // Tags
   const tagsContainer = document.querySelector('.tags');
   if (tagsContainer) {
     tagsContainer.innerHTML = product.tags.map(t => `<span class="tag">${t}</span>`).join('');
   }
   
+  // Related products
   const relatedProducts = getRelatedProducts(id);
   const relGrid = document.querySelector('.rel-grid');
   if (relGrid) {
     if (relatedProducts.length > 0) {
       relGrid.innerHTML = relatedProducts.map(p => {
-        const locked = p.status !== 'open';
+        const locked = p.status !== 'open'; // 'open' = ready/tersedia. Selain itu = terkunci.
         const tag = locked ? 'div' : 'a';
         const hrefAttr = locked ? '' : `href="product.html?id=${p.id}"`;
         return `
@@ -475,6 +549,9 @@ function renderProductDetail() {
   }
 }
 
+// ================================================================
+// NAV MOBILE
+// ================================================================
 function toggleMenu() {
   const m = document.getElementById('mobileMenu');
   const h = document.getElementById('hamburger');
@@ -492,6 +569,9 @@ function closeMenu() {
   document.body.style.overflow = '';
 }
 
+// ================================================================
+// GALLERY — Switch gambar
+// ================================================================
 function switchImg(thumb, src) {
   const mainImg = document.getElementById('mainImg');
   if (!mainImg) return;
@@ -500,11 +580,17 @@ function switchImg(thumb, src) {
   thumb.classList.add('active');
 }
 
+// ================================================================
+// SIZE PICKER
+// ================================================================
 function pickSize(btn) {
   document.querySelectorAll('.sz').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
 }
 
+// ================================================================
+// TAB SWITCHER
+// ================================================================
 function switchTab(btn, tabId) {
   document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
@@ -513,21 +599,26 @@ function switchTab(btn, tabId) {
   if (pane) pane.classList.add('active');
 }
 
+// ================================================================
+// NOTIFY
+// ================================================================
 function handleNotify() {
   const input = document.getElementById('notifyEmail');
   if (!input) return;
   const email = input.value.trim();
   if (!email || !email.includes('@')) {
-    alert('Masukin email yang bener bro 🙏');
+    alert('Emailnya yang bener dulu ya 🙏');
     return;
   }
   const nameEl = document.querySelector('.prod-name');
   const productName = nameEl ? nameEl.textContent.trim() : 'produk';
-  alert('Siap! Lo bakal dapet notif pas "' + productName + '" drop.
-بسم الله — thanks udah nunggu.');
+  alert('Siap! Kamu bakal dapet notif pas "' + productName + '" drop.\nبسم الله — makasih udah sabar nungguin.');
   input.value = '';
 }
 
+// ================================================================
+// INIT
+// ================================================================
 document.addEventListener('DOMContentLoaded', function() {
   const isProductPage = window.location.pathname.includes('product.html');
   
@@ -537,11 +628,13 @@ document.addEventListener('DOMContentLoaded', function() {
     renderProducts();
   }
   
+  // Nav hamburger
   const hamburger = document.getElementById('hamburger');
   if (hamburger) {
     hamburger.addEventListener('click', toggleMenu);
   }
   
+  // Nav scroll effect
   const nav = document.querySelector('nav');
   if (nav) {
     window.addEventListener('scroll', function() {
@@ -549,6 +642,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }, { passive: true });
   }
 
+  // ==============================================================
+  // HERO PARALLAX — scroll depth + mouse-tilt lampu logo
+  // ==============================================================
   (function heroParallax() {
     const hero = document.getElementById('home');
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -561,6 +657,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const actions = hero.querySelector('.hero-actions');
     const root = document.documentElement;
 
+    // --- Scroll parallax: layer bergerak beda kecepatan (depth of field) ---
     let ticking = false;
     function updateScrollParallax() {
       const y = window.scrollY;
@@ -581,6 +678,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }, { passive: true });
     updateScrollParallax();
 
+    // --- Mouse-tilt: logo "nyala" ngikutin cahaya kursor (desktop only) ---
     if (logo && window.matchMedia('(pointer: fine)').matches) {
       let rafId = null;
       hero.addEventListener('mousemove', function(e) {
@@ -601,6 +699,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   })();
 
+  // ==============================================================
+  // SCROLL PROGRESS BAR — garis neon di atas nav, isi seiring scroll
+  // ==============================================================
   (function scrollProgressBar() {
     const bar = document.getElementById('scrollProgress');
     if (!bar) return;
@@ -619,6 +720,9 @@ document.addEventListener('DOMContentLoaded', function() {
     update();
   })();
 
+  // ==============================================================
+  // CURSOR GLOW — cahaya lembut ngikutin kursor, dengan lerp halus
+  // ==============================================================
   (function cursorGlow() {
     const glow = document.getElementById('cursorGlow');
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -649,6 +753,9 @@ document.addEventListener('DOMContentLoaded', function() {
     requestAnimationFrame(loop);
   })();
 
+  // ==============================================================
+  // SCROLL REVEAL — fade/slide/scale-in saat elemen masuk viewport
+  // ==============================================================
   (function scrollReveal() {
     const targets = document.querySelectorAll('.reveal, .reveal-scale, .reveal-left, .reveal-right');
     if (!targets.length) return;
@@ -668,6 +775,9 @@ document.addEventListener('DOMContentLoaded', function() {
     targets.forEach(function(el) { io.observe(el); });
   })();
 
+  // ==============================================================
+  // MAGNETIC TILT — drop-card & about-visual "ngikutin" kursor (3D)
+  // ==============================================================
   (function tiltCards() {
     if (!window.matchMedia('(pointer: fine)').matches) return;
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -694,6 +804,7 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     }
 
+    // Drop cards muncul lagi setelah render — pakai delegasi via MutationObserver ringan
     function initDropCardTilt() {
       document.querySelectorAll('.drop-card').forEach(function(card) {
         if (card.dataset.tiltBound) return;
@@ -707,6 +818,7 @@ document.addEventListener('DOMContentLoaded', function() {
       new MutationObserver(initDropCardTilt).observe(relGrid, { childList: true });
     }
 
+    // About visual — tilt lembut mengikuti kursor di dalam section
     const aboutVisual = document.querySelector('.about-visual');
     if (aboutVisual) {
       let rafId = null;
@@ -728,6 +840,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   })();
 
+  // ==============================================================
+  // ABOUT LOGO TOUCH-GLOW — nyala saat disentuh (semua device, termasuk mobile)
+  // ==============================================================
   (function aboutLogoTouchGlow() {
     const aboutLogo = document.querySelector('.about-logo-float');
     if (!aboutLogo) return;
@@ -742,6 +857,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }, { passive: true });
   })();
 
+  // ==============================================================
+  // PHILOSOPHY PARALLAX — watermark bergerak beda kecepatan dari scroll
+  // ==============================================================
   (function philosophyParallax() {
     const phil = document.querySelector('.about-phil-banner');
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -750,7 +868,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function update() {
       const rect = phil.getBoundingClientRect();
       const vh = window.innerHeight || 1;
-      const centered = (rect.top + rect.height / 2 - vh / 2) / vh;
+      const centered = (rect.top + rect.height / 2 - vh / 2) / vh; // -ish range
       const offset = Math.max(-1, Math.min(1, -centered)) * 44;
       phil.style.setProperty('--phil-px', offset.toFixed(1) + 'px');
       ticking = false;
@@ -762,6 +880,9 @@ document.addEventListener('DOMContentLoaded', function() {
     update();
   })();
 
+  // ==============================================================
+  // MARQUEE SKEW — sedikit miring saat scroll cepat, balik halus
+  // ==============================================================
   (function marqueeSkew() {
     const strip = document.querySelector('.marquee-strip');
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -787,23 +908,33 @@ document.addEventListener('DOMContentLoaded', function() {
     }, { passive: true });
   })();
 
+  // Close mobile menu on resize
   window.addEventListener('resize', function() {
     if (window.innerWidth > 900) closeMenu();
   });
 
+  // ── VISITOR COUNTER (countapi.mileshilliard.com — pengganti countapi.xyz) ──
   (function() {
     var numEl  = document.getElementById('visitorCount');
     var noteEl = document.getElementById('visitorNote');
     if (!numEl) return;
+
+    // Key unik CAPRUX — jangan ganti setelah live, counter tersimpan di sini
     var KEY = 'caprux-id_visitor-total-2025';
+
     numEl.classList.add('loading');
+
     fetch('https://countapi.mileshilliard.com/api/v1/hit/' + KEY)
       .then(function(r) { return r.json(); })
       .then(function(data) {
+        // API mengembalikan { key, value } — value bisa string atau number
         var raw = data && (data.value !== undefined ? data.value : null);
         var val = (raw !== null) ? parseInt(raw, 10) : NaN;
+
         if (!isNaN(val)) {
           numEl.classList.remove('loading');
+
+          // Animasi count-up singkat
           var start = Math.max(0, val - Math.min(val, 60));
           var step  = 16;
           var steps = Math.ceil(900 / step);
@@ -814,6 +945,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (cur >= val) { cur = val; clearInterval(timer); }
             numEl.textContent = Math.floor(cur).toLocaleString('id-ID');
           }, step);
+
           if (noteEl) noteEl.textContent = 'Terhitung sejak website diluncurkan · real-time';
         } else {
           numEl.classList.remove('loading');
