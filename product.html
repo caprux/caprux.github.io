@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CAPRUX — Product</title>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&family=Inter:wght@300;400;500&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=9">
+  <link rel="stylesheet" href="style.css?v=10">
 </head>
 <body>
 
@@ -15,28 +15,28 @@
 
 <!-- Mobile Menu -->
 <div class="mobile-menu" id="mobileMenu">
-  <a href="index.html#products" onclick="closeMenu()">Produk</a>
-  <a href="index.html#about" onclick="closeMenu()">Story</a>
-  <a href="index.html#contact" onclick="closeMenu()">Contact</a>
-  <a href="index.html#products" class="m-cta" onclick="closeMenu()">Pembelian Produk</a>
+  <a href="index.html#products" onclick="closeMenu()">The Drops</a>
+  <a href="index.html#kenapa" onclick="closeMenu()">The Roots</a>
+  <a href="index.html#contact" onclick="closeMenu()">Radar</a>
+  <a href="index.html#products" class="m-cta" onclick="closeMenu()">Secure Your Gear</a>
 </div>
 
 <!-- Nav -->
 <nav>
   <a href="index.html" class="nav-logo"><img src="logo_text_putih.png" alt="CAPRUX"></a>
   <ul class="nav-links">
-    <li><a href="index.html#products">Produk</a></li>
-    <li><a href="index.html#about">Story</a></li>
-    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="index.html#products">The Drops</a></li>
+    <li><a href="index.html#kenapa">The Roots</a></li>
+    <li><a href="index.html#contact">Radar</a></li>
   </ul>
-  <a href="index.html#products" class="nav-cta">Pembelian Produk</a>
+  <a href="index.html#products" class="nav-cta">Secure Your Gear</a>
   <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 
 <!-- Breadcrumb -->
 <div class="breadcrumb">
   <a href="index.html">Home</a><span class="bc-sep">›</span>
-  <a href="index.html#products">Produk</a><span class="bc-sep">›</span>
+  <a href="index.html#products">The Drops</a><span class="bc-sep">›</span>
   <span class="bc-cur">Loading...</span>
 </div>
 
@@ -71,12 +71,12 @@
       <p class="prod-desc">Description</p>
 
       <div class="specs-block">
-        <div class="block-label">// Spesifikasi</div>
+        <div class="block-label">// Spek Tempur</div>
         <table class="specs-tbl"></table>
       </div>
 
       <div class="size-block">
-        <div class="block-label">// Pilih Ukuran</div>
+        <div class="block-label">// Size Lo Apa?</div>
         <div class="size-row">
           <button class="sz" onclick="pickSize(this)">M</button>
           <button class="sz" onclick="pickSize(this)">L</button>
@@ -87,11 +87,11 @@
 
       <div class="cta-block">
         <button class="btn-primary" disabled>⚡ Notify Me — Coming Soon</button>
-        <a href="index.html#products" class="btn-ghost">← Lihat Produk Lain</a>
+        <a href="index.html#products" class="btn-ghost">← Explore Drops Lainnya</a>
       </div>
 
       <div class="notify-block">
-        <div class="block-label">// Mau tau saat produk tersedia?</div>
+        <div class="block-label">// Takut Kehabisan Drop Berikutnya?</div>
         <div class="notify-row">
           <input class="notify-in" type="email" placeholder="email@example.com" id="notifyEmail">
           <button class="notify-btn" onclick="handleNotify()">Notify</button>
@@ -107,9 +107,9 @@
 <div class="detail-section">
   <div class="detail-wrap reveal">
     <div class="tabs">
-      <button class="tab active" onclick="switchTab(this,'t1')">Detail Produk</button>
+      <button class="tab active" onclick="switchTab(this,'t1')">Bedah Produk</button>
       <button class="tab" onclick="switchTab(this,'t2')">Size Guide</button>
-      <button class="tab" onclick="switchTab(this,'t3')">Perawatan</button>
+      <button class="tab" onclick="switchTab(this,'t3')">Care Guide</button>
     </div>
     <div class="tab-pane active" id="t1">
       <div class="detail-grid"></div>
@@ -125,8 +125,8 @@
 
 <!-- Related -->
 <section class="related">
-  <p class="eyebrow reveal">// You Might Also Like</p>
-  <h2 class="sec-title reveal">Produk Lainnya</h2>
+  <p class="eyebrow reveal">// Racun Lainnya Buat Lo</p>
+  <h2 class="sec-title reveal">Explore Drops</h2>
   <div class="rel-divider reveal"></div>
   <div class="rel-grid reveal-scale" style="--reveal-delay:.1s"></div>
 </section>
@@ -152,6 +152,6 @@
   <span class="email-fab-ping"></span>
 </a>
 
-<script src="script.js?v=9"></script>
+<script src="script.js?v=10"></script>
 </body>
 </html>
