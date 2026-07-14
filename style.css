@@ -41,16 +41,7 @@ body {
   font-weight: 300;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
-  /* Default pointer: Kujang minimalis warna hitam dengan outline neon hijau caprux */
-  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M10 28 C 10 28, 14 20, 24 6 C 26 3, 29 2, 29 2 C 29 2, 27 7, 24 10 C 18 16, 12 28, 10 28 Z' fill='%23000000' stroke='%2300ff00' stroke-width='1.5'/%3E%3Ccircle cx='21' cy='9' r='1.5' fill='%2300ff00'/%3E%3C/svg%3E") 4 4, auto;
 }
-
-/* Hover pointer untuk semua elemen yang bisa diklik */
-a, button, .sz, .thumb, .drop-card, .pcard, .tab, .carousel-dot, .hamburger {
-  /* Hover pointer: Kujang full neon hijau menyala dengan efek glow */
-  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M10 28 C 10 28, 14 20, 24 6 C 26 3, 29 2, 29 2 C 29 2, 27 7, 24 10 C 18 16, 12 28, 10 28 Z' fill='%2300ff00' filter='drop-shadow(0 0 4px %2300ff00)'/%3E%3C/svg%3E") 4 4, pointer;
-}
-
 img {
   max-width: 100%;
   height: auto;
@@ -131,6 +122,7 @@ nav.scrolled {
   justify-content: center;
   gap: 5px;
   width: 36px; height: 36px;
+  cursor: pointer;
   background: none; border: none;
   padding: 4px;
 }
@@ -252,6 +244,7 @@ nav.scrolled {
   z-index: 2;
   perspective: 900px;
 }
+/* Neon lamp glow — aura cahaya di belakang logo, flicker kayak lampu neon asli */
 .logo-glow {
   position: absolute;
   inset: -18% -12%;
@@ -360,6 +353,7 @@ nav.scrolled {
   color: var(--black);
   border: none;
   padding: clamp(11px,2vh,14px) clamp(20px,4vw,32px);
+  cursor: pointer;
   font-weight: 700;
   display: inline-block;
   position: relative;
@@ -510,12 +504,14 @@ section { padding: clamp(60px, 8vh, 100px) var(--pad-x); }
 a.ep-card {
   color: inherit;
   text-decoration: none;
+  cursor: pointer;
 }
 a.drop-card { text-decoration: none; color: inherit; }
 .drop-card {
   background: var(--surf2);
   position: relative;
   overflow: hidden;
+  cursor: pointer;
   aspect-ratio: 3/4;
   display: flex;
   flex-direction: column;
@@ -627,7 +623,7 @@ a.drop-card { text-decoration: none; color: inherit; }
 /* ───────────────────────────────────────────
    ABOUT & PHILOSOPHY (digabung)
    ─────────────────────────────────────────── */
-#about, #kenapa { position: relative; }
+#about { position: relative; }
 
 .about-phil-banner {
   background: var(--green);
@@ -720,6 +716,7 @@ a.drop-card { text-decoration: none; color: inherit; }
   will-change: transform;
 }
 
+/* Ambient glow pool — cahaya lembut biar logo nggak ngambang kosong, tanpa kotak/border */
 .about-visual::before {
   content: '';
   position: absolute;
@@ -955,6 +952,7 @@ footer {
   background: var(--surf2);
   aspect-ratio: 1;
   overflow: hidden;
+  cursor: pointer;
   border: 1px solid transparent;
   transition: border-color .2s;
 }
@@ -1017,6 +1015,9 @@ footer {
   border: 1px solid;
   text-transform: uppercase;
 }
+.s-soon { color: var(--green); border-color: var(--green); }
+.s-open { color: var(--white); border-color: var(--white); background: rgba(255,255,255,.06); }
+.s-sold { color: var(--grey); border-color: var(--grey); }
 
 .prod-desc {
   font-size: clamp(.84rem, 1.2vw, .95rem);
@@ -1069,6 +1070,7 @@ footer {
   border: 1px solid #333;
   color: var(--grey);
   padding: 8px 15px;
+  cursor: pointer;
   background: none;
   transition: border-color .2s, color .2s;
 }
@@ -1089,6 +1091,7 @@ footer {
 }
 .btn-primary:disabled {
   opacity: .38;
+  cursor: not-allowed;
   transform: none;
 }
 .btn-ghost {
@@ -1123,6 +1126,7 @@ footer {
   border: 1px solid var(--green);
   color: var(--green);
   padding: 12px 15px;
+  cursor: pointer;
   white-space: nowrap;
   transition: background .2s, color .2s;
 }
@@ -1166,6 +1170,7 @@ footer {
   border-bottom: 2px solid transparent;
   color: var(--grey);
   padding: 13px 22px 11px;
+  cursor: pointer;
   transition: color .2s, border-color .2s;
   margin-bottom: -1px;
 }
@@ -1276,6 +1281,36 @@ footer {
   gap: 2px;
 }
 
+a.drop-card { text-decoration: none; color: inherit; }
+.drop-card {
+  background: var(--surf2);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  aspect-ratio: 3/4;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  transform: perspective(1000px) rotateX(var(--tilt-ry, 0deg)) rotateY(var(--tilt-rx, 0deg)) scale(var(--tilt-scale, 1));
+  transition: transform .45s cubic-bezier(.16,1,.3,1);
+  will-change: transform;
+}
+@media (hover: hover) and (pointer: fine) {
+  .drop-card:hover { --tilt-scale: 1.025; }
+}
+.drop-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 22px; height: 22px;
+  border-top: 2px solid var(--green);
+  border-left: 2px solid var(--green);
+  opacity: 0;
+  transition: opacity .3s;
+  z-index: 5;
+}
+.drop-card:hover::before { opacity: 1; }
+
 .dc-img {
   position: absolute; inset: 0;
   display: flex;
@@ -1294,6 +1329,8 @@ footer {
   filter: grayscale(0%) brightness(1.05);
 }
 
+/* ── Locked (belum ready / coming soon / habis) ── */
+.drop-card.locked { cursor: not-allowed; }
 .drop-card.locked .dc-img img { filter: grayscale(100%) brightness(.5); }
 .drop-card.locked:hover .dc-img img { transform: none; filter: grayscale(100%) brightness(.5); }
 .drop-card.locked .pcard-lock { opacity: 1; }
@@ -1404,9 +1441,10 @@ footer {
 
 /* ───────────────────────────────────────────
    CAROUSEL PRODUK — LINEAR FOCUS/DEFOCUS
+   selected = besar di tengah, lainnya kecil di samping, semua sejajar vertikal
    ─────────────────────────────────────────── */
 .carousel-wrap {
-  display: none;
+  display: none; /* hanya tampil jika ada productCarousel — JS yang isi */
   flex-direction: column;
   align-items: center;
   gap: 24px;
@@ -1417,19 +1455,23 @@ footer {
 
 .carousel-track {
   display: flex;
-  align-items: center;
+  align-items: center;        /* semua card sejajar tengah secara vertikal */
   justify-content: center;
   gap: clamp(10px, 2vw, 20px);
   width: 100%;
   padding: 20px 0;
+  cursor: grab;
   user-select: none;
 }
+.carousel-track:active { cursor: grabbing; }
 
+/* ── Base card ── */
 .pcard {
   flex-shrink: 0;
   background: var(--surf2);
   position: relative;
   overflow: hidden;
+  cursor: pointer;
   border: 1px solid transparent;
   transition:
     width      .45s cubic-bezier(.4,0,.2,1),
@@ -1443,6 +1485,7 @@ footer {
   justify-content: flex-end;
 }
 
+/* ── Ukuran tiap state ── */
 .pcard.active {
   width:  clamp(240px, 36vw, 380px);
   height: clamp(320px, 48vw, 510px);
@@ -1474,6 +1517,7 @@ footer {
   z-index: 1;
 }
 
+/* ── Gambar ── */
 .pcard-img {
   position: absolute;
   inset: 0;
@@ -1486,6 +1530,8 @@ footer {
 .pcard.far    .pcard-img { filter: grayscale(60%); }
 .pcard.active:hover .pcard-img { transform: scale(1.04); }
 
+/* ── Locked (belum ready / coming soon / habis) — abu-abu, tidak bisa dibuka ── */
+.pcard.locked { cursor: not-allowed; }
 .pcard.locked .pcard-img { filter: grayscale(100%) brightness(.5); }
 .pcard.locked.active .pcard-img { filter: grayscale(100%) brightness(.55); }
 .pcard.locked.active:hover .pcard-img { transform: none; }
@@ -1519,6 +1565,7 @@ footer {
 }
 .pcard.shake { animation: card-shake .45s ease; }
 
+/* Corner bracket hanya di active */
 .pcard::before {
   content: '';
   position: absolute;
@@ -1532,6 +1579,7 @@ footer {
 }
 .pcard.active::before { opacity: 1; }
 
+/* ── Overlay info — hanya muncul di active ── */
 .pcard-body {
   position: relative;
   z-index: 2;
@@ -1580,6 +1628,7 @@ footer {
   letter-spacing: .3em;
 }
 
+/* ── Dots ── */
 .carousel-dots {
   display: flex;
   gap: 8px;
@@ -1590,6 +1639,7 @@ footer {
   border-radius: 50%;
   background: #333;
   border: 1px solid #444;
+  cursor: pointer;
   transition: background .25s, transform .25s, box-shadow .25s;
 }
 .carousel-dot.active {
@@ -1614,6 +1664,7 @@ footer {
   }
 }
 
+
 @media (max-width: 900px) {
   .nav-links, .nav-cta { display: none; }
   .hamburger { display: flex; }
@@ -1626,6 +1677,7 @@ footer {
 
 @media (max-width: 480px) {
   .drops-grid { grid-template-columns: 1fr; }
+  .ep-grid { grid-template-columns: 1fr; }
   .scroll-hint { display: none; }
   #home::before, #home::after { width: 22px; height: 22px; }
   .hero-actions { flex-direction: column; align-items: flex-start; }
@@ -1662,6 +1714,7 @@ footer {
   }
 }
 
+/* ============ Email Contact FAB ============ */
 .email-fab {
   position: fixed;
   bottom: 24px;
@@ -1680,18 +1733,21 @@ footer {
   transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
   text-decoration: none;
 }
+
 .email-fab svg {
   width: 24px;
   height: 24px;
   position: relative;
   z-index: 2;
 }
+
 .email-fab:hover {
   transform: scale(1.08) translateY(-2px);
   background: var(--green);
   color: #000;
   box-shadow: 0 0 24px rgba(0,255,0,.75);
 }
+
 .email-fab-ping {
   position: absolute;
   inset: 0;
@@ -1722,6 +1778,9 @@ footer {
   .email-fab-ping { animation: none; }
 }
 
+/* ================================================================
+   SCROLL PROGRESS BAR — garis neon tipis di atas nav, isi seiring scroll
+   ================================================================ */
 .scroll-progress {
   position: fixed;
   top: 0; left: 0;
@@ -1735,6 +1794,9 @@ footer {
   pointer-events: none;
 }
 
+/* ================================================================
+   CURSOR GLOW — cahaya lembut ngikutin kursor (desktop only)
+   ================================================================ */
 .cursor-glow {
   position: fixed;
   top: 0; left: 0;
@@ -1755,6 +1817,10 @@ footer {
   .cursor-glow { display: none; }
 }
 
+/* ================================================================
+   SCROLL-REVEAL SYSTEM — elemen masuk halus saat kena viewport
+   Dipicu oleh IntersectionObserver di script.js (.in-view ditambahkan)
+   ================================================================ */
 .reveal {
   opacity: 0;
   transform: translateY(38px);
@@ -1797,4 +1863,56 @@ footer {
     transform: none !important;
   }
   .scroll-progress, .cursor-glow { display: none; }
+}
+
+/* ================================================================
+   CUSTOM POINTER — "Anyaman-Reticle" : perpaduan garis bidik teknologi
+   + tanda "X" (simbol plot-twist CAPRUX) + motif putus-putus ala anyaman.
+   Cuma ganti tampilan kursor OS, tidak menyentuh fungsi/JS apa pun.
+   ================================================================ */
+@media (pointer: fine) {
+  html, body {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 22 22'%3E%3Ccircle cx='11' cy='11' r='6.4' fill='none' stroke='%2300ff00' stroke-width='1.1' stroke-dasharray='2.4 2.1' opacity='.8'/%3E%3Ccircle cx='11' cy='11' r='1.2' fill='%2300ff00'/%3E%3Cpath d='M11 1v3M11 18v3M1 11h3M18 11h3' stroke='%2300ff00' stroke-width='1.1'/%3E%3C/svg%3E") 11 11, auto;
+  }
+
+  a, button, .hamburger, .sz, .tab, .thumb, .carousel-dot,
+  .drop-card, a.drop-card, a.ep-card, .pcard, a.pcard,
+  .notify-btn, .email-fab, .btn-primary, .btn-ghost,
+  .nav-cta, .m-cta, .c-link {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26' viewBox='0 0 26 26'%3E%3Ccircle cx='13' cy='13' r='9' fill='rgba(0,255,0,0.10)' stroke='%2300ff00' stroke-width='1.5'/%3E%3Cpath d='M9.2 9.2l7.6 7.6M16.8 9.2l-7.6 7.6' stroke='%2300ff00' stroke-width='1.7' stroke-linecap='round'/%3E%3Cpath d='M13 1.5v3.4M13 21.1v3.4M1.5 13h3.4M21.1 13h3.4' stroke='%2300ff00' stroke-width='1.3'/%3E%3C/svg%3E") 13 13, pointer;
+  }
+
+  input, textarea {
+    cursor: text;
+  }
+}
+
+/* ================================================================
+   CURSOR-GLOW ACCENT — cincin putus-putus (motif anyaman/tenun) +
+   tanda "X" neon yang menempel pas di titik cahaya kursor.
+   Menumpang pada #cursorGlow yang sudah ada (--cx/--cy diisi oleh
+   loop rAF di script.js yang tidak diubah) — murni tambahan visual.
+   ================================================================ */
+.cursor-glow::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 34px; height: 34px;
+  margin: -17px 0 0 -17px;
+  border-radius: 50%;
+  border: 1px dashed rgba(0,255,0,.55);
+  animation: cpx-ring-spin 8s linear infinite;
+}
+.cursor-glow::after {
+  content: '✕';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: rgba(0,255,0,.6);
+  text-shadow: 0 0 8px rgba(0,255,0,.7);
+}
+@keyframes cpx-ring-spin {
+  to { transform: rotate(360deg); }
 }
