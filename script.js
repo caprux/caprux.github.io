@@ -32,7 +32,7 @@ const PRODUCTS = [
       { label: 'Logo', value: 'Polyflex 3D Silicon 1mm' },
       { label: 'Label', value: 'Woven label neon green hem' },
       { label: 'Potongan', value: 'Regular fit' },
-      { label: 'Origin', value: 'Made in Jawabarat 🇮🇩' }
+      { label: 'Origin', value: 'Made in Jawa Barat 🇮🇩' }
     ],
     details: [
       { title: '// Bahan & Konstruksi', items: [
@@ -50,7 +50,7 @@ const PRODUCTS = [
       ]},
       { title: '// Filosofi Produk Ini', items: [
         'Terinspirasi dari panas Bumi yang menyengat',
-        '"The Tropical Soul" — sensasi alam indonesia pinggir pantai',
+        '"The Tropical Soul" — sensasi alam Indonesia di pinggir pantai',
         'Limited product, tidak ada restock setelah habis'
       ]}
     ],
@@ -94,7 +94,7 @@ const PRODUCTS = [
       { label: 'Fitur', value: 'Zipper YKK, hood adjustable' },
       { label: 'Logo', value: 'Embroidery + woven label' },
       { label: 'Potongan', value: 'Regular fit, model gunung' },
-      { label: 'Origin', value: 'Made in Jawabarat 🇮🇩' }
+      { label: 'Origin', value: 'Made in Jawa Barat 🇮🇩' }
     ],
     details: [
       { title: '// Bahan & Konstruksi', items: [
@@ -137,7 +137,7 @@ const PRODUCTS = [
     id: 'celana-pendek',
     name: 'THE ARCHIPELAGO SOUL',
     badge: '// Nillon Ripstop',
-    desc: 'For men only. No Boti.',
+    desc: 'For men only. No excuses, just hustle.',
     price: 'Rp 225.750',
     status: 'soon',
     image: 'Celana_Pendek_CAPRUX.png',
@@ -149,14 +149,14 @@ const PRODUCTS = [
     ],
     type: 'Celana Pendek Men\'s',
     tag: '// The Short Circuit · Produk 003',
-    fullDesc: 'Celana pendek dari bahan <strong>Nilon Ripstop</strong> — kuat, tahan sobek, dan ringan. Dibuat khusus untuk pria yang bergerak. <strong>For men only. No Boti.</strong> Saku dalam yang fungsional, potongan yang tidak membatasi gerak.',
+    fullDesc: 'Celana pendek dari bahan <strong>Nilon Ripstop</strong> — kuat, tahan sobek, dan ringan. Dibuat khusus untuk pria yang bergerak. <strong>For men only. No excuses, just hustle.</strong> Saku dalam yang fungsional, potongan yang tidak membatasi gerak.',
     specs: [
       { label: 'Bahan', value: 'Nilon Ripstop' },
       { label: 'Fitur', value: 'Quick-dry, anti-sobek' },
       { label: 'Saku', value: '2 saku samping + 1 saku belakang' },
       { label: 'Ikat Pinggang', value: 'Drawstring + velcro adjuster' },
       { label: 'Potongan', value: 'Regular fit, panjang di atas lutut' },
-      { label: 'Origin', value: 'Made in Jawabarat 🇮🇩' }
+      { label: 'Origin', value: 'Made in Jawa Barat 🇮🇩' }
     ],
     details: [
       { title: '// Bahan & Konstruksi', items: [
@@ -219,7 +219,7 @@ const PRODUCTS = [
   //   specs: [
   //     { label: 'Bahan', value: '...' },
   //     { label: 'Fitur', value: '...' },
-  //     { label: 'Origin', value: 'Made in Jawabarat 🇮🇩' }
+  //     { label: 'Origin', value: 'Made in Jawa Barat 🇮🇩' }
   //   ],
   //   details: [
   //     { title: '// Judul 1', items: ['Item 1', 'Item 2'] },
@@ -384,7 +384,7 @@ function renderProductDetail() {
     document.body.innerHTML = `
       <div style="display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;background:#000;color:#fff;font-family:monospace;">
         <h1 style="font-size:3rem;color:#00ff00;">404</h1>
-        <p>Waduh, produk ini nggak ketemu.</p>
+        <p>Waduh, jejak produk ini raib tertelan kekacauan.</p>
         <a href="index.html" style="color:#00ff00;text-decoration:underline;">← Balik ke Home</a>
       </div>
     `;
