@@ -969,7 +969,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var ctx = cnv.getContext('2d');
     var dismissed = false;
     var startTime = Date.now();
-    var totalDur  = 6200;
+    var totalDur  = 2000;
 
     function resize() { cnv.width = overlay.offsetWidth; cnv.height = overlay.offsetHeight; }
     resize();
@@ -1019,8 +1019,8 @@ document.addEventListener('DOMContentLoaded', function() {
     function scheduleNext() {
       if (dismissed) return;
       var t=Math.min((Date.now()-startTime)/totalDur,1);
-      var minD=t<0.3?1400:t<0.6?800:t<0.85?280:80;
-      var maxD=t<0.3?2400:t<0.6?1400:t<0.85?550:180;
+      var minD=t<0.3?260:t<0.6?160:t<0.85?90:45;
+      var maxD=t<0.3?450:t<0.6?300:t<0.85?170:90;
       setTimeout(function(){ if(!dismissed){strike(t);scheduleNext();} },rnd(minD,maxD));
     }
 
@@ -1029,11 +1029,11 @@ document.addEventListener('DOMContentLoaded', function() {
       strike(1); strike(1); strike(1); doFlash(1);
       setTimeout(function(){
         overlay.classList.add('fade-out');
-        setTimeout(function(){ overlay.remove(); },1000);
-      },100);
+        setTimeout(function(){ overlay.remove(); },500);
+      },80);
     }
 
-    setTimeout(scheduleNext, 800);
+    setTimeout(scheduleNext, 120);
     setTimeout(dismiss, totalDur);
     if (skipBtn) skipBtn.addEventListener('click', dismiss);
   })();

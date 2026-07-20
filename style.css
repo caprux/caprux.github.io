@@ -21,9 +21,9 @@
   --font-body: 'Inter', sans-serif;
   --font-mono: 'Share Tech Mono', monospace;
   --fabric-tex:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E"),
-    repeating-linear-gradient(45deg, rgba(255,255,255,.03) 0px, rgba(255,255,255,.03) 1px, transparent 1px, transparent 5px),
-    repeating-linear-gradient(-45deg, rgba(255,255,255,.022) 0px, rgba(255,255,255,.022) 1px, transparent 1px, transparent 5px);
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E"),
+    repeating-linear-gradient(45deg, rgba(255,255,255,.045) 0px, rgba(255,255,255,.045) 1px, transparent 1px, transparent 5px),
+    repeating-linear-gradient(-45deg, rgba(255,255,255,.032) 0px, rgba(255,255,255,.032) 1px, transparent 1px, transparent 5px);
 }
 
 /* ───────────────────────────────────────────
@@ -1718,6 +1718,40 @@ a.drop-card { text-decoration: none; color: inherit; }
   *, *::before, *::after {
     animation: none !important;
     transition: none !important;
+  }
+}
+
+/* ───────────────────────────────────────────
+   HP SANGAT KECIL (320px–359px, mis. iPhone SE / Android lama)
+   ─────────────────────────────────────────── */
+@media (max-width: 359px) {
+  :root { --pad-x: 12px; }
+  .hero-actions { gap: 10px; }
+  .nav-logo img { height: 22px; }
+  .about-values .val-n { font-size: .68rem; }
+}
+
+/* ───────────────────────────────────────────
+   MOBILE LANDSCAPE (layar pendek, mis. HP diputar)
+   ─────────────────────────────────────────── */
+@media (max-height: 480px) and (orientation: landscape) {
+  #home {
+    min-height: auto;
+    padding-top: clamp(90px, 20vh, 120px);
+    padding-bottom: clamp(30px, 10vh, 50px);
+  }
+  .mobile-menu { justify-content: flex-start; padding-top: 90px; gap: 18px; overflow-y: auto; }
+  .mobile-menu a { font-size: 1.4rem; }
+  .scroll-hint { display: none; }
+}
+
+/* ───────────────────────────────────────────
+   LAYAR ULTRA-WIDE (monitor lebar, TV, dsb.)
+   ─────────────────────────────────────────── */
+@media (min-width: 1800px) {
+  nav, #home, #products, #kenapa, #contact, footer {
+    padding-left: max(var(--pad-x), calc((100vw - 1760px) / 2));
+    padding-right: max(var(--pad-x), calc((100vw - 1760px) / 2));
   }
 }
 
