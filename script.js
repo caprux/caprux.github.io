@@ -18,10 +18,10 @@ const PRODUCTS = [
     shopeeUrl: 'https://id.shp.ee/kc8YJcLh',
     image: 'CPRX-06-SB.png',
     images: [
-      'CPRX-KO-01.png',
-      'CPRX-KO-02.png',
-      'CPRX-KO-03.png',
-      'CPRX-KO-04.png'
+      'CPX_KO_01.png',
+      'CPX_KO_02.png',
+      'CPX_KO_03.png',
+      'CPX_KO_04.png'
     ],
     type: 'Kaos Oblong Premium',
     tag: '// Micro Cotton Danbowl · PRODUK 001',
@@ -81,10 +81,10 @@ const PRODUCTS = [
     shopeeUrl: 'https://id.shp.ee/c1xPsCmU',
     image: 'Jaket_Crincle_CAPRUX.png',
     images: [
-      'CPRX-JK-01.webp',
-      'CPRX-JK-02.webp',
-      'CPRX-JK-03.webp',
-      'CPRX-JK-04.webp'
+      'CPX_JP_01.png',
+      'CPX_JP_02.png',
+      'CPX_JP_03.png',
+      'CPX_JP_04.png'
     ],
     type: 'Jaket Gunung Sporty',
     tag: '// Parasut Crincle · PRODUK 002',
