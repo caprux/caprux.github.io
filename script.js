@@ -16,7 +16,7 @@ const PRODUCTS = [
     price: 'Rp 125.750',
     status: 'open',
     shopeeUrl: 'https://id.shp.ee/kc8YJcLh',
-    image: 'CPRX-06-SB.png',
+    image: 'CPX_KO_01.png',
     images: [
       'CPX_KO_01.png',
       'CPX_KO_02.png',
@@ -79,7 +79,7 @@ const PRODUCTS = [
     price: 'Rp 175.750',
     status: 'open',
     shopeeUrl: 'https://id.shp.ee/c1xPsCmU',
-    image: 'Jaket_Crincle_CAPRUX.png',
+    image: 'CPX_JP_01.png',
     images: [
       'CPX_JP_01.png',
       'CPX_JP_02.png',
