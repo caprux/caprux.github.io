@@ -81,10 +81,10 @@ const PRODUCTS = [
     shopeeUrl: 'https://id.shp.ee/c1xPsCmU',
     image: 'Jaket_Crincle_CAPRUX.png',
     images: [
-      'CPRX-JK-01.png',
-      'CPRX-JK-02.png',
-      'CPRX-JK-03.png',
-      'CPRX-JK-04.png'
+      'CPRX-JK-01.webp',
+      'CPRX-JK-02.webp',
+      'CPRX-JK-03.webp',
+      'CPRX-JK-04.webp'
     ],
     type: 'Jaket Gunung Sporty',
     tag: '// Parasut Crincle · PRODUK 002',
