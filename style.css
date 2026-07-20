@@ -20,6 +20,10 @@
   --font-head: 'Space Grotesk', sans-serif;
   --font-body: 'Inter', sans-serif;
   --font-mono: 'Share Tech Mono', monospace;
+  --fabric-tex:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E"),
+    repeating-linear-gradient(45deg, rgba(255,255,255,.03) 0px, rgba(255,255,255,.03) 1px, transparent 1px, transparent 5px),
+    repeating-linear-gradient(-45deg, rgba(255,255,255,.022) 0px, rgba(255,255,255,.022) 1px, transparent 1px, transparent 5px);
 }
 
 /* ───────────────────────────────────────────
@@ -35,7 +39,8 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 body {
-  background: var(--black);
+  background-color: var(--black);
+  background-image: var(--fabric-tex);
   color: var(--white);
   font-family: var(--font-body);
   font-weight: 300;
@@ -480,7 +485,7 @@ section { padding: clamp(60px, 8vh, 100px) var(--pad-x); }
 /* ───────────────────────────────────────────
    PRODUCTS
    ─────────────────────────────────────────── */
-#products { background: var(--surface); }
+#products { background-color: var(--surface); background-image: var(--fabric-tex); }
 
 .drops-header {
   display: flex;
@@ -760,7 +765,7 @@ a.drop-card { text-decoration: none; color: inherit; }
 /* ───────────────────────────────────────────
    KENAPA CAPRUX
    ─────────────────────────────────────────── */
-#kenapa { background: var(--surface); }
+#kenapa { background-color: var(--surface); background-image: var(--fabric-tex); }
 .sec-title .title-strike {
   color: var(--grey);
   opacity: .5;
@@ -859,6 +864,7 @@ footer {
 }
 .f-socials {
   display: flex;
+  flex-wrap: wrap;
   gap: 20px;
 }
 .f-socials a {
@@ -1148,7 +1154,8 @@ footer {
 }
 
 .detail-section {
-  background: var(--surface);
+  background-color: var(--surface);
+  background-image: var(--fabric-tex);
   padding: clamp(44px, 6vh, 72px) var(--pad-x);
 }
 .detail-wrap {
