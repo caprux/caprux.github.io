@@ -13,15 +13,15 @@ const PRODUCTS = [
     name: 'THE TROPICAL SOUL',
     badge: '// Micro Cotton Danbowl',
     desc: 'Polyflex 3D logo silicon 1mm.',
-    price: 'Rp 175.750',
+    price: 'Rp 125.750',
     status: 'open',
     shopeeUrl: 'https://id.shp.ee/kc8YJcLh',
     image: 'CPRX-06-SB.png',
     images: [
-      'CPRX-06-SB.png',
-      'CPRX-06-BK.png',
-      'CPRX-04-SB.png',
-      'CPRX-04-BK.png'
+      'CPRX-KO-01.png',
+      'CPRX-KO-02.png',
+      'CPRX-KO-03.png',
+      'CPRX-KO-04.png'
     ],
     type: 'Kaos Oblong Premium',
     tag: '// Micro Cotton Danbowl · PRODUK 001',
@@ -76,15 +76,15 @@ const PRODUCTS = [
     name: 'THE VOLCANIC SOUL',
     badge: '// Parasut Crincle',
     desc: 'Model Gunung. Bahan Sporty.',
-    price: 'Rp 289.750',
+    price: 'Rp 175.750',
     status: 'open',
     shopeeUrl: 'https://id.shp.ee/c1xPsCmU',
     image: 'Jaket_Crincle_CAPRUX.png',
     images: [
-      'Jaket_Crincle_CAPRUX.png',
-      'Jaket_Crincle_CAPRUX_2.png',
-      'Jaket_Crincle_CAPRUX_3.png',
-      'Jaket_Crincle_CAPRUX_4.png'
+      'CPRX-JK-01.png',
+      'CPRX-JK-02.png',
+      'CPRX-JK-03.png',
+      'CPRX-JK-04.png'
     ],
     type: 'Jaket Gunung Sporty',
     tag: '// Parasut Crincle · PRODUK 002',
