@@ -78,6 +78,7 @@ const PRODUCTS = [
     desc: 'Model Gunung. Bahan Sporty.',
     price: 'Rp 289.750',
     status: 'open',
+    shopeeUrl: 'https://id.shp.ee/c1xPsCmU',
     image: 'Jaket_Crincle_CAPRUX.png',
     images: [
       'Jaket_Crincle_CAPRUX.png',
