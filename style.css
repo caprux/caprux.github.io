@@ -1957,3 +1957,67 @@ a.drop-card { text-decoration: none; color: inherit; }
 @keyframes cpx-ring-spin {
   to { transform: rotate(360deg); }
 }
+
+/* ================================================================
+   PERFORMANCE OPTIMIZATIONS — adaptive untuk device mid-low
+   Diinject via data-perf attribute oleh perf-patch.js
+   ================================================================ */
+
+/* Content-visibility: auto — skip render elemen di luar viewport */
+#kenapa, #contact {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 600px;
+}
+
+/* CSS Containment — kurangi reflow scope */
+#products, #kenapa, #contact, footer {
+  contain: layout style;
+}
+
+/* Device LOW — matiin semua efek berat via CSS saja */
+[data-perf="LOW"] .hero-grid {
+  background-image: linear-gradient(rgba(0,255,0,.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,255,0,.018) 1px, transparent 1px);
+}
+[data-perf="LOW"] .hero-logo-wrap img.main-logo {
+  filter: drop-shadow(0 0 10px #00ff0066);
+  will-change: auto;
+}
+[data-perf="LOW"] .hero-sub,
+[data-perf="LOW"] .hero-actions,
+[data-perf="LOW"] .hero-grid,
+[data-perf="LOW"] .hero-scan {
+  transform: none !important;
+  will-change: auto !important;
+}
+[data-perf="LOW"] .about-phil-banner {
+  overflow: hidden;
+}
+[data-perf="LOW"] .phil-watermark {
+  animation: none !important;
+}
+[data-perf="LOW"] .logo-glow {
+  display: none;
+}
+[data-perf="LOW"] .hero-scan {
+  display: none;
+}
+[data-perf="LOW"] .hero-noise {
+  display: none;
+}
+[data-perf="LOW"] .scroll-progress {
+  box-shadow: none;
+}
+
+/* Device MID — kurangi efek tapi tidak dimatiin total */
+[data-perf="MID"] .hero-logo-wrap img.main-logo {
+  filter: drop-shadow(0 0 12px #00ff0077);
+}
+[data-perf="MID"] .logo-glow {
+  animation: none;
+  opacity: 0.25;
+  filter: blur(20px);
+}
+[data-perf="MID"] .hero-noise {
+  display: none;
+}

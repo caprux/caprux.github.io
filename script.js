@@ -649,7 +649,8 @@ document.addEventListener('DOMContentLoaded', function() {
   (function heroParallax() {
     const hero = document.getElementById('home');
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!hero || reduceMotion) return;
+    const tier = window.__CPX_TIER || 'HIGH';
+    if (!hero || reduceMotion || tier === 'LOW') return;
 
     const grid = hero.querySelector('.hero-grid');
     const scan = hero.querySelector('.hero-scan');
@@ -679,8 +680,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }, { passive: true });
     updateScrollParallax();
 
-    // --- Mouse-tilt: logo "nyala" ngikutin cahaya kursor (desktop only) ---
-    if (logo && window.matchMedia('(pointer: fine)').matches) {
+    // --- Mouse-tilt: logo "nyala" ngikutin cahaya kursor (desktop only, HIGH only) ---
+    if (logo && tier === 'HIGH' && window.matchMedia('(pointer: fine)').matches) {
       let rafId = null;
       hero.addEventListener('mousemove', function(e) {
         const rect = hero.getBoundingClientRect();
@@ -727,7 +728,8 @@ document.addEventListener('DOMContentLoaded', function() {
   (function cursorGlow() {
     const glow = document.getElementById('cursorGlow');
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!glow || reduceMotion || !window.matchMedia('(pointer: fine)').matches) return;
+    const tier = window.__CPX_TIER || 'HIGH';
+    if (!glow || reduceMotion || !window.matchMedia('(pointer: fine)').matches || tier !== 'HIGH') return;
 
     let targetX = -420, targetY = -420;
     let curX = -420, curY = -420;
@@ -782,7 +784,8 @@ document.addEventListener('DOMContentLoaded', function() {
   (function tiltCards() {
     if (!window.matchMedia('(pointer: fine)').matches) return;
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduceMotion) return;
+    const tier = window.__CPX_TIER || 'HIGH';
+    if (reduceMotion || tier !== 'HIGH') return;
 
     function attachTilt(el, maxDeg, scaleVar) {
       let rafId = null;
@@ -864,7 +867,8 @@ document.addEventListener('DOMContentLoaded', function() {
   (function philosophyParallax() {
     const phil = document.querySelector('.about-phil-banner');
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!phil || reduceMotion) return;
+    const tier = window.__CPX_TIER || 'HIGH';
+    if (!phil || reduceMotion || tier === 'LOW') return;
     let ticking = false;
     function update() {
       const rect = phil.getBoundingClientRect();
@@ -887,7 +891,8 @@ document.addEventListener('DOMContentLoaded', function() {
   (function marqueeSkew() {
     const strip = document.querySelector('.marquee-strip');
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!strip || reduceMotion) return;
+    const tier = window.__CPX_TIER || 'HIGH';
+    if (!strip || reduceMotion || tier !== 'HIGH') return;
     let lastY = window.scrollY;
     let ticking = false;
     let resetTimer = null;
@@ -962,9 +967,18 @@ document.addEventListener('DOMContentLoaded', function() {
   })();
   (function() {
     var overlay = document.getElementById('introOverlay');
+    var skipBtn = document.getElementById('introSkip');
+    // Skip intro jika sudah pernah lihat di session ini, ATAU device LOW/MID
+    var tier = window.__CPX_TIER || 'HIGH';
+    var seen = false;
+    try { seen = !!sessionStorage.getItem('cpx_intro_seen'); } catch(e) {}
+    if (seen || tier === 'LOW' || tier === 'MID') {
+      if (overlay) { overlay.style.display = 'none'; overlay.remove(); }
+      return;
+    }
+    try { sessionStorage.setItem('cpx_intro_seen', '1'); } catch(e) {}
     var cnv     = document.getElementById('introCanvas');
     var fl      = document.getElementById('introFlash');
-    var skipBtn = document.getElementById('introSkip');
     if (!overlay || !cnv) return;
     var ctx = cnv.getContext('2d');
     var dismissed = false;
