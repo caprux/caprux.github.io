@@ -247,8 +247,8 @@ const PRODUCTS = [
 // ================================================================
 const STATUS_LABEL = {
   soon: 'Coming Soon',
-  open: '✓ Tersedia',
-  sold: 'Habis'
+  open: '✓ Available',
+  sold: 'Sold Out'
 };
 
 function getProduct(id) {
@@ -383,10 +383,10 @@ function renderProductDetail() {
   
   if (!product) {
     document.body.innerHTML = `
-      <div style="display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;background:#000;color:#fff;font-family:monospace;">
-        <h1 style="font-size:3rem;color:#00ff00;">404</h1>
-        <p>Waduh, jejak produk ini raib tertelan kekacauan.</p>
-        <a href="index.html" style="color:#00ff00;text-decoration:underline;">← Balik ke Home</a>
+      <div style="display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;background:#0a0807;color:#f5f0ea;font-family:'DM Mono',monospace;">
+        <h1 style="font-size:3rem;color:#C9922A;font-family:'Bebas Neue',sans-serif;letter-spacing:.05em;">404</h1>
+        <p style="font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:#6b6560;">This product vanished into the chaos.</p>
+        <a href="index.html" style="color:#C9922A;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;border:1px solid rgba(201,146,42,.3);padding:10px 24px;transition:all .2s;">← Back to Home</a>
       </div>
     `;
     return;
@@ -451,15 +451,15 @@ function renderProductDetail() {
   const ctaBtn = document.querySelector('.cta-block .btn-primary');
   if (ctaBtn) {
     if (product.status === 'open' && product.shopeeUrl) {
-      ctaBtn.textContent = '🛒 Beli Sekarang di Shopee';
+      ctaBtn.textContent = '◈ Buy Now on Shopee';
       ctaBtn.removeAttribute('disabled');
       ctaBtn.style.cursor = 'pointer';
       ctaBtn.onclick = function() { window.open(product.shopeeUrl, '_blank'); };
     } else if (product.status === 'sold') {
-      ctaBtn.textContent = '✕ Stok Habis';
+      ctaBtn.textContent = '✕ Sold Out';
       ctaBtn.setAttribute('disabled', 'true');
     } else {
-      ctaBtn.textContent = '⚡ Notify Me — Coming Soon';
+      ctaBtn.textContent = '◈ Notify Me — Coming Soon';
       ctaBtn.setAttribute('disabled', 'true');
     }
   }
@@ -545,7 +545,7 @@ function renderProductDetail() {
       `;
       }).join('');
     } else {
-      relGrid.innerHTML = `<p style="color:var(--grey);padding:20px;">Tidak ada produk terkait.</p>`;
+      relGrid.innerHTML = `<p style="color:var(--grey);padding:20px;font-family:var(--font-body);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;">No related products.</p>`;
     }
   }
 }
@@ -608,12 +608,12 @@ function handleNotify() {
   if (!input) return;
   const email = input.value.trim();
   if (!email || !email.includes('@')) {
-    alert('Emailnya yang bener dulu ya 🙏');
+    alert('Please enter a valid email address 🙏');
     return;
   }
   const nameEl = document.querySelector('.prod-name');
-  const productName = nameEl ? nameEl.textContent.trim() : 'produk';
-  alert('Siap! Kamu bakal dapet notif pas "' + productName + '" drop.\nبسم الله — makasih udah sabar nungguin.');
+  const productName = nameEl ? nameEl.textContent.trim() : 'this product';
+  alert('Done! You\'ll get notified when "' + productName + '" drops.\nبسم الله — thanks for waiting.');
   input.value = '';
 }
 
@@ -952,17 +952,17 @@ document.addEventListener('DOMContentLoaded', function() {
             numEl.textContent = Math.floor(cur).toLocaleString('id-ID');
           }, step);
 
-          if (noteEl) noteEl.textContent = 'Terhitung sejak website diluncurkan · real-time';
+          if (noteEl) noteEl.textContent = 'Counted since launch · real-time';
         } else {
           numEl.classList.remove('loading');
           numEl.textContent = '—';
-          if (noteEl) noteEl.textContent = 'Data tidak tersedia saat ini';
+          if (noteEl) noteEl.textContent = 'Data unavailable right now';
         }
       })
       .catch(function() {
         numEl.classList.remove('loading');
         numEl.textContent = '—';
-        if (noteEl) noteEl.textContent = 'Gagal memuat data pengunjung';
+        if (noteEl) noteEl.textContent = 'Failed to load visitor count';
       });
   })();
   (function() {
@@ -996,13 +996,13 @@ document.addEventListener('DOMContentLoaded', function() {
       var mx=(x1+x2)/2+rnd(-rough,rough), my=(y1+y2)/2+rnd(-rough,rough);
       if (depth===1) {
         ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(mx,my); ctx.lineTo(x2,y2);
-        ctx.strokeStyle='rgba(0,255,0,'+alpha+')'; ctx.lineWidth=w;
-        ctx.shadowColor='#00ff00'; ctx.shadowBlur=w*7; ctx.stroke(); ctx.shadowBlur=0;
+        ctx.strokeStyle='rgba(201,146,42,'+alpha+')'; ctx.lineWidth=w;
+        ctx.shadowColor='#C9922A'; ctx.shadowBlur=w*7; ctx.stroke(); ctx.shadowBlur=0;
         if (Math.random()<0.4) {
           var bx=mx+rnd(-70,70), by=my+rnd(20,90);
           ctx.beginPath(); ctx.moveTo(mx,my); ctx.lineTo(bx,by);
-          ctx.strokeStyle='rgba(0,255,0,'+(alpha*0.45)+')'; ctx.lineWidth=w*0.4;
-          ctx.shadowBlur=4; ctx.shadowColor='#00ff00'; ctx.stroke(); ctx.shadowBlur=0;
+          ctx.strokeStyle='rgba(201,146,42,'+(alpha*0.45)+')'; ctx.lineWidth=w*0.4;
+          ctx.shadowBlur=4; ctx.shadowColor='#C9922A'; ctx.stroke(); ctx.shadowBlur=0;
         }
       } else {
         drawBolt(x1,y1,mx,my,rough/1.6,depth-1,alpha,w);
