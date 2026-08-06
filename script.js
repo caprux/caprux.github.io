@@ -262,59 +262,114 @@ function getRelatedProducts(id) {
 }
 
 // ================================================================
-// RENDER PRODUCT GRID (index.html) — Grid premium 3-col
+// RENDER PRODUCT GRID (index.html)
 // ================================================================
 function renderProducts() {
+  // ── Legacy grid untuk product.html ──
   const grid = document.getElementById('productGrid');
-  if (!grid) return;
+  if (grid) {
+    grid.style.display = 'none'; // sembunyikan grid lama, carousel yang tampil
+  }
 
-  const statusLabel = { soon: 'Coming Soon', open: '✓ Tersedia', sold: 'Habis' };
+  // ── Carousel untuk index.html ──
+  const outer    = document.getElementById('productCarousel');
+  const dotsWrap = document.getElementById('carouselDots');
+  if (!outer || !dotsWrap) return;
 
-  grid.innerHTML = PRODUCTS.map(p => {
-    const statusClass = `s-${p.status}`;
-    const label = statusLabel[p.status] || p.status;
-    const isAvailable = p.status === 'open';
+  // Tampilkan wrapper carousel
+  const carouselWrap = outer.closest('.carousel-wrap');
+  if (carouselWrap) carouselWrap.style.display = 'flex';
 
-    const inner = `
-      <div class="drop-card-img">
-        ${p.image
-          ? `<img src="${p.image}" alt="${p.name}" loading="lazy">`
-          : `<div style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;color:var(--ash);font-family:var(--font-mono);font-size:.7rem;letter-spacing:.2em;">CPX</div>`
-        }
+  let activeIdx = 0;
+
+  function getClass(i) {
+    const d = i - activeIdx;
+    if (d === 0) return 'active';
+    if (d === 1 || d === -1) return 'side';
+    return 'far';
+  }
+
+  // Build HTML
+  outer.innerHTML = PRODUCTS.map((p, i) => {
+    const locked = p.status !== 'open'; // 'open' = ready/tersedia dibeli. Selain itu (soon/sold) = terkunci.
+    return `
+    <div class="pcard ${getClass(i)}${locked ? ' locked' : ''}" data-idx="${i}">
+      ${p.image
+        ? `<img class="pcard-img" src="${p.image}" alt="${p.name}" loading="lazy">`
+        : `<div class="pcard-placeholder"><span>CPX</span></div>`}
+      ${locked ? `<div class="pcard-lock">🔒 ${STATUS_LABEL[p.status] || 'Segera Hadir'}</div>` : ''}
+      <div class="pcard-body">
+        <div class="pcard-badge">${p.badge}</div>
+        <div class="pcard-name">${p.name}</div>
+        <div class="pcard-price">${p.price}</div>
       </div>
-      <div class="drop-cta-hint">↗</div>
-      <div class="drop-body">
-        <div class="drop-badge">${p.badge.replace('//', '').trim()}</div>
-        <div class="drop-name">${p.name}</div>
-        <div class="drop-desc">${p.desc}</div>
-        <div class="drop-foot">
-          <span class="drop-price">${p.price}</span>
-          <span class="drop-status ${statusClass}">${label}</span>
-        </div>
-      </div>
-    `;
-
-    if (isAvailable) {
-      return `<a href="product.html?id=${p.id}" class="drop-card">${inner}</a>`;
-    } else {
-      return `<div class="drop-card" style="cursor:default" title="${label}">${inner}</div>`;
-    }
+    </div>
+  `;
   }).join('');
 
-  // Tilt cards after render
-  if (window.__CPX_TIER === 'HIGH' && window.matchMedia('(pointer: fine)').matches) {
-    grid.querySelectorAll('.drop-card').forEach(function(card) {
-      card.addEventListener('mousemove', function(e) {
-        const rect = card.getBoundingClientRect();
-        const relX = (e.clientX - rect.left) / rect.width - 0.5;
-        const relY = (e.clientY - rect.top) / rect.height - 0.5;
-        card.style.transform = `perspective(1000px) rotateY(${(relX * 4).toFixed(2)}deg) rotateX(${(-relY * 3).toFixed(2)}deg)`;
-      });
-      card.addEventListener('mouseleave', function() {
-        card.style.transform = '';
-      });
+  dotsWrap.innerHTML = PRODUCTS.map((_, i) =>
+    `<div class="carousel-dot${i === activeIdx ? ' active' : ''}" data-idx="${i}"></div>`
+  ).join('');
+
+  function setActive(idx) {
+    const prev = activeIdx;
+    activeIdx = Math.max(0, Math.min(PRODUCTS.length - 1, idx));
+    if (prev === activeIdx) return;
+
+    outer.querySelectorAll('.pcard').forEach((c, i) => {
+      const locked = PRODUCTS[i].status !== 'open';
+      c.className = 'pcard ' + getClass(i) + (locked ? ' locked' : '');
+    });
+    dotsWrap.querySelectorAll('.carousel-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === activeIdx);
     });
   }
+
+  // Click cards — kartu locked (belum ready/coming soon) tetap bisa digeser ke tengah,
+  // tapi TIDAK bisa diteruskan ke halaman produk.
+  outer.querySelectorAll('.pcard').forEach((c, i) => {
+    c.addEventListener('click', () => {
+      if (i !== activeIdx) {
+        setActive(i);
+        return;
+      }
+      const p = PRODUCTS[i];
+      if (!p || !p.id) return;
+      if (p.status !== 'open') {
+        // Feedback visual: goyang sebentar, kasih tau belum bisa dibuka
+        c.classList.remove('shake');
+        void c.offsetWidth; // restart animasi
+        c.classList.add('shake');
+        return;
+      }
+      window.location.href = 'product.html?id=' + p.id;
+    });
+  });
+
+  // Click dots
+  dotsWrap.querySelectorAll('.carousel-dot').forEach((d, i) => {
+    d.addEventListener('click', () => setActive(i));
+  });
+
+  // Touch swipe
+  let tStart = 0;
+  outer.addEventListener('touchstart', e => { tStart = e.touches[0].clientX; }, { passive: true });
+  outer.addEventListener('touchend',   e => {
+    const dx = e.changedTouches[0].clientX - tStart;
+    if (Math.abs(dx) > 36) dx < 0 ? setActive(activeIdx + 1) : setActive(activeIdx - 1);
+  }, { passive: true });
+
+  // Mouse drag
+  let mStart = 0, dragging = false;
+  outer.addEventListener('mousedown', e => { dragging = true; mStart = e.clientX; });
+  document.addEventListener('mousemove', e => {
+    if (!dragging) return;
+    if (Math.abs(e.clientX - mStart) > 36) {
+      dragging = false;
+      e.clientX - mStart < 0 ? setActive(activeIdx + 1) : setActive(activeIdx - 1);
+    }
+  });
+  document.addEventListener('mouseup', () => { dragging = false; });
 }
 
 
@@ -331,7 +386,7 @@ function renderProductDetail() {
       <div style="display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;background:#000;color:#fff;font-family:monospace;">
         <h1 style="font-size:3rem;color:#00ff00;">404</h1>
         <p>Waduh, jejak produk ini raib tertelan kekacauan.</p>
-        <a href="index.html" style="color:var(--accent,#e8c97a);text-decoration:underline;">← Balik ke Home</a>
+        <a href="index.html" style="color:#00ff00;text-decoration:underline;">← Balik ke Home</a>
       </div>
     `;
     return;
@@ -430,8 +485,8 @@ function renderProductDetail() {
   const detailGrid = document.querySelector('#t1 .detail-grid');
   if (detailGrid) {
     detailGrid.innerHTML = product.details.map(d => `
-      <div class="detail-col">
-        <div class="block-label">${d.title}</div>
+      <div class="d-block">
+        <div class="d-label">${d.title}</div>
         <ul>${d.items.map(item => `<li>${item}</li>`).join('')}</ul>
       </div>
     `).join('');
@@ -450,8 +505,8 @@ function renderProductDetail() {
   const careGrid = document.querySelector('.care-grid');
   if (careGrid) {
     careGrid.innerHTML = product.care.map(c => `
-      <div class="care-item">
-        <div class="care-icon">${c.icon}</div>
+      <div class="care">
+        <div class="care-ico">${c.icon}</div>
         <div class="care-lbl">${c.label}</div>
         <div class="care-txt">${c.text}</div>
       </div>
@@ -530,8 +585,8 @@ function switchImg(thumb, src) {
 // SIZE PICKER
 // ================================================================
 function pickSize(btn) {
-  document.querySelectorAll('.sz').forEach(b => b.classList.remove('picked'));
-  btn.classList.add('picked');
+  document.querySelectorAll('.sz').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
 }
 
 // ================================================================
@@ -540,7 +595,7 @@ function pickSize(btn) {
 function switchTab(btn, tabId) {
   document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
-  btn.classList.add('picked');
+  btn.classList.add('active');
   const pane = document.getElementById(tabId);
   if (pane) pane.classList.add('active');
 }
@@ -694,8 +749,8 @@ document.addEventListener('DOMContentLoaded', function() {
     function loop() {
       curX += (targetX - curX) * 0.12;
       curY += (targetY - curY) * 0.12;
-      glow.style.left = curX + 'px';
-      glow.style.top = curY + 'px';
+      glow.style.setProperty('--cx', curX + 'px');
+      glow.style.setProperty('--cy', curY + 'px');
       requestAnimationFrame(loop);
     }
     requestAnimationFrame(loop);
@@ -709,13 +764,13 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!targets.length) return;
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduceMotion || !('IntersectionObserver' in window)) {
-      targets.forEach(function(el) { el.classList.add('visible'); });
+      targets.forEach(function(el) { el.classList.add('in-view'); });
       return;
     }
     const io = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
         if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
+          entry.target.classList.add('in-view');
           io.unobserve(entry.target);
         }
       });
