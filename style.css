@@ -11,46 +11,48 @@
    diperkaya dengan turunan forest green yang adem
    ─────────────────────────────────────────── */
 :root {
-  /* Core brand — tidak berubah */
+  /* Core brand */
   --black:    #000000;
-  --white:    #ffffff;
-  --green:    #00ff00;
+  --white:    #f4fff4; /* Putih dengan sentuhan mint lembut, kontras tapi tidak silau */
+  --green:    #00ff33; /* Hijau neon sedikit lebih menyala */
 
-  /* Surface — gelap seperti tanah dalam hutan */
-  --surface:  #050f07;
-  --surf2:    #0a1a0d;
-  --surf3:    #0f2413;
+  /* Surface - Menggelapkan dasar "tanah" agar teks lebih hidup */
+  --surface:  #010602;
+  --surf2:    #031206;
+  --surf3:    #06200a;
 
-  /* Forest accent — turunan hijau yang lebih hangat dan adem */
-  --forest:   #1a4a22;
-  --moss:     #2d6e38;
-  --leaf:     #4caf64;
-  --mist:     #7dffb0;   /* tetap ada aksen neon tapi lebih lembut dari 00ff00 */
+  /* Forest accent - Hijau lumut diterangkan untuk visibilitas */
+  --forest:   #12401a;
+  --moss:     #4ac95f;
+  --leaf:     #52d973;
+  --mist:     #b3ffcc;
 
-  /* Earth tones — tanah, batu, kayu */
+  /* Earth tones */
   --earth:    #1c1208;
   --stone:    #2a2a22;
   --bark:     #3d2e1a;
 
-  /* Glow organik — lebih lembut dari neon keras */
-  --glow:     0 0 20px rgba(0,255,0,.25), 0 0 60px rgba(0,200,60,.12);
-  --glow-sm:  0 0 10px rgba(0,255,0,.2);
-  --glow-warm: 0 0 30px rgba(80,200,100,.2), 0 0 80px rgba(40,150,60,.08);
+  /* Glow organik */
+  --glow:     0 0 20px rgba(0,255,0,.35), 0 0 60px rgba(0,200,60,.18);
+  --glow-sm:  0 0 12px rgba(0,255,0,.3);
+  --glow-warm: 0 0 30px rgba(80,200,100,.25), 0 0 80px rgba(40,150,60,.15);
 
-  /* Grey */
-  --grey:     #5a6e5c;
-  --grey-lt:  #8aaa8c;
+  /* Grey - Diterangkan drastis agar nyaman dibaca di background gelap */
+  --grey:     #90c299;
+  --grey-lt:  #c2ebd0;
 
   --pad-x: clamp(16px, 5vw, 60px);
-  --font-head: 'Space Grotesk', sans-serif;
-  --font-body: 'Inter', sans-serif;
+
+  /* FULL MONOSPACE - Karakter tegas dan raw */
+  --font-head: 'Share Tech Mono', monospace;
+  --font-body: 'Share Tech Mono', monospace;
   --font-mono: 'Share Tech Mono', monospace;
 
-  /* Tekstur organik — lebih halus dari fabric cyberpunk */
+  /* Tekstur organik - opacity dinaikkan sedikit agar kabut/hutan lebih terasa */
   --organic-tex:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.45' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E"),
-    radial-gradient(ellipse at 20% 80%, rgba(20,60,25,.18) 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 20%, rgba(10,40,15,.12) 0%, transparent 55%);
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.45' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E"),
+    radial-gradient(ellipse at 20% 80%, rgba(20,60,25,.3) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(10,40,15,.25) 0%, transparent 55%);
 }
 
 /* ───────────────────────────────────────────
@@ -71,6 +73,9 @@ body {
   color: var(--white);
   font-family: var(--font-body);
   font-weight: 300;
+  font-size: 16px;
+  /* Bayangan teks hitam pekat agar tulisan "terangkat" dan sangat kontras */
+  text-shadow: 0 1px 3px rgba(0,0,0,0.95), 0 2px 8px rgba(0,0,0,0.6);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
@@ -215,7 +220,6 @@ nav.scrolled {
               radial-gradient(ellipse at 80% 20%, rgba(5,25,10,.4) 0%, transparent 55%);
 }
 
-/* SVG Hutan Latar */
 .hero-forest {
   position: absolute;
   inset: 0;
@@ -228,7 +232,6 @@ nav.scrolled {
   object-fit: cover;
 }
 
-/* Animasi pohon bergerak pelan mengikuti angin */
 .tree {
   transform-origin: bottom center;
   animation: tree-sway 8s ease-in-out infinite;
@@ -246,7 +249,6 @@ nav.scrolled {
   75%       { transform: rotate(-.6deg); }
 }
 
-/* Partikel spora melayang */
 .spore {
   animation: spore-float 6s ease-in-out infinite;
 }
@@ -265,7 +267,6 @@ nav.scrolled {
   66%       { transform: translateY(-8px) translateX(-5px); opacity: .6; }
 }
 
-/* Kabut hutan */
 .hero-mist {
   position: absolute;
   inset: 0;
@@ -290,7 +291,6 @@ nav.scrolled {
   z-index: 1;
 }
 
-/* Corner marks — lebih halus */
 #home::before, #home::after {
   content: '';
   position: absolute;
@@ -302,7 +302,6 @@ nav.scrolled {
 #home::before { top: clamp(70px,10vh,100px); left: var(--pad-x); border-width: 1px 0 0 1px; }
 #home::after  { bottom: 32px; right: var(--pad-x); border-width: 0 1px 1px 0; }
 
-/* Hero content */
 .hero-content {
   position: relative;
   z-index: 3;
@@ -325,7 +324,6 @@ nav.scrolled {
   perspective: 900px;
 }
 
-/* Aura organik di balik logo */
 .logo-glow {
   position: absolute;
   inset: -22% -14%;
@@ -561,7 +559,6 @@ section {
   text-align: right;
 }
 
-/* carousel */
 .carousel-wrap {
   display: none;
   flex-direction: column;
@@ -673,7 +670,6 @@ section {
 }
 .pcard.shake { animation: shake .35s ease; }
 
-/* drops grid (tersembunyi tapi tetap ada untuk product.html) */
 .drops-grid { display: none; }
 
 /* ───────────────────────────────────────────
@@ -687,7 +683,6 @@ section {
   border-bottom: 1px solid rgba(30,70,36,.25);
 }
 
-/* Philosophy Banner */
 .about-phil-banner {
   position: relative;
   overflow: hidden;
@@ -742,7 +737,6 @@ section {
   position: relative;
 }
 
-/* Body text */
 .about-body {
   font-size: clamp(.9rem, 1.4vw, 1.05rem);
   line-height: 1.8;
@@ -752,7 +746,6 @@ section {
 }
 .about-body strong { color: var(--white); font-weight: 600; }
 
-/* Values */
 .about-values {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -797,7 +790,6 @@ section {
   padding-left: 16px;
 }
 
-/* About visual float */
 .about-right { margin-top: clamp(32px, 5vh, 48px); }
 .about-visual {
   display: flex;
@@ -865,7 +857,6 @@ section {
 }
 .c-icon { color: var(--moss); font-size: .8rem; }
 
-/* Visitor Counter */
 .visitor-counter {
   border: 1px solid rgba(30,70,36,.35);
   background: rgba(5,15,7,.5);
@@ -983,7 +974,6 @@ footer {
   margin: 0 auto;
 }
 
-/* Gallery */
 .gallery-main {
   position: relative;
   aspect-ratio: 3/4;
@@ -1027,7 +1017,6 @@ footer {
 .thumb.active { border-color: var(--green); }
 .thumb img { width: 100%; height: 100%; object-fit: cover; }
 
-/* Product Info */
 .prod-eyebrow {
   font-family: var(--font-mono);
   font-size: .62rem;
@@ -1175,7 +1164,6 @@ footer {
 }
 .tag:hover { color: var(--grey-lt); border-color: rgba(30,70,36,.6); }
 
-/* Detail Tabs */
 .detail-section { padding: 0 var(--pad-x) clamp(48px, 7vh, 72px); }
 .detail-wrap { max-width: 1100px; margin: 0 auto; }
 .tabs { display: flex; gap: 0; border-bottom: 1px solid rgba(30,70,36,.3); margin-bottom: 28px; }
@@ -1199,7 +1187,6 @@ footer {
 .tab-pane.active { display: block; }
 
 .detail-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; }
-.d-block { }
 .d-label {
   font-family: var(--font-mono);
   font-size: .62rem;
@@ -1257,7 +1244,6 @@ footer {
 }
 .care-txt { font-size: .82rem; line-height: 1.65; color: var(--grey-lt); }
 
-/* Related */
 .related {
   border-top: 1px solid rgba(30,70,36,.2);
   background: var(--surf2);
@@ -1369,7 +1355,7 @@ footer {
 }
 
 /* ───────────────────────────────────────────
-   CURSOR GLOW — warna organik lebih hangat
+   CURSOR GLOW
    ─────────────────────────────────────────── */
 .cursor-glow {
   position: fixed;
@@ -1389,7 +1375,6 @@ footer {
 .cursor-glow.active { opacity: 1; }
 @media (pointer: coarse), (hover: none) { .cursor-glow { display: none; } }
 
-/* cursor ring — motif daun */
 .cursor-glow::before {
   content: '';
   position: absolute;
@@ -1445,7 +1430,7 @@ footer {
 }
 
 /* ───────────────────────────────────────────
-   CUSTOM CURSOR — daun/alam reticle
+   CUSTOM CURSOR
    ─────────────────────────────────────────── */
 @media (pointer: fine) {
   html, body {

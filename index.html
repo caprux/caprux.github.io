@@ -18,7 +18,7 @@
   <link rel="icon" type="image/png" href="LOGO_TRANSPARAN_HITAM.png">
   <link rel="shortcut icon" type="image/png" href="LOGO_TRANSPARAN_HITAM.png">
   <link rel="apple-touch-icon" href="LOGO_TRANSPARAN_HITAM.png">
-  <meta name="theme-color" content="#050f07">
+  <meta name="theme-color" content="#010602">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&family=Inter:wght@300;400;500&family=Share+Tech+Mono&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -61,11 +61,6 @@
 }
 </style>
 
-<!-- Ambient forest sound -->
-<audio id="forestAmbient" loop preload="none" style="display:none;">
-  <source src="https://assets.mixkit.co/active_storage/sfx/2515/2515-preview.mp3" type="audio/mpeg">
-</audio>
-
 <!-- Mobile Menu -->
 <div class="mobile-menu" id="mobileMenu">
   <a href="#products" onclick="closeMenu()">Koleksi</a>
@@ -88,47 +83,39 @@
 
 <!-- Hero -->
 <section id="home">
-  <!-- SVG pohon latar belakang -->
   <div class="hero-forest" aria-hidden="true">
     <svg class="forest-svg" viewBox="0 0 1200 700" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax meet">
-      <!-- Pohon kiri jauh -->
       <g class="tree t-far-left" opacity=".18">
         <line x1="60" y1="700" x2="60" y2="400" stroke="#1a4a20" stroke-width="8"/>
         <path d="M60 430 Q20 380 10 310 Q50 350 60 330 Q70 350 110 310 Q100 380 60 430Z" fill="#0d2e14"/>
         <path d="M60 360 Q25 310 15 250 Q55 290 60 270 Q65 290 105 250 Q95 310 60 360Z" fill="#0f3416"/>
         <path d="M60 295 Q30 250 22 195 Q58 230 60 215 Q62 230 98 195 Q90 250 60 295Z" fill="#112e16"/>
       </g>
-      <!-- Pohon kanan jauh -->
       <g class="tree t-far-right" opacity=".15">
         <line x1="1140" y1="700" x2="1140" y2="350" stroke="#1a4a20" stroke-width="10"/>
         <path d="M1140 390 Q1090 330 1075 245 Q1125 290 1140 265 Q1155 290 1205 245 Q1190 330 1140 390Z" fill="#0d2e14"/>
         <path d="M1140 310 Q1098 258 1085 180 Q1130 218 1140 200 Q1150 218 1195 180 Q1182 258 1140 310Z" fill="#0f3416"/>
         <path d="M1140 240 Q1105 195 1095 130 Q1133 162 1140 148 Q1147 162 1185 130 Q1175 195 1140 240Z" fill="#112e16"/>
       </g>
-      <!-- Pohon tengah kiri -->
       <g class="tree t-mid-left" opacity=".3">
         <line x1="220" y1="700" x2="220" y2="280" stroke="#1e5828" stroke-width="14"/>
         <path d="M220 330 Q158 265 140 170 Q200 220 220 195 Q240 220 300 170 Q282 265 220 330Z" fill="#122a18"/>
         <path d="M220 250 Q168 192 152 108 Q208 152 220 132 Q232 152 288 108 Q272 192 220 250Z" fill="#163320"/>
         <path d="M220 175 Q175 124 160 54 Q212 92 220 76 Q228 92 280 54 Q265 124 220 175Z" fill="#1a3a24"/>
       </g>
-      <!-- Pohon tengah kanan -->
       <g class="tree t-mid-right" opacity=".28">
         <line x1="980" y1="700" x2="980" y2="310" stroke="#1e5828" stroke-width="12"/>
         <path d="M980 360 Q928 295 912 205 Q966 248 980 225 Q994 248 1048 205 Q1032 295 980 360Z" fill="#122a18"/>
         <path d="M980 280 Q935 220 920 140 Q970 178 980 160 Q990 178 1040 140 Q1025 220 980 280Z" fill="#163320"/>
         <path d="M980 210 Q940 160 928 90 Q974 122 980 108 Q986 122 1032 90 Q1020 160 980 210Z" fill="#1a3a24"/>
       </g>
-      <!-- Pohon depan kiri besar -->
       <g class="tree t-front-left" opacity=".55">
         <line x1="80" y1="700" x2="80" y2="180" stroke="#245e30" stroke-width="20"/>
-        <!-- Cabang kiri -->
         <line x1="80" y1="380" x2="20" y2="310" stroke="#1e5228" stroke-width="8"/>
         <line x1="80" y1="300" x2="140" y2="240" stroke="#1e5228" stroke-width="7"/>
         <path d="M80 240 Q10 165 -10 60 Q65 120 80 90 Q95 120 170 60 Q150 165 80 240Z" fill="#152e1c"/>
         <path d="M80 170 Q20 105 5 20 Q68 68 80 50 Q92 68 155 20 Q140 105 80 170Z" fill="#1a3822"/>
       </g>
-      <!-- Pohon depan kanan besar -->
       <g class="tree t-front-right" opacity=".5">
         <line x1="1120" y1="700" x2="1120" y2="200" stroke="#245e30" stroke-width="18"/>
         <line x1="1120" y1="400" x2="1180" y2="330" stroke="#1e5228" stroke-width="7"/>
@@ -136,9 +123,7 @@
         <path d="M1120 260 Q1058 185 1038 80 Q1108 138 1120 110 Q1132 138 1202 80 Q1182 185 1120 260Z" fill="#152e1c"/>
         <path d="M1120 190 Q1065 122 1048 38 Q1112 82 1120 62 Q1128 82 1192 38 Q1175 122 1120 190Z" fill="#1a3822"/>
       </g>
-      <!-- Akar dan lumut di bawah -->
       <ellipse cx="600" cy="690" rx="580" ry="18" fill="#0a1f0e" opacity=".6"/>
-      <!-- Partikel cahaya -->
       <circle class="spore s1" cx="300" cy="300" r="2" fill="#7dffb0" opacity=".6"/>
       <circle class="spore s2" cx="550" cy="200" r="1.5" fill="#a0ffc0" opacity=".5"/>
       <circle class="spore s3" cx="750" cy="350" r="2.5" fill="#7dffb0" opacity=".45"/>

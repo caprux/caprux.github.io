@@ -291,7 +291,7 @@ function renderProducts() {
 
   // Build HTML
   outer.innerHTML = PRODUCTS.map((p, i) => {
-    const locked = p.status !== 'open'; // 'open' = ready/tersedia dibeli. Selain itu (soon/sold) = terkunci.
+    const locked = p.status !== 'open';
     return `
     <div class="pcard ${getClass(i)}${locked ? ' locked' : ''}" data-idx="${i}">
       ${p.image
@@ -325,8 +325,7 @@ function renderProducts() {
     });
   }
 
-  // Click cards — kartu locked (belum ready/coming soon) tetap bisa digeser ke tengah,
-  // tapi TIDAK bisa diteruskan ke halaman produk.
+  // Click cards
   outer.querySelectorAll('.pcard').forEach((c, i) => {
     c.addEventListener('click', () => {
       if (i !== activeIdx) {
@@ -336,9 +335,8 @@ function renderProducts() {
       const p = PRODUCTS[i];
       if (!p || !p.id) return;
       if (p.status !== 'open') {
-        // Feedback visual: goyang sebentar, kasih tau belum bisa dibuka
         c.classList.remove('shake');
-        void c.offsetWidth; // restart animasi
+        void c.offsetWidth;
         c.classList.add('shake');
         return;
       }
@@ -380,7 +378,7 @@ function renderProductDetail() {
   const params = new URLSearchParams(window.location.search);
   const id = params.get('id');
   const product = getProduct(id);
-  
+
   if (!product) {
     document.body.innerHTML = `
       <div style="display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;background:#000;color:#fff;font-family:monospace;">
@@ -391,28 +389,28 @@ function renderProductDetail() {
     `;
     return;
   }
-  
+
   document.title = `${product.name} — CAPRUX`;
-  
+
   // Breadcrumb
   const bcCur = document.querySelector('.bc-cur');
   if (bcCur) bcCur.textContent = product.name;
-  
+
   // ============================================================
   // GALLERY — support multiple images
   // ============================================================
   const images = product.images || [product.image];
-  
+
   // Main image
   const mainImg = document.getElementById('mainImg');
   if (mainImg) {
     mainImg.src = images[0] || product.image;
     mainImg.alt = product.name;
   }
-  
+
   const gTag = document.querySelector('.g-tag');
   if (gTag) gTag.textContent = `// CAPRUX · ${product.tag.replace('//', '').trim()}`;
-  
+
   // Thumbs
   const thumbs = document.querySelectorAll('.thumb');
   thumbs.forEach((thumb, i) => {
@@ -425,29 +423,29 @@ function renderProductDetail() {
     thumb.className = 'thumb' + (i === 0 ? ' active' : '');
     thumb.onclick = function() { switchImg(this, imgSrc); };
   });
-  
+
   // ============================================================
   // INFO
   // ============================================================
   const eyebrow = document.querySelector('.prod-eyebrow');
   if (eyebrow) eyebrow.textContent = product.tag;
-  
+
   const nameEl = document.querySelector('.prod-name');
   if (nameEl) nameEl.innerHTML = product.name.replace(/ /g, '<br>');
-  
+
   const typeEl = document.querySelector('.prod-type');
   if (typeEl) typeEl.textContent = product.type;
-  
+
   const priceEl = document.querySelector('.price');
   if (priceEl) priceEl.textContent = product.price;
-  
+
   const statusEl = document.querySelector('.status');
   if (statusEl) {
     statusEl.textContent = STATUS_LABEL[product.status] || product.status;
     statusEl.className = `status s-${product.status}`;
   }
-  
-  // CTA — kalau open & ada shopeeUrl, aktifkan tombol beli ke Shopee
+
+  // CTA
   const ctaBtn = document.querySelector('.cta-block .btn-primary');
   if (ctaBtn) {
     if (product.status === 'open' && product.shopeeUrl) {
@@ -463,16 +461,16 @@ function renderProductDetail() {
       ctaBtn.setAttribute('disabled', 'true');
     }
   }
-  
+
   // Sembunyikan notify block kalau produk sudah open
   const notifyBlock = document.querySelector('.notify-block');
   if (notifyBlock && product.status === 'open') {
     notifyBlock.style.display = 'none';
   }
-  
+
   const descEl = document.querySelector('.prod-desc');
   if (descEl) descEl.innerHTML = product.fullDesc;
-  
+
   // Specs
   const specsTbl = document.querySelector('.specs-tbl');
   if (specsTbl) {
@@ -480,7 +478,7 @@ function renderProductDetail() {
       <tr><td>${s.label}</td><td>${s.value}</td></tr>
     `).join('');
   }
-  
+
   // Details tabs
   const detailGrid = document.querySelector('#t1 .detail-grid');
   if (detailGrid) {
@@ -491,7 +489,7 @@ function renderProductDetail() {
       </div>
     `).join('');
   }
-  
+
   // Size Guide
   const sgTbl = document.querySelector('.sg-tbl');
   if (sgTbl) {
@@ -500,7 +498,7 @@ function renderProductDetail() {
       <tbody>${product.sizeGuide.rows.map(row => `<tr>${row.map(cell => `<td>${cell}</td>`).join('')}</tr>`).join('')}</tbody>
     `;
   }
-  
+
   // Care
   const careGrid = document.querySelector('.care-grid');
   if (careGrid) {
@@ -512,20 +510,20 @@ function renderProductDetail() {
       </div>
     `).join('');
   }
-  
+
   // Tags
   const tagsContainer = document.querySelector('.tags');
   if (tagsContainer) {
     tagsContainer.innerHTML = product.tags.map(t => `<span class="tag">${t}</span>`).join('');
   }
-  
+
   // Related products
   const relatedProducts = getRelatedProducts(id);
   const relGrid = document.querySelector('.rel-grid');
   if (relGrid) {
     if (relatedProducts.length > 0) {
       relGrid.innerHTML = relatedProducts.map(p => {
-        const locked = p.status !== 'open'; // 'open' = ready/tersedia. Selain itu = terkunci.
+        const locked = p.status !== 'open';
         const tag = locked ? 'div' : 'a';
         const hrefAttr = locked ? '' : `href="product.html?id=${p.id}"`;
         return `
@@ -622,19 +620,19 @@ function handleNotify() {
 // ================================================================
 document.addEventListener('DOMContentLoaded', function() {
   const isProductPage = window.location.pathname.includes('product.html');
-  
+
   if (isProductPage) {
     renderProductDetail();
   } else {
     renderProducts();
   }
-  
+
   // Nav hamburger
   const hamburger = document.getElementById('hamburger');
   if (hamburger) {
     hamburger.addEventListener('click', toggleMenu);
   }
-  
+
   // Nav scroll effect
   const nav = document.querySelector('nav');
   if (nav) {
@@ -644,7 +642,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // ==============================================================
-  // HERO PARALLAX — scroll depth + mouse-tilt lampu logo
+  // HERO PARALLAX
   // ==============================================================
   (function heroParallax() {
     const hero = document.getElementById('home');
@@ -659,7 +657,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const actions = hero.querySelector('.hero-actions');
     const root = document.documentElement;
 
-    // --- Scroll parallax: layer bergerak beda kecepatan (depth of field) ---
     let ticking = false;
     function updateScrollParallax() {
       const y = window.scrollY;
@@ -680,7 +677,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }, { passive: true });
     updateScrollParallax();
 
-    // --- Mouse-tilt: logo "nyala" ngikutin cahaya kursor (desktop only, HIGH only) ---
     if (logo && tier === 'HIGH' && window.matchMedia('(pointer: fine)').matches) {
       let rafId = null;
       hero.addEventListener('mousemove', function(e) {
@@ -702,7 +698,7 @@ document.addEventListener('DOMContentLoaded', function() {
   })();
 
   // ==============================================================
-  // SCROLL PROGRESS BAR — garis neon di atas nav, isi seiring scroll
+  // SCROLL PROGRESS BAR
   // ==============================================================
   (function scrollProgressBar() {
     const bar = document.getElementById('scrollProgress');
@@ -723,7 +719,7 @@ document.addEventListener('DOMContentLoaded', function() {
   })();
 
   // ==============================================================
-  // CURSOR GLOW — cahaya lembut ngikutin kursor, dengan lerp halus
+  // CURSOR GLOW
   // ==============================================================
   (function cursorGlow() {
     const glow = document.getElementById('cursorGlow');
@@ -757,7 +753,7 @@ document.addEventListener('DOMContentLoaded', function() {
   })();
 
   // ==============================================================
-  // SCROLL REVEAL — fade/slide/scale-in saat elemen masuk viewport
+  // SCROLL REVEAL
   // ==============================================================
   (function scrollReveal() {
     const targets = document.querySelectorAll('.reveal, .reveal-scale, .reveal-left, .reveal-right');
@@ -779,7 +775,7 @@ document.addEventListener('DOMContentLoaded', function() {
   })();
 
   // ==============================================================
-  // MAGNETIC TILT — drop-card & about-visual "ngikutin" kursor (3D)
+  // MAGNETIC TILT
   // ==============================================================
   (function tiltCards() {
     if (!window.matchMedia('(pointer: fine)').matches) return;
@@ -808,7 +804,6 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     }
 
-    // Drop cards muncul lagi setelah render — pakai delegasi via MutationObserver ringan
     function initDropCardTilt() {
       document.querySelectorAll('.drop-card').forEach(function(card) {
         if (card.dataset.tiltBound) return;
@@ -822,7 +817,6 @@ document.addEventListener('DOMContentLoaded', function() {
       new MutationObserver(initDropCardTilt).observe(relGrid, { childList: true });
     }
 
-    // About visual — tilt lembut mengikuti kursor di dalam section
     const aboutVisual = document.querySelector('.about-visual');
     if (aboutVisual) {
       let rafId = null;
@@ -845,7 +839,7 @@ document.addEventListener('DOMContentLoaded', function() {
   })();
 
   // ==============================================================
-  // ABOUT LOGO TOUCH-GLOW — nyala saat disentuh (semua device, termasuk mobile)
+  // ABOUT LOGO TOUCH-GLOW
   // ==============================================================
   (function aboutLogoTouchGlow() {
     const aboutLogo = document.querySelector('.about-logo-float');
@@ -862,7 +856,7 @@ document.addEventListener('DOMContentLoaded', function() {
   })();
 
   // ==============================================================
-  // PHILOSOPHY PARALLAX — watermark bergerak beda kecepatan dari scroll
+  // PHILOSOPHY PARALLAX
   // ==============================================================
   (function philosophyParallax() {
     const phil = document.querySelector('.about-phil-banner');
@@ -873,7 +867,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function update() {
       const rect = phil.getBoundingClientRect();
       const vh = window.innerHeight || 1;
-      const centered = (rect.top + rect.height / 2 - vh / 2) / vh; // -ish range
+      const centered = (rect.top + rect.height / 2 - vh / 2) / vh;
       const offset = Math.max(-1, Math.min(1, -centered)) * 44;
       phil.style.setProperty('--phil-px', offset.toFixed(1) + 'px');
       ticking = false;
@@ -886,7 +880,7 @@ document.addEventListener('DOMContentLoaded', function() {
   })();
 
   // ==============================================================
-  // MARQUEE SKEW — sedikit miring saat scroll cepat, balik halus
+  // MARQUEE SKEW
   // ==============================================================
   (function marqueeSkew() {
     const strip = document.querySelector('.marquee-strip');
@@ -919,13 +913,14 @@ document.addEventListener('DOMContentLoaded', function() {
     if (window.innerWidth > 900) closeMenu();
   });
 
-  // ── VISITOR COUNTER (countapi.mileshilliard.com — pengganti countapi.xyz) ──
+  // ==============================================================
+  // VISITOR COUNTER
+  // ==============================================================
   (function() {
     var numEl  = document.getElementById('visitorCount');
     var noteEl = document.getElementById('visitorNote');
     if (!numEl) return;
 
-    // Key unik CAPRUX — jangan ganti setelah live, counter tersimpan di sini
     var KEY = 'caprux-id_visitor-total-2025';
 
     numEl.classList.add('loading');
@@ -933,14 +928,12 @@ document.addEventListener('DOMContentLoaded', function() {
     fetch('https://countapi.mileshilliard.com/api/v1/hit/' + KEY)
       .then(function(r) { return r.json(); })
       .then(function(data) {
-        // API mengembalikan { key, value } — value bisa string atau number
         var raw = data && (data.value !== undefined ? data.value : null);
         var val = (raw !== null) ? parseInt(raw, 10) : NaN;
 
         if (!isNaN(val)) {
           numEl.classList.remove('loading');
 
-          // Animasi count-up singkat
           var start = Math.max(0, val - Math.min(val, 60));
           var step  = 16;
           var steps = Math.ceil(900 / step);
@@ -965,8 +958,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if (noteEl) noteEl.textContent = 'Gagal memuat data pengunjung';
       });
   })();
+
   // ==============================================================
-  // FOREST INTRO — partikel organik mengambang saat halaman dibuka
+  // FOREST INTRO
   // ==============================================================
   (function() {
     var overlay = document.getElementById('introOverlay');
@@ -991,7 +985,6 @@ document.addEventListener('DOMContentLoaded', function() {
     resize();
     window.addEventListener('resize', resize);
 
-    // Partikel spora / cahaya hutan
     var particles = [];
     var W, H;
     function initParticles() {
@@ -1015,11 +1008,9 @@ document.addEventListener('DOMContentLoaded', function() {
     initParticles();
     window.addEventListener('resize', initParticles);
 
-    // Gambar pohon sederhana di kiri dan kanan canvas
     function drawForestSilhouette(w, h) {
       ctx.save();
       ctx.globalAlpha = 0.12;
-      // Pohon kiri
       var drawTree = function(x, baseY, trunkH, trunkW, layerCount, spread) {
         ctx.fillStyle = '#0d2e14';
         ctx.fillRect(x - trunkW/2, baseY - trunkH, trunkW, trunkH);
@@ -1048,7 +1039,6 @@ document.addEventListener('DOMContentLoaded', function() {
       W = cnv.width; H = cnv.height;
       ctx.clearRect(0, 0, W, H);
 
-      // Kabut bawah
       var grad = ctx.createRadialGradient(W/2, H, 0, W/2, H, H * 0.5);
       grad.addColorStop(0, 'rgba(10,50,20,.12)');
       grad.addColorStop(1, 'transparent');
@@ -1057,7 +1047,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
       drawForestSilhouette(W, H);
 
-      // Partikel
       var elapsed = Date.now() - startTime;
       var progress = Math.min(elapsed / totalDur, 1);
       particles.forEach(function(p) {
@@ -1075,7 +1064,6 @@ document.addEventListener('DOMContentLoaded', function() {
         ctx.fillStyle = 'hsla(' + p.hue + ',80%,65%,' + finalAlpha + ')';
         ctx.fill();
 
-        // Glow ring
         if (p.r > 1.5) {
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.r * 2.5, 0, Math.PI * 2);
@@ -1103,3 +1091,38 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   })();
 });
+
+// ==============================================================
+// AMBIENT FOREST AUDIO (Kesunyian Alam)
+// Berlaku di semua halaman (index.html & product.html)
+// ==============================================================
+(function initForestAudio() {
+  let audio = document.getElementById('forestAmbientGlobal');
+  if (!audio) {
+    audio = document.createElement('audio');
+    audio.id = 'forestAmbientGlobal';
+    audio.loop = true;
+    audio.src = 'https://assets.mixkit.co/active_storage/sfx/2515/2515-preview.mp3';
+    audio.style.display = 'none';
+    document.body.appendChild(audio);
+  }
+
+  // Volume rendah (25%) agar jadi energi latar yang menenangkan
+  audio.volume = 0.25;
+
+  let isPlaying = false;
+  function playAudio() {
+    if (!isPlaying) {
+      audio.play().then(() => {
+        isPlaying = true;
+        document.removeEventListener('click', playAudio);
+        document.removeEventListener('touchstart', playAudio);
+      }).catch(() => {
+        // Browser masih blokir — tunggu klik berikutnya
+      });
+    }
+  }
+
+  document.addEventListener('click', playAudio, { passive: true });
+  document.addEventListener('touchstart', playAudio, { passive: true });
+})();
