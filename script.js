@@ -385,7 +385,7 @@ function renderProductDetail() {
     document.body.innerHTML = `
       <div style="display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;background:#000;color:#fff;font-family:monospace;">
         <h1 style="font-size:3rem;color:#00ff00;">404</h1>
-        <p>Waduh, jejak produk ini raib tertelan kekacauan.</p>
+        <p>Jejak ini belum ditemukan. Mungkin masih dalam perjalanan.</p>
         <a href="index.html" style="color:#00ff00;text-decoration:underline;">← Balik ke Home</a>
       </div>
     `;
@@ -456,10 +456,10 @@ function renderProductDetail() {
       ctaBtn.style.cursor = 'pointer';
       ctaBtn.onclick = function() { window.open(product.shopeeUrl, '_blank'); };
     } else if (product.status === 'sold') {
-      ctaBtn.textContent = '✕ Stok Habis';
+      ctaBtn.textContent = '— Stok Habis';
       ctaBtn.setAttribute('disabled', 'true');
     } else {
-      ctaBtn.textContent = '⚡ Notify Me — Coming Soon';
+      ctaBtn.textContent = '🌿 Beritahu Saya — Segera Tiba';
       ctaBtn.setAttribute('disabled', 'true');
     }
   }
@@ -613,7 +613,7 @@ function handleNotify() {
   }
   const nameEl = document.querySelector('.prod-name');
   const productName = nameEl ? nameEl.textContent.trim() : 'produk';
-  alert('Siap! Kamu bakal dapet notif pas "' + productName + '" drop.\nبسم الله — makasih udah sabar nungguin.');
+  alert('Siap, ' + productName + ' — akan kami kabarkan saat tiba. Makasih sudah setia menunggu.');
   input.value = '';
 }
 
@@ -965,10 +965,12 @@ document.addEventListener('DOMContentLoaded', function() {
         if (noteEl) noteEl.textContent = 'Gagal memuat data pengunjung';
       });
   })();
+  // ==============================================================
+  // FOREST INTRO — partikel organik mengambang saat halaman dibuka
+  // ==============================================================
   (function() {
     var overlay = document.getElementById('introOverlay');
     var skipBtn = document.getElementById('introSkip');
-    // Skip intro jika sudah pernah lihat di session ini, ATAU device LOW/MID
     var tier = window.__CPX_TIER || 'HIGH';
     var seen = false;
     try { seen = !!sessionStorage.getItem('cpx_intro_seen'); } catch(e) {}
@@ -977,78 +979,127 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
     try { sessionStorage.setItem('cpx_intro_seen', '1'); } catch(e) {}
-    var cnv     = document.getElementById('introCanvas');
-    var fl      = document.getElementById('introFlash');
+
+    var cnv = document.getElementById('introCanvas');
     if (!overlay || !cnv) return;
     var ctx = cnv.getContext('2d');
     var dismissed = false;
     var startTime = Date.now();
-    var totalDur  = 2000;
+    var totalDur = 2800;
 
     function resize() { cnv.width = overlay.offsetWidth; cnv.height = overlay.offsetHeight; }
     resize();
     window.addEventListener('resize', resize);
 
-    function rnd(a,b){ return a + Math.random()*(b-a); }
+    // Partikel spora / cahaya hutan
+    var particles = [];
+    var W, H;
+    function initParticles() {
+      W = cnv.width; H = cnv.height;
+      particles = [];
+      var count = Math.min(60, Math.floor(W * H / 14000));
+      for (var i = 0; i < count; i++) {
+        particles.push({
+          x: Math.random() * W,
+          y: Math.random() * H,
+          r: 0.8 + Math.random() * 2.2,
+          vx: (Math.random() - 0.5) * 0.4,
+          vy: -(0.3 + Math.random() * 0.8),
+          alpha: 0.2 + Math.random() * 0.6,
+          pulse: Math.random() * Math.PI * 2,
+          pulseSpeed: 0.02 + Math.random() * 0.03,
+          hue: 110 + Math.floor(Math.random() * 40)
+        });
+      }
+    }
+    initParticles();
+    window.addEventListener('resize', initParticles);
 
-    function drawBolt(x1,y1,x2,y2,rough,depth,alpha,w) {
-      if (depth<=0) return;
-      var mx=(x1+x2)/2+rnd(-rough,rough), my=(y1+y2)/2+rnd(-rough,rough);
-      if (depth===1) {
-        ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(mx,my); ctx.lineTo(x2,y2);
-        ctx.strokeStyle='rgba(0,255,0,'+alpha+')'; ctx.lineWidth=w;
-        ctx.shadowColor='#00ff00'; ctx.shadowBlur=w*7; ctx.stroke(); ctx.shadowBlur=0;
-        if (Math.random()<0.4) {
-          var bx=mx+rnd(-70,70), by=my+rnd(20,90);
-          ctx.beginPath(); ctx.moveTo(mx,my); ctx.lineTo(bx,by);
-          ctx.strokeStyle='rgba(0,255,0,'+(alpha*0.45)+')'; ctx.lineWidth=w*0.4;
-          ctx.shadowBlur=4; ctx.shadowColor='#00ff00'; ctx.stroke(); ctx.shadowBlur=0;
+    // Gambar pohon sederhana di kiri dan kanan canvas
+    function drawForestSilhouette(w, h) {
+      ctx.save();
+      ctx.globalAlpha = 0.12;
+      // Pohon kiri
+      var drawTree = function(x, baseY, trunkH, trunkW, layerCount, spread) {
+        ctx.fillStyle = '#0d2e14';
+        ctx.fillRect(x - trunkW/2, baseY - trunkH, trunkW, trunkH);
+        for (var l = 0; l < layerCount; l++) {
+          var ly = baseY - trunkH * 0.4 - l * (trunkH * 0.22);
+          var lw = spread * (1 - l * 0.18);
+          ctx.beginPath();
+          ctx.moveTo(x, ly - lw * 0.9);
+          ctx.lineTo(x + lw, ly + lw * 0.4);
+          ctx.lineTo(x - lw, ly + lw * 0.4);
+          ctx.closePath();
+          ctx.fillStyle = l % 2 === 0 ? '#0f3416' : '#0d2a12';
+          ctx.fill();
         }
-      } else {
-        drawBolt(x1,y1,mx,my,rough/1.6,depth-1,alpha,w);
-        drawBolt(mx,my,x2,y2,rough/1.6,depth-1,alpha,w);
-      }
+      };
+      drawTree(w * 0.06, h, h * 0.7, 14, 4, w * 0.09);
+      drawTree(w * 0.15, h, h * 0.55, 10, 3, w * 0.07);
+      drawTree(w * 0.94, h, h * 0.65, 12, 4, w * 0.085);
+      drawTree(w * 0.86, h, h * 0.5, 9, 3, w * 0.065);
+      ctx.restore();
     }
 
-    function doFlash(str) {
-      fl.style.transition='opacity 0.03s'; fl.style.opacity=String(Math.min(str*0.13,0.18));
-      setTimeout(function(){ fl.style.transition='opacity 0.2s'; fl.style.opacity='0'; },55);
-    }
-
-    function strike(intensity) {
-      ctx.clearRect(0,0,cnv.width,cnv.height);
-      var cx=cnv.width/2, count=1+Math.floor(intensity*3);
-      for (var i=0;i<count;i++) {
-        var side=Math.random()<0.5?-1:1;
-        drawBolt(cx+side*rnd(60,200),0,cx+rnd(-60,60),cnv.height/2+rnd(-40,40),rnd(40,100),5,rnd(0.7,1),rnd(0.8+intensity,1.8+intensity*1.5));
-      }
-      if (intensity>0.45&&Math.random()<intensity*0.65)
-        drawBolt(cx+rnd(-20,20),0,cx+rnd(-10,10),cnv.height/2+rnd(-10,10),rnd(30,70),5,0.95,1.2+intensity);
-      doFlash(intensity);
-      var fade=1;
-      var fo=function(){ fade-=0.07+intensity*0.04; if(fade>0){ctx.globalAlpha=fade;requestAnimationFrame(fo);}else{ctx.globalAlpha=1;ctx.clearRect(0,0,cnv.width,cnv.height);} };
-      setTimeout(function(){ requestAnimationFrame(fo); },60+Math.floor((1-intensity)*60));
-    }
-
-    function scheduleNext() {
+    var rafId = null;
+    function loop() {
       if (dismissed) return;
-      var t=Math.min((Date.now()-startTime)/totalDur,1);
-      var minD=t<0.3?260:t<0.6?160:t<0.85?90:45;
-      var maxD=t<0.3?450:t<0.6?300:t<0.85?170:90;
-      setTimeout(function(){ if(!dismissed){strike(t);scheduleNext();} },rnd(minD,maxD));
+      W = cnv.width; H = cnv.height;
+      ctx.clearRect(0, 0, W, H);
+
+      // Kabut bawah
+      var grad = ctx.createRadialGradient(W/2, H, 0, W/2, H, H * 0.5);
+      grad.addColorStop(0, 'rgba(10,50,20,.12)');
+      grad.addColorStop(1, 'transparent');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, W, H);
+
+      drawForestSilhouette(W, H);
+
+      // Partikel
+      var elapsed = Date.now() - startTime;
+      var progress = Math.min(elapsed / totalDur, 1);
+      particles.forEach(function(p) {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.pulse += p.pulseSpeed;
+        var glow = Math.sin(p.pulse) * 0.3;
+        if (p.y < -10) { p.y = H + 5; p.x = Math.random() * W; }
+        if (p.x < -10) p.x = W + 5;
+        if (p.x > W + 10) p.x = -5;
+
+        var finalAlpha = p.alpha * (0.5 + glow) * progress;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'hsla(' + p.hue + ',80%,65%,' + finalAlpha + ')';
+        ctx.fill();
+
+        // Glow ring
+        if (p.r > 1.5) {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r * 2.5, 0, Math.PI * 2);
+          ctx.fillStyle = 'hsla(' + p.hue + ',70%,55%,' + (finalAlpha * 0.15) + ')';
+          ctx.fill();
+        }
+      });
+
+      rafId = requestAnimationFrame(loop);
     }
+    loop();
 
     function dismiss() {
-      if (dismissed) return; dismissed=true;
-      strike(1); strike(1); strike(1); doFlash(1);
-      setTimeout(function(){
-        overlay.classList.add('fade-out');
-        setTimeout(function(){ overlay.remove(); },500);
-      },80);
+      if (dismissed) return;
+      dismissed = true;
+      if (rafId) cancelAnimationFrame(rafId);
+      overlay.classList.add('fade-out');
+      setTimeout(function() { overlay.remove(); }, 800);
     }
 
-    setTimeout(scheduleNext, 120);
     setTimeout(dismiss, totalDur);
     if (skipBtn) skipBtn.addEventListener('click', dismiss);
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) dismiss();
+    });
   })();
 });

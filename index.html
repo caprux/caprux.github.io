@@ -3,28 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CAPRUX — From Chaos to Light</title>
-  <meta name="description" content="Semua pernah hancur. Semua pernah kacau. Semua pernah tidak baik-baik saja. CAPRUX adalah perjalanan dari kekacauan menuju keberanian, arah, dan cahaya.">
+  <title>CAPRUX — Dari Lumpur ke Langit</title>
+  <meta name="description" content="CAPRUX adalah jiwa yang tumbuh dari kekacauan — seperti pohon yang tumbuh dari tanah gelap menuju cahaya. Bukan tentang bangkit. Tentang terbang.">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="CAPRUX">
-  <meta property="og:title" content="CAPRUX — From Chaos to Light">
-  <meta property="og:description" content="Semua pernah hancur. Semua pernah kacau. Semua pernah tidak baik-baik saja. CAPRUX adalah perjalanan dari kekacauan menuju keberanian, arah, dan cahaya.">
+  <meta property="og:title" content="CAPRUX — Dari Lumpur ke Langit">
+  <meta property="og:description" content="CAPRUX adalah jiwa yang tumbuh dari kekacauan — seperti pohon yang tumbuh dari tanah gelap menuju cahaya.">
   <meta property="og:image" content="https://caprux.id/logo_text_putih.png">
   <meta property="og:url" content="https://caprux.id">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="CAPRUX — From Chaos to Light">
-  <meta name="twitter:description" content="Semua pernah hancur. Semua pernah kacau. Semua pernah tidak baik-baik saja. CAPRUX adalah perjalanan dari kekacauan menuju keberanian, arah, dan cahaya.">
+  <meta name="twitter:title" content="CAPRUX — Dari Lumpur ke Langit">
+  <meta name="twitter:description" content="CAPRUX adalah jiwa yang tumbuh dari kekacauan — seperti pohon yang tumbuh dari tanah gelap menuju cahaya.">
   <meta name="twitter:image" content="https://caprux.id/logo_text_putih.png">
   <link rel="icon" type="image/png" href="LOGO_TRANSPARAN_HITAM.png">
   <link rel="shortcut icon" type="image/png" href="LOGO_TRANSPARAN_HITAM.png">
   <link rel="apple-touch-icon" href="LOGO_TRANSPARAN_HITAM.png">
-  <meta name="theme-color" content="#000000">
+  <meta name="theme-color" content="#050f07">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&family=Inter:wght@300;400;500&family=Share+Tech+Mono&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&family=Inter:wght@300;400;500&family=Share+Tech+Mono&display=swap" rel="stylesheet"></noscript>
-  <link rel="stylesheet" href="style.css?v=9">
-  <script src="perf-patch.js?v=9"></script>
+  <link rel="stylesheet" href="style.css?v=10">
+  <script src="perf-patch.js?v=10"></script>
   <script async src="https://cdn.jsdelivr.net/npm/counterapi/dist/counter.browser.min.js"></script>
 </head>
 <body>
@@ -33,100 +33,171 @@
 <div class="scroll-progress" id="scrollProgress"></div>
 <div class="cursor-glow" id="cursorGlow"></div>
 
-<!-- Lightning Intro Overlay -->
-<div id="introOverlay" style="position:fixed;inset:0;z-index:9999;background-color:#000;background-image:var(--fabric-tex);display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;">
+<!-- Forest Intro Overlay -->
+<div id="introOverlay" style="position:fixed;inset:0;z-index:9999;background-color:#020b04;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;">
   <canvas id="introCanvas" style="position:absolute;inset:0;width:100%;height:100%;"></canvas>
-  <div id="introFlash" style="position:absolute;inset:0;background:#00ff00;opacity:0;pointer-events:none;"></div>
+  <div id="introMist" style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 80%,rgba(0,80,20,.18),transparent 70%);pointer-events:none;animation:mist-breathe 4s ease-in-out infinite;"></div>
   <div style="position:relative;z-index:2;text-align:center;pointer-events:none;">
-    <img src="logo_text_putih.png" alt="CAPRUX" style="width:clamp(180px,55vw,420px);filter:drop-shadow(0 0 28px #00ff0099);animation:intro-logo-pulse 1.8s ease-in-out infinite;">
-    <p style="font-family:'Share Tech Mono',monospace;font-size:clamp(.52rem,.8vw,.65rem);letter-spacing:.35em;text-transform:uppercase;color:rgba(0,255,0,.55);margin-top:18px;">// memuat ingatan lama.</p>
+    <img src="logo_text_putih.png" alt="CAPRUX" style="width:clamp(160px,48vw,380px);filter:drop-shadow(0 0 32px rgba(100,255,120,.45));animation:intro-logo-glow 2.4s ease-in-out infinite;">
+    <p style="font-family:'Share Tech Mono',monospace;font-size:clamp(.5rem,.75vw,.62rem);letter-spacing:.3em;text-transform:uppercase;color:rgba(120,220,140,.5);margin-top:20px;">// alam berbicara. dengarkan.</p>
   </div>
-  <button id="introSkip" style="position:absolute;bottom:clamp(20px,4vh,36px);right:clamp(16px,4vw,40px);font-family:'Share Tech Mono',monospace;font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;background:transparent;border:1px solid rgba(0,255,0,.35);color:rgba(0,255,0,.55);padding:7px 16px;cursor:pointer;z-index:3;transition:border-color .2s,color .2s;" onmouseenter="this.style.borderColor='rgba(0,255,0,.9)';this.style.color='rgba(0,255,0,.9)'" onmouseleave="this.style.borderColor='rgba(0,255,0,.35)';this.style.color='rgba(0,255,0,.55)'">Lewati //</button>
+  <button id="introSkip" style="position:absolute;bottom:clamp(20px,4vh,36px);right:clamp(16px,4vw,40px);font-family:'Share Tech Mono',monospace;font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;background:transparent;border:1px solid rgba(100,200,120,.3);color:rgba(100,200,120,.5);padding:7px 16px;cursor:pointer;z-index:3;transition:border-color .2s,color .2s;" onmouseenter="this.style.borderColor='rgba(100,200,120,.8)';this.style.color='rgba(100,200,120,.9)'" onmouseleave="this.style.borderColor='rgba(100,200,120,.3)';this.style.color='rgba(100,200,120,.5)'">Masuk //</button>
 </div>
+
 <style>
-@keyframes intro-logo-pulse {
-  0%,100%{filter:drop-shadow(0 0 20px #00ff0077);}
-  50%{filter:drop-shadow(0 0 44px #00ff00cc);}
+@keyframes intro-logo-glow {
+  0%,100%{filter:drop-shadow(0 0 20px rgba(80,220,100,.35));}
+  50%{filter:drop-shadow(0 0 50px rgba(80,220,100,.65));}
+}
+@keyframes mist-breathe {
+  0%,100%{opacity:.5;transform:scaleX(1);}
+  50%{opacity:.9;transform:scaleX(1.08);}
 }
 #introOverlay.fade-out {
-  animation: intro-fade .5s ease forwards;
+  animation: intro-fade .8s ease forwards;
 }
 @keyframes intro-fade {
   to { opacity: 0; pointer-events: none; }
 }
 </style>
 
+<!-- Ambient forest sound -->
+<audio id="forestAmbient" loop preload="none" style="display:none;">
+  <source src="https://assets.mixkit.co/active_storage/sfx/2515/2515-preview.mp3" type="audio/mpeg">
+</audio>
+
 <!-- Mobile Menu -->
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#products" onclick="closeMenu()">Artefak</a>
-  <a href="#kenapa" onclick="closeMenu()">Asal-Usul</a>
-  <a href="#contact" onclick="closeMenu()">Transmisi</a>
-  <a href="#products" class="m-cta" onclick="closeMenu()">Masuk ke Arsip</a>
+  <a href="#products" onclick="closeMenu()">Koleksi</a>
+  <a href="#kenapa" onclick="closeMenu()">Jiwa Brand</a>
+  <a href="#contact" onclick="closeMenu()">Terhubung</a>
+  <a href="#products" class="m-cta" onclick="closeMenu()">Lihat Koleksi</a>
 </div>
 
 <!-- Nav -->
 <nav>
   <a href="index.html" class="nav-logo"><img src="logo_text_putih.png" alt="CAPRUX"></a>
   <ul class="nav-links">
-    <li><a href="#products">Artefak</a></li>
-    <li><a href="#kenapa">Asal-Usul</a></li>
-    <li><a href="#contact">Transmisi</a></li>
+    <li><a href="#products">Koleksi</a></li>
+    <li><a href="#kenapa">Jiwa Brand</a></li>
+    <li><a href="#contact">Terhubung</a></li>
   </ul>
-  <a href="#products" class="nav-cta">Masuk ke Arsip</a>
+  <a href="#products" class="nav-cta">Lihat Koleksi</a>
   <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 
 <!-- Hero -->
 <section id="home">
-  <div class="hero-grid"></div>
-  <div class="hero-scan"></div>
+  <!-- SVG pohon latar belakang -->
+  <div class="hero-forest" aria-hidden="true">
+    <svg class="forest-svg" viewBox="0 0 1200 700" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax meet">
+      <!-- Pohon kiri jauh -->
+      <g class="tree t-far-left" opacity=".18">
+        <line x1="60" y1="700" x2="60" y2="400" stroke="#1a4a20" stroke-width="8"/>
+        <path d="M60 430 Q20 380 10 310 Q50 350 60 330 Q70 350 110 310 Q100 380 60 430Z" fill="#0d2e14"/>
+        <path d="M60 360 Q25 310 15 250 Q55 290 60 270 Q65 290 105 250 Q95 310 60 360Z" fill="#0f3416"/>
+        <path d="M60 295 Q30 250 22 195 Q58 230 60 215 Q62 230 98 195 Q90 250 60 295Z" fill="#112e16"/>
+      </g>
+      <!-- Pohon kanan jauh -->
+      <g class="tree t-far-right" opacity=".15">
+        <line x1="1140" y1="700" x2="1140" y2="350" stroke="#1a4a20" stroke-width="10"/>
+        <path d="M1140 390 Q1090 330 1075 245 Q1125 290 1140 265 Q1155 290 1205 245 Q1190 330 1140 390Z" fill="#0d2e14"/>
+        <path d="M1140 310 Q1098 258 1085 180 Q1130 218 1140 200 Q1150 218 1195 180 Q1182 258 1140 310Z" fill="#0f3416"/>
+        <path d="M1140 240 Q1105 195 1095 130 Q1133 162 1140 148 Q1147 162 1185 130 Q1175 195 1140 240Z" fill="#112e16"/>
+      </g>
+      <!-- Pohon tengah kiri -->
+      <g class="tree t-mid-left" opacity=".3">
+        <line x1="220" y1="700" x2="220" y2="280" stroke="#1e5828" stroke-width="14"/>
+        <path d="M220 330 Q158 265 140 170 Q200 220 220 195 Q240 220 300 170 Q282 265 220 330Z" fill="#122a18"/>
+        <path d="M220 250 Q168 192 152 108 Q208 152 220 132 Q232 152 288 108 Q272 192 220 250Z" fill="#163320"/>
+        <path d="M220 175 Q175 124 160 54 Q212 92 220 76 Q228 92 280 54 Q265 124 220 175Z" fill="#1a3a24"/>
+      </g>
+      <!-- Pohon tengah kanan -->
+      <g class="tree t-mid-right" opacity=".28">
+        <line x1="980" y1="700" x2="980" y2="310" stroke="#1e5828" stroke-width="12"/>
+        <path d="M980 360 Q928 295 912 205 Q966 248 980 225 Q994 248 1048 205 Q1032 295 980 360Z" fill="#122a18"/>
+        <path d="M980 280 Q935 220 920 140 Q970 178 980 160 Q990 178 1040 140 Q1025 220 980 280Z" fill="#163320"/>
+        <path d="M980 210 Q940 160 928 90 Q974 122 980 108 Q986 122 1032 90 Q1020 160 980 210Z" fill="#1a3a24"/>
+      </g>
+      <!-- Pohon depan kiri besar -->
+      <g class="tree t-front-left" opacity=".55">
+        <line x1="80" y1="700" x2="80" y2="180" stroke="#245e30" stroke-width="20"/>
+        <!-- Cabang kiri -->
+        <line x1="80" y1="380" x2="20" y2="310" stroke="#1e5228" stroke-width="8"/>
+        <line x1="80" y1="300" x2="140" y2="240" stroke="#1e5228" stroke-width="7"/>
+        <path d="M80 240 Q10 165 -10 60 Q65 120 80 90 Q95 120 170 60 Q150 165 80 240Z" fill="#152e1c"/>
+        <path d="M80 170 Q20 105 5 20 Q68 68 80 50 Q92 68 155 20 Q140 105 80 170Z" fill="#1a3822"/>
+      </g>
+      <!-- Pohon depan kanan besar -->
+      <g class="tree t-front-right" opacity=".5">
+        <line x1="1120" y1="700" x2="1120" y2="200" stroke="#245e30" stroke-width="18"/>
+        <line x1="1120" y1="400" x2="1180" y2="330" stroke="#1e5228" stroke-width="7"/>
+        <line x1="1120" y1="310" x2="1060" y2="250" stroke="#1e5228" stroke-width="6"/>
+        <path d="M1120 260 Q1058 185 1038 80 Q1108 138 1120 110 Q1132 138 1202 80 Q1182 185 1120 260Z" fill="#152e1c"/>
+        <path d="M1120 190 Q1065 122 1048 38 Q1112 82 1120 62 Q1128 82 1192 38 Q1175 122 1120 190Z" fill="#1a3822"/>
+      </g>
+      <!-- Akar dan lumut di bawah -->
+      <ellipse cx="600" cy="690" rx="580" ry="18" fill="#0a1f0e" opacity=".6"/>
+      <!-- Partikel cahaya -->
+      <circle class="spore s1" cx="300" cy="300" r="2" fill="#7dffb0" opacity=".6"/>
+      <circle class="spore s2" cx="550" cy="200" r="1.5" fill="#a0ffc0" opacity=".5"/>
+      <circle class="spore s3" cx="750" cy="350" r="2.5" fill="#7dffb0" opacity=".45"/>
+      <circle class="spore s4" cx="900" cy="180" r="1.8" fill="#c8ffd8" opacity=".55"/>
+      <circle class="spore s5" cx="450" cy="420" r="1.2" fill="#7dffb0" opacity=".4"/>
+      <circle class="spore s6" cx="680" cy="150" r="2" fill="#a0ffc0" opacity=".5"/>
+      <circle class="spore s7" cx="150" cy="250" r="1.5" fill="#7dffb0" opacity=".45"/>
+      <circle class="spore s8" cx="1020" cy="280" r="2" fill="#c8ffd8" opacity=".4"/>
+    </svg>
+  </div>
+
+  <div class="hero-mist" aria-hidden="true"></div>
   <div class="hero-noise"></div>
-  <div class="hero-tag">// file ditemukan. siap dibaca.</div>
-  <div class="hero-logo-wrap">
-    <div class="logo-glow" aria-hidden="true"></div>
-    <img class="main-logo" src="logo_text_putih.png" alt="CAPRUX">
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">// tumbuh dari yang dalam</p>
+    <div class="hero-logo-wrap">
+      <div class="logo-glow" aria-hidden="true"></div>
+      <img class="main-logo" src="logo_text_putih.png" alt="CAPRUX">
+    </div>
+    <p class="hero-sub">Dari lumpur ke langit.<br>Bukan tentang bangkit —<br><strong>tentang terbang.</strong></p>
+    <p class="hero-mantra">// Jalannya yang diingat, bukan hasilnya</p>
+    <div class="hero-actions">
+      <a href="#products" class="btn-primary">Lihat Koleksi</a>
+      <a href="#kenapa" class="btn-ghost">Jiwa CAPRUX</a>
+    </div>
   </div>
-  <p class="hero-sub">Semua pernah hancur.<br>Semua pernah kacau.<br>Semua pernah <strong>tidak baik-baik saja</strong>.</p>
-  <p class="hero-mantra">// Doing the Impossible, with GOD's Help</p>
-  <div class="hero-actions">
-    <a href="#products" class="btn-primary">Lihat Perjalanannya</a>
-    <a href="#kenapa" class="btn-ghost">Kenapa CAPRUX ada?</a>
-  </div>
+
   <div class="scroll-hint">
     <div class="scroll-line"></div>
-    <span>Lanjut</span>
+    <span>Gulir</span>
   </div>
 </section>
 
 <!-- Marquee -->
 <div class="marquee-strip" aria-hidden="true">
   <div class="marquee-inner">
-<span>CAPRUX</span><span class="msep">×</span>
-<span>From Chaos to Light</span><span class="msep">×</span>
-<span>Semua Pernah Kacau</span><span class="msep">×</span>
-<span>Bangkit · Bertumbuh · Menjadi Penerang</span><span class="msep">×</span>
-<span>Doing the Impossible with GOD's Help</span><span class="msep">×</span>
-<span>Dari Kekacauan Menuju Cahaya</span><span class="msep">×</span>
-<span>Yang Pernah Hancur, Memilih Bangkit</span><span class="msep">×</span>
-<span>Hidup yang Mulai Ditata</span><span class="msep">×</span>
-<span>Berantakan Bukan Berarti Berakhir</span><span class="msep">×</span>
-<span>Dengan Tuhan, Kita Terus Berjalan</span><span class="msep">×</span>
-<span>Berani Menata Arah</span><span class="msep">×</span>
-<span>Menjadi Penerang untuk Sekitar</span><span class="msep">×</span>
-<span>Nusantara · Jiwa Dunia</span><span class="msep">×</span>
-<span>CAPRUX</span><span class="msep">×</span>
-<span>From Chaos to Light</span><span class="msep">×</span>
-<span>Semua Pernah Kacau</span><span class="msep">×</span>
-<span>Bangkit · Bertumbuh · Menjadi Penerang</span><span class="msep">×</span>
-<span>Doing the Impossible with GOD's Help</span><span class="msep">×</span>
-<span>Dari Kekacauan Menuju Cahaya</span><span class="msep">×</span>
-<span>Yang Pernah Hancur, Memilih Bangkit</span><span class="msep">×</span>
-<span>Hidup yang Mulai Ditata</span><span class="msep">×</span>
-<span>Berantakan Bukan Berarti Berakhir</span><span class="msep">×</span>
-<span>Dengan Tuhan, Kita Terus Berjalan</span><span class="msep">×</span>
-<span>Berani Menata Arah</span><span class="msep">×</span>
-<span>Menjadi Penerang untuk Sekitar</span><span class="msep">×</span>
-<span>Nusantara · Jiwa Dunia</span><span class="msep">×</span>
+<span>CAPRUX</span><span class="msep">·</span>
+<span>Dari Lumpur ke Langit</span><span class="msep">·</span>
+<span>Jiwa yang Tumbuh</span><span class="msep">·</span>
+<span>Tanah · Air · Angin · Api · Batu</span><span class="msep">·</span>
+<span>Jalannya yang Diingat</span><span class="msep">·</span>
+<span>Nusantara · Jiwa Semesta</span><span class="msep">·</span>
+<span>Bukan Bangkit — Terbang</span><span class="msep">·</span>
+<span>Keikhlasan adalah Akar</span><span class="msep">·</span>
+<span>Teknologi Membungkus Alam</span><span class="msep">·</span>
+<span>Leluhur Berbicara Lewat Bumi</span><span class="msep">·</span>
+<span>Gunung · Hutan · Sungai · Langit</span><span class="msep">·</span>
+<span>CAPRUX</span><span class="msep">·</span>
+<span>Dari Lumpur ke Langit</span><span class="msep">·</span>
+<span>Jiwa yang Tumbuh</span><span class="msep">·</span>
+<span>Tanah · Air · Angin · Api · Batu</span><span class="msep">·</span>
+<span>Jalannya yang Diingat</span><span class="msep">·</span>
+<span>Nusantara · Jiwa Semesta</span><span class="msep">·</span>
+<span>Bukan Bangkit — Terbang</span><span class="msep">·</span>
+<span>Keikhlasan adalah Akar</span><span class="msep">·</span>
+<span>Teknologi Membungkus Alam</span><span class="msep">·</span>
+<span>Leluhur Berbicara Lewat Bumi</span><span class="msep">·</span>
+<span>Gunung · Hutan · Sungai · Langit</span><span class="msep">·</span>
   </div>
 </div>
 
@@ -134,79 +205,76 @@
 <section id="products">
   <div class="drops-header reveal">
     <div>
-      <p class="eyebrow">// Artefak</p>
-      <h2 class="sec-title">Yang Ditemukan</h2>
+      <p class="eyebrow">// Koleksi</p>
+      <h2 class="sec-title">Yang Dibawa dari Perjalanan</h2>
       <div class="divider"></div>
     </div>
-    <p class="drops-desc">Setiap artefak membawa bagian dari perjalanan.<br>Dari kekacauan, menuju hidup yang lebih terarah.</p>
+    <p class="drops-desc">Setiap helai membawa energi bumi.<br>Dipakai oleh mereka yang tahu ke mana arah tuju.</p>
   </div>
   <div class="drops-grid" id="productGrid"></div>
 
-  <!-- Carousel produk linear -->
   <div class="carousel-wrap reveal-scale">
     <div class="carousel-track" id="productCarousel"></div>
     <div class="carousel-dots" id="carouselDots"></div>
   </div>
 </section>
 
-<!-- Kenapa CAPRUX & Cerita -->
+<!-- Jiwa Brand -->
 <section id="kenapa">
   <div class="about-phil-banner reveal-scale">
     <span class="phil-watermark">CAPRUX</span>
-    <p class="phil-label">// Catatan dari Pengarsip</p>
-    <p class="phil-quote">ONLY<br>GOD<br>KNOW</p>
-    <p class="phil-sub">Pernah Hancur — Pernah Kacau — Memilih Bangkit — Menjadi Penerang.</p>
+    <p class="phil-label">// Dari Dalam Bumi</p>
+    <p class="phil-quote">JIWA<br>YANG<br>TUMBUH</p>
+    <p class="phil-sub">Dari lumpur — ke langit. Dicuci hujan. Langsung bersih. Langsung memberi.</p>
   </div>
 
-  <p class="eyebrow reveal">// Asal-Usul</p>
+  <p class="eyebrow reveal">// Jiwa Brand</p>
   <h2 class="sec-title reveal">Kenapa <span class="title-strike">CAPRUX</span> ada?</h2>
   <div class="divider reveal"></div>
 
-<p class="about-body">Hidup kadang <strong>capruk</strong>.</p>
+<p class="about-body">Pohon tidak meminta izin untuk tumbuh.</p>
 
-<p class="about-body">Banyak hal terjadi.<br>
-Pikiran ke mana-mana.<br>
-Arah bisa berubah.</p>
+<p class="about-body">Ia muncul dari tanah gelap,<br>
+dari akar yang tidak terlihat,<br>
+dari benih yang pernah dikira mati.</p>
 
-<p class="about-body">Dan itu bagian dari hidup.</p>
+<p class="about-body">CAPRUX lahir dari sana.</p>
 
-<p class="about-body">CAPRUX adalah tentang <strong>pilihan setelahnya.</strong></p>
+<p class="about-body">Bukan dari semangat yang sempurna.<br>
+Tapi dari <strong>keikhlasan yang dalam</strong> —<br>
+menerima semua yang pernah terjadi<br>
+sebagai bagian dari perjalanan.</p>
 
-<p class="about-body">Apa yang bisa dipilih?<br>
-Apa yang bisa berubah?<br>
-Apa lagi yang mungkin?</p>
+<p class="about-body">Kami percaya bahwa<br>
+lumpur bukan penghalang.<br>
+Lumpur adalah <strong>tanah yang subur.</strong></p>
 
-<p class="about-body">X adalah titik temu.<br>
-Antara yang sudah terjadi dan yang belum.</p>
+<p class="about-body">Dan dari sana kamu tidak perlu pelan-pelan bangkit.<br>
+Kamu bisa langsung <strong>terbang.</strong></p>
 
-<p class="about-body"><strong>CAPRUX.</strong><br>
-Bukan tentang menjadi sempurna.<br>
-Tentang terus membuka kemungkinan.</p>
-
-<p class="about-body"><strong>Doing the Impossible, with GOD's Help.</strong></p>
+<p class="about-body">Dicuci awan.<br>
+Dibawa angin.<br>
+Diberi cahaya oleh langit yang sama<br>
+yang menaungi seluruh Nusantara.</p>
 
 <div class="about-values">
   <div class="val">
-    <span class="val-n">>> BANGKIT </span>
-    <div class="val-t"><strong>Next.</strong> Selalu ada pilihan berikutnya.</div>
+    <span class="val-n">AKAR</span>
+    <div class="val-t"><strong>Keikhlasan.</strong> Menerima semua yang terjadi tanpa menahan diri untuk tumbuh.</div>
   </div>
-
   <div class="val">
-    <span class="val-n">>> TERARAH </span>
-    <div class="val-t"><strong>Choose.</strong> Pilih yang terasa benar untukmu.</div>
+    <span class="val-n">BATANG</span>
+    <div class="val-t"><strong>Perjalanan.</strong> Yang diingat bukan hasilnya — tapi setiap langkah yang membentuk.</div>
   </div>
-
   <div class="val">
-    <span class="val-n">>> PENERANG </span>
-    <div class="val-t"><strong>Be the possibility.</strong></div>
+    <span class="val-n">MAHKOTA</span>
+    <div class="val-t"><strong>Memberi.</strong> Tumbuh bukan untuk diri sendiri — tapi untuk menaungi sekitar.</div>
   </div>
 </div>
 
-<p class="about-quote" style="font-family:'Share Tech Mono',monospace;font-size:.72rem;letter-spacing:.02em;font-style:italic;opacity:.65;margin-top:22px;line-height:1.8;">
-"What else is possible?"
+<p class="about-quote">
+"Bumi tidak pernah menyimpan rasa sakit — ia mengubahnya menjadi bunga."
 </p>
-
-
 
     <div class="about-right reveal-right" style="--reveal-delay:.15s">
       <div class="about-visual">
@@ -219,28 +287,28 @@ Tentang terus membuka kemungkinan.</p>
 <!-- Contact -->
 <section id="contact">
   <div>
-    <p class="eyebrow reveal">// Transmisi</p>
-    <h2 class="sec-title reveal">Perjalanan ini terbuka.</h2>
+    <p class="eyebrow reveal">// Terhubung</p>
+    <h2 class="sec-title reveal">Alam terbuka untuk semua.</h2>
     <div class="divider reveal"></div>
-    <p class="c-intro reveal">Kalau kamu pernah berada di titik yang sama —<br>kamu tidak sendirian.<br>Terus berjalan. Terus bertumbuh. Terus menjadi penerang.</p>
+    <p class="c-intro reveal">Kalau kamu merasa tumbuh sendirian —<br>kamu tidak pernah sendirian.<br>Bumi yang sama menopang kita semua.</p>
     <div class="c-links reveal" style="--reveal-delay:.1s">
-      <a href="https://instagram.com/caprux.id" class="c-link" target="_blank"><span class="c-icon">▶</span> Instagram</a>
-      <a href="https://www.tiktok.com/@caprux.id" class="c-link" target="_blank"><span class="c-icon">▶</span> TikTok</a>
-      <a href="https://www.x.com/caprux_official" class="c-link" target="_blank"><span class="c-icon">▶</span> X</a>
-      <a href="https://www.youtube.com/@caprux_id" class="c-link" target="_blank"><span class="c-icon">▶</span> YouTube</a>
-      <a href="https://www.shopee.co.id/caprux.id" class="c-link" target="_blank"><span class="c-icon">▶</span> Shopee</a>
-      <a href="https://www.facebook.com/profile.php?id=61570786385157" class="c-link" target="_blank"><span class="c-icon">▶</span> Facebook</a>
+      <a href="https://instagram.com/caprux.id" class="c-link" target="_blank"><span class="c-icon">↗</span> Instagram</a>
+      <a href="https://www.tiktok.com/@caprux.id" class="c-link" target="_blank"><span class="c-icon">↗</span> TikTok</a>
+      <a href="https://www.x.com/caprux_official" class="c-link" target="_blank"><span class="c-icon">↗</span> X</a>
+      <a href="https://www.youtube.com/@caprux_id" class="c-link" target="_blank"><span class="c-icon">↗</span> YouTube</a>
+      <a href="https://www.shopee.co.id/caprux.id" class="c-link" target="_blank"><span class="c-icon">↗</span> Shopee</a>
+      <a href="https://www.facebook.com/profile.php?id=61570786385157" class="c-link" target="_blank"><span class="c-icon">↗</span> Facebook</a>
     </div>
 
     <!-- Visitor Counter -->
     <div class="visitor-counter reveal" style="--reveal-delay:.2s">
-      <div class="vc-label">// Yang sudah membuka arsip ini.</div>
+      <div class="vc-label">// Jiwa yang sudah singgah di sini.</div>
       <div class="vc-display">
-        <span class="vc-icon">⚡</span>
+        <span class="vc-icon">🌿</span>
         <span class="vc-number" id="visitorCount">—</span>
-        <span class="vc-unit">saksi</span>
+        <span class="vc-unit">jiwa</span>
       </div>
-      <div class="vc-note" id="visitorNote">Mengambil catatan lama...</div>
+      <div class="vc-note" id="visitorNote">Menghitung yang hadir...</div>
     </div>
   </div>
 </section>
@@ -248,7 +316,7 @@ Tentang terus membuka kemungkinan.</p>
 <!-- Footer -->
 <footer class="reveal">
   <div class="f-logo"><img src="logo_text_putih.png" alt="CAPRUX"></div>
-  <div class="f-copy">© 2024 CAPRUX — Doing the Impossible with GOD's Help<br><span style="color:#333;font-size:.58rem">Arsip ini dibuat di Nusantara · Jiwa Dunia · Digerakkan oleh ENF</span></div>
+  <div class="f-copy">© 2024 CAPRUX — Dari Lumpur ke Langit<br><span style="color:#2a4a30;font-size:.58rem">Tumbuh di Nusantara · Jiwa Semesta · Digerakkan oleh Keikhlasan</span></div>
   <div class="f-socials">
     <a href="https://instagram.com/caprux.id" target="_blank">IG</a>
     <a href="https://tiktok.com/@caprux.id" target="_blank">TT</a>
@@ -260,7 +328,7 @@ Tentang terus membuka kemungkinan.</p>
 </footer>
 
 <!-- Email Contact FAB -->
-<a href="mailto:caprux.official@gmail.com?subject=TRANSMISI" class="email-fab" aria-label="Kirim ke Pengarsip" title="Kirim ke Pengarsip">
+<a href="mailto:caprux.official@gmail.com?subject=SAPA CAPRUX" class="email-fab" aria-label="Kirim pesan" title="Kirim pesan">
   <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M3 6.5C3 5.67157 3.67157 5 4.5 5H19.5C20.3284 5 21 5.67157 21 6.5V17.5C21 18.3284 20.3284 19 19.5 19H4.5C3.67157 19 3 18.3284 3 17.5V6.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
     <path d="M4 6.5L11.2865 12.0433C11.7051 12.3626 12.2949 12.3626 12.7135 12.0433L20 6.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
@@ -268,6 +336,6 @@ Tentang terus membuka kemungkinan.</p>
   <span class="email-fab-ping"></span>
 </a>
 
-<script src="script.js?v=9" defer></script>
+<script src="script.js?v=10" defer></script>
 </body>
 </html>
