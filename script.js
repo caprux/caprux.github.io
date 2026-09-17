@@ -979,7 +979,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var ctx = cnv.getContext('2d');
     var dismissed = false;
     var startTime = Date.now();
-    var totalDur = 2800;
+    var totalDur = 3600; // Lebih panjang — beri waktu hutan bernafas
 
     function resize() { cnv.width = overlay.offsetWidth; cnv.height = overlay.offsetHeight; }
     resize();
@@ -990,18 +990,19 @@ document.addEventListener('DOMContentLoaded', function() {
     function initParticles() {
       W = cnv.width; H = cnv.height;
       particles = [];
-      var count = Math.min(60, Math.floor(W * H / 14000));
+      // Lebih sedikit partikel, lebih lambat — seperti spora/kunang-kunang di hutan
+      var count = Math.min(40, Math.floor(W * H / 18000));
       for (var i = 0; i < count; i++) {
         particles.push({
           x: Math.random() * W,
-          y: Math.random() * H,
-          r: 0.8 + Math.random() * 2.2,
-          vx: (Math.random() - 0.5) * 0.4,
-          vy: -(0.3 + Math.random() * 0.8),
-          alpha: 0.2 + Math.random() * 0.6,
+          y: H * 0.3 + Math.random() * H * 0.7,
+          r: 0.6 + Math.random() * 1.8,
+          vx: (Math.random() - 0.5) * 0.18,
+          vy: -(0.1 + Math.random() * 0.35),
+          alpha: 0.15 + Math.random() * 0.45,
           pulse: Math.random() * Math.PI * 2,
-          pulseSpeed: 0.02 + Math.random() * 0.03,
-          hue: 110 + Math.floor(Math.random() * 40)
+          pulseSpeed: 0.008 + Math.random() * 0.015, // lebih lambat
+          hue: 108 + Math.floor(Math.random() * 30)  // hijau ke kuning-hijau
         });
       }
     }
@@ -1034,13 +1035,16 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     var rafId = null;
+    // Partikel cahaya hutan — lebih lambat, lebih organik
     function loop() {
       if (dismissed) return;
       W = cnv.width; H = cnv.height;
       ctx.clearRect(0, 0, W, H);
 
-      var grad = ctx.createRadialGradient(W/2, H, 0, W/2, H, H * 0.5);
-      grad.addColorStop(0, 'rgba(10,50,20,.12)');
+      // Latar: gradien tanah ke cahaya
+      var grad = ctx.createRadialGradient(W/2, H * 0.85, 0, W/2, H * 0.3, H * 0.75);
+      grad.addColorStop(0, 'rgba(8,38,14,.18)');
+      grad.addColorStop(0.5, 'rgba(5,22,9,.08)');
       grad.addColorStop(1, 'transparent');
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, W, H);
@@ -1093,36 +1097,97 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ==============================================================
-// AMBIENT FOREST AUDIO (Kesunyian Alam)
+// AMBIENT FOREST AUDIO (Kesunyian Hutan — Suara Bumi)
 // Berlaku di semua halaman (index.html & product.html)
+// Layered: hutan + burung + angin
 // ==============================================================
 (function initForestAudio() {
-  let audio = document.getElementById('forestAmbientGlobal');
-  if (!audio) {
-    audio = document.createElement('audio');
-    audio.id = 'forestAmbientGlobal';
-    audio.loop = true;
-    audio.src = 'https://assets.mixkit.co/active_storage/sfx/2515/2515-preview.mp3';
-    audio.style.display = 'none';
-    document.body.appendChild(audio);
+  var tier = window.__CPX_TIER || 'HIGH';
+
+  // Sumber suara hutan (burung, angin, air) — bebas royalti
+  var FOREST_SOURCES = [
+    // Hutan tropis — burung, serangga, air mengalir
+    'https://assets.mixkit.co/active_storage/sfx/2552/2552-preview.mp3',
+    // Hutan dengan angin dan daun bergerak (fallback)
+    'https://assets.mixkit.co/active_storage/sfx/2515/2515-preview.mp3'
+  ];
+
+  function createLayer(src, vol) {
+    var a = document.createElement('audio');
+    a.loop = true;
+    a.src = src;
+    a.volume = vol;
+    a.style.display = 'none';
+    a.preload = 'none';
+    document.body.appendChild(a);
+    return a;
   }
 
-  // Volume rendah (25%) agar jadi energi latar yang menenangkan
-  audio.volume = 0.25;
+  // Layer utama: suara hutan (burung + serangga + air)
+  var mainAudio = document.getElementById('forestAmbientGlobal');
+  if (!mainAudio) {
+    mainAudio = createLayer(FOREST_SOURCES[0], 0);
+    mainAudio.id = 'forestAmbientGlobal';
+  }
 
-  let isPlaying = false;
-  function playAudio() {
-    if (!isPlaying) {
-      audio.play().then(() => {
-        isPlaying = true;
-        document.removeEventListener('click', playAudio);
-        document.removeEventListener('touchstart', playAudio);
-      }).catch(() => {
-        // Browser masih blokir — tunggu klik berikutnya
-      });
+  // Layer angin tipis (hanya HIGH tier agar tidak berat)
+  var windAudio = null;
+  if (tier === 'HIGH') {
+    windAudio = document.getElementById('forestWindGlobal');
+    if (!windAudio) {
+      windAudio = createLayer(FOREST_SOURCES[1], 0);
+      windAudio.id = 'forestWindGlobal';
     }
   }
 
-  document.addEventListener('click', playAudio, { passive: true });
-  document.addEventListener('touchstart', playAudio, { passive: true });
+  var isPlaying = false;
+
+  function fadeIn(audio, targetVol, dur) {
+    if (!audio) return;
+    var step = targetVol / (dur / 80);
+    var cur = 0;
+    var iv = setInterval(function() {
+      cur = Math.min(targetVol, cur + step);
+      audio.volume = cur;
+      if (cur >= targetVol) clearInterval(iv);
+    }, 80);
+  }
+
+  function playAll() {
+    if (isPlaying) return;
+    isPlaying = true;
+    document.removeEventListener('click', playAll);
+    document.removeEventListener('touchstart', playAll);
+
+    // Play main forest audio — fade ke 0.28 dalam 3 detik
+    mainAudio.play().then(function() {
+      fadeIn(mainAudio, 0.28, 3000);
+    }).catch(function() {
+      isPlaying = false;
+    });
+
+    // Play wind layer (lebih pelan, delay 1s)
+    if (windAudio) {
+      setTimeout(function() {
+        windAudio.play().then(function() {
+          fadeIn(windAudio, 0.12, 4000);
+        }).catch(function() {});
+      }, 1200);
+    }
+  }
+
+  // Tunggu interaksi pertama (aturan browser)
+  document.addEventListener('click', playAll, { passive: true });
+  document.addEventListener('touchstart', playAll, { passive: true });
+
+  // Pause semua saat tab tersembunyi, resume saat kembali
+  document.addEventListener('visibilitychange', function() {
+    if (document.hidden) {
+      if (mainAudio) mainAudio.pause();
+      if (windAudio) windAudio.pause();
+    } else if (isPlaying) {
+      if (mainAudio) mainAudio.play().catch(function(){});
+      if (windAudio) windAudio.play().catch(function(){});
+    }
+  });
 })();
