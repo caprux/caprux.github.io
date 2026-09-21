@@ -198,7 +198,6 @@ const PRODUCTS = [
 
   // ============================================================
   // ✨ TAMBAH PRODUK BARU DI SINI ✨
-  // Copy blok di bawah, sesuaikan datanya
   // ============================================================
   // {
   //   id: 'nama-produk',
@@ -208,35 +207,14 @@ const PRODUCTS = [
   //   price: 'Rp 999.000',
   //   status: 'soon',
   //   image: 'nama_gambar.png',
-  //   images: [
-  //     'nama_gambar.png',
-  //     'nama_gambar_2.png',
-  //     'nama_gambar_3.png',
-  //     'nama_gambar_4.png'
-  //   ],
+  //   images: ['nama_gambar.png', 'nama_gambar_2.png', 'nama_gambar_3.png', 'nama_gambar_4.png'],
   //   type: 'Jenis Produk',
   //   tag: '// Bahan · PRODUK 004',
   //   fullDesc: 'Deskripsi lengkap dengan <strong>HTML</strong>.',
-  //   specs: [
-  //     { label: 'Bahan', value: '...' },
-  //     { label: 'Fitur', value: '...' },
-  //     { label: 'Origin', value: 'Made in Jawa Barat 🇮🇩' }
-  //   ],
-  //   details: [
-  //     { title: '// Judul 1', items: ['Item 1', 'Item 2'] },
-  //     { title: '// Judul 2', items: ['Item 1', 'Item 2'] }
-  //   ],
-  //   sizeGuide: {
-  //     headers: ['Size', 'Dada (cm)', 'Panjang (cm)'],
-  //     rows: [
-  //       ['S', '88–92', '67'],
-  //       ['M', '92–96', '70']
-  //     ]
-  //   },
-  //   care: [
-  //     { icon: '🌊', label: '// Cuci', text: '...' },
-  //     { icon: '🚫', label: '// Jangan', text: '...' }
-  //   ],
+  //   specs: [{ label: 'Bahan', value: '...' }],
+  //   details: [{ title: '// Judul', items: ['Item 1', 'Item 2'] }],
+  //   sizeGuide: { headers: ['Size', 'Dada (cm)'], rows: [['S', '88–92']] },
+  //   care: [{ icon: '🌊', label: '// Cuci', text: '...' }],
   //   tags: ['#tag1', '#tag2'],
   //   related: ['kaos-oblong', 'jaket-crincle']
   // }
@@ -265,18 +243,13 @@ function getRelatedProducts(id) {
 // RENDER PRODUCT GRID (index.html)
 // ================================================================
 function renderProducts() {
-  // ── Legacy grid untuk product.html ──
   const grid = document.getElementById('productGrid');
-  if (grid) {
-    grid.style.display = 'none'; // sembunyikan grid lama, carousel yang tampil
-  }
+  if (grid) grid.style.display = 'none';
 
-  // ── Carousel untuk index.html ──
   const outer    = document.getElementById('productCarousel');
   const dotsWrap = document.getElementById('carouselDots');
   if (!outer || !dotsWrap) return;
 
-  // Tampilkan wrapper carousel
   const carouselWrap = outer.closest('.carousel-wrap');
   if (carouselWrap) carouselWrap.style.display = 'flex';
 
@@ -289,7 +262,6 @@ function renderProducts() {
     return 'far';
   }
 
-  // Build HTML
   outer.innerHTML = PRODUCTS.map((p, i) => {
     const locked = p.status !== 'open';
     return `
@@ -325,13 +297,9 @@ function renderProducts() {
     });
   }
 
-  // Click cards
   outer.querySelectorAll('.pcard').forEach((c, i) => {
     c.addEventListener('click', () => {
-      if (i !== activeIdx) {
-        setActive(i);
-        return;
-      }
+      if (i !== activeIdx) { setActive(i); return; }
       const p = PRODUCTS[i];
       if (!p || !p.id) return;
       if (p.status !== 'open') {
@@ -344,12 +312,10 @@ function renderProducts() {
     });
   });
 
-  // Click dots
   dotsWrap.querySelectorAll('.carousel-dot').forEach((d, i) => {
     d.addEventListener('click', () => setActive(i));
   });
 
-  // Touch swipe
   let tStart = 0;
   outer.addEventListener('touchstart', e => { tStart = e.touches[0].clientX; }, { passive: true });
   outer.addEventListener('touchend',   e => {
@@ -357,7 +323,6 @@ function renderProducts() {
     if (Math.abs(dx) > 36) dx < 0 ? setActive(activeIdx + 1) : setActive(activeIdx - 1);
   }, { passive: true });
 
-  // Mouse drag
   let mStart = 0, dragging = false;
   outer.addEventListener('mousedown', e => { dragging = true; mStart = e.clientX; });
   document.addEventListener('mousemove', e => {
@@ -370,9 +335,8 @@ function renderProducts() {
   document.addEventListener('mouseup', () => { dragging = false; });
 }
 
-
 // ================================================================
-// RENDER PRODUCT DETAIL (product.html) — DENGAN MULTIPLE IMAGES
+// RENDER PRODUCT DETAIL (product.html)
 // ================================================================
 function renderProductDetail() {
   const params = new URLSearchParams(window.location.search);
@@ -392,16 +356,11 @@ function renderProductDetail() {
 
   document.title = `${product.name} — CAPRUX`;
 
-  // Breadcrumb
   const bcCur = document.querySelector('.bc-cur');
   if (bcCur) bcCur.textContent = product.name;
 
-  // ============================================================
-  // GALLERY — support multiple images
-  // ============================================================
   const images = product.images || [product.image];
 
-  // Main image
   const mainImg = document.getElementById('mainImg');
   if (mainImg) {
     mainImg.src = images[0] || product.image;
@@ -411,22 +370,15 @@ function renderProductDetail() {
   const gTag = document.querySelector('.g-tag');
   if (gTag) gTag.textContent = `// CAPRUX · ${product.tag.replace('//', '').trim()}`;
 
-  // Thumbs
   const thumbs = document.querySelectorAll('.thumb');
   thumbs.forEach((thumb, i) => {
     const img = thumb.querySelector('img');
     const imgSrc = images[i % images.length] || images[0] || product.image;
-    if (img) {
-      img.src = imgSrc;
-      img.alt = product.name;
-    }
+    if (img) { img.src = imgSrc; img.alt = product.name; }
     thumb.className = 'thumb' + (i === 0 ? ' active' : '');
     thumb.onclick = function() { switchImg(this, imgSrc); };
   });
 
-  // ============================================================
-  // INFO
-  // ============================================================
   const eyebrow = document.querySelector('.prod-eyebrow');
   if (eyebrow) eyebrow.textContent = product.tag;
 
@@ -445,7 +397,6 @@ function renderProductDetail() {
     statusEl.className = `status s-${product.status}`;
   }
 
-  // CTA
   const ctaBtn = document.querySelector('.cta-block .btn-primary');
   if (ctaBtn) {
     if (product.status === 'open' && product.shopeeUrl) {
@@ -462,16 +413,12 @@ function renderProductDetail() {
     }
   }
 
-  // Sembunyikan notify block kalau produk sudah open
   const notifyBlock = document.querySelector('.notify-block');
-  if (notifyBlock && product.status === 'open') {
-    notifyBlock.style.display = 'none';
-  }
+  if (notifyBlock && product.status === 'open') notifyBlock.style.display = 'none';
 
   const descEl = document.querySelector('.prod-desc');
   if (descEl) descEl.innerHTML = product.fullDesc;
 
-  // Specs
   const specsTbl = document.querySelector('.specs-tbl');
   if (specsTbl) {
     specsTbl.innerHTML = product.specs.map(s => `
@@ -479,7 +426,6 @@ function renderProductDetail() {
     `).join('');
   }
 
-  // Details tabs
   const detailGrid = document.querySelector('#t1 .detail-grid');
   if (detailGrid) {
     detailGrid.innerHTML = product.details.map(d => `
@@ -490,7 +436,6 @@ function renderProductDetail() {
     `).join('');
   }
 
-  // Size Guide
   const sgTbl = document.querySelector('.sg-tbl');
   if (sgTbl) {
     sgTbl.innerHTML = `
@@ -499,7 +444,6 @@ function renderProductDetail() {
     `;
   }
 
-  // Care
   const careGrid = document.querySelector('.care-grid');
   if (careGrid) {
     careGrid.innerHTML = product.care.map(c => `
@@ -511,13 +455,11 @@ function renderProductDetail() {
     `).join('');
   }
 
-  // Tags
   const tagsContainer = document.querySelector('.tags');
   if (tagsContainer) {
     tagsContainer.innerHTML = product.tags.map(t => `<span class="tag">${t}</span>`).join('');
   }
 
-  // Related products
   const relatedProducts = getRelatedProducts(id);
   const relGrid = document.querySelector('.rel-grid');
   if (relGrid) {
@@ -627,13 +569,9 @@ document.addEventListener('DOMContentLoaded', function() {
     renderProducts();
   }
 
-  // Nav hamburger
   const hamburger = document.getElementById('hamburger');
-  if (hamburger) {
-    hamburger.addEventListener('click', toggleMenu);
-  }
+  if (hamburger) hamburger.addEventListener('click', toggleMenu);
 
-  // Nav scroll effect
   const nav = document.querySelector('nav');
   if (nav) {
     window.addEventListener('scroll', function() {
@@ -670,10 +608,7 @@ document.addEventListener('DOMContentLoaded', function() {
       ticking = false;
     }
     window.addEventListener('scroll', function() {
-      if (!ticking) {
-        requestAnimationFrame(updateScrollParallax);
-        ticking = true;
-      }
+      if (!ticking) { requestAnimationFrame(updateScrollParallax); ticking = true; }
     }, { passive: true });
     updateScrollParallax();
 
@@ -813,9 +748,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     initDropCardTilt();
     const relGrid = document.querySelector('.rel-grid');
-    if (relGrid) {
-      new MutationObserver(initDropCardTilt).observe(relGrid, { childList: true });
-    }
+    if (relGrid) new MutationObserver(initDropCardTilt).observe(relGrid, { childList: true });
 
     const aboutVisual = document.querySelector('.about-visual');
     if (aboutVisual) {
@@ -844,15 +777,9 @@ document.addEventListener('DOMContentLoaded', function() {
   (function aboutLogoTouchGlow() {
     const aboutLogo = document.querySelector('.about-logo-float');
     if (!aboutLogo) return;
-    aboutLogo.addEventListener('touchstart', function() {
-      aboutLogo.classList.add('touched');
-    }, { passive: true });
-    aboutLogo.addEventListener('touchend', function() {
-      aboutLogo.classList.remove('touched');
-    }, { passive: true });
-    aboutLogo.addEventListener('touchcancel', function() {
-      aboutLogo.classList.remove('touched');
-    }, { passive: true });
+    aboutLogo.addEventListener('touchstart', function() { aboutLogo.classList.add('touched'); }, { passive: true });
+    aboutLogo.addEventListener('touchend', function() { aboutLogo.classList.remove('touched'); }, { passive: true });
+    aboutLogo.addEventListener('touchcancel', function() { aboutLogo.classList.remove('touched'); }, { passive: true });
   })();
 
   // ==============================================================
@@ -908,7 +835,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }, { passive: true });
   })();
 
-  // Close mobile menu on resize
   window.addEventListener('resize', function() {
     if (window.innerWidth > 900) closeMenu();
   });
@@ -922,7 +848,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!numEl) return;
 
     var KEY = 'caprux-id_visitor-total-2025';
-
     numEl.classList.add('loading');
 
     fetch('https://countapi.mileshilliard.com/api/v1/hit/' + KEY)
@@ -933,7 +858,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (!isNaN(val)) {
           numEl.classList.remove('loading');
-
           var start = Math.max(0, val - Math.min(val, 60));
           var step  = 16;
           var steps = Math.ceil(900 / step);
@@ -944,7 +868,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (cur >= val) { cur = val; clearInterval(timer); }
             numEl.textContent = Math.floor(cur).toLocaleString('id-ID');
           }, step);
-
           if (noteEl) noteEl.textContent = 'Terhitung sejak website diluncurkan · real-time';
         } else {
           numEl.classList.remove('loading');
@@ -960,7 +883,7 @@ document.addEventListener('DOMContentLoaded', function() {
   })();
 
   // ==============================================================
-  // FOREST INTRO
+  // FOREST INTRO — Lebih organik & lambat (kayak hutan asli)
   // ==============================================================
   (function() {
     var overlay = document.getElementById('introOverlay');
@@ -979,7 +902,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var ctx = cnv.getContext('2d');
     var dismissed = false;
     var startTime = Date.now();
-    var totalDur = 3600; // Lebih panjang — beri waktu hutan bernafas
+    var totalDur = 4200; // lebih panjang — beri waktu hutan bernafas
 
     function resize() { cnv.width = overlay.offsetWidth; cnv.height = overlay.offsetHeight; }
     resize();
@@ -990,90 +913,145 @@ document.addEventListener('DOMContentLoaded', function() {
     function initParticles() {
       W = cnv.width; H = cnv.height;
       particles = [];
-      // Lebih sedikit partikel, lebih lambat — seperti spora/kunang-kunang di hutan
-      var count = Math.min(40, Math.floor(W * H / 18000));
+      // Lebih sedikit partikel — lebih organik, spora melayang pelan
+      var count = Math.min(35, Math.floor(W * H / 22000));
       for (var i = 0; i < count; i++) {
         particles.push({
           x: Math.random() * W,
-          y: H * 0.3 + Math.random() * H * 0.7,
-          r: 0.6 + Math.random() * 1.8,
-          vx: (Math.random() - 0.5) * 0.18,
-          vy: -(0.1 + Math.random() * 0.35),
-          alpha: 0.15 + Math.random() * 0.45,
+          y: H * 0.25 + Math.random() * H * 0.75,
+          r: 0.7 + Math.random() * 2.0,
+          vx: (Math.random() - 0.5) * 0.15,
+          vy: -(0.08 + Math.random() * 0.25),
+          alpha: 0.15 + Math.random() * 0.4,
           pulse: Math.random() * Math.PI * 2,
-          pulseSpeed: 0.008 + Math.random() * 0.015, // lebih lambat
-          hue: 108 + Math.floor(Math.random() * 30)  // hijau ke kuning-hijau
+          pulseSpeed: 0.006 + Math.random() * 0.012,
+          hue: 105 + Math.floor(Math.random() * 35)
         });
       }
     }
     initParticles();
     window.addEventListener('resize', initParticles);
 
-    function drawForestSilhouette(w, h) {
+    // ── Pohon silhouette (kiri-kanan, layering kedalaman) ──
+    function drawForestSilhouette(w, h, t) {
       ctx.save();
-      ctx.globalAlpha = 0.12;
-      var drawTree = function(x, baseY, trunkH, trunkW, layerCount, spread) {
-        ctx.fillStyle = '#0d2e14';
-        ctx.fillRect(x - trunkW/2, baseY - trunkH, trunkW, trunkH);
-        for (var l = 0; l < layerCount; l++) {
-          var ly = baseY - trunkH * 0.4 - l * (trunkH * 0.22);
-          var lw = spread * (1 - l * 0.18);
-          ctx.beginPath();
-          ctx.moveTo(x, ly - lw * 0.9);
-          ctx.lineTo(x + lw, ly + lw * 0.4);
-          ctx.lineTo(x - lw, ly + lw * 0.4);
-          ctx.closePath();
-          ctx.fillStyle = l % 2 === 0 ? '#0f3416' : '#0d2a12';
-          ctx.fill();
-        }
-      };
-      drawTree(w * 0.06, h, h * 0.7, 14, 4, w * 0.09);
-      drawTree(w * 0.15, h, h * 0.55, 10, 3, w * 0.07);
-      drawTree(w * 0.94, h, h * 0.65, 12, 4, w * 0.085);
-      drawTree(w * 0.86, h, h * 0.5, 9, 3, w * 0.065);
+      // Layer 1: pohon jauh (paling gelap, paling blur)
+      ctx.globalAlpha = 0.28;
+      drawTreeLayer(w, h, 0.04, 0.72, '#061a0a', t * 0.15);
+      drawTreeLayer(w, h, 0.96, 0.72, '#061a0a', t * 0.15 + 1.2);
+      drawTreeLayer(w, h, 0.12, 0.6, '#071f0c', t * 0.2 + 0.6);
+
+      // Layer 2: pohon sedang
+      ctx.globalAlpha = 0.4;
+      drawTreeLayer(w, h, 0.02, 0.85, '#0a2810', t * 0.25 + 0.3);
+      drawTreeLayer(w, h, 0.98, 0.85, '#0a2810', t * 0.25 + 1.8);
+      drawTreeLayer(w, h, 0.18, 0.7, '#0c2f14', t * 0.3 + 0.9);
+
+      // Layer 3: pohon dekat (paling jelas, ada gerakan angin)
+      ctx.globalAlpha = 0.55;
+      drawTreeLayer(w, h, 0.0, 1.0, '#0e3417', t * 0.35);
+      drawTreeLayer(w, h, 1.0, 1.0, '#0e3417', t * 0.35 + 2.4);
+
+      // Layer 4: akar/bayangan tanah bawah
+      ctx.globalAlpha = 0.6;
+      ctx.fillStyle = '#020b04';
+      ctx.beginPath();
+      ctx.moveTo(0, h);
+      ctx.lineTo(0, h - 20);
+      for (var x = 0; x <= w; x += 40) {
+        ctx.lineTo(x, h - 18 - Math.sin((x + t * 12) * 0.008) * 4);
+      }
+      ctx.lineTo(w, h);
+      ctx.closePath();
+      ctx.fill();
+
       ctx.restore();
     }
 
+    // Helper: satu "pohon" silhouette (batang + 3 layer daun)
+    function drawTreeLayer(w, h, xRatio, heightRatio, color, seed) {
+      var x = xRatio * w;
+      var baseY = h + 10;
+      var trunkH = h * heightRatio * 0.55;
+      var sway = Math.sin(seed + performance.now() * 0.0004) * 3;
+
+      // Batang
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      ctx.moveTo(x - 3, baseY);
+      ctx.lineTo(x - 2 + sway * 0.3, baseY - trunkH);
+      ctx.lineTo(x + 2 + sway * 0.3, baseY - trunkH);
+      ctx.lineTo(x + 3, baseY);
+      ctx.closePath();
+      ctx.fill();
+
+      // Daun: 4 lapisan segitiga menumpuk
+      var layers = 4;
+      for (var l = 0; l < layers; l++) {
+        var ly = baseY - trunkH - l * (trunkH * 0.18);
+        var lw = (w * 0.045) * (1 - l * 0.15);
+        var swayL = sway * (1 + l * 0.4);
+
+        ctx.beginPath();
+        ctx.moveTo(x + swayL, ly - lw * 1.1);
+        ctx.lineTo(x + lw + swayL * 0.6, ly + lw * 0.5);
+        ctx.quadraticCurveTo(x + swayL * 0.5, ly + lw * 0.3, x - lw + swayL * 0.6, ly + lw * 0.5);
+        ctx.closePath();
+        ctx.fillStyle = color;
+        ctx.fill();
+      }
+    }
+
     var rafId = null;
-    // Partikel cahaya hutan — lebih lambat, lebih organik
     function loop() {
       if (dismissed) return;
       W = cnv.width; H = cnv.height;
       ctx.clearRect(0, 0, W, H);
 
-      // Latar: gradien tanah ke cahaya
-      var grad = ctx.createRadialGradient(W/2, H * 0.85, 0, W/2, H * 0.3, H * 0.75);
-      grad.addColorStop(0, 'rgba(8,38,14,.18)');
-      grad.addColorStop(0.5, 'rgba(5,22,9,.08)');
-      grad.addColorStop(1, 'transparent');
-      ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, W, H);
-
-      drawForestSilhouette(W, H);
-
       var elapsed = Date.now() - startTime;
       var progress = Math.min(elapsed / totalDur, 1);
+      var t = elapsed * 0.001;
+
+      // Latar: cahaya matahari menembus kanopi (radial dari atas tengah)
+      var skyGrad = ctx.createRadialGradient(W * 0.5, H * 0.15, 0, W * 0.5, H * 0.15, H * 0.9);
+      skyGrad.addColorStop(0, 'rgba(30,80,40,.22)');
+      skyGrad.addColorStop(0.4, 'rgba(15,45,22,.12)');
+      skyGrad.addColorStop(1, 'transparent');
+      ctx.fillStyle = skyGrad;
+      ctx.fillRect(0, 0, W, H);
+
+      // Kabut bawah
+      var mistGrad = ctx.createLinearGradient(0, H * 0.6, 0, H);
+      mistGrad.addColorStop(0, 'transparent');
+      mistGrad.addColorStop(1, 'rgba(10,40,18,.35)');
+      ctx.fillStyle = mistGrad;
+      ctx.fillRect(0, H * 0.6, W, H * 0.4);
+
+      drawForestSilhouette(W, H, t);
+
+      // Partikel spora / kunang-kunang (bergerak pelan ke atas)
       particles.forEach(function(p) {
         p.x += p.vx;
         p.y += p.vy;
         p.pulse += p.pulseSpeed;
-        var glow = Math.sin(p.pulse) * 0.3;
+        var glow = Math.sin(p.pulse) * 0.35;
         if (p.y < -10) { p.y = H + 5; p.x = Math.random() * W; }
         if (p.x < -10) p.x = W + 5;
         if (p.x > W + 10) p.x = -5;
 
-        var finalAlpha = p.alpha * (0.5 + glow) * progress;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = 'hsla(' + p.hue + ',80%,65%,' + finalAlpha + ')';
-        ctx.fill();
-
-        if (p.r > 1.5) {
+        var finalAlpha = p.alpha * (0.55 + glow) * progress;
+        // Outer glow ring
+        if (p.r > 1.3) {
           ctx.beginPath();
-          ctx.arc(p.x, p.y, p.r * 2.5, 0, Math.PI * 2);
-          ctx.fillStyle = 'hsla(' + p.hue + ',70%,55%,' + (finalAlpha * 0.15) + ')';
+          ctx.arc(p.x, p.y, p.r * 3.5, 0, Math.PI * 2);
+          ctx.fillStyle = 'hsla(' + p.hue + ',75%,55%,' + (finalAlpha * 0.1) + ')';
           ctx.fill();
         }
+        // Core
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'hsla(' + p.hue + ',85%,70%,' + finalAlpha + ')';
+        ctx.fill();
       });
 
       rafId = requestAnimationFrame(loop);
@@ -1085,7 +1063,7 @@ document.addEventListener('DOMContentLoaded', function() {
       dismissed = true;
       if (rafId) cancelAnimationFrame(rafId);
       overlay.classList.add('fade-out');
-      setTimeout(function() { overlay.remove(); }, 800);
+      setTimeout(function() { overlay.remove(); }, 1000);
     }
 
     setTimeout(dismiss, totalDur);
@@ -1097,97 +1075,66 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ==============================================================
-// AMBIENT FOREST AUDIO (Kesunyian Hutan — Suara Bumi)
+// AMBIENT FOREST AUDIO — hutan.mp3 (file lokal kamu)
 // Berlaku di semua halaman (index.html & product.html)
-// Layered: hutan + burung + angin
+// Auto-play setelah interaksi pertama, dengan fade-in halus
 // ==============================================================
 (function initForestAudio() {
-  var tier = window.__CPX_TIER || 'HIGH';
+  // Kunci utama: kalau sudah di-init di halaman ini, skip
+  if (window.__CAPRUX_AUDIO_INIT__) return;
+  window.__CAPRUX_AUDIO_INIT__ = true;
 
-  // Sumber suara hutan (burung, angin, air) — bebas royalti
-  var FOREST_SOURCES = [
-    // Hutan tropis — burung, serangga, air mengalir
-    'https://assets.mixkit.co/active_storage/sfx/2552/2552-preview.mp3',
-    // Hutan dengan angin dan daun bergerak (fallback)
-    'https://assets.mixkit.co/active_storage/sfx/2515/2515-preview.mp3'
-  ];
-
-  function createLayer(src, vol) {
-    var a = document.createElement('audio');
-    a.loop = true;
-    a.src = src;
-    a.volume = vol;
-    a.style.display = 'none';
-    a.preload = 'none';
-    document.body.appendChild(a);
-    return a;
-  }
-
-  // Layer utama: suara hutan (burung + serangga + air)
-  var mainAudio = document.getElementById('forestAmbientGlobal');
-  if (!mainAudio) {
-    mainAudio = createLayer(FOREST_SOURCES[0], 0);
-    mainAudio.id = 'forestAmbientGlobal';
-  }
-
-  // Layer angin tipis (hanya HIGH tier agar tidak berat)
-  var windAudio = null;
-  if (tier === 'HIGH') {
-    windAudio = document.getElementById('forestWindGlobal');
-    if (!windAudio) {
-      windAudio = createLayer(FOREST_SOURCES[1], 0);
-      windAudio.id = 'forestWindGlobal';
-    }
-  }
+  // Buat elemen audio — pakai file lokal hutan.mp3
+  var audio = document.createElement('audio');
+  audio.id = 'forestAmbientGlobal';
+  audio.loop = true;
+  audio.src = 'hutan.mp3';
+  audio.preload = 'auto';
+  audio.style.display = 'none';
+  document.body.appendChild(audio);
 
   var isPlaying = false;
+  var targetVol = 0.35; // volume tujuan (0.35 = sedang, cukup terasa)
 
-  function fadeIn(audio, targetVol, dur) {
-    if (!audio) return;
-    var step = targetVol / (dur / 80);
-    var cur = 0;
-    var iv = setInterval(function() {
-      cur = Math.min(targetVol, cur + step);
-      audio.volume = cur;
-      if (cur >= targetVol) clearInterval(iv);
-    }, 80);
+  function fadeIn(audioEl, target, dur) {
+    var startVol = 0;
+    audioEl.volume = startVol;
+    var startTime = performance.now();
+    function step() {
+      var elapsed = performance.now() - startTime;
+      var p = Math.min(elapsed / dur, 1);
+      // Easing: ease-out cubic — halus kayak angin
+      var eased = 1 - Math.pow(1 - p, 3);
+      audioEl.volume = startVol + (target - startVol) * eased;
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
   }
 
   function playAll() {
     if (isPlaying) return;
-    isPlaying = true;
-    document.removeEventListener('click', playAll);
-    document.removeEventListener('touchstart', playAll);
-
-    // Play main forest audio — fade ke 0.28 dalam 3 detik
-    mainAudio.play().then(function() {
-      fadeIn(mainAudio, 0.28, 3000);
+    audio.play().then(function() {
+      isPlaying = true;
+      fadeIn(audio, targetVol, 3500); // 3.5 detik fade-in — pelan & damai
+      document.removeEventListener('click', playAll);
+      document.removeEventListener('touchstart', playAll);
+      document.removeEventListener('keydown', playAll);
     }).catch(function() {
-      isPlaying = false;
+      // Browser blokir — coba lagi di interaksi berikutnya
     });
-
-    // Play wind layer (lebih pelan, delay 1s)
-    if (windAudio) {
-      setTimeout(function() {
-        windAudio.play().then(function() {
-          fadeIn(windAudio, 0.12, 4000);
-        }).catch(function() {});
-      }, 1200);
-    }
   }
 
-  // Tunggu interaksi pertama (aturan browser)
+  // Trigger pada interaksi pertama
   document.addEventListener('click', playAll, { passive: true });
   document.addEventListener('touchstart', playAll, { passive: true });
+  document.addEventListener('keydown', playAll, { passive: true });
 
-  // Pause semua saat tab tersembunyi, resume saat kembali
+  // Pause saat tab tersembunyi, resume saat kembali
   document.addEventListener('visibilitychange', function() {
     if (document.hidden) {
-      if (mainAudio) mainAudio.pause();
-      if (windAudio) windAudio.pause();
+      audio.pause();
     } else if (isPlaying) {
-      if (mainAudio) mainAudio.play().catch(function(){});
-      if (windAudio) windAudio.play().catch(function(){});
+      audio.play().catch(function(){});
     }
   });
 })();
