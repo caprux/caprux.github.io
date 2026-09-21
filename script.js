@@ -191,12 +191,9 @@ function renderProductDetail() {
   const bcCur = document.querySelector('.bc-cur');
   if (bcCur) bcCur.textContent = product.name;
 
-  // ============================================================
-  // GALLERY — support multiple images
-  // ============================================================
+  // ── GALLERY ──
   const images = product.images || [product.image];
 
-  // Main image
   const mainImg = document.getElementById('mainImg');
   if (mainImg) {
     mainImg.src = images[0] || product.image;
@@ -206,7 +203,6 @@ function renderProductDetail() {
   const gTag = document.querySelector('.g-tag');
   if (gTag) gTag.textContent = `// CAPRUX · ${product.tag.replace('//', '').trim()}`;
 
-  // Thumbs
   const thumbs = document.querySelectorAll('.thumb');
   thumbs.forEach((thumb, i) => {
     const img = thumb.querySelector('img');
@@ -219,9 +215,7 @@ function renderProductDetail() {
     thumb.onclick = function() { switchImg(this, imgSrc); };
   });
 
-  // ============================================================
-  // INFO
-  // ============================================================
+  // ── INFO ──
   const eyebrow = document.querySelector('.prod-eyebrow');
   if (eyebrow) eyebrow.textContent = product.tag;
 
@@ -266,53 +260,13 @@ function renderProductDetail() {
   const descEl = document.querySelector('.prod-desc');
   if (descEl) descEl.innerHTML = product.fullDesc;
 
-  // Specs
-  const specsTbl = document.querySelector('.specs-tbl');
-  if (specsTbl) {
-    specsTbl.innerHTML = product.specs.map(s => `
-      <tr><td>${s.label}</td><td>${s.value}</td></tr>
-    `).join('');
-  }
-
-  // Details tabs
-  const detailGrid = document.querySelector('#t1 .detail-grid');
-  if (detailGrid) {
-    detailGrid.innerHTML = product.details.map(d => `
-      <div class="d-block">
-        <div class="d-label">${d.title}</div>
-        <ul>${d.items.map(item => `<li>${item}</li>`).join('')}</ul>
-      </div>
-    `).join('');
-  }
-
-  // Size Guide
-  const sgTbl = document.querySelector('.sg-tbl');
-  if (sgTbl) {
-    sgTbl.innerHTML = `
-      <thead><tr>${product.sizeGuide.headers.map(h => `<th>${h}</th>`).join('')}</tr></thead>
-      <tbody>${product.sizeGuide.rows.map(row => `<tr>${row.map(cell => `<td>${cell}</td>`).join('')}</tr>`).join('')}</tbody>
-    `;
-  }
-
-  // Care
-  const careGrid = document.querySelector('.care-grid');
-  if (careGrid) {
-    careGrid.innerHTML = product.care.map(c => `
-      <div class="care">
-        <div class="care-ico">${c.icon}</div>
-        <div class="care-lbl">${c.label}</div>
-        <div class="care-txt">${c.text}</div>
-      </div>
-    `).join('');
-  }
-
   // Tags
   const tagsContainer = document.querySelector('.tags');
   if (tagsContainer) {
     tagsContainer.innerHTML = product.tags.map(t => `<span class="tag">${t}</span>`).join('');
   }
 
-  // Related products
+  // ── RELATED PRODUCTS ──
   const relatedProducts = getRelatedProducts(id);
   const relGrid = document.querySelector('.rel-grid');
   if (relGrid) {
