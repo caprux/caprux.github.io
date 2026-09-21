@@ -7,218 +7,38 @@
 // ================================================================
 // DATA PRODUK — ✨ TAMBAH PRODUK BARU DI SINI ✨
 // ================================================================
-const PRODUCTS = [
-  {
-    id: 'kaos-oblong',
-    name: 'THE TROPICAL SOUL',
-    badge: '// Micro Cotton Danbowl',
-    desc: 'Polyflex 3D logo silicon 1mm.',
-    price: 'Rp 100.000',
-    status: 'open',
-    shopeeUrl: 'https://id.shp.ee/kc8YJcLh',
-    image: 'CPX_KO_01.png',
-    images: [
-      'CPX_KO_01.png',
-      'CPX_KO_02.png',
-      'CPX_KO_03.png',
-      'CPX_KO_04.png'
-    ],
-    type: 'Kaos Oblong Premium',
-    tag: '// Micro Cotton Danbowl · PRODUK 001',
-    fullDesc: 'Kaos oblong premium dengan bahan <strong>Micro Cotton Danbowl</strong> — lembut, adem, dan breathable untuk iklim tropis. Logo <strong>Polyflex 3D Silicon 1mm</strong> timbul, bukan sablon biasa. Setiap detail dibuat tanpa kompromi.',
-    specs: [
-      { label: 'Bahan', value: 'Micro Cotton' },
-      { label: 'Gramasi', value: '210 gsm' },
-      { label: 'Logo', value: 'Polyflex 3D Silicon 1mm' },
-      { label: 'Label', value: 'Woven label neon green hem' },
-      { label: 'Potongan', value: 'Regular fit' },
-      { label: 'Origin', value: 'Made in Jawa Barat 🇮🇩' }
-    ],
-    details: [
-      { title: '// Bahan & Konstruksi', items: [
-        'Micro Cotton Danbowl 210 gsm',
-        'Lembut, Nyaman, Anti Gerah',
-        'Jahitan rantai double needle di bahu',
-        'Kerah ribbed 1×1 dengan elastane',
-        'Side seam untuk struktur tubuh lebih baik'
-      ]},
-      { title: '// Logo & Branding', items: [
-        'Polyflex 3D Silicon 1mm — timbul, tidak retak',
-        'Woven label CAPRUX di hem kiri bawah (neon green)',
-        'Heat transfer size label di leher dalam',
-        'Disablon DTF manual'
-      ]},
-      { title: '// Filosofi Produk Ini', items: [
-        'Terinspirasi dari panas Bumi yang menyengat',
-        '"The Tropical Soul" — sensasi alam Indonesia di pinggir pantai',
-        'Limited product, tidak ada restock setelah habis'
-      ]}
-    ],
-    sizeGuide: {
-      headers: ['Size', 'Panjang Badan (cm)', 'Lebar Bahu (cm)','Panjang Lengan (cm)'],
-      rows: [
-        ['M', '70', '52', '20'],
-        ['L', '72', '53', '21'],
-        ['XL', '74', '54', '22']
-      ]
-    },
-    care: [
-      { icon: '🌊', label: '// Cuci', text: 'Mesin cuci maks 30°C. Balik kain sebelum mencuci agar logo tidak tergesek.' },
-      { icon: '🚫', label: '// Jangan Bleach', text: 'Hindari pemutih apapun. Merusak bahan dan warna secara permanen.' },
-      { icon: '🌡️', label: '// Setrika', text: 'Suhu rendah-sedang. Jangan setrika langsung di logo Polyflex — gunakan kain pelapis.' },
-      { icon: '👕', label: '// Jemur', text: 'Terbalik di tempat teduh. Hindari sinar matahari langsung yang terlalu lama.' }
-    ],
-    tags: ['#streetwear', '#kaos', '#etnicroot', '#jawabarat', '#caprux'],
-    related: ['jaket-crincle', 'celana-pendek']
-  },
-  {
-    id: 'jaket-crincle',
-    name: 'THE VOLCANIC SOUL',
-    badge: '// Parasut Crincle',
-    desc: 'Model Gunung. Bahan Sporty.',
-    price: 'Rp 150.000',
-    status: 'open',
-    shopeeUrl: 'https://id.shp.ee/c1xPsCmU',
-    image: 'CPX_JP_01.png',
-    images: [
-      'CPX_JP_01.png',
-      'CPX_JP_02.png',
-      'CPX_JP_03.png',
-      'CPX_JP_04.png'
-    ],
-    type: 'Jaket Gunung Sporty',
-    tag: '// Parasut Crincle · PRODUK 002',
-    fullDesc: 'Jaket outdoor dari bahan <strong>Parasut Crincle</strong> — ringan, tahan angin, dan tetap stylish di jalur gunung maupun jalanan kota. Potongan <strong>model gunung</strong> yang fungsional tanpa kehilangan estetika streetwear CAPRUX.',
-    specs: [
-      { label: 'Bahan', value: 'Parasut Crincle' },
-      { label: 'Berat', value: 'Lightweight, anti-angin' },
-      { label: 'Fitur', value: 'Zipper YKK, hood adjustable' },
-      { label: 'Logo', value: 'Embroidery + woven label' },
-      { label: 'Potongan', value: 'Regular fit, model gunung' },
-      { label: 'Origin', value: 'Made in Jawa Barat 🇮🇩' }
-    ],
-    details: [
-      { title: '// Bahan & Konstruksi', items: [
-        'Parasut Crincle ringan dan tahan angin',
-        'Lining mesh tipis untuk sirkulasi udara',
-        'Jahitan taped seam di area kritis',
-        'Zipper YKK tahan lama di seluruh bagian',
-        'Hood adjustable dengan drawcord'
-      ]},
-      { title: '// Logo & Branding', items: [
-        'Embroidery logo di dada kiri',
-        'Woven label CAPRUX di saku kanan',
-        'Rubber patch di hem belakang',
-        'Zipper pull custom CAPRUX'
-      ]},
-      { title: '// Filosofi Produk Ini', items: [
-        'Untuk yang naik gunung tanpa melepas gaya',
-        '"Wind Blocker" — halangi semua yang mau ngecilin kamu',
-        'Limited batch, tidak ada restock setelah habis'
-      ]}
-    ],
-    sizeGuide: {
-      headers: ['Size', 'Lingkar Dada (cm)', 'Panjang Badan (cm)', 'Lebar Bahu (cm)', 'Panjang Lengan (cm)'],
-      rows: [
-        ['M', '96–100', '68', '46', '62'],
-        ['L', '100–104', '71', '48', '64'],
-        ['XL', '104–108', '74', '50', '66']
-      ]
-    },
-    care: [
-      { icon: '🌊', label: '// Cuci', text: 'Tangan atau mesin gentle cycle maks 30°C. Jangan diperas terlalu kuat.' },
-      { icon: '🚫', label: '// Jangan Dryer', text: 'Hindari mesin pengering. Bahan crincle bisa menyusut dan merusak lapisan.' },
-      { icon: '🌡️', label: '// Setrika', text: 'Tidak disarankan setrika langsung. Gantung dan biarkan keriput alami yang jadi karakter bahan.' },
-      { icon: '👕', label: '// Jemur', text: 'Gantung terbalik di tempat teduh, angin cukup. Kering sempurna sebelum disimpan.' }
-    ],
-    tags: ['#streetwear', '#jaket', '#outdoor', '#jawabarat', '#caprux'],
-    related: ['kaos-oblong', 'celana-pendek']
-  },
-  {
-    id: 'celana-pendek',
-    name: 'THE ARCHIPELAGO SOUL',
-    badge: '// Nillon Ripstop',
-    desc: 'For men only. No excuses, just hustle.',
-    price: 'Rp 225.750',
-    status: 'soon',
-    image: 'Celana_Pendek_CAPRUX.png',
-    images: [
-      'Celana_Pendek_CAPRUX.png',
-      'Celana_Pendek_CAPRUX_2.png',
-      'Celana_Pendek_CAPRUX_3.png',
-      'Celana_Pendek_CAPRUX_4.png'
-    ],
-    type: 'Celana Pendek Men\'s',
-    tag: '// The Short Circuit · Produk 003',
-    fullDesc: 'Celana pendek dari bahan <strong>Nilon Ripstop</strong> — kuat, tahan sobek, dan ringan. Dibuat khusus untuk pria yang bergerak. <strong>For men only. No excuses, just hustle.</strong> Saku dalam yang fungsional, potongan yang tidak membatasi gerak.',
-    specs: [
-      { label: 'Bahan', value: 'Nilon Ripstop' },
-      { label: 'Fitur', value: 'Quick-dry, anti-sobek' },
-      { label: 'Saku', value: '2 saku samping + 1 saku belakang' },
-      { label: 'Ikat Pinggang', value: 'Drawstring + velcro adjuster' },
-      { label: 'Potongan', value: 'Regular fit, panjang di atas lutut' },
-      { label: 'Origin', value: 'Made in Jawa Barat 🇮🇩' }
-    ],
-    details: [
-      { title: '// Bahan & Konstruksi', items: [
-        'Nilon Ripstop — ringan dan tahan sobek',
-        'Quick-dry, cocok untuk aktivitas luar ruangan',
-        'Jahitan reinforced di area tarikan tinggi',
-        'Elastis pinggang dengan drawstring external',
-        'Kaki celana dengan flat seam finishing'
-      ]},
-      { title: '// Logo & Branding', items: [
-        'Embroidery patch CAPRUX di paha kiri',
-        'Woven label di saku belakang (neon green)',
-        'Rubber tab di ikat pinggang kanan'
-      ]},
-      { title: '// Filosofi Produk Ini', items: [
-        '"Short Circuit" — jalan pintas untuk yang bergerak cepat',
-        'Dibuat untuk pria yang tidak berhenti bergerak',
-        'Limited batch, tidak ada restock setelah habis'
-      ]}
-    ],
-    sizeGuide: {
-      headers: ['Size', 'Lingkar Pinggang (cm)', 'Lingkar Pinggul (cm)', 'Panjang Celana (cm)', 'Paha (cm)'],
-      rows: [
-        ['M', '74–78', '92–96', '50', '58'],
-        ['L', '78–82', '96–100', '52', '60'],
-        ['XL', '82–86', '100–104', '54', '62']
-      ]
-    },
-    care: [
-      { icon: '🌊', label: '// Cuci', text: 'Mesin cuci gentle cycle atau tangan, maks 30°C. Kosongkan saku sebelum mencuci.' },
-      { icon: '🚫', label: '// Jangan Bleach', text: 'Bahan nilon sensitif terhadap bahan kimia keras. Hindari pemutih dan fabric softener berbasis silikon.' },
-      { icon: '🌡️', label: '// Setrika', text: 'Tidak perlu disetrika — bahan nilon akan menjadi rata secara alami setelah dijemur dan dipakai.' },
-      { icon: '👕', label: '// Jemur', text: 'Gantung di tempat teduh. Quick-dry — biasanya kering dalam 1–2 jam di angin terbuka.' }
-    ],
-    tags: ['#streetwear', '#celana', '#outdoor', '#jawabarat', '#caprux'],
-    related: ['kaos-oblong', 'jaket-crincle']
-  }
+// ================================================================
+// DATA PRODUK — Sekarang dibaca dari data/products.csv
+// Edit produk cukup di Excel → export CSV → upload ke GitHub
+// Jangan edit bagian ini secara manual
+// ================================================================
 
-  // ============================================================
-  // ✨ TAMBAH PRODUK BARU DI SINI ✨
-  // ============================================================
-  // {
-  //   id: 'nama-produk',
-  //   name: 'NAMA PRODUK',
-  //   badge: '// Bahan',
-  //   desc: 'Deskripsi singkat.',
-  //   price: 'Rp 999.000',
-  //   status: 'soon',
-  //   image: 'nama_gambar.png',
-  //   images: ['nama_gambar.png', 'nama_gambar_2.png', 'nama_gambar_3.png', 'nama_gambar_4.png'],
-  //   type: 'Jenis Produk',
-  //   tag: '// Bahan · PRODUK 004',
-  //   fullDesc: 'Deskripsi lengkap dengan <strong>HTML</strong>.',
-  //   specs: [{ label: 'Bahan', value: '...' }],
-  //   details: [{ title: '// Judul', items: ['Item 1', 'Item 2'] }],
-  //   sizeGuide: { headers: ['Size', 'Dada (cm)'], rows: [['S', '88–92']] },
-  //   care: [{ icon: '🌊', label: '// Cuci', text: '...' }],
-  //   tags: ['#tag1', '#tag2'],
-  //   related: ['kaos-oblong', 'jaket-crincle']
-  // }
-];
+// Variabel global — diisi setelah CSV selesai diload
+let PRODUCTS = [];
+
+// ── Fungsi load produk dari CSV (dipanggil di DOMContentLoaded) ──
+function loadAndRender() {
+  const isProductPage = window.location.pathname.includes('product.html');
+
+  if (window.CAPRUX_DATA) {
+    window.CAPRUX_DATA.loadProducts()
+      .then(function(products) {
+        PRODUCTS = products;
+        if (isProductPage) {
+          renderProductDetail();
+        } else {
+          renderProducts();
+        }
+      })
+      .catch(function(err) {
+        console.warn('[CAPRUX] Gagal load products.csv, pakai data fallback kosong.', err);
+        PRODUCTS = [];
+        if (!isProductPage) renderProducts();
+      });
+  } else {
+    console.warn('[CAPRUX] caprux-data.js belum dimuat');
+  }
+}
 
 // ================================================================
 // FUNGSI UTILITY
@@ -239,17 +59,19 @@ function getRelatedProducts(id) {
   return product.related.map(relId => getProduct(relId)).filter(Boolean);
 }
 
-// ================================================================
-// RENDER PRODUCT GRID (index.html)
-// ================================================================
 function renderProducts() {
+  // ── Legacy grid untuk product.html ──
   const grid = document.getElementById('productGrid');
-  if (grid) grid.style.display = 'none';
+  if (grid) {
+    grid.style.display = 'none'; // sembunyikan grid lama, carousel yang tampil
+  }
 
+  // ── Carousel untuk index.html ──
   const outer    = document.getElementById('productCarousel');
   const dotsWrap = document.getElementById('carouselDots');
   if (!outer || !dotsWrap) return;
 
+  // Tampilkan wrapper carousel
   const carouselWrap = outer.closest('.carousel-wrap');
   if (carouselWrap) carouselWrap.style.display = 'flex';
 
@@ -262,6 +84,7 @@ function renderProducts() {
     return 'far';
   }
 
+  // Build HTML
   outer.innerHTML = PRODUCTS.map((p, i) => {
     const locked = p.status !== 'open';
     return `
@@ -297,9 +120,13 @@ function renderProducts() {
     });
   }
 
+  // Click cards
   outer.querySelectorAll('.pcard').forEach((c, i) => {
     c.addEventListener('click', () => {
-      if (i !== activeIdx) { setActive(i); return; }
+      if (i !== activeIdx) {
+        setActive(i);
+        return;
+      }
       const p = PRODUCTS[i];
       if (!p || !p.id) return;
       if (p.status !== 'open') {
@@ -312,10 +139,12 @@ function renderProducts() {
     });
   });
 
+  // Click dots
   dotsWrap.querySelectorAll('.carousel-dot').forEach((d, i) => {
     d.addEventListener('click', () => setActive(i));
   });
 
+  // Touch swipe
   let tStart = 0;
   outer.addEventListener('touchstart', e => { tStart = e.touches[0].clientX; }, { passive: true });
   outer.addEventListener('touchend',   e => {
@@ -323,6 +152,7 @@ function renderProducts() {
     if (Math.abs(dx) > 36) dx < 0 ? setActive(activeIdx + 1) : setActive(activeIdx - 1);
   }, { passive: true });
 
+  // Mouse drag
   let mStart = 0, dragging = false;
   outer.addEventListener('mousedown', e => { dragging = true; mStart = e.clientX; });
   document.addEventListener('mousemove', e => {
@@ -335,8 +165,9 @@ function renderProducts() {
   document.addEventListener('mouseup', () => { dragging = false; });
 }
 
+
 // ================================================================
-// RENDER PRODUCT DETAIL (product.html)
+// RENDER PRODUCT DETAIL (product.html) — DENGAN MULTIPLE IMAGES
 // ================================================================
 function renderProductDetail() {
   const params = new URLSearchParams(window.location.search);
@@ -356,11 +187,16 @@ function renderProductDetail() {
 
   document.title = `${product.name} — CAPRUX`;
 
+  // Breadcrumb
   const bcCur = document.querySelector('.bc-cur');
   if (bcCur) bcCur.textContent = product.name;
 
+  // ============================================================
+  // GALLERY — support multiple images
+  // ============================================================
   const images = product.images || [product.image];
 
+  // Main image
   const mainImg = document.getElementById('mainImg');
   if (mainImg) {
     mainImg.src = images[0] || product.image;
@@ -370,15 +206,22 @@ function renderProductDetail() {
   const gTag = document.querySelector('.g-tag');
   if (gTag) gTag.textContent = `// CAPRUX · ${product.tag.replace('//', '').trim()}`;
 
+  // Thumbs
   const thumbs = document.querySelectorAll('.thumb');
   thumbs.forEach((thumb, i) => {
     const img = thumb.querySelector('img');
     const imgSrc = images[i % images.length] || images[0] || product.image;
-    if (img) { img.src = imgSrc; img.alt = product.name; }
+    if (img) {
+      img.src = imgSrc;
+      img.alt = product.name;
+    }
     thumb.className = 'thumb' + (i === 0 ? ' active' : '');
     thumb.onclick = function() { switchImg(this, imgSrc); };
   });
 
+  // ============================================================
+  // INFO
+  // ============================================================
   const eyebrow = document.querySelector('.prod-eyebrow');
   if (eyebrow) eyebrow.textContent = product.tag;
 
@@ -397,6 +240,7 @@ function renderProductDetail() {
     statusEl.className = `status s-${product.status}`;
   }
 
+  // CTA
   const ctaBtn = document.querySelector('.cta-block .btn-primary');
   if (ctaBtn) {
     if (product.status === 'open' && product.shopeeUrl) {
@@ -413,12 +257,16 @@ function renderProductDetail() {
     }
   }
 
+  // Sembunyikan notify block kalau produk sudah open
   const notifyBlock = document.querySelector('.notify-block');
-  if (notifyBlock && product.status === 'open') notifyBlock.style.display = 'none';
+  if (notifyBlock && product.status === 'open') {
+    notifyBlock.style.display = 'none';
+  }
 
   const descEl = document.querySelector('.prod-desc');
   if (descEl) descEl.innerHTML = product.fullDesc;
 
+  // Specs
   const specsTbl = document.querySelector('.specs-tbl');
   if (specsTbl) {
     specsTbl.innerHTML = product.specs.map(s => `
@@ -426,6 +274,7 @@ function renderProductDetail() {
     `).join('');
   }
 
+  // Details tabs
   const detailGrid = document.querySelector('#t1 .detail-grid');
   if (detailGrid) {
     detailGrid.innerHTML = product.details.map(d => `
@@ -436,6 +285,7 @@ function renderProductDetail() {
     `).join('');
   }
 
+  // Size Guide
   const sgTbl = document.querySelector('.sg-tbl');
   if (sgTbl) {
     sgTbl.innerHTML = `
@@ -444,6 +294,7 @@ function renderProductDetail() {
     `;
   }
 
+  // Care
   const careGrid = document.querySelector('.care-grid');
   if (careGrid) {
     careGrid.innerHTML = product.care.map(c => `
@@ -455,11 +306,13 @@ function renderProductDetail() {
     `).join('');
   }
 
+  // Tags
   const tagsContainer = document.querySelector('.tags');
   if (tagsContainer) {
     tagsContainer.innerHTML = product.tags.map(t => `<span class="tag">${t}</span>`).join('');
   }
 
+  // Related products
   const relatedProducts = getRelatedProducts(id);
   const relGrid = document.querySelector('.rel-grid');
   if (relGrid) {
@@ -561,17 +414,16 @@ function handleNotify() {
 // INIT
 // ================================================================
 document.addEventListener('DOMContentLoaded', function() {
-  const isProductPage = window.location.pathname.includes('product.html');
+  // Load produk dari CSV dulu, lalu render
+  loadAndRender();
 
-  if (isProductPage) {
-    renderProductDetail();
-  } else {
-    renderProducts();
+  // Nav hamburger
+  const hamburger = document.getElementById('hamburger');
+  if (hamburger) {
+    hamburger.addEventListener('click', toggleMenu);
   }
 
-  const hamburger = document.getElementById('hamburger');
-  if (hamburger) hamburger.addEventListener('click', toggleMenu);
-
+  // Nav scroll effect
   const nav = document.querySelector('nav');
   if (nav) {
     window.addEventListener('scroll', function() {
@@ -608,7 +460,10 @@ document.addEventListener('DOMContentLoaded', function() {
       ticking = false;
     }
     window.addEventListener('scroll', function() {
-      if (!ticking) { requestAnimationFrame(updateScrollParallax); ticking = true; }
+      if (!ticking) {
+        requestAnimationFrame(updateScrollParallax);
+        ticking = true;
+      }
     }, { passive: true });
     updateScrollParallax();
 
@@ -748,7 +603,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     initDropCardTilt();
     const relGrid = document.querySelector('.rel-grid');
-    if (relGrid) new MutationObserver(initDropCardTilt).observe(relGrid, { childList: true });
+    if (relGrid) {
+      new MutationObserver(initDropCardTilt).observe(relGrid, { childList: true });
+    }
 
     const aboutVisual = document.querySelector('.about-visual');
     if (aboutVisual) {
@@ -777,9 +634,15 @@ document.addEventListener('DOMContentLoaded', function() {
   (function aboutLogoTouchGlow() {
     const aboutLogo = document.querySelector('.about-logo-float');
     if (!aboutLogo) return;
-    aboutLogo.addEventListener('touchstart', function() { aboutLogo.classList.add('touched'); }, { passive: true });
-    aboutLogo.addEventListener('touchend', function() { aboutLogo.classList.remove('touched'); }, { passive: true });
-    aboutLogo.addEventListener('touchcancel', function() { aboutLogo.classList.remove('touched'); }, { passive: true });
+    aboutLogo.addEventListener('touchstart', function() {
+      aboutLogo.classList.add('touched');
+    }, { passive: true });
+    aboutLogo.addEventListener('touchend', function() {
+      aboutLogo.classList.remove('touched');
+    }, { passive: true });
+    aboutLogo.addEventListener('touchcancel', function() {
+      aboutLogo.classList.remove('touched');
+    }, { passive: true });
   })();
 
   // ==============================================================
@@ -835,6 +698,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }, { passive: true });
   })();
 
+  // Close mobile menu on resize
   window.addEventListener('resize', function() {
     if (window.innerWidth > 900) closeMenu();
   });
@@ -848,6 +712,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!numEl) return;
 
     var KEY = 'caprux-id_visitor-total-2025';
+
     numEl.classList.add('loading');
 
     fetch('https://countapi.mileshilliard.com/api/v1/hit/' + KEY)
@@ -858,6 +723,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (!isNaN(val)) {
           numEl.classList.remove('loading');
+
           var start = Math.max(0, val - Math.min(val, 60));
           var step  = 16;
           var steps = Math.ceil(900 / step);
@@ -868,6 +734,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (cur >= val) { cur = val; clearInterval(timer); }
             numEl.textContent = Math.floor(cur).toLocaleString('id-ID');
           }, step);
+
           if (noteEl) noteEl.textContent = 'Terhitung sejak website diluncurkan · real-time';
         } else {
           numEl.classList.remove('loading');
@@ -883,7 +750,7 @@ document.addEventListener('DOMContentLoaded', function() {
   })();
 
   // ==============================================================
-  // FOREST INTRO — Lebih organik & lambat (kayak hutan asli)
+  // FOREST INTRO
   // ==============================================================
   (function() {
     var overlay = document.getElementById('introOverlay');
@@ -902,7 +769,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var ctx = cnv.getContext('2d');
     var dismissed = false;
     var startTime = Date.now();
-    var totalDur = 4200; // lebih panjang — beri waktu hutan bernafas
+    var totalDur = 3600; // Lebih panjang — beri waktu hutan bernafas
 
     function resize() { cnv.width = overlay.offsetWidth; cnv.height = overlay.offsetHeight; }
     resize();
@@ -913,145 +780,90 @@ document.addEventListener('DOMContentLoaded', function() {
     function initParticles() {
       W = cnv.width; H = cnv.height;
       particles = [];
-      // Lebih sedikit partikel — lebih organik, spora melayang pelan
-      var count = Math.min(35, Math.floor(W * H / 22000));
+      // Lebih sedikit partikel, lebih lambat — seperti spora/kunang-kunang di hutan
+      var count = Math.min(40, Math.floor(W * H / 18000));
       for (var i = 0; i < count; i++) {
         particles.push({
           x: Math.random() * W,
-          y: H * 0.25 + Math.random() * H * 0.75,
-          r: 0.7 + Math.random() * 2.0,
-          vx: (Math.random() - 0.5) * 0.15,
-          vy: -(0.08 + Math.random() * 0.25),
-          alpha: 0.15 + Math.random() * 0.4,
+          y: H * 0.3 + Math.random() * H * 0.7,
+          r: 0.6 + Math.random() * 1.8,
+          vx: (Math.random() - 0.5) * 0.18,
+          vy: -(0.1 + Math.random() * 0.35),
+          alpha: 0.15 + Math.random() * 0.45,
           pulse: Math.random() * Math.PI * 2,
-          pulseSpeed: 0.006 + Math.random() * 0.012,
-          hue: 105 + Math.floor(Math.random() * 35)
+          pulseSpeed: 0.008 + Math.random() * 0.015, // lebih lambat
+          hue: 108 + Math.floor(Math.random() * 30)  // hijau ke kuning-hijau
         });
       }
     }
     initParticles();
     window.addEventListener('resize', initParticles);
 
-    // ── Pohon silhouette (kiri-kanan, layering kedalaman) ──
-    function drawForestSilhouette(w, h, t) {
+    function drawForestSilhouette(w, h) {
       ctx.save();
-      // Layer 1: pohon jauh (paling gelap, paling blur)
-      ctx.globalAlpha = 0.28;
-      drawTreeLayer(w, h, 0.04, 0.72, '#061a0a', t * 0.15);
-      drawTreeLayer(w, h, 0.96, 0.72, '#061a0a', t * 0.15 + 1.2);
-      drawTreeLayer(w, h, 0.12, 0.6, '#071f0c', t * 0.2 + 0.6);
-
-      // Layer 2: pohon sedang
-      ctx.globalAlpha = 0.4;
-      drawTreeLayer(w, h, 0.02, 0.85, '#0a2810', t * 0.25 + 0.3);
-      drawTreeLayer(w, h, 0.98, 0.85, '#0a2810', t * 0.25 + 1.8);
-      drawTreeLayer(w, h, 0.18, 0.7, '#0c2f14', t * 0.3 + 0.9);
-
-      // Layer 3: pohon dekat (paling jelas, ada gerakan angin)
-      ctx.globalAlpha = 0.55;
-      drawTreeLayer(w, h, 0.0, 1.0, '#0e3417', t * 0.35);
-      drawTreeLayer(w, h, 1.0, 1.0, '#0e3417', t * 0.35 + 2.4);
-
-      // Layer 4: akar/bayangan tanah bawah
-      ctx.globalAlpha = 0.6;
-      ctx.fillStyle = '#020b04';
-      ctx.beginPath();
-      ctx.moveTo(0, h);
-      ctx.lineTo(0, h - 20);
-      for (var x = 0; x <= w; x += 40) {
-        ctx.lineTo(x, h - 18 - Math.sin((x + t * 12) * 0.008) * 4);
-      }
-      ctx.lineTo(w, h);
-      ctx.closePath();
-      ctx.fill();
-
+      ctx.globalAlpha = 0.12;
+      var drawTree = function(x, baseY, trunkH, trunkW, layerCount, spread) {
+        ctx.fillStyle = '#0d2e14';
+        ctx.fillRect(x - trunkW/2, baseY - trunkH, trunkW, trunkH);
+        for (var l = 0; l < layerCount; l++) {
+          var ly = baseY - trunkH * 0.4 - l * (trunkH * 0.22);
+          var lw = spread * (1 - l * 0.18);
+          ctx.beginPath();
+          ctx.moveTo(x, ly - lw * 0.9);
+          ctx.lineTo(x + lw, ly + lw * 0.4);
+          ctx.lineTo(x - lw, ly + lw * 0.4);
+          ctx.closePath();
+          ctx.fillStyle = l % 2 === 0 ? '#0f3416' : '#0d2a12';
+          ctx.fill();
+        }
+      };
+      drawTree(w * 0.06, h, h * 0.7, 14, 4, w * 0.09);
+      drawTree(w * 0.15, h, h * 0.55, 10, 3, w * 0.07);
+      drawTree(w * 0.94, h, h * 0.65, 12, 4, w * 0.085);
+      drawTree(w * 0.86, h, h * 0.5, 9, 3, w * 0.065);
       ctx.restore();
     }
 
-    // Helper: satu "pohon" silhouette (batang + 3 layer daun)
-    function drawTreeLayer(w, h, xRatio, heightRatio, color, seed) {
-      var x = xRatio * w;
-      var baseY = h + 10;
-      var trunkH = h * heightRatio * 0.55;
-      var sway = Math.sin(seed + performance.now() * 0.0004) * 3;
-
-      // Batang
-      ctx.fillStyle = color;
-      ctx.beginPath();
-      ctx.moveTo(x - 3, baseY);
-      ctx.lineTo(x - 2 + sway * 0.3, baseY - trunkH);
-      ctx.lineTo(x + 2 + sway * 0.3, baseY - trunkH);
-      ctx.lineTo(x + 3, baseY);
-      ctx.closePath();
-      ctx.fill();
-
-      // Daun: 4 lapisan segitiga menumpuk
-      var layers = 4;
-      for (var l = 0; l < layers; l++) {
-        var ly = baseY - trunkH - l * (trunkH * 0.18);
-        var lw = (w * 0.045) * (1 - l * 0.15);
-        var swayL = sway * (1 + l * 0.4);
-
-        ctx.beginPath();
-        ctx.moveTo(x + swayL, ly - lw * 1.1);
-        ctx.lineTo(x + lw + swayL * 0.6, ly + lw * 0.5);
-        ctx.quadraticCurveTo(x + swayL * 0.5, ly + lw * 0.3, x - lw + swayL * 0.6, ly + lw * 0.5);
-        ctx.closePath();
-        ctx.fillStyle = color;
-        ctx.fill();
-      }
-    }
-
     var rafId = null;
+    // Partikel cahaya hutan — lebih lambat, lebih organik
     function loop() {
       if (dismissed) return;
       W = cnv.width; H = cnv.height;
       ctx.clearRect(0, 0, W, H);
 
-      var elapsed = Date.now() - startTime;
-      var progress = Math.min(elapsed / totalDur, 1);
-      var t = elapsed * 0.001;
-
-      // Latar: cahaya matahari menembus kanopi (radial dari atas tengah)
-      var skyGrad = ctx.createRadialGradient(W * 0.5, H * 0.15, 0, W * 0.5, H * 0.15, H * 0.9);
-      skyGrad.addColorStop(0, 'rgba(30,80,40,.22)');
-      skyGrad.addColorStop(0.4, 'rgba(15,45,22,.12)');
-      skyGrad.addColorStop(1, 'transparent');
-      ctx.fillStyle = skyGrad;
+      // Latar: gradien tanah ke cahaya
+      var grad = ctx.createRadialGradient(W/2, H * 0.85, 0, W/2, H * 0.3, H * 0.75);
+      grad.addColorStop(0, 'rgba(8,38,14,.18)');
+      grad.addColorStop(0.5, 'rgba(5,22,9,.08)');
+      grad.addColorStop(1, 'transparent');
+      ctx.fillStyle = grad;
       ctx.fillRect(0, 0, W, H);
 
-      // Kabut bawah
-      var mistGrad = ctx.createLinearGradient(0, H * 0.6, 0, H);
-      mistGrad.addColorStop(0, 'transparent');
-      mistGrad.addColorStop(1, 'rgba(10,40,18,.35)');
-      ctx.fillStyle = mistGrad;
-      ctx.fillRect(0, H * 0.6, W, H * 0.4);
+      drawForestSilhouette(W, H);
 
-      drawForestSilhouette(W, H, t);
-
-      // Partikel spora / kunang-kunang (bergerak pelan ke atas)
+      var elapsed = Date.now() - startTime;
+      var progress = Math.min(elapsed / totalDur, 1);
       particles.forEach(function(p) {
         p.x += p.vx;
         p.y += p.vy;
         p.pulse += p.pulseSpeed;
-        var glow = Math.sin(p.pulse) * 0.35;
+        var glow = Math.sin(p.pulse) * 0.3;
         if (p.y < -10) { p.y = H + 5; p.x = Math.random() * W; }
         if (p.x < -10) p.x = W + 5;
         if (p.x > W + 10) p.x = -5;
 
-        var finalAlpha = p.alpha * (0.55 + glow) * progress;
-        // Outer glow ring
-        if (p.r > 1.3) {
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.r * 3.5, 0, Math.PI * 2);
-          ctx.fillStyle = 'hsla(' + p.hue + ',75%,55%,' + (finalAlpha * 0.1) + ')';
-          ctx.fill();
-        }
-        // Core
+        var finalAlpha = p.alpha * (0.5 + glow) * progress;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = 'hsla(' + p.hue + ',85%,70%,' + finalAlpha + ')';
+        ctx.fillStyle = 'hsla(' + p.hue + ',80%,65%,' + finalAlpha + ')';
         ctx.fill();
+
+        if (p.r > 1.5) {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r * 2.5, 0, Math.PI * 2);
+          ctx.fillStyle = 'hsla(' + p.hue + ',70%,55%,' + (finalAlpha * 0.15) + ')';
+          ctx.fill();
+        }
       });
 
       rafId = requestAnimationFrame(loop);
@@ -1063,7 +875,7 @@ document.addEventListener('DOMContentLoaded', function() {
       dismissed = true;
       if (rafId) cancelAnimationFrame(rafId);
       overlay.classList.add('fade-out');
-      setTimeout(function() { overlay.remove(); }, 1000);
+      setTimeout(function() { overlay.remove(); }, 800);
     }
 
     setTimeout(dismiss, totalDur);
@@ -1075,66 +887,87 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ==============================================================
-// AMBIENT FOREST AUDIO — hutan.mp3 (file lokal kamu)
+// AMBIENT FOREST AUDIO (Kesunyian Hutan — Suara Bumi)
 // Berlaku di semua halaman (index.html & product.html)
-// Auto-play setelah interaksi pertama, dengan fade-in halus
+// Layered: hutan + burung + angin
 // ==============================================================
 (function initForestAudio() {
-  // Kunci utama: kalau sudah di-init di halaman ini, skip
-  if (window.__CAPRUX_AUDIO_INIT__) return;
-  window.__CAPRUX_AUDIO_INIT__ = true;
+  var tier = window.__CPX_TIER || 'HIGH';
 
-  // Buat elemen audio — pakai file lokal hutan.mp3
-  var audio = document.createElement('audio');
-  audio.id = 'forestAmbientGlobal';
-  audio.loop = true;
-  audio.src = 'hutan.mp3';
-  audio.preload = 'auto';
-  audio.style.display = 'none';
-  document.body.appendChild(audio);
+  // Sumber suara — file lokal
+  var FOREST_SOURCES = [
+    'hutan.mp3'
+  ];
+
+  function createLayer(src, vol) {
+    var a = document.createElement('audio');
+    a.loop = true;
+    a.src = src;
+    a.volume = vol;
+    a.style.display = 'none';
+    a.preload = 'none';
+    document.body.appendChild(a);
+    return a;
+  }
+
+  // Layer utama: suara hutan (burung + serangga + air)
+  var mainAudio = document.getElementById('forestAmbientGlobal');
+  if (!mainAudio) {
+    mainAudio = createLayer(FOREST_SOURCES[0], 0);
+    mainAudio.id = 'forestAmbientGlobal';
+  }
+
+  // Wind layer dinonaktifkan — cukup 1 layer dari hutan.mp3
+  var windAudio = null;
 
   var isPlaying = false;
-  var targetVol = 0.35; // volume tujuan (0.35 = sedang, cukup terasa)
 
-  function fadeIn(audioEl, target, dur) {
-    var startVol = 0;
-    audioEl.volume = startVol;
-    var startTime = performance.now();
-    function step() {
-      var elapsed = performance.now() - startTime;
-      var p = Math.min(elapsed / dur, 1);
-      // Easing: ease-out cubic — halus kayak angin
-      var eased = 1 - Math.pow(1 - p, 3);
-      audioEl.volume = startVol + (target - startVol) * eased;
-      if (p < 1) requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
+  function fadeIn(audio, targetVol, dur) {
+    if (!audio) return;
+    var step = targetVol / (dur / 80);
+    var cur = 0;
+    var iv = setInterval(function() {
+      cur = Math.min(targetVol, cur + step);
+      audio.volume = cur;
+      if (cur >= targetVol) clearInterval(iv);
+    }, 80);
   }
 
   function playAll() {
     if (isPlaying) return;
-    audio.play().then(function() {
-      isPlaying = true;
-      fadeIn(audio, targetVol, 3500); // 3.5 detik fade-in — pelan & damai
-      document.removeEventListener('click', playAll);
-      document.removeEventListener('touchstart', playAll);
-      document.removeEventListener('keydown', playAll);
+    isPlaying = true;
+    document.removeEventListener('click', playAll);
+    document.removeEventListener('touchstart', playAll);
+
+    // Play main forest audio — fade ke 0.28 dalam 3 detik
+    mainAudio.play().then(function() {
+      fadeIn(mainAudio, 0.28, 3000);
     }).catch(function() {
-      // Browser blokir — coba lagi di interaksi berikutnya
+      isPlaying = false;
     });
+
+    // Play wind layer (lebih pelan, delay 1s)
+    if (windAudio) {
+      setTimeout(function() {
+        windAudio.play().then(function() {
+          fadeIn(windAudio, 0.12, 4000);
+        }).catch(function() {});
+      }, 1200);
+    }
   }
 
-  // Trigger pada interaksi pertama
+  // Tunggu interaksi pertama (aturan browser)
   document.addEventListener('click', playAll, { passive: true });
   document.addEventListener('touchstart', playAll, { passive: true });
-  document.addEventListener('keydown', playAll, { passive: true });
 
-  // Pause saat tab tersembunyi, resume saat kembali
+  // Pause semua saat tab tersembunyi, resume saat kembali
   document.addEventListener('visibilitychange', function() {
     if (document.hidden) {
-      audio.pause();
+      if (mainAudio) mainAudio.pause();
+      if (windAudio) windAudio.pause();
     } else if (isPlaying) {
-      audio.play().catch(function(){});
+      if (mainAudio) mainAudio.play().catch(function(){});
+      if (windAudio) windAudio.play().catch(function(){});
     }
   });
 })();

@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Nobody Sound — CAPRUX</title>
+  <meta name="description" content="Direktori tamu podcast Nobody Sound by CAPRUX — orang-orang biasa dengan keahlian luar biasa.">
+  <link rel="icon" type="image/png" href="LOGO_TRANSPARAN_HITAM.png">
+  <link rel="shortcut icon" type="image/png" href="LOGO_TRANSPARAN_HITAM.png">
+  <link rel="apple-touch-icon" href="LOGO_TRANSPARAN_HITAM.png">
+  <meta name="theme-color" content="#010602">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&family=Inter:wght@300;400;500&family=Share+Tech+Mono&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&family=Inter:wght@300;400;500&family=Share+Tech+Mono&display=swap" rel="stylesheet"></noscript>
+  <link rel="stylesheet" href="style.css?v=10">
+  <script src="perf-patch.js?v=10"></script>
+  <style>
+    /* ── Nobody Sound Page Styles ── */
+    .ns-hero {
+      padding: clamp(100px, 14vw, 160px) 0 clamp(40px, 6vw, 80px);
+      text-align: center;
+      position: relative;
+    }
+    .ns-hero-eyebrow {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: .7rem;
+      letter-spacing: .3em;
+      color: var(--green);
+      opacity: .6;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .ns-hero-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.4rem, 8vw, 5.5rem);
+      font-weight: 900;
+      line-height: .95;
+      letter-spacing: -.02em;
+      color: #fff;
+      margin: 0 0 20px;
+    }
+    .ns-hero-title span {
+      color: var(--green);
+    }
+    .ns-hero-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(.82rem, 1.5vw, 1rem);
+      color: rgba(255,255,255,.5);
+      max-width: 480px;
+      margin: 0 auto 40px;
+      line-height: 1.65;
+    }
+
+    /* ── Search + Filter ── */
+    .ns-controls {
+      max-width: 860px;
+      margin: 0 auto 48px;
+      padding: 0 clamp(16px, 5vw, 40px);
+    }
+    .ns-search-wrap {
+      position: relative;
+      margin-bottom: 20px;
+    }
+    .ns-search-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--green);
+      opacity: .5;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: .7rem;
+      pointer-events: none;
+    }
+    .ns-search {
+      width: 100%;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(0,255,100,.15);
+      border-radius: 4px;
+      padding: 14px 16px 14px 48px;
+      color: #fff;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: .95rem;
+      outline: none;
+      transition: border-color .2s, background .2s;
+      box-sizing: border-box;
+    }
+    .ns-search::placeholder { color: rgba(255,255,255,.25); }
+    .ns-search:focus {
+      border-color: rgba(0,255,100,.45);
+      background: rgba(255,255,255,.07);
+    }
+
+    .ns-filters {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .ns-filter-btn {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: .62rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      padding: 7px 14px;
+      border: 1px solid rgba(0,255,100,.2);
+      background: transparent;
+      color: rgba(255,255,255,.45);
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all .2s;
+    }
+    .ns-filter-btn:hover,
+    .ns-filter-btn.active {
+      border-color: var(--green);
+      color: var(--green);
+      background: rgba(0,255,100,.06);
+    }
+    .ns-filter-btn.active {
+      background: rgba(0,255,100,.1);
+    }
+
+    /* ── Grid Kartu ── */
+    .ns-section {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 clamp(16px, 5vw, 40px) 80px;
+    }
+    .ns-count {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: .62rem;
+      letter-spacing: .2em;
+      color: rgba(255,255,255,.3);
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .ns-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    /* ── Kartu Tamu ── */
+    .ns-card {
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(0,255,100,.1);
+      border-radius: 6px;
+      padding: 24px;
+      position: relative;
+      transition: border-color .25s, background .25s, transform .25s;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .ns-card:hover {
+      border-color: rgba(0,255,100,.35);
+      background: rgba(0,255,100,.04);
+      transform: translateY(-3px);
+    }
+    .ns-card-head {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .ns-avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(0,255,100,.2);
+      background: rgba(0,255,100,.06);
+      flex-shrink: 0;
+    }
+    .ns-avatar-placeholder {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 2px solid rgba(0,255,100,.2);
+      background: rgba(0,255,100,.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 900;
+      font-size: 1.2rem;
+      color: var(--green);
+      flex-shrink: 0;
+    }
+    .ns-card-meta { flex: 1; min-width: 0; }
+    .ns-card-nama {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      margin: 0 0 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .ns-card-nickname {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: .6rem;
+      color: var(--green);
+      opacity: .65;
+      letter-spacing: .12em;
+    }
+    .ns-card-kategori {
+      display: inline-block;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: .55rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border: 1px solid rgba(0,255,100,.25);
+      color: rgba(0,255,100,.7);
+      border-radius: 2px;
+      margin-bottom: 12px;
+    }
+    .ns-card-keahlian {
+      font-family: 'Inter', sans-serif;
+      font-size: .82rem;
+      color: rgba(255,255,255,.65);
+      line-height: 1.55;
+      margin-bottom: 12px;
+    }
+    .ns-card-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: .76rem;
+      color: rgba(255,255,255,.4);
+      line-height: 1.6;
+      margin-bottom: 16px;
+      flex: 1;
+    }
+
+    /* Status hubungi */
+    .ns-hubungi {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: .58rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .ns-hubungi-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #00ff64;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    .ns-hubungi-dot.off { background: rgba(255,255,255,.2); animation: none; }
+    .ns-hubungi-text { color: rgba(255,255,255,.45); }
+    .ns-hubungi-text.on { color: var(--green); }
+    @keyframes pulse-dot {
+      0%,100% { opacity: 1; }
+      50% { opacity: .35; }
+    }
+
+    /* Sosial media links */
+    .ns-socials {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+    .ns-social-link {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: .58rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 5px 10px;
+      border: 1px solid rgba(255,255,255,.1);
+      color: rgba(255,255,255,.4);
+      text-decoration: none;
+      border-radius: 2px;
+      transition: all .2s;
+    }
+    .ns-social-link:hover {
+      border-color: var(--green);
+      color: var(--green);
+      background: rgba(0,255,100,.06);
+    }
+    .ns-social-link.wa {
+      border-color: rgba(37,211,102,.3);
+      color: rgba(37,211,102,.6);
+    }
+    .ns-social-link.wa:hover {
+      border-color: #25D366;
+      color: #25D366;
+      background: rgba(37,211,102,.08);
+    }
+
+    /* Link episode */
+    .ns-episode-link {
+      display: block;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: 9px 14px;
+      border: 1px solid rgba(0,255,100,.2);
+      color: var(--green);
+      text-decoration: none;
+      border-radius: 2px;
+      text-align: center;
+      transition: all .2s;
+      margin-top: auto;
+    }
+    .ns-episode-link:hover {
+      background: rgba(0,255,100,.1);
+      border-color: var(--green);
+    }
+
+    /* Empty state */
+    .ns-empty {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 60px 20px;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: .75rem;
+      letter-spacing: .15em;
+      color: rgba(255,255,255,.25);
+    }
+
+    /* Loading skeleton */
+    .ns-skeleton {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(0,255,100,.07);
+      border-radius: 6px;
+      padding: 24px;
+      height: 280px;
+      animation: ns-shimmer 1.5s ease-in-out infinite;
+    }
+    @keyframes ns-shimmer {
+      0%,100% { opacity: .4; }
+      50% { opacity: .8; }
+    }
+
+    /* Mobile tweak */
+    @media (max-width: 480px) {
+      .ns-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html#products" onclick="closeMenu()">Koleksi</a>
+  <a href="index.html#kenapa" onclick="closeMenu()">Jiwa Brand</a>
+  <a href="nobody-sound.html" onclick="closeMenu()">Nobody Sound</a>
+  <a href="index.html#contact" onclick="closeMenu()">Terhubung</a>
+  <a href="index.html#products" class="m-cta" onclick="closeMenu()">Lihat Koleksi</a>
+</div>
+
+<!-- Nav -->
+<nav>
+  <a href="index.html" class="nav-logo"><img src="logo_text_putih.png" alt="CAPRUX"></a>
+  <ul class="nav-links">
+    <li><a href="index.html#products">Koleksi</a></li>
+    <li><a href="index.html#kenapa">Jiwa Brand</a></li>
+    <li><a href="nobody-sound.html" class="active-nav">Nobody Sound</a></li>
+    <li><a href="index.html#contact">Terhubung</a></li>
+  </ul>
+  <a href="index.html#products" class="nav-cta">Lihat Koleksi</a>
+  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- Hero -->
+<div class="ns-hero">
+  <p class="ns-hero-eyebrow">// Podcast · CAPRUX</p>
+  <h1 class="ns-hero-title">NOBODY<br><span>SOUND</span></h1>
+  <p class="ns-hero-sub">
+    Mereka bukan siapa-siapa di mata dunia —<br>
+    tapi punya ilmu, cerita, dan tangan yang bisa diandalkan.<br>
+    Temukan mereka di sini.
+  </p>
+</div>
+
+<!-- Search + Filter -->
+<div class="ns-controls">
+  <div class="ns-search-wrap">
+    <span class="ns-search-icon">// CARI</span>
+    <input
+      class="ns-search"
+      id="nsSearch"
+      type="text"
+      placeholder="Cari nama, nickname, atau keahlian..."
+      autocomplete="off"
+    >
+  </div>
+  <div class="ns-filters" id="nsFilters">
+    <button class="ns-filter-btn active" data-cat="semua">Semua</button>
+    <!-- Kategori lain diisi otomatis dari CSV -->
+  </div>
+</div>
+
+<!-- Grid Tamu -->
+<div class="ns-section">
+  <div class="ns-count" id="nsCount">Memuat data...</div>
+  <div class="ns-grid" id="nsGrid">
+    <!-- Skeleton loading -->
+    <div class="ns-skeleton"></div>
+    <div class="ns-skeleton"></div>
+    <div class="ns-skeleton"></div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="reveal">
+  <div class="f-logo"><img src="logo_text_putih.png" alt="CAPRUX"></div>
+  <div class="f-copy">© 2024 CAPRUX — Dari Lumpur ke Langit<br><span style="color:#2a4a30;font-size:.58rem">Akar Bumi · Jiwa Semesta · Being the Impossible with God's Help</span></div>
+  <div class="f-socials">
+    <a href="https://instagram.com/caprux.id" target="_blank">IG</a>
+    <a href="https://tiktok.com/@caprux.id" target="_blank">TT</a>
+    <a href="https://www.x.com/caprux_official" target="_blank">X</a>
+    <a href="https://www.youtube.com/@caprux_id" target="_blank">YT</a>
+    <a href="https://shopee.co.id/caprux.id" target="_blank">SP</a>
+    <a href="https://www.facebook.com/profile.php?id=61570786385157" target="_blank">FB</a>
+  </div>
+</footer>
+
+<a href="mailto:caprux.official@gmail.com?subject=NOBODY SOUND" class="email-fab" aria-label="Tanya via Email" title="Tanya via Email">
+  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M3 6.5C3 5.67157 3.67157 5 4.5 5H19.5C20.3284 5 21 5.67157 21 6.5V17.5C21 18.3284 20.3284 19 19.5 19H4.5C3.67157 19 3 18.3284 3 17.5V6.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M4 6.5L11.2865 12.0433C11.7051 12.3626 12.2949 12.3626 12.7135 12.0433L20 6.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <span class="email-fab-ping"></span>
+</a>
+
+<script src="caprux-data.js?v=10" defer></script>
+<script>
+// ── Nav hamburger (standalone karena tidak pakai script.js penuh) ──
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+  document.getElementById('hamburger').classList.toggle('open');
+}
+function closeMenu() {
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+}
+document.addEventListener('DOMContentLoaded', function() {
+  var hb = document.getElementById('hamburger');
+  if (hb) hb.addEventListener('click', toggleMenu);
+
+  // Nav scroll
+  var nav = document.querySelector('nav');
+  if (nav) {
+    window.addEventListener('scroll', function() {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+  }
+
+  // Scroll progress
+  var sp = document.getElementById('scrollProgress');
+  if (sp) {
+    window.addEventListener('scroll', function() {
+      var pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+      sp.style.width = Math.min(100, pct) + '%';
+    }, { passive: true });
+  }
+
+  // Cursor glow (HIGH tier only)
+  var cg = document.getElementById('cursorGlow');
+  if (cg && window.__CPX_TIER === 'HIGH') {
+    document.addEventListener('mousemove', function(e) {
+      cg.style.left = e.clientX + 'px';
+      cg.style.top  = e.clientY + 'px';
+    });
+  }
+
+  // ── Load Nobody Sound dari CSV ──
+  loadNobodySound();
+});
+
+// ── State ──
+var ALL_GUESTS = [];
+var activeCategory = 'semua';
+var searchQuery = '';
+
+function loadNobodySound() {
+  if (!window.CAPRUX_DATA) {
+    document.getElementById('nsGrid').innerHTML = '<div class="ns-empty">// caprux-data.js belum dimuat</div>';
+    return;
+  }
+
+  window.CAPRUX_DATA.loadGuests()
+    .then(function(guests) {
+      ALL_GUESTS = guests;
+      buildFilters(guests);
+      renderGuests();
+    })
+    .catch(function(err) {
+      console.error('[CAPRUX NS] Gagal load:', err);
+      document.getElementById('nsGrid').innerHTML =
+        '<div class="ns-empty">// Gagal memuat data. Pastikan file data/nobody-sound.csv sudah diupload.</div>';
+      document.getElementById('nsCount').textContent = '// 0 tamu';
+    });
+}
+
+function buildFilters(guests) {
+  var cats = ['semua'];
+  guests.forEach(function(g) {
+    if (g.kategori && cats.indexOf(g.kategori) === -1) cats.push(g.kategori);
+  });
+
+  var wrap = document.getElementById('nsFilters');
+  wrap.innerHTML = cats.map(function(cat) {
+    return '<button class="ns-filter-btn' + (cat === 'semua' ? ' active' : '') +
+      '" data-cat="' + cat + '">' + cat.charAt(0).toUpperCase() + cat.slice(1) + '</button>';
+  }).join('');
+
+  wrap.querySelectorAll('.ns-filter-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      wrap.querySelectorAll('.ns-filter-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      activeCategory = btn.dataset.cat;
+      renderGuests();
+    });
+  });
+}
+
+// Search listener
+document.addEventListener('DOMContentLoaded', function() {
+  var searchEl = document.getElementById('nsSearch');
+  if (searchEl) {
+    searchEl.addEventListener('input', function() {
+      searchQuery = this.value.toLowerCase().trim();
+      renderGuests();
+    });
+  }
+});
+
+function renderGuests() {
+  var q = searchQuery;
+  var cat = activeCategory;
+
+  var filtered = ALL_GUESTS.filter(function(g) {
+    var matchCat = cat === 'semua' || g.kategori === cat;
+    var matchQ = !q ||
+      g.nickname.toLowerCase().includes(q) ||
+      g.kategori.toLowerCase().includes(q) ||
+      g.jangkauan.toLowerCase().includes(q) ||
+      g.deskripsi.toLowerCase().includes(q);
+    return matchCat && matchQ;
+  });
+
+  var grid = document.getElementById('nsGrid');
+  var countEl = document.getElementById('nsCount');
+
+  countEl.textContent = '// ' + filtered.length + ' tamu ditemukan';
+
+  if (filtered.length === 0) {
+    grid.innerHTML = '<div class="ns-empty">// Tidak ada tamu yang cocok dengan pencarian ini.</div>';
+    return;
+  }
+
+  grid.innerHTML = filtered.map(function(g) {
+    // Avatar
+    var avatarHtml = g.foto
+      ? '<img class="ns-avatar" src="nobody-sound/' + g.foto + '" alt="' + g.nama + '" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">' +
+        '<div class="ns-avatar-placeholder" style="display:none">' + g.nama.charAt(0).toUpperCase() + '</div>'
+      : '<div class="ns-avatar-placeholder">' + g.nama.charAt(0).toUpperCase() + '</div>';
+
+    // Sosial
+    var socialHtml = g.socials.map(function(s) {
+      var cls = s.platform === 'WhatsApp' ? ' wa' : '';
+      return '<a href="' + s.url + '" class="ns-social-link' + cls + '" target="_blank" rel="noopener">' +
+        (s.platform === 'WhatsApp' ? '💬 WA' : s.platform) + '</a>';
+    }).join('');
+
+    // Jangkauan
+    var jangkauanHtml = g.jangkauan
+      ? '<div class="ns-hubungi"><div class="ns-hubungi-dot"></div>' +
+        '<span class="ns-hubungi-text on">📍 ' + g.jangkauan + '</span></div>'
+      : '';
+
+    return '<div class="ns-card">' +
+      '<div class="ns-card-head">' + avatarHtml + '<div class="ns-card-meta">' +
+        '<p class="ns-card-nama">' + g.nickname + '</p>' +
+        '<p class="ns-card-nickname">// ' + g.kategori + '</p>' +
+      '</div></div>' +
+      '<span class="ns-card-kategori">' + g.kategori + '</span>' +
+      (g.deskripsi ? '<p class="ns-card-desc">' + g.deskripsi + '</p>' : '') +
+      jangkauanHtml +
+      (socialHtml ? '<div class="ns-socials">' + socialHtml + '</div>' : '') +
+      '</div>';
+  }).join('');
+}
+</script>
+</body>
+</html>
