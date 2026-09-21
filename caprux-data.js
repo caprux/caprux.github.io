@@ -1,39 +1,52 @@
-// ================================================================
-// CAPRUX — caprux-data.js  v2.0
-// Baca data dari data/products.csv dan data/nobody-sound.csv
-// Format CSV dari CAPRUX_DATA_v2.xlsx
-// ================================================================
 window.CAPRUX_DATA = (function () {
   'use strict';
 
-  function parseCSV(text) {
-    var lines = text.trim().split('\n');
-    var headers = splitLine(lines[0]);
-    var rows = [];
-    for (var i = 1; i < lines.length; i++) {
-      var line = lines[i].trim();
-      if (!line) continue;
-      var vals = splitLine(line);
-      var obj = {};
-      headers.forEach(function(h, idx) {
-        obj[h.trim()] = (vals[idx] || '').trim();
-      });
-      // Skip baris kosong (id tidak ada)
-      if (obj.id) rows.push(obj);
-    }
-    return rows;
+  function detectSeparator(text) {
+    var firstLine = text.split('\n')[0];
+    var semi = (firstLine.match(/;/g) || []).length;
+    var comma = (firstLine.match(/,/g) || []).length;
+    return semi > comma ? ';' : ',';
   }
 
-  function splitLine(line) {
+  function splitLine(line, sep) {
+    sep = sep || ',';
     var result = [], cur = '', inQ = false;
     for (var i = 0; i < line.length; i++) {
       var ch = line[i];
       if (ch === '"') { inQ = !inQ; continue; }
-      if (ch === ',' && !inQ) { result.push(cur); cur = ''; continue; }
+      if (ch === sep && !inQ) { result.push(cur); cur = ''; continue; }
       cur += ch;
     }
     result.push(cur);
     return result;
+  }
+
+  function parseCSV(text) {
+    var lines = text.trim().split('\n');
+    var sep = detectSeparator(text);
+
+    var headerIdx = 0;
+    for (var i = 0; i < lines.length; i++) {
+      var l = lines[i].trim();
+      if (!l) continue;
+      var lower = l.toLowerCase();
+      if (lower.startsWith('id' + sep)) { headerIdx = i; break; }
+    }
+
+    var headers = splitLine(lines[headerIdx], sep);
+    var rows = [];
+    for (var j = headerIdx + 1; j < lines.length; j++) {
+      var line = lines[j].trim();
+      if (!line) continue;
+      if (/^[;,]+$/.test(line)) continue;
+      var vals = splitLine(line, sep);
+      var obj = {};
+      headers.forEach(function(h, idx) {
+        obj[h.trim()] = (vals[idx] || '').trim();
+      });
+      if (obj.id) rows.push(obj);
+    }
+    return rows;
   }
 
   function fetchCSV(path) {
@@ -44,7 +57,6 @@ window.CAPRUX_DATA = (function () {
     });
   }
 
-  // ── Produk: parse var_stok "M-Hitam=10,L-Hitam=8" → objek ──
   function parseStok(varStokStr) {
     if (!varStokStr) return {};
     var result = {};
@@ -74,7 +86,6 @@ window.CAPRUX_DATA = (function () {
       sizes:    sizes,
       colors:   colors,
       stok:     stok,
-      // Legacy compat fields (dipakai script.js lama)
       tag:      '// ' + row.type,
       fullDesc: row.desc,
       specs:    [],
@@ -105,12 +116,12 @@ window.CAPRUX_DATA = (function () {
 
   return {
     loadProducts: function() {
-      return fetchCSV('data/products.csv').then(function(text) {
+      return fetchCSV('products.csv').then(function(text) {
         return parseCSV(text).map(rowToProduct);
       });
     },
     loadGuests: function() {
-      return fetchCSV('data/nobody-sound.csv').then(function(text) {
+      return fetchCSV('nobody-sound.csv').then(function(text) {
         return parseCSV(text).map(rowToGuest);
       });
     }
