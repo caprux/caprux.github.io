@@ -4,118 +4,25 @@
 
 **Doing the Impossible, with GOD's Help**
 
-Website resmi **CAPRUX**, brand streetwear pria berbasis di Baleendah, Kabupaten Bandung, Jawa Barat. Dibangun dan di-hosting dengan GitHub Pages di [caprux.github.io](https://caprux.github.io).
+Website resmi **CAPRUX**, entitas dari seorang pria yang tinggal di Baleendah, Kabupaten Bandung, Jawa Barat.
 
----
 
 ## 🧭 Tentang CAPRUX
 
-CAPRUX lahir dari kamar sempit, kepala penuh ide, dan semangat *urang Bandung resep heureuy*. Nama **CAPRUX** diambil dari kata Sunda *capruk* — kacau, tidak terduga — yang justru dijadikan titik awal, bukan aib.
+CAPRUX bukan nama sebuah brand, bukan kata ganti dari bahas sunda capruk  yang biar keren di ganti caprux, bukan juga symbol kekacauan, carpux adalah jiwa yang harus dimiliki semua orang saat mereka merasa hidup tapi tidak hidup.
+CAPRUX singkatan dari kata yang terdengar aneh namun bisa mengubah dari lumpur, tumbuh, berakar kuat, memberi manfaat dan terbang.
 
-Tiga nilai inti brand:
+Nilai inti brand:
 
-- **NEKAT** — meski tanpa skill, percaya semua bisa dipelajari sambil jalan.
-- **BERANI** — lawan rasa takut, siap menanggung risiko kalau gagal.
-- **YAKIN** — takdir bisa berubah kalau usaha dibarengi doa.
+C - Consciousness / Kesadaran
+A - Abundance / Berkelimpahan
+P - Power / Kekuatan
+R - Resonance / Memancar
+U - Unlimited / Melimpah
+X - X / XXX
 
-Filosofi produksi: *Meaningful Chaos* — berbeda karena punya arah, bukan asal beda.
+Dan mempunyai arti "sadar diri bahwa kita aslinya dari tuhan sudah di beri kelimpahan, dan mempunyai kekuatan untuk memancarkan kebahagiaan, keuangan, cinta dan semua hal baik yang tidak terbatas dengan cara yang tidak perlu ada yang tau karena yang terjadi semua mau tuhan"
 
----
-
-## 🗂️ Struktur Proyek
-
-```
-├── index.html                  # Landing page (hero, about, products, contact)
-├── style.css                   # Styling utama (tema neon-cyberpunk dark)
-├── script.js                   # Animasi intro, carousel, visitor counter, dsb.
-├── caprux.css                  # Stylesheet bersama untuk halaman produk
-├── caprux.js                   # Logic bersama untuk halaman produk
-├── products/
-│   ├── cpx-ko-001.html         # The Tropical Soul — kaos oblong
-│   ├── cpx-jk-002.html         # The Wind Blocker — jaket crincle
-│   └── cpx-cp-003.html         # The Short Circuit — celana pendek
-├── assets/
-│   ├── logo_text_putih.png
-│   ├── LOGO_TRANSPARAN_HITAM.png
-│   └── LOGO_TRANSPARAN_PUTIH.png
-└── README.md
-```
-
-> Struktur folder dapat menyesuaikan dengan kondisi repo aktual — silakan sesuaikan path di atas jika berbeda.
-
----
-
-## ✨ Fitur Utama
-
-- **Intro animation** — efek neon lightning saat halaman pertama kali dibuka.
-- **Horizontal product carousel** dengan spring easing.
-- **Sistem produk modular** — tiap produk memiliki halaman HTML sendiri dengan data JSON tertanam, memudahkan penambahan produk baru tanpa mengubah struktur inti.
-- **Real-time visitor counter** menggunakan [CountAPI](https://countapi.mileshilliard.com).
-- **Live chat** terintegrasi via Tawk.to.
-- **Desain responsif**, mobile-first.
-- Tema visual **dark neon-green cyberpunk**, dengan font Orbitron, Rajdhani, Exo 2, dan Share Tech Mono.
-
----
-
-## 🎨 Design System
-
-| Elemen | Detail |
-|---|---|
-| Warna utama | `--green` (neon green) di atas latar gelap |
-| Font display | Orbitron, Rajdhani |
-| Font body/mono | Exo 2, Share Tech Mono |
-| Label produk | Woven hem label neon green `#00FF00`, logo dada polyflex putih 3D |
-| Gaya komunikasi | Gaul, beriman, gila — youthful namun berakar spiritual |
-
----
-
-## 🛍️ Produk
-
-Setiap produk menggunakan format kode: `CPX-[TYPE]-[NUMBER]`
-
-| Kode | Nama | Tipe |
-|---|---|---|
-| CPX-KO-001 | The Tropical Soul | Kaos Oblong |
-| CPX-JK-002 | The Wind Blocker | Jaket Crincle |
-| CPX-CP-003 | The Short Circuit | Celana Pendek |
-
-Lini nama produk mengikuti tema geografi Indonesia: *Tropical Soul, Volcanic Soul, Archipelago Soul, Summit Soul, Nomadic Soul, Strata Soul, Terrace Soul, Delta Soul.*
-
----
-
-## 🚀 Menjalankan Secara Lokal
-
-Karena situs ini adalah situs statis (HTML/CSS/JS murni tanpa build step), cukup:
-
-```bash
-git clone https://github.com/caprux/caprux.github.io.git
-cd caprux.github.io
-```
-
-Lalu buka `index.html` langsung di browser, atau jalankan local server sederhana:
-
-```bash
-python3 -m http.server 8000
-```
-
-Akses di `http://localhost:8000`.
-
----
-
-## 🌐 Deployment
-
-Situs ini di-deploy otomatis melalui **GitHub Pages** dari branch utama repository `caprux.github.io`, dengan domain kustom **caprux.id**.
-
----
-
-## 📇 Kontak & Sosial Media
-
-- Instagram: [@caprux.id](https://instagram.com/caprux.id)
-- TikTok: [@caprux.id](https://www.tiktok.com/@caprux.id)
-- Shopee: [caprux.id](https://www.shopee.co.id/caprux.id)
-- Facebook: [CAPRUX](https://www.facebook.com/profile.php?id=61570786385157)
-
----
 
 ## 📄 Lisensi
 
@@ -123,4 +30,4 @@ Situs ini di-deploy otomatis melalui **GitHub Pages** dari branch utama reposito
 
 ---
 
-*Made in Jawabarat · Powered by ENF*
+*Powered by ENF*
