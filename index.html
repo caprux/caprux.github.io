@@ -3,85 +3,334 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CAPRUX — Dari Tanah, Kita Tumbuh.</title>
-  <meta name="description" content="CAPRUX — Dari Tanah, Kita Tumbuh. Kaos dan jaket jujur, gak sempurna, kita bilang apa adanya.">
+  <title>CAPRUX — Kacau Tapi Sadar.</title>
+  <meta name="description" content="CAPRUX itu soul buat yang lagi kacau tapi sadar. Kaos dan jaket yang jujur: gak sempurna, dan kita bilang apa adanya. Being the impossible with God's help.">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="CAPRUX">
-  <meta property="og:title" content="CAPRUX — Dari Tanah, Kita Tumbuh.">
-  <meta property="og:description" content="Kaos dan jaket jujur, gak sempurna.">
+  <meta property="og:title" content="CAPRUX — Kacau Tapi Sadar.">
+  <meta property="og:description" content="Kacau itu bukan vonis. Yang sadar lagi kacau udah selangkah di depan. Kaos dan jaket jujur dari CAPRUX.">
   <meta property="og:image" content="https://caprux.id/logo_text_putih.png">
   <meta property="og:url" content="https://caprux.id">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CAPRUX — Kacau Tapi Sadar.">
+  <meta name="twitter:description" content="Kacau itu bukan vonis. Yang sadar lagi kacau udah selangkah di depan. Kaos dan jaket jujur dari CAPRUX.">
+  <meta name="twitter:image" content="https://caprux.id/logo_text_putih.png">
   <link rel="icon" type="image/png" href="LOGO_TRANSPARAN_HITAM.png">
-  <meta name="theme-color" content="#0e0a06">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@300;400&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" type="image/png" href="LOGO_TRANSPARAN_HITAM.png">
+  <link rel="apple-touch-icon" href="LOGO_TRANSPARAN_HITAM.png">
+  <meta name="theme-color" content="#010602">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&family=Inter:wght@300;400;500&family=Share+Tech+Mono&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&family=Inter:wght@300;400;500&family=Share+Tech+Mono&display=swap" rel="stylesheet"></noscript>
   <link rel="stylesheet" href="style.css?v=11">
   <script src="perf-patch.js?v=11"></script>
+  <script async src="https://cdn.jsdelivr.net/npm/counterapi/dist/counter.browser.min.js"></script>
 </head>
 <body>
-<div class="scroll-progress" id="scrollProgress"></div>
 
-<div id="introOverlay" style="position:fixed;inset:0;z-index:9999;background:#0e0a06;display:flex;flex-direction:column;align-items:center;justify-content:center;">
-  <img src="logo_text_putih.png" alt="CAPRUX" style="width:clamp(160px,40vw,340px);filter:drop-shadow(0 0 28px rgba(216,178,106,.5));">
-  <p style="font-family:'Share Tech Mono',monospace;font-size:.6rem;letter-spacing:.28em;color:rgba(216,178,106,.7);margin-top:18px;">dari tanah, kita tumbuh.</p>
-  <button id="introSkip" style="position:absolute;bottom:30px;right:30px;font-family:'Share Tech Mono',monospace;font-size:.55rem;background:transparent;border:1px solid rgba(216,178,106,.3);color:rgba(216,178,106,.5);padding:6px 14px;cursor:pointer">Masuk //</button>
+<!-- Scroll Progress + Cursor Glow -->
+<div class="scroll-progress" id="scrollProgress"></div>
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<!-- Forest Intro Overlay -->
+<div id="introOverlay" style="position:fixed;inset:0;z-index:9999;background-color:#020b04;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;">
+  <canvas id="introCanvas" style="position:absolute;inset:0;width:100%;height:100%;"></canvas>
+  <div id="introMist" style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 80%,rgba(0,80,20,.18),transparent 70%);pointer-events:none;animation:mist-breathe 4s ease-in-out infinite;"></div>
+  <div style="position:relative;z-index:2;text-align:center;pointer-events:none;">
+    <img src="logo_text_putih.png" alt="CAPRUX" style="width:clamp(160px,48vw,380px);filter:drop-shadow(0 0 32px rgba(100,255,120,.45));animation:intro-logo-glow 2.4s ease-in-out infinite;">
+    <p style="font-family:'Share Tech Mono',monospace;font-size:clamp(.5rem,.75vw,.62rem);letter-spacing:.3em;text-transform:uppercase;color:rgba(120,220,140,.5);margin-top:20px;">// lagi kacau? diem dulu. sadar dulu.</p>
+    <p style="font-family:'Share Tech Mono',monospace;font-size:clamp(.42rem,.65vw,.54rem);letter-spacing:.22em;text-transform:uppercase;color:rgba(80,160,100,.35);margin-top:12px;">being the impossible — with God's help</p>
+  </div>
+  <button id="introSkip" style="position:absolute;bottom:clamp(20px,4vh,36px);right:clamp(16px,4vw,40px);font-family:'Share Tech Mono',monospace;font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;background:transparent;border:1px solid rgba(100,200,120,.3);color:rgba(100,200,120,.5);padding:7px 16px;cursor:pointer;z-index:3;transition:border-color .2s,color .2s;" onmouseenter="this.style.borderColor='rgba(100,200,120,.8)';this.style.color='rgba(100,200,120,.9)'" onmouseleave="this.style.borderColor='rgba(100,200,120,.3)';this.style.color='rgba(100,200,120,.5)'">Masuk //</button>
 </div>
 
+<style>
+@keyframes intro-logo-glow {
+  0%,100%{filter:drop-shadow(0 0 20px rgba(80,220,100,.35));}
+  50%{filter:drop-shadow(0 0 50px rgba(80,220,100,.65));}
+}
+@keyframes mist-breathe {
+  0%,100%{opacity:.5;transform:scaleX(1);}
+  50%{opacity:.9;transform:scaleX(1.08);}
+}
+#introOverlay.fade-out {
+  animation: intro-fade .8s ease forwards;
+}
+@keyframes intro-fade {
+  to { opacity: 0; pointer-events: none; }
+}
+</style>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#products" onclick="closeMenu()">Penanda</a>
+  <a href="#kenapa" onclick="closeMenu()">Kenapa Kacau</a>
+  <a href="nobody-sound.html" onclick="closeMenu()">Nobody Sound</a>
+  <a href="#contact" onclick="closeMenu()">Cerita</a>
+  <a href="#products" class="m-cta" onclick="closeMenu()">Liat Penanda</a>
+</div>
+
+<!-- Nav -->
 <nav>
-  <a href="data:text/html;base64,PCFET0NUWVBFIGh0bWw+CjxodG1sIGxhbmc9ImlkIj4KPGhlYWQ+CiAgPG1ldGEgY2hhcnNldD0iVVRGLTgiPgogIDxtZXRhIG5hbWU9InZpZXdwb3J0IiBjb250ZW50PSJ3aWR0aD1kZXZpY2Utd2lkdGgsIGluaXRpYWwtc2NhbGU9MS4wIj4KICA8dGl0bGU+Q0FQUlVYIOKAlCBEYXJpIFRhbmFoLCBLaXRhIFR1bWJ1aC48L3RpdGxlPgogIDxtZXRhIG5hbWU9ImRlc2NyaXB0aW9uIiBjb250ZW50PSJDQVBSVVgg4oCUIERhcmkgVGFuYWgsIEtpdGEgVHVtYnVoLiBQZW5hbmRhIGp1anVyOiBrYW9zIGRhbiBqYWtldCB5YW5nIGdhayBzZW1wdXJuYSwga2l0YSBiaWxhbmcgYXBhIGFkYW55YS4gQ29uc2lzdGVucyBBYnVuZGFuY2UgUG93ZXIgUmVzb25hbmNlIFVubGltaXRlZCBYZWN1dGlvbi4iPgogIDxtZXRhIHByb3BlcnR5PSJvZzp0eXBlIiBjb250ZW50PSJ3ZWJzaXRlIj4KICA8bWV0YSBwcm9wZXJ0eT0ib2c6c2l0ZV9uYW1lIiBjb250ZW50PSJDQVBSVVgiPgogIDxtZXRhIHByb3BlcnR5PSJvZzp0aXRsZSIgY29udGVudD0iQ0FQUlVYIOKAlCBLYWNhdSBUYXBpIFNhZGFyLiI+CiAgPG1ldGEgcHJvcGVydHk9Im9nOmRlc2NyaXB0aW9uIiBjb250ZW50PSJLYWNhdSBpdHUgYnVrYW4gdm9uaXMuIFlhbmcgc2FkYXIgbGFnaSBrYWNhdSB1ZGFoIHNlbGFuZ2thaCBkaSBkZXBhbi4gS2FvcyBkYW4gamFrZXQganVqdXIgZGFyaSBDQVBSVVguIj4KICA8bWV0YSBwcm9wZXJ0eT0ib2c6aW1hZ2UiIGNvbnRlbnQ9Imh0dHBzOi8vY2FwcnV4LmlkL2xvZ29fdGV4dF9wdXRpaC5wbmciPgogIDxtZXRhIHByb3BlcnR5PSJvZzp1cmwiIGNvbnRlbnQ9Imh0dHBzOi8vY2FwcnV4LmlkIj4KICA8bWV0YSBuYW1lPSJ0d2l0dGVyOmNhcmQiIGNvbnRlbnQ9InN1bW1hcnlfbGFyZ2VfaW1hZ2UiPgogIDxtZXRhIG5hbWU9InR3aXR0ZXI6dGl0bGUiIGNvbnRlbnQ9IkNBUFJVWCDigJQgS2FjYXUgVGFwaSBTYWRhci4iPgogIDxtZXRhIG5hbWU9InR3aXR0ZXI6ZGVzY3JpcHRpb24iIGNvbnRlbnQ9IkthY2F1IGl0dSBidWthbiB2b25pcy4gWWFuZyBzYWRhciBsYWdpIGthY2F1IHVkYWggc2VsYW5na2FoIGRpIGRlcGFuLiBLYW9zIGRhbiBqYWtldCBqdWp1ciBkYXJpIENBUFJVWC4iPgogIDxtZXRhIG5hbWU9InR3aXR0ZXI6aW1hZ2UiIGNvbnRlbnQ9Imh0dHBzOi8vY2FwcnV4LmlkL2xvZ29fdGV4dF9wdXRpaC5wbmciPgogIDxsaW5rIHJlbD0iaWNvbiIgdHlwZT0iaW1hZ2UvcG5nIiBocmVmPSJMT0dPX1RSQU5TUEFSQU5fSElUQU0ucG5nIj4KICA8bGluayByZWw9InNob3J0Y3V0IGljb24iIHR5cGU9ImltYWdlL3BuZyIgaHJlZj0iTE9HT19UUkFOU1BBUkFOX0hJVEFNLnBuZyI+CiAgPGxpbmsgcmVsPSJhcHBsZS10b3VjaC1pY29uIiBocmVmPSJMT0dPX1RSQU5TUEFSQU5fSElUQU0ucG5nIj4KICA8bWV0YSBuYW1lPSJ0aGVtZS1jb2xvciIgY29udGVudD0iIzBlMGEwNiI+CiAgPGxpbmsgcmVsPSJwcmVjb25uZWN0IiBocmVmPSJodHRwczovL2ZvbnRzLmdvb2dsZWFwaXMuY29tIj4KICA8bGluayByZWw9InByZWNvbm5lY3QiIGhyZWY9Imh0dHBzOi8vZm9udHMuZ3N0YXRpYy5jb20iIGNyb3Nzb3JpZ2luPgogIDxsaW5rIGhyZWY9Imh0dHBzOi8vZm9udHMuZ29vZ2xlYXBpcy5jb20vY3NzMj9mYW1pbHk9U3BhY2UrR3JvdGVzazp3Z2h0QDQwMDs1MDA7NzAwOzkwMCZmYW1pbHk9SW50ZXI6d2dodEAzMDA7NDAwOzUwMCZmYW1pbHk9U2hhcmUrVGVjaCtNb25vJmRpc3BsYXk9c3dhcCIgcmVsPSJzdHlsZXNoZWV0IiBtZWRpYT0icHJpbnQiIG9ubG9hZD0idGhpcy5tZWRpYT0nYWxsJyI+CiAgPG5vc2NyaXB0PjxsaW5rIGhyZWY9Imh0dHBzOi8vZm9udHMuZ29vZ2xlYXBpcy5jb20vY3NzMj9mYW1pbHk9U3BhY2UrR3JvdGVzazp3Z2h0QDQwMDs1MDA7NzAwOzkwMCZmYW1pbHk9SW50ZXI6d2dodEAzMDA7NDAwOzUwMCZmYW1pbHk9U2hhcmUrVGVjaCtNb25vJmRpc3BsYXk9c3dhcCIgcmVsPSJzdHlsZXNoZWV0Ij48L25vc2NyaXB0PgogIDxsaW5rIHJlbD0ic3R5bGVzaGVldCIgaHJlZj0ic3R5bGUuY3NzP3Y9MTEiPgogIDxzY3JpcHQgc3JjPSJwZXJmLXBhdGNoLmpzP3Y9MTEiPjwvc2NyaXB0PgogIDxzY3JpcHQgYXN5bmMgc3JjPSJodHRwczovL2Nkbi5qc2RlbGl2ci5uZXQvbnBtL2NvdW50ZXJhcGkvZGlzdC9jb3VudGVyLmJyb3dzZXIubWluLmpzIj48L3NjcmlwdD4KPC9oZWFkPgo8Ym9keT4KCjwhLS0gU2Nyb2xsIFByb2dyZXNzICsgQ3Vyc29yIEdsb3cgLS0+CjxkaXYgY2xhc3M9InNjcm9sbC1wcm9ncmVzcyIgaWQ9InNjcm9sbFByb2dyZXNzIj48L2Rpdj4KPGRpdiBjbGFzcz0iY3Vyc29yLWdsb3ciIGlkPSJjdXJzb3JHbG93Ij48L2Rpdj4KCjwhLS0gRm9yZXN0IEludHJvIE92ZXJsYXkgLS0+CjxkaXYgaWQ9ImludHJvT3ZlcmxheSIgc3R5bGU9InBvc2l0aW9uOmZpeGVkO2luc2V0OjA7ei1pbmRleDo5OTk5O2JhY2tncm91bmQtY29sb3I6IzBlMGEwNjtkaXNwbGF5OmZsZXg7ZmxleC1kaXJlY3Rpb246Y29sdW1uO2FsaWduLWl0ZW1zOmNlbnRlcjtqdXN0aWZ5LWNvbnRlbnQ6Y2VudGVyO292ZXJmbG93OmhpZGRlbjsiPgogIDxjYW52YXMgaWQ9ImludHJvQ2FudmFzIiBzdHlsZT0icG9zaXRpb246YWJzb2x1dGU7aW5zZXQ6MDt3aWR0aDoxMDAlO2hlaWdodDoxMDAlOyI+PC9jYW52YXM+CiAgPGRpdiBpZD0iaW50cm9NaXN0IiBzdHlsZT0icG9zaXRpb246YWJzb2x1dGU7aW5zZXQ6MDtiYWNrZ3JvdW5kOnJhZGlhbC1ncmFkaWVudChlbGxpcHNlIGF0IDUwJSA4MCUscmdiYSgyMTYsMTc4LDEwNiwuMTQpLHRyYW5zcGFyZW50IDcwJSk7cG9pbnRlci1ldmVudHM6bm9uZTthbmltYXRpb246bWlzdC1icmVhdGhlIDRzIGVhc2UtaW4tb3V0IGluZmluaXRlOyI+PC9kaXY+CiAgPGRpdiBzdHlsZT0icG9zaXRpb246cmVsYXRpdmU7ei1pbmRleDoyO3RleHQtYWxpZ246Y2VudGVyO3BvaW50ZXItZXZlbnRzOm5vbmU7Ij4KICAgIDxpbWcgc3JjPSJsb2dvX3RleHRfcHV0aWgucG5nIiBhbHQ9IkNBUFJVWCIgc3R5bGU9IndpZHRoOmNsYW1wKDE2MHB4LDQ4dncsMzgwcHgpO2ZpbHRlcjpkcm9wLXNoYWRvdygwIDAgMzJweCByZ2JhKDIxNiwxNzgsMTA2LC41NSkpO2FuaW1hdGlvbjppbnRyby1sb2dvLWdsb3cgMi40cyBlYXNlLWluLW91dCBpbmZpbml0ZTsiPgogICAgPHAgc3R5bGU9ImZvbnQtZmFtaWx5OidTaGFyZSBUZWNoIE1vbm8nLG1vbm9zcGFjZTtmb250LXNpemU6Y2xhbXAoLjVyZW0sLjc1dncsLjYycmVtKTtsZXR0ZXItc3BhY2luZzouM2VtO3RleHQtdHJhbnNmb3JtOnVwcGVyY2FzZTtjb2xvcjpyZ2JhKDIxNiwxNzgsMTA2LC43KTttYXJnaW4tdG9wOjIwcHg7Ij4vLyAyMiBNZWkgMTk4OSB8IFNlbmluIEtsaXdvbiB8IFVsYXIgVGFuYWggS3VhIDIgfCBYRUNVVElPTjwvcD4KICAgIDxwIHN0eWxlPSJmb250LWZhbWlseTonU2hhcmUgVGVjaCBNb25vJyxtb25vc3BhY2U7Zm9udC1zaXplOmNsYW1wKC40MnJlbSwuNjV2dywuNTRyZW0pO2xldHRlci1zcGFjaW5nOi4yMmVtO3RleHQtdHJhbnNmb3JtOnVwcGVyY2FzZTtjb2xvcjpyZ2JhKDIwMCwxNzAsMTIwLC40NSk7bWFyZ2luLXRvcDoxMnB4OyI+YmVpbmcgdGhlIGltcG9zc2libGUg4oCUIHdpdGggR29kJ3MgaGVscDwvcD4KICA8L2Rpdj4KICA8YnV0dG9uIGlkPSJpbnRyb1NraXAiIHN0eWxlPSJwb3NpdGlvbjphYnNvbHV0ZTtib3R0b206Y2xhbXAoMjBweCw0dmgsMzZweCk7cmlnaHQ6Y2xhbXAoMTZweCw0dncsNDBweCk7Zm9udC1mYW1pbHk6J1NoYXJlIFRlY2ggTW9ubycsbW9ub3NwYWNlO2ZvbnQtc2l6ZTouNTZyZW07bGV0dGVyLXNwYWNpbmc6LjIyZW07dGV4dC10cmFuc2Zvcm06dXBwZXJjYXNlO2JhY2tncm91bmQ6dHJhbnNwYXJlbnQ7Ym9yZGVyOjFweCBzb2xpZCByZ2JhKDEwMCwyMDAsMTIwLC4zKTtjb2xvcjpyZ2JhKDEwMCwyMDAsMTIwLC41KTtwYWRkaW5nOjdweCAxNnB4O2N1cnNvcjpwb2ludGVyO3otaW5kZXg6Mzt0cmFuc2l0aW9uOmJvcmRlci1jb2xvciAuMnMsY29sb3IgLjJzOyIgb25tb3VzZWVudGVyPSJ0aGlzLnN0eWxlLmJvcmRlckNvbG9yPSdyZ2JhKDEwMCwyMDAsMTIwLC44KSc7dGhpcy5zdHlsZS5jb2xvcj0ncmdiYSgxMDAsMjAwLDEyMCwuOSknIiBvbm1vdXNlbGVhdmU9InRoaXMuc3R5bGUuYm9yZGVyQ29sb3I9J3JnYmEoMTAwLDIwMCwxMjAsLjMpJzt0aGlzLnN0eWxlLmNvbG9yPSdyZ2JhKDEwMCwyMDAsMTIwLC41KSciPk1hc3VrIC8vPC9idXR0b24+CjwvZGl2PgoKPHN0eWxlPgpAa2V5ZnJhbWVzIGludHJvLWxvZ28tZ2xvdyB7CiAgMCUsMTAwJXtmaWx0ZXI6ZHJvcC1zaGFkb3coMCAwIDIwcHggcmdiYSgyMTYsMTc4LDEwNiwuMzUpKTt9CiAgNTAle2ZpbHRlcjpkcm9wLXNoYWRvdygwIDAgNTBweCByZ2JhKDIxNiwxNzgsMTA2LC42NSkpO30KfQpAa2V5ZnJhbWVzIG1pc3QtYnJlYXRoZSB7CiAgMCUsMTAwJXtvcGFjaXR5Oi41O3RyYW5zZm9ybTpzY2FsZVgoMSk7fQogIDUwJXtvcGFjaXR5Oi45O3RyYW5zZm9ybTpzY2FsZVgoMS4wOCk7fQp9CiNpbnRyb092ZXJsYXkuZmFkZS1vdXQgewogIGFuaW1hdGlvbjogaW50cm8tZmFkZSAuOHMgZWFzZSBmb3J3YXJkczsKfQpAa2V5ZnJhbWVzIGludHJvLWZhZGUgewogIHRvIHsgb3BhY2l0eTogMDsgcG9pbnRlci1ldmVudHM6IG5vbmU7IH0KfQo8L3N0eWxlPgoKPCEtLSBNb2JpbGUgTWVudSAtLT4KPGRpdiBjbGFzcz0ibW9iaWxlLW1lbnUiIGlkPSJtb2JpbGVNZW51Ij4KICA8YSBocmVmPSIjcHJvZHVjdHMiIG9uY2xpY2s9ImNsb3NlTWVudSgpIj5QZW5hbmRhPC9hPgogIDxhIGhyZWY9IiNrZW5hcGEiIG9uY2xpY2s9ImNsb3NlTWVudSgpIj5LZW5hcGEgS2FjYXU8L2E+CiAgPGEgaHJlZj0ibm9ib2R5LXNvdW5kLmh0bWwiIG9uY2xpY2s9ImNsb3NlTWVudSgpIj5Ob2JvZHkgU291bmQ8L2E+CiAgPGEgaHJlZj0iI2NvbnRhY3QiIG9uY2xpY2s9ImNsb3NlTWVudSgpIj5DZXJpdGE8L2E+CiAgPGEgaHJlZj0iI3Byb2R1Y3RzIiBjbGFzcz0ibS1jdGEiIG9uY2xpY2s9ImNsb3NlTWVudSgpIj5MaWF0IFBlbmFuZGE8L2E+CjwvZGl2PgoKPCEtLSBOYXYgLS0+CjxuYXY+CiAgPGEgaHJlZj0iaW5kZXguaHRtbCIgY2xhc3M9Im5hdi1sb2dvIj48aW1nIHNyYz0ibG9nb190ZXh0X3B1dGloLnBuZyIgYWx0PSJDQVBSVVgiPjwvYT4KICA8dWwgY2xhc3M9Im5hdi1saW5rcyI+CiAgICA8bGk+PGEgaHJlZj0iI3Byb2R1Y3RzIj5QZW5hbmRhPC9hPjwvbGk+CiAgICA8bGk+PGEgaHJlZj0iI2tlbmFwYSI+S2VuYXBhIEthY2F1PC9hPjwvbGk+CiAgICA8bGk+PGEgaHJlZj0ibm9ib2R5LXNvdW5kLmh0bWwiPk5vYm9keSBTb3VuZDwvYT48L2xpPgogICAgPGxpPjxhIGhyZWY9IiNjb250YWN0Ij5DZXJpdGE8L2E+PC9saT4KICA8L3VsPgogIDxhIGhyZWY9IiNwcm9kdWN0cyIgY2xhc3M9Im5hdi1jdGEiPkxpYXQgUGVuYW5kYTwvYT4KICA8YnV0dG9uIGNsYXNzPSJoYW1idXJnZXIiIGlkPSJoYW1idXJnZXIiIGFyaWEtbGFiZWw9Ik1lbnUiPjxzcGFuPjwvc3Bhbj48c3Bhbj48L3NwYW4+PHNwYW4+PC9zcGFuPjwvYnV0dG9uPgo8L25hdj4KCjwhLS0gSGVybyAtLT4KPHNlY3Rpb24gaWQ9ImhvbWUiPgogIDxkaXYgY2xhc3M9Imhlcm8tZm9yZXN0IiBhcmlhLWhpZGRlbj0idHJ1ZSI+CiAgICA8c3ZnIGNsYXNzPSJmb3Jlc3Qtc3ZnIiB2aWV3Qm94PSIwIDAgMTIwMCA3MDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNYXggbWVldCI+CiAgICAgIDxnIGNsYXNzPSJ0cmVlIHQtZmFyLWxlZnQiIG9wYWNpdHk9Ii4xOCI+CiAgICAgICAgPGxpbmUgeDE9IjYwIiB5MT0iNzAwIiB4Mj0iNjAiIHkyPSI0MDAiIHN0cm9rZT0iIzFhNGEyMCIgc3Ryb2tlLXdpZHRoPSI4Ii8+CiAgICAgICAgPHBhdGggZD0iTTYwIDQzMCBRMjAgMzgwIDEwIDMxMCBRNTAgMzUwIDYwIDMzMCBRNzAgMzUwIDExMCAzMTAgUTEwMCAzODAgNjAgNDMwWiIgZmlsbD0iIzBkMmUxNCIvPgogICAgICAgIDxwYXRoIGQ9Ik02MCAzNjAgUTI1IDMxMCAxNSAyNTAgUTU1IDI5MCA2MCAyNzAgUTY1IDI5MCAxMDUgMjUwIFE5NSAzMTAgNjAgMzYwWiIgZmlsbD0iIzBmMzQxNiIvPgogICAgICAgIDxwYXRoIGQ9Ik02MCAyOTUgUTMwIDI1MCAyMiAxOTUgUTU4IDIzMCA2MCAyMTUgUTYyIDIzMCA5OCAxOTUgUTkwIDI1MCA2MCAyOTVaIiBmaWxsPSIjMTEyZTE2Ii8+CiAgICAgIDwvZz4KICAgICAgPGcgY2xhc3M9InRyZWUgdC1mYXItcmlnaHQiIG9wYWNpdHk9Ii4xNSI+CiAgICAgICAgPGxpbmUgeDE9IjExNDAiIHkxPSI3MDAiIHgyPSIxMTQwIiB5Mj0iMzUwIiBzdHJva2U9IiMxYTRhMjAiIHN0cm9rZS13aWR0aD0iMTAiLz4KICAgICAgICA8cGF0aCBkPSJNMTE0MCAzOTAgUTEwOTAgMzMwIDEwNzUgMjQ1IFExMTI1IDI5MCAxMTQwIDI2NSBRMTE1NSAyOTAgMTIwNSAyNDUgUTExOTAgMzMwIDExNDAgMzkwWiIgZmlsbD0iIzBkMmUxNCIvPgogICAgICAgIDxwYXRoIGQ9Ik0xMTQwIDMxMCBRMTA5OCAyNTggMTA4NSAxODAgUTExMzAgMjE4IDExNDAgMjAwIFExMTUwIDIxOCAxMTk1IDE4MCBRMTE4MiAyNTggMTE0MCAzMTBaIiBmaWxsPSIjMGYzNDE2Ii8+CiAgICAgICAgPHBhdGggZD0iTTExNDAgMjQwIFExMTA1IDE5NSAxMDk1IDEzMCBRMTEzMyAxNjIgMTE0MCAxNDggUTExNDcgMTYyIDExODUgMTMwIFExMTc1IDE5NSAxMTQwIDI0MFoiIGZpbGw9IiMxMTJlMTYiLz4KICAgICAgPC9nPgogICAgICA8ZyBjbGFzcz0idHJlZSB0LW1pZC1sZWZ0IiBvcGFjaXR5PSIuMyI+CiAgICAgICAgPGxpbmUgeDE9IjIyMCIgeTE9IjcwMCIgeDI9IjIyMCIgeTI9IjI4MCIgc3Ryb2tlPSIjMWU1ODI4IiBzdHJva2Utd2lkdGg9IjE0Ii8+CiAgICAgICAgPHBhdGggZD0iTTIyMCAzMzAgUTE1OCAyNjUgMTQwIDE3MCBRMjAwIDIyMCAyMjAgMTk1IFEyNDAgMjIwIDMwMCAxNzAgUTI4MiAyNjUgMjIwIDMzMFoiIGZpbGw9IiMxMjJhMTgiLz4KICAgICAgICA8cGF0aCBkPSJNMjIwIDI1MCBRMTY4IDE5MiAxNTIgMTA4IFEyMDggMTUyIDIyMCAxMzIgUTIzMiAxNTIgMjg4IDEwOCBRMjcyIDE5MiAyMjAgMjUwWiIgZmlsbD0iIzE2MzMyMCIvPgogICAgICAgIDxwYXRoIGQ9Ik0yMjAgMTc1IFExNzUgMTI0IDE2MCA1NCBRMjEyIDkyIDIyMCA3NiBRMjI4IDkyIDI4MCA1NCBRMjY1IDEyNCAyMjAgMTc1WiIgZmlsbD0iIzFhM2EyNCIvPgogICAgICA8L2c+CiAgICAgIDxnIGNsYXNzPSJ0cmVlIHQtbWlkLXJpZ2h0IiBvcGFjaXR5PSIuMjgiPgogICAgICAgIDxsaW5lIHgxPSI5ODAiIHkxPSI3MDAiIHgyPSI5ODAiIHkyPSIzMTAiIHN0cm9rZT0iIzFlNTgyOCIgc3Ryb2tlLXdpZHRoPSIxMiIvPgogICAgICAgIDxwYXRoIGQ9Ik05ODAgMzYwIFE5MjggMjk1IDkxMiAyMDUgUTk2NiAyNDggOTgwIDIyNSBROTk0IDI0OCAxMDQ4IDIwNSBRMTAzMiAyOTUgOTgwIDM2MFoiIGZpbGw9IiMxMjJhMTgiLz4KICAgICAgICA8cGF0aCBkPSJNOTgwIDI4MCBROTM1IDIyMCA5MjAgMTQwIFE5NzAgMTc4IDk4MCAxNjAgUTk5MCAxNzggMTA0MCAxNDAgUTEwMjUgMjIwIDk4MCAyODBaIiBmaWxsPSIjMTYzMzIwIi8+CiAgICAgICAgPHBhdGggZD0iTTk4MCAyMTAgUTk0MCAxNjAgOTI4IDkwIFE5NzQgMTIyIDk4MCAxMDggUTk4NiAxMjIgMTAzMiA5MCBRMTAyMCAxNjAgOTgwIDIxMFoiIGZpbGw9IiMxYTNhMjQiLz4KICAgICAgPC9nPgogICAgICA8ZyBjbGFzcz0idHJlZSB0LWZyb250LWxlZnQiIG9wYWNpdHk9Ii41NSI+CiAgICAgICAgPGxpbmUgeDE9IjgwIiB5MT0iNzAwIiB4Mj0iODAiIHkyPSIxODAiIHN0cm9rZT0iIzI0NWUzMCIgc3Ryb2tlLXdpZHRoPSIyMCIvPgogICAgICAgIDxsaW5lIHgxPSI4MCIgeTE9IjM4MCIgeDI9IjIwIiB5Mj0iMzEwIiBzdHJva2U9IiMxZTUyMjgiIHN0cm9rZS13aWR0aD0iOCIvPgogICAgICAgIDxsaW5lIHgxPSI4MCIgeTE9IjMwMCIgeDI9IjE0MCIgeTI9IjI0MCIgc3Ryb2tlPSIjMWU1MjI4IiBzdHJva2Utd2lkdGg9IjciLz4KICAgICAgICA8cGF0aCBkPSJNODAgMjQwIFExMCAxNjUgLTEwIDYwIFE2NSAxMjAgODAgOTAgUTk1IDEyMCAxNzAgNjAgUTE1MCAxNjUgODAgMjQwWiIgZmlsbD0iIzE1MmUxYyIvPgogICAgICAgIDxwYXRoIGQ9Ik04MCAxNzAgUTIwIDEwNSA1IDIwIFE2OCA2OCA4MCA1MCBROTIgNjggMTU1IDIwIFExNDAgMTA1IDgwIDE3MFoiIGZpbGw9IiMxYTM4MjIiLz4KICAgICAgPC9nPgogICAgICA8ZyBjbGFzcz0idHJlZSB0LWZyb250LXJpZ2h0IiBvcGFjaXR5PSIuNSI+CiAgICAgICAgPGxpbmUgeDE9IjExMjAiIHkxPSI3MDAiIHgyPSIxMTIwIiB5Mj0iMjAwIiBzdHJva2U9IiMyNDVlMzAiIHN0cm9rZS13aWR0aD0iMTgiLz4KICAgICAgICA8bGluZSB4MT0iMTEyMCIgeTE9IjQwMCIgeDI9IjExODAiIHkyPSIzMzAiIHN0cm9rZT0iIzFlNTIyOCIgc3Ryb2tlLXdpZHRoPSI3Ii8+CiAgICAgICAgPGxpbmUgeDE9IjExMjAiIHkxPSIzMTAiIHgyPSIxMDYwIiB5Mj0iMjUwIiBzdHJva2U9IiMxZTUyMjgiIHN0cm9rZS13aWR0aD0iNiIvPgogICAgICAgIDxwYXRoIGQ9Ik0xMTIwIDI2MCBRMTA1OCAxODUgMTAzOCA4MCBRMTEwOCAxMzggMTEyMCAxMTAgUTExMzIgMTM4IDEyMDIgODAgUTExODIgMTg1IDExMjAgMjYwWiIgZmlsbD0iIzE1MmUxYyIvPgogICAgICAgIDxwYXRoIGQ9Ik0xMTIwIDE5MCBRMTA2NSAxMjIgMTA0OCAzOCBRMTExMiA4MiAxMTIwIDYyIFExMTI4IDgyIDExOTIgMzggUTExNzUgMTIyIDExMjAgMTkwWiIgZmlsbD0iIzFhMzgyMiIvPgogICAgICA8L2c+CiAgICAgIDxlbGxpcHNlIGN4PSI2MDAiIGN5PSI2OTAiIHJ4PSI1ODAiIHJ5PSIxOCIgZmlsbD0iIzBhMWYwZSIgb3BhY2l0eT0iLjYiLz4KICAgICAgPGNpcmNsZSBjbGFzcz0ic3BvcmUgczEiIGN4PSIzMDAiIGN5PSIzMDAiIHI9IjIiIGZpbGw9IiM3ZGZmYjAiIG9wYWNpdHk9Ii42Ii8+CiAgICAgIDxjaXJjbGUgY2xhc3M9InNwb3JlIHMyIiBjeD0iNTUwIiBjeT0iMjAwIiByPSIxLjUiIGZpbGw9IiNhMGZmYzAiIG9wYWNpdHk9Ii41Ii8+CiAgICAgIDxjaXJjbGUgY2xhc3M9InNwb3JlIHMzIiBjeD0iNzUwIiBjeT0iMzUwIiByPSIyLjUiIGZpbGw9IiM3ZGZmYjAiIG9wYWNpdHk9Ii40NSIvPgogICAgICA8Y2lyY2xlIGNsYXNzPSJzcG9yZSBzNCIgY3g9IjkwMCIgY3k9IjE4MCIgcj0iMS44IiBmaWxsPSIjYzhmZmQ4IiBvcGFjaXR5PSIuNTUiLz4KICAgICAgPGNpcmNsZSBjbGFzcz0ic3BvcmUgczUiIGN4PSI0NTAiIGN5PSI0MjAiIHI9IjEuMiIgZmlsbD0iIzdkZmZiMCIgb3BhY2l0eT0iLjQiLz4KICAgICAgPGNpcmNsZSBjbGFzcz0ic3BvcmUgczYiIGN4PSI2ODAiIGN5PSIxNTAiIHI9IjIiIGZpbGw9IiNhMGZmYzAiIG9wYWNpdHk9Ii41Ii8+CiAgICAgIDxjaXJjbGUgY2xhc3M9InNwb3JlIHM3IiBjeD0iMTUwIiBjeT0iMjUwIiByPSIxLjUiIGZpbGw9IiM3ZGZmYjAiIG9wYWNpdHk9Ii40NSIvPgogICAgICA8Y2lyY2xlIGNsYXNzPSJzcG9yZSBzOCIgY3g9IjEwMjAiIGN5PSIyODAiIHI9IjIiIGZpbGw9IiNjOGZmZDgiIG9wYWNpdHk9Ii40Ii8+CiAgICA8L3N2Zz4KICA8L2Rpdj4KCiAgPGRpdiBjbGFzcz0iaGVyby1taXN0IiBhcmlhLWhpZGRlbj0idHJ1ZSI+PC9kaXY+CiAgPGRpdiBjbGFzcz0iaGVyby1ub2lzZSI+PC9kaXY+CgogIDxkaXYgY2xhc3M9Imhlcm8tY29udGVudCI+CiAgICA8cCBjbGFzcz0iaGVyby1leWVicm93IiBzdHlsZT0iY29sb3I6I0Q4QjI2QSI+Ly8gY2FwcnV4LmlkLTQ1OS0xMiB8IGp1anVyIGFqYTwvcD4KICAgIDxkaXYgY2xhc3M9Imhlcm8tbG9nby13cmFwIj4KICAgICAgPGRpdiBjbGFzcz0ibG9nby1nbG93IiBhcmlhLWhpZGRlbj0idHJ1ZSI+PC9kaXY+CiAgICAgIDxpbWcgY2xhc3M9Im1haW4tbG9nbyIgc3JjPSJsb2dvX3RleHRfcHV0aWgucG5nIiBhbHQ9IkNBUFJVWCI+CiAgICA8L2Rpdj4KICAgIDxwIGNsYXNzPSJoZXJvLXN1YiI+R3VlIEFndW5nLCAyMiBNZWkgMTk4OSBDaWxhY2FwLCBTZW5pbiBLbGl3b24uIEFyc2l0ZWsgJiBFc3RpbWF0b3IuIEluaSBidWthbiBicmFuZCBiYWp1IHNlbXB1cm5hLjxicj5LYW9zbnlhIE1pY3JvIENvdHRvbiAyMTAgR1NNIGphaGl0YW5ueWEgYnVydS1idXJ1LCBqYWtldG55YSBwYXJhc3V0IGNyaW5rbGUgYmVuYW5nIHNpc2EuPGJyPjxzdHJvbmc+R3VlIGJpbGFuZyBhcGEgYWRhbnlhLiBMbyBuaWxhaSBzZW5kaXJpLjwvc3Ryb25nPjwvcD4KICAgIDxwIGNsYXNzPSJoZXJvLW1hbnRyYSIgc3R5bGU9ImNvbG9yOiNEOEIyNkEiPi8vIGRhcmkgdGFuYWgsIGtpdGEgdHVtYnVoLiAvLyB4ZWN1dGlvbi48L3A+CiAgICA8ZGl2IGNsYXNzPSJoZXJvLWFjdGlvbnMiPgogICAgICA8YSBocmVmPSIjcHJvZHVjdHMiIGNsYXNzPSJidG4tcHJpbWFyeSI+TGlhdCBQZW5hbmRhPC9hPgogICAgICA8YSBocmVmPSIja2VuYXBhIiBjbGFzcz0iYnRuLWdob3N0Ij5LZW5hcGEgS2FjYXU8L2E+CiAgICA8L2Rpdj4KICA8L2Rpdj4KCiAgPGRpdiBjbGFzcz0ic2Nyb2xsLWhpbnQiPgogICAgPGRpdiBjbGFzcz0ic2Nyb2xsLWxpbmUiPjwvZGl2PgogICAgPHNwYW4+R3VsaXI8L3NwYW4+CiAgPC9kaXY+Cjwvc2VjdGlvbj4KCjwhLS0gTWFycXVlZSAtLT4KPGRpdiBjbGFzcz0ibWFycXVlZS1zdHJpcCIgYXJpYS1oaWRkZW49InRydWUiPgogIDxkaXYgY2xhc3M9Im1hcnF1ZWUtaW5uZXIiPgo8c3Bhbj5DQVBSVVg8L3NwYW4+PHNwYW4gY2xhc3M9Im1zZXAiPsK3PC9zcGFuPgo8c3Bhbj5EYXJpIFRhbmFoIEtpdGEgVHVtYnVoPC9zcGFuPjxzcGFuIGNsYXNzPSJtc2VwIj7Ctzwvc3Bhbj4KPHNwYW4+SnVqdXIgYWphOiBqYWhpdGFubnlhIGdhayByYXBpLCBwb3Rvbmdhbm55YSBnYWsgc2ltZXRyaXM8L3NwYW4+PHNwYW4gY2xhc3M9Im1zZXAiPsK3PC9zcGFuPgo8c3Bhbj5JbmkgcGVuYW5kYSwgYnVrYW4gcHJvZHVrIHNlbXB1cm5hPC9zcGFuPjxzcGFuIGNsYXNzPSJtc2VwIj7Ctzwvc3Bhbj4KPHNwYW4+Q29uc2lzdGVucyBBYnVuZGFuY2UgUG93ZXIgUmVzb25hbmNlIFVubGltaXRlZCBYZWN1dGlvbjwvc3Bhbj48c3BhbiBjbGFzcz0ibXNlcCI+wrc8L3NwYW4+CjxzcGFuPkJlaW5nIHRoZSBpbXBvc3NpYmxlIHdpdGggR29kJ3MgaGVscDwvc3Bhbj48c3BhbiBjbGFzcz0ibXNlcCI+wrc8L3NwYW4+CjxzcGFuPkNBUFJVWDwvc3Bhbj48c3BhbiBjbGFzcz0ibXNlcCI+wrc8L3NwYW4+CjxzcGFuPkRhcmkgVGFuYWggS2l0YSBUdW1idWg8L3NwYW4+PHNwYW4gY2xhc3M9Im1zZXAiPsK3PC9zcGFuPgo8c3Bhbj5KdWp1ciBhamE6IGphaGl0YW5ueWEgZ2FrIHJhcGksIHBvdG9uZ2FubnlhIGdhayBzaW1ldHJpczwvc3Bhbj48c3BhbiBjbGFzcz0ibXNlcCI+wrc8L3NwYW4+CjxzcGFuPkluaSBwZW5hbmRhLCBidWthbiBwcm9kdWsgc2VtcHVybmE8L3NwYW4+PHNwYW4gY2xhc3M9Im1zZXAiPsK3PC9zcGFuPgo8c3Bhbj5Db25zaXN0ZW5zIEFidW5kYW5jZSBQb3dlciBSZXNvbmFuY2UgVW5saW1pdGVkIFhlY3V0aW9uPC9zcGFuPjxzcGFuIGNsYXNzPSJtc2VwIj7Ctzwvc3Bhbj4KPHNwYW4+QmVpbmcgdGhlIGltcG9zc2libGUgd2l0aCBHb2QncyBoZWxwPC9zcGFuPjxzcGFuIGNsYXNzPSJtc2VwIj7Ctzwvc3Bhbj4KICA8L2Rpdj4KPC9kaXY+Cgo8IS0tIFByb2R1Y3RzIC0tPgo8c2VjdGlvbiBpZD0icHJvZHVjdHMiPgogIDxkaXYgY2xhc3M9ImRyb3BzLWhlYWRlciByZXZlYWwiPgogICAgPGRpdj4KICAgICAgPHAgY2xhc3M9ImV5ZWJyb3ciPi8vIFBlbmFuZGE8L3A+CiAgICAgIDxoMiBjbGFzcz0ic2VjLXRpdGxlIj5QZW5hbmRhIHlhbmcgZ2FrIHJhcGkuIEtpdGEganVqdXIgZGFyaSBhd2FsLjwvaDI+CiAgICAgIDxkaXYgY2xhc3M9ImRpdmlkZXIiPjwvZGl2PgogICAgPC9kaXY+CiAgICA8cCBjbGFzcz0iZHJvcHMtZGVzYyI+SW5pIGJ1a2FuIGRhZ2FuZ2FuIHNlbXB1cm5hLjxicj5JbmkgcGVuYW5kYTogbG8gbGFnaSBrYWNhdSB0YXBpIHNhZGFyLiBKYWhpdGFubnlhIGdhayByYXBpLCBwb3Rvbmdhbm55YSBnYWsgc2ltZXRyaXMuIERpcGFrZSBhamEgZHVsdS4gS2FsYXUgbG8gbmdlcmFzYSBhbmVoLCB5YSBpdHUgbG8gbGFnaSBueWFkYXIuPGJyPjxicj5XYXJuYSBrZWJlcnVudHVuZ2FuOiBLdW5pbmcgVGFuYWggI0Q4QjI2QSwgQ29rbGF0IEJhdGEgI0EwNUEyQywgTWVyYWggQmF0YSAjOEIzQTJFIC0gVWxhciBUYW5haCBLdWEgMi48L3A+CiAgPC9kaXY+CiAgPGRpdiBjbGFzcz0iZHJvcHMtZ3JpZCIgaWQ9InByb2R1Y3RHcmlkIj48L2Rpdj4KCiAgPGRpdiBjbGFzcz0iY2Fyb3VzZWwtd3JhcCByZXZlYWwtc2NhbGUiPgogICAgPGRpdiBjbGFzcz0iY2Fyb3VzZWwtdHJhY2siIGlkPSJwcm9kdWN0Q2Fyb3VzZWwiPjwvZGl2PgogICAgPGRpdiBjbGFzcz0iY2Fyb3VzZWwtZG90cyIgaWQ9ImNhcm91c2VsRG90cyI+PC9kaXY+CiAgPC9kaXY+Cjwvc2VjdGlvbj4KCjwhLS0gSml3YSBCcmFuZCAtLT4KPHNlY3Rpb24gaWQ9ImtlbmFwYSI+CiAgPGRpdiBjbGFzcz0iYWJvdXQtcGhpbC1iYW5uZXIgcmV2ZWFsLXNjYWxlIj4KICAgIDxzcGFuIGNsYXNzPSJwaGlsLXdhdGVybWFyayI+Q0FQUlVYPC9zcGFuPgogICAgPHAgY2xhc3M9InBoaWwtbGFiZWwiPi8vIHNvdWw8L3A+CiAgICA8cCBjbGFzcz0icGhpbC1xdW90ZSI+S0FDQVU8YnI+VEFQSTxicj5TQURBUjwvcD4KICAgIDxwIGNsYXNzPSJwaGlsLXN1YiI+QmVydWJhaCBkaW11bGFpIGRhcmkgc2FkYXIuPC9wPgogIDwvZGl2PgoKICA8cCBjbGFzcz0iZXllYnJvdyByZXZlYWwiPi8vIEtlbmFwYSBLYWNhdTwvcD4KICA8aDIgY2xhc3M9InNlYy10aXRsZSByZXZlYWwiPktlbmFwYSA8c3BhbiBjbGFzcz0idGl0bGUtc3RyaWtlIj5DQVBSVUs8L3NwYW4+IGphZGkgQ0FQUlVYPzwvaDI+CiAgPGRpdiBjbGFzcz0iZGl2aWRlciByZXZlYWwiPjwvZGl2PgoKPHAgY2xhc3M9ImFib3V0LWJvZHkiPkp1anVyIGFqYTogZ3VlIGJ1a2FuIG1vdGl2YXRvci4gR3VlIEFyc2l0ZWsgJiBFc3RpbWF0b3IsIFNlbmluLUp1bWF0IDA4LjAwLTE2LjMwLiBLYW9zIGRhbiBqYWtldCBpbmkgZ3VlIGJpa2luIGJ1cnUtYnVydSwgcG90b25nYW5ueWEgZ2FrIHNpbWV0cmlzLCB5YW5nIG1vdG9uZyBsYWdpIG5nYW50dWsuIEd1ZSBiaWxhbmcgYXBhIGFkYW55YS48L3A+Cgo8cCBjbGFzcz0iYWJvdXQtYm9keSI+QmVsdW0gamFkaSB5YW5nIGxvIG1hdS48YnI+CkJlbHVtIGJpc2EgYmFuZ2dhIHNhbWEgZGlyaSBzZW5kaXJpLjxicj4KQmVsdW0gZGljaW50YWkgb2xlaCBvcmFuZyB5YW5nIHR1bHVzLjxicj4KQmVsdW0gYmlzYSBiZXJuYWZhcyBkYW4gaGlkdXAgYmViYXMgdGFucGEgdGVrYW5hbi48YnI+Ckl0dSBidWthbiBhaWIuIEl0dSB0aXRpayBhd2FsLjwvcD4KCjxwIGNsYXNzPSJhYm91dC1ib2R5Ij5TZWthcmFuZyBiZXJoZW50aSBiYW5kaW5na2FuIGRpcmkgZGVuZ2FuIG9yYW5nIGxhaW4uPGJyPgpUYXBpIGthbG8gbG8gdGVydXMgYmFuZGluZ2luIHNhbWEgb3JhbmcgbGFpbiBzaWFwIHNpYXA8YnI+CkthcmVuYSBtYWtpbiBiaWtpbiBsbyBuZ2VyYXNhIGdvYmxvaywgbWlza2luLCBqZWxlayBkYW4gcmVtZWguPGJyPgpBcnRpbnlhIGxvIGJha2FsIHRldGFwIGRpIHNpdHUgdGVydXMuPC9wPgoKPHAgY2xhc3M9ImFib3V0LWJvZHkiPkluaSBidWthbiBsYXBhayBkYWdhbmdhbi48YnI+CkluaSBUYW5kYSBsbyBuZ2dhIHNlbmRpcmksPGJyPgpBZGEgZ3VhIHlhbmcgc2lhcCBqYWRpIHBhdG5lciBsZXdhdGluIGFuamluZ255YSB0YWtkaXIuPC9wPgoKPHAgY2xhc3M9ImFib3V0LWJvZHkiPktldGFrdWthbiBkYW4ga2VjZW1hc2FuIGxvIGFrYW4gZHVuaWEuPGJyPgpBZGFsYWggamFsYW4geWFuZyBsbyBwaWxpaCBidWF0IG1lbmRlcml0YS48YnI+CkRhbiBndWEgbmdnYSBueXVydWggbG8gc2FiYXIgYXRhdSBpa2hsYXNoLjxicj4KVGFwaSBndWEgbmdhamFrIGxvIHNlbnl1bSBsYWx1IGxpYXQga2UgbGFuZ2l0LDxicj4KbGFsdSB1Y2Fwa2FuICJndWEganVnYSBtYWtsdWttdSB0dWhhbixndWEgcGVuZ2VuIGJhaGFnaWEiLjwvcD4KCjxwIGNsYXNzPSJhYm91dC1ib2R5Ij5MYWx1IGtlbWJhbGkgbmFmYXMga2FybmEgbG8gc2FkYXIgbWFzaWggYmlzYSBuYWZhcy48YnI+CkRhbiBsbyBrZW1iYWxpIGxld2F0aSBoaWR1cCBrYXJuYSBsbyBzYWRhciBtYXNpaCBoaWR1cCw8YnI+CkRhcmkgc2l0dSBuYW1hIENBUFJVWCBueWFtYnVuZywgaHVydWYgZGVtaSBodXJ1Zjo8L3A+Cgo8ZGl2IGNsYXNzPSJhYm91dC12YWx1ZXMiPgogIDxkaXYgY2xhc3M9InZhbCI+CiAgICA8c3BhbiBjbGFzcz0idmFsLW4iPkMgPC9zcGFuPgogICAgPGRpdiBjbGFzcz0idmFsLXQiPjxzdHJvbmc+Q29uc2Npb3VzbmVzcy48L3N0cm9uZz4gU2FkYXIgZHVsdTogbG8gYWRhLCBsbyBsYWdpIGthY2F1LCBsbyBtYXNpaCBuYXBhcy4gU2VtdWEgbXVsYWkgZGFyaSBzaW5pLjwvZGl2PgogIDwvZGl2PgogIDxkaXYgY2xhc3M9InZhbCI+CiAgICA8c3BhbiBjbGFzcz0idmFsLW4iPkEgPC9zcGFuPgogICAgPGRpdiBjbGFzcz0idmFsLXQiPjxzdHJvbmc+QWJ1bmRhbmNlLjwvc3Ryb25nPiBTYWRhciBsbyBtYW1wdSBiZXJrZWxpbXBhaGFuLiBNb2RhbG55YSB1ZGFoIGRpa2FzaWggVHVoYW46IG5hcGFzLCBiYWRhbiwgb3Rhaywgd2FrdHUuIFRpbmdnYWwgZGlwYWtlLjwvZGl2PgogIDwvZGl2PgogIDxkaXYgY2xhc3M9InZhbCI+CiAgICA8c3BhbiBjbGFzcz0idmFsLW4iPlAgPC9zcGFuPgogICAgPGRpdiBjbGFzcz0idmFsLXQiPjxzdHJvbmc+UG93ZXIuPC9zdHJvbmc+IFByYXNhbmdrYSwgcGVyYXNhYW4sIGRhbiBwaWtpcmFuIGxvIGl0dSBrZWt1YXRhbm55YS4gUGlsaWggeWFuZyBsbyB1bGFuZywga2FyZW5hIHlhbmcgZGl1bGFuZyBqYWRpIGphbHVyLjwvZGl2PgogIDwvZGl2PgogIDxkaXYgY2xhc3M9InZhbCI+CiAgICA8c3BhbiBjbGFzcz0idmFsLW4iPlIgPC9zcGFuPgogICAgPGRpdiBjbGFzcz0idmFsLXQiPjxzdHJvbmc+UmVzb25hbmNlLjwvc3Ryb25nPiBUdWJ1aCBpbmkgcGVtYW5jYXIuIFlhbmcgbG8gcGFuY2FyaW4gbmFyaWsgeWFuZyBzZWZyZWt1ZW5zaS4gUGFuY2FyaW4gY2ludGEsIHlhbmcga2V0YXJpayBrZWJhaWthbi48L2Rpdj4KICA8L2Rpdj4KICA8ZGl2IGNsYXNzPSJ2YWwiPgogICAgPHNwYW4gY2xhc3M9InZhbC1uIj5VIDwvc3Bhbj4KICAgIDxkaXYgY2xhc3M9InZhbC10Ij48c3Ryb25nPlVubGltaXRlZC48L3N0cm9uZz4gS2ViYWlrYW4geWFuZyBiaXNhIGxvIHRhcmlrIGdhayBhZGEgYmF0YXNueWEsIGtlY3VhbGkgYmF0YXMgeWFuZyBsbyBwYXNhbmcgc2VuZGlyaS48L2Rpdj4KICA8L2Rpdj4KICA8ZGl2IGNsYXNzPSJ2YWwiPgogICAgPHNwYW4gY2xhc3M9InZhbC1uIj5YIDwvc3Bhbj4KICAgIDxkaXYgY2xhc3M9InZhbC10Ij48c3Ryb25nPlhFQ1VUSU9OLjwvc3Ryb25nPiBFa3Nla3VzaS4gU2VtdWEgZGkgYXRhcyBnYWsgZ3VuYSB0YW5wYSBla3Nla3VzaS4gU2F0dSB0ZW1wbGF0ZSwgc2F0dSBiZWRhaGFuLCBzYXR1IHRpbmRha2FuIGhhcmkgaW5pLiA8c3Ryb25nPkJlaW5nIHRoZSBpbXBvc3NpYmxlIHdpdGggR29kJ3MgaGVscC48L3N0cm9uZz48L2Rpdj4KICA8L2Rpdj4KPC9kaXY+Cgo8cCBjbGFzcz0iYWJvdXQtYm9keSI+SmFkaSBwZXJ0YW55YWFubnlhIGJ1a2FuICJrZW5hcGEgZ3VhIGthY2F1PyI8YnI+ClBlcnRhbnlhYW5ueWE6IGthbGF1IG11bGFpIGhhcmkgaW5pIGd1YSBiZXJoZW50aSBuZ2ViYW5kaW5naW4sPGJyPgpwaWtpcmFuIGFwYSB5YW5nIGd1YSBwaWxpaCB1bGFuZyBiZXNvayBwYWdpPzwvcD4KCjxwIGNsYXNzPSJhYm91dC1xdW90ZSI+CiJ1YmFobGFoIHN1ZHV0IHBhbmRhbmcgaGlkdXAgaW5pIGRlbmdhbiBzdWR1dCBwYW5kYW5nIGtpdGEgc2VuZGlyaSBqYW5nYW4gbWVtaW5qYW0gc3VkdXQgcGFuZGFuZyBvcmFuZyBsYWluLCBrYXJlbmEgYmVsdW0gdGVudHUgb3JhbmcgbGFpbiBtZWxpaGF0IGtpdGEgZGVuZ2FuIHN1ZHV0IHBhbmRhbmcgeWFuZyBzZWxhbHUgbWVuZ2dhbmdndSBraXRhLi4uLiIKPC9wPgo8cCBjbGFzcz0iYWJvdXQtcXVvdGUiIHN0eWxlPSJtYXJnaW4tdG9wOjEycHg7Zm9udC1zaXplOi44MnJlbTtvcGFjaXR5Oi41NSI+CiJsYWt1a2FubGFoIGhhbCBrZWNpbCBkYW4ga2F1IHB1amkgc2VuZGlyaSx0YW5wYSBoYXJ1cyBtZWxha3VrYW4gaGFsIGJlc2FyIGhhbnlhIHVudHVrIGRpIHB1amkgb3JhbmcgbGFpbiIKPC9wPgoKICAgIDxkaXYgY2xhc3M9ImFib3V0LXJpZ2h0IHJldmVhbC1yaWdodCIgc3R5bGU9Ii0tcmV2ZWFsLWRlbGF5Oi4xNXMiPgogICAgICA8ZGl2IGNsYXNzPSJhYm91dC12aXN1YWwiPgogICAgICAgIDxpbWcgY2xhc3M9ImFib3V0LWxvZ28tZmxvYXQiIHNyYz0iTE9HT19UUkFOU1BBUkFOX1BVVElILnBuZyIgYWx0PSJDQVBSVVggTG9nbyI+CiAgICAgIDwvZGl2PgogICAgPC9kaXY+Cjwvc2VjdGlvbj4KCjwhLS0gTm9ib2R5IFNvdW5kIC0tPgo8c2VjdGlvbiBpZD0ibm9ib2R5LXNvdW5kIiBzdHlsZT0icGFkZGluZzo4MHB4IDAgNjBweDt0ZXh0LWFsaWduOmNlbnRlcjsiPgogIDxwIGNsYXNzPSJleWVicm93IHJldmVhbCI+Ly8gUG9kY2FzdDwvcD4KICA8aDIgY2xhc3M9InNlYy10aXRsZSByZXZlYWwiPk5vYm9keSBTb3VuZDwvaDI+CiAgPGRpdiBjbGFzcz0iZGl2aWRlciByZXZlYWwiPjwvZGl2PgogIDxwIGNsYXNzPSJhYm91dC1ib2R5IHJldmVhbCIgc3R5bGU9Im1heC13aWR0aDo1NDBweDttYXJnaW46MCBhdXRvIDM2cHg7Ij4KICAgIE1lcmVrYSBidWthbiBzaWFwYS1zaWFwYSBkaSBtYXRhIGR1bmlhLDxicj4KICAgIHRhcGkgcGVybmFoIGthY2F1LCBzYWRhciwgZGFuIG1pbGloIGphbGFuLjxicj4KICAgIDxzdHJvbmc+Tm9ib2R5IFNvdW5kPC9zdHJvbmc+IGFkYWxhaCBydWFuZyBidWF0IHN1YXJhIG1lcmVrYS4KICA8L3A+CiAgPGEgaHJlZj0ibm9ib2R5LXNvdW5kLmh0bWwiIGNsYXNzPSJidG4tcHJpbWFyeSByZXZlYWwiIHN0eWxlPSJkaXNwbGF5OmlubGluZS1ibG9jazttYXJnaW4tdG9wOjhweDsiPgogICAgRGVuZ2VyaW4gTWVyZWthIOKGkgogIDwvYT4KPC9zZWN0aW9uPgoKPCEtLSBDb250YWN0IC0tPgo8c2VjdGlvbiBpZD0iY29udGFjdCI+CiAgPGRpdj4KICAgIDxwIGNsYXNzPSJleWVicm93IHJldmVhbCI+Ly8gQ2VyaXRhPC9wPgogICAgPGgyIGNsYXNzPSJzZWMtdGl0bGUgcmV2ZWFsIj5LYWNhdSBsbyBpdHUgY2VyaXRhLiBUdWxpcyBhcGEgYWRhbnlhLjwvaDI+CiAgICA8ZGl2IGNsYXNzPSJkaXZpZGVyIHJldmVhbCI+PC9kaXY+CiAgICA8cCBjbGFzcz0iYy1pbnRybyByZXZlYWwiPkdhayBwZXJsdSByYXBpLCBnYWsgcGVybHUgYWRhIGtlc2ltcHVsYW4uPGJyPlBhcyBsbyBudWxpcywgbG8ga2VsdWFyIGRhcmkga2VrYWNhdWFuIGRhbiBuZ2VsaWF0IGRpYSBkYXJpIGx1YXIuPGJyPkRhcmkgbHVhciwgamFsYW4ga2VsdWFybnlhIGtlbGlhdGFuLjwvcD4KICAgIDxkaXYgY2xhc3M9ImMtbGlua3MgcmV2ZWFsIiBzdHlsZT0iLS1yZXZlYWwtZGVsYXk6LjFzIj4KICAgICAgPGEgaHJlZj0iaHR0cHM6Ly9pbnN0YWdyYW0uY29tL2NhcHJ1eC5pZCIgY2xhc3M9ImMtbGluayIgdGFyZ2V0PSJfYmxhbmsiPjxzcGFuIGNsYXNzPSJjLWljb24iPuKGlzwvc3Bhbj4gSW5zdGFncmFtPC9hPgogICAgICA8YSBocmVmPSJodHRwczovL3d3dy50aWt0b2suY29tL0BjYXBydXguaWQiIGNsYXNzPSJjLWxpbmsiIHRhcmdldD0iX2JsYW5rIj48c3BhbiBjbGFzcz0iYy1pY29uIj7ihpc8L3NwYW4+IFRpa1RvazwvYT4KICAgICAgPGEgaHJlZj0iaHR0cHM6Ly93d3cueC5jb20vY2FwcnV4X29mZmljaWFsIiBjbGFzcz0iYy1saW5rIiB0YXJnZXQ9Il9ibGFuayI+PHNwYW4gY2xhc3M9ImMtaWNvbiI+4oaXPC9zcGFuPiBYPC9hPgogICAgICA8YSBocmVmPSJodHRwczovL3d3dy55b3V0dWJlLmNvbS9AY2FwcnV4X2lkIiBjbGFzcz0iYy1saW5rIiB0YXJnZXQ9Il9ibGFuayI+PHNwYW4gY2xhc3M9ImMtaWNvbiI+4oaXPC9zcGFuPiBZb3VUdWJlPC9hPgogICAgICA8YSBocmVmPSJodHRwczovL3d3dy5zaG9wZWUuY28uaWQvY2FwcnV4LmlkIiBjbGFzcz0iYy1saW5rIiB0YXJnZXQ9Il9ibGFuayI+PHNwYW4gY2xhc3M9ImMtaWNvbiI+4oaXPC9zcGFuPiBTaG9wZWU8L2E+CiAgICAgIDxhIGhyZWY9Imh0dHBzOi8vd3d3LmZhY2Vib29rLmNvbS9wcm9maWxlLnBocD9pZD02MTU3MDc4NjM4NTE1NyIgY2xhc3M9ImMtbGluayIgdGFyZ2V0PSJfYmxhbmsiPjxzcGFuIGNsYXNzPSJjLWljb24iPuKGlzwvc3Bhbj4gRmFjZWJvb2s8L2E+CiAgICA8L2Rpdj4KCiAgICA8IS0tIFZpc2l0b3IgQ291bnRlciAtLT4KICAgIDxkaXYgY2xhc3M9InZpc2l0b3ItY291bnRlciByZXZlYWwiIHN0eWxlPSItLXJldmVhbC1kZWxheTouMnMiPgogICAgICA8ZGl2IGNsYXNzPSJ2Yy1sYWJlbCI+Ly8gWWFuZyB1ZGFoIG1hbXBpciBrZSBzaW5pLCBrYWNhdSBkYW4gc2FkYXIuPC9kaXY+CiAgICAgIDxkaXYgY2xhc3M9InZjLWRpc3BsYXkiPgogICAgICAgIDxzcGFuIGNsYXNzPSJ2Yy1pY29uIj7wn4y/PC9zcGFuPgogICAgICAgIDxzcGFuIGNsYXNzPSJ2Yy1udW1iZXIiIGlkPSJ2aXNpdG9yQ291bnQiPuKAlDwvc3Bhbj4KICAgICAgICA8c3BhbiBjbGFzcz0idmMtdW5pdCI+aml3YTwvc3Bhbj4KICAgICAgPC9kaXY+CiAgICAgIDxkaXYgY2xhc3M9InZjLW5vdGUiIGlkPSJ2aXNpdG9yTm90ZSI+TWVuZ2hpdHVuZyB5YW5nIGhhZGlyLi4uPC9kaXY+CiAgICA8L2Rpdj4KICA8L2Rpdj4KPC9zZWN0aW9uPgoKPCEtLSBGb290ZXIgLS0+Cjxmb290ZXIgY2xhc3M9InJldmVhbCI+CiAgPGRpdiBjbGFzcz0iZi1sb2dvIj48aW1nIHNyYz0ibG9nb190ZXh0X3B1dGloLnBuZyIgYWx0PSJDQVBSVVgiPjwvZGl2PgogIDxkaXYgY2xhc3M9ImYtY29weSI+wqkgMjAyNiBDQVBSVVgg4oCUIERhcmkgVGFuYWgsIEtpdGEgVHVtYnVoLjxicj48c3BhbiBzdHlsZT0iY29sb3I6I0Q4QjI2QTtmb250LXNpemU6LjU4cmVtIj5DLUEtUC1SLVUtWCA9IENvbnNpc3RlbnMgQWJ1bmRhbmNlIFBvd2VyIFJlc29uYW5jZSBVbmxpbWl0ZWQgWEVDVVRJT04gfCAyMiBNZWkgMTk4OSBTZW5pbiBLbGl3b24gS3VhMiB8ICNEOEIyNkEgI0EwNUEyQyAjOEIzQTJFIHwgQmVpbmcgdGhlIEltcG9zc2libGUgd2l0aCBHb2QncyBIZWxwPC9zcGFuPjwvZGl2Pgo8L2Zvb3Rlcj4KCjwhLS0gRW1haWwgQ29udGFjdCBGQUIgLS0+CjxhIGhyZWY9Im1haWx0bzpjYXBydXgub2ZmaWNpYWxAZ21haWwuY29tP3N1YmplY3Q9U0FQQSBDQVBSVVgiIGNsYXNzPSJlbWFpbC1mYWIiIGFyaWEtbGFiZWw9IktpcmltIHBlc2FuIiB0aXRsZT0iS2lyaW0gcGVzYW4iPgogIDxzdmcgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZD0iTTMgNi41QzMgNS42NzE1NyAzLjY3MTU3IDUgNC41IDVIMTkuNUMyMC4zMjg0IDUgMjEgNS42NzE1NyAyMSA2LjVWMTcuNUMyMSAxOC4zMjg0IDIwLjMyODQgMTkgMTkuNSAxOUg0LjVDMy42NzE1NyAxOSAzIDE4LjMyODQgMyAxNy41VjYuNVoiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjEuNiIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgogICAgPHBhdGggZD0iTTQgNi41TDExLjI4NjUgMTIuMDQzM0MxMS43MDUxIDEyLjM2MjYgMTIuMjk0OSAxMi4zNjI2IDEyLjcxMzUgMTIuMDQzM0wyMCA2LjUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjEuNiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CiAgPC9zdmc+CiAgPHNwYW4gY2xhc3M9ImVtYWlsLWZhYi1waW5nIj48L3NwYW4+CjwvYT4KCjxzY3JpcHQgc3JjPSJjYXBydXgtZGF0YS5qcz92PTExIiBkZWZlcj48L3NjcmlwdD4KPHNjcmlwdCBzcmM9InNjcmlwdC5qcz92PTExIiBkZWZlcj48L3NjcmlwdD4KPC9ib2R5Pgo8L2h0bWw+Cg==" class="nav-logo"><img src="logo_text_putih.png" alt="CAPRUX"></a>
+  <a href="index.html" class="nav-logo"><img src="logo_text_putih.png" alt="CAPRUX"></a>
   <ul class="nav-links">
     <li><a href="#products">Penanda</a></li>
-    <li><a href="#kenapa">Kenapa</a></li>
+    <li><a href="#kenapa">Kenapa Kacau</a></li>
     <li><a href="nobody-sound.html">Nobody Sound</a></li>
+    <li><a href="#contact">Cerita</a></li>
   </ul>
   <a href="#products" class="nav-cta">Liat Penanda</a>
-  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 
+<!-- Hero -->
 <section id="home">
-  <div class="hero-content" style="padding:120px 6vw 40px;text-align:center">
-    <p class="hero-eyebrow" style="color:#D8B26A">// jujur aja</p>
-    <h1 style="font-family:'Space Grotesk';font-size:clamp(2rem,7vw,4.5rem);line-height:.95;margin-top:12px">Dari Tanah,<br><span style="color:#D8B26A">Kita Tumbuh.</span></h1>
-    <p class="hero-sub" style="max-width:520px;margin:18px auto 0;color:#8a9a8a">Ini bukan kaos sempurna. Jahitannya buru-buru, potongannya gak simetris, yang motong lagi ngantuk. Dipake aja dulu.</p>
-    <div class="hero-actions" style="margin-top:28px">
+  <div class="hero-forest" aria-hidden="true">
+    <svg class="forest-svg" viewBox="0 0 1200 700" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax meet">
+      <g class="tree t-far-left" opacity=".18">
+        <line x1="60" y1="700" x2="60" y2="400" stroke="#1a4a20" stroke-width="8"/>
+        <path d="M60 430 Q20 380 10 310 Q50 350 60 330 Q70 350 110 310 Q100 380 60 430Z" fill="#0d2e14"/>
+        <path d="M60 360 Q25 310 15 250 Q55 290 60 270 Q65 290 105 250 Q95 310 60 360Z" fill="#0f3416"/>
+        <path d="M60 295 Q30 250 22 195 Q58 230 60 215 Q62 230 98 195 Q90 250 60 295Z" fill="#112e16"/>
+      </g>
+      <g class="tree t-far-right" opacity=".15">
+        <line x1="1140" y1="700" x2="1140" y2="350" stroke="#1a4a20" stroke-width="10"/>
+        <path d="M1140 390 Q1090 330 1075 245 Q1125 290 1140 265 Q1155 290 1205 245 Q1190 330 1140 390Z" fill="#0d2e14"/>
+        <path d="M1140 310 Q1098 258 1085 180 Q1130 218 1140 200 Q1150 218 1195 180 Q1182 258 1140 310Z" fill="#0f3416"/>
+        <path d="M1140 240 Q1105 195 1095 130 Q1133 162 1140 148 Q1147 162 1185 130 Q1175 195 1140 240Z" fill="#112e16"/>
+      </g>
+      <g class="tree t-mid-left" opacity=".3">
+        <line x1="220" y1="700" x2="220" y2="280" stroke="#1e5828" stroke-width="14"/>
+        <path d="M220 330 Q158 265 140 170 Q200 220 220 195 Q240 220 300 170 Q282 265 220 330Z" fill="#122a18"/>
+        <path d="M220 250 Q168 192 152 108 Q208 152 220 132 Q232 152 288 108 Q272 192 220 250Z" fill="#163320"/>
+        <path d="M220 175 Q175 124 160 54 Q212 92 220 76 Q228 92 280 54 Q265 124 220 175Z" fill="#1a3a24"/>
+      </g>
+      <g class="tree t-mid-right" opacity=".28">
+        <line x1="980" y1="700" x2="980" y2="310" stroke="#1e5828" stroke-width="12"/>
+        <path d="M980 360 Q928 295 912 205 Q966 248 980 225 Q994 248 1048 205 Q1032 295 980 360Z" fill="#122a18"/>
+        <path d="M980 280 Q935 220 920 140 Q970 178 980 160 Q990 178 1040 140 Q1025 220 980 280Z" fill="#163320"/>
+        <path d="M980 210 Q940 160 928 90 Q974 122 980 108 Q986 122 1032 90 Q1020 160 980 210Z" fill="#1a3a24"/>
+      </g>
+      <g class="tree t-front-left" opacity=".55">
+        <line x1="80" y1="700" x2="80" y2="180" stroke="#245e30" stroke-width="20"/>
+        <line x1="80" y1="380" x2="20" y2="310" stroke="#1e5228" stroke-width="8"/>
+        <line x1="80" y1="300" x2="140" y2="240" stroke="#1e5228" stroke-width="7"/>
+        <path d="M80 240 Q10 165 -10 60 Q65 120 80 90 Q95 120 170 60 Q150 165 80 240Z" fill="#152e1c"/>
+        <path d="M80 170 Q20 105 5 20 Q68 68 80 50 Q92 68 155 20 Q140 105 80 170Z" fill="#1a3822"/>
+      </g>
+      <g class="tree t-front-right" opacity=".5">
+        <line x1="1120" y1="700" x2="1120" y2="200" stroke="#245e30" stroke-width="18"/>
+        <line x1="1120" y1="400" x2="1180" y2="330" stroke="#1e5228" stroke-width="7"/>
+        <line x1="1120" y1="310" x2="1060" y2="250" stroke="#1e5228" stroke-width="6"/>
+        <path d="M1120 260 Q1058 185 1038 80 Q1108 138 1120 110 Q1132 138 1202 80 Q1182 185 1120 260Z" fill="#152e1c"/>
+        <path d="M1120 190 Q1065 122 1048 38 Q1112 82 1120 62 Q1128 82 1192 38 Q1175 122 1120 190Z" fill="#1a3822"/>
+      </g>
+      <ellipse cx="600" cy="690" rx="580" ry="18" fill="#0a1f0e" opacity=".6"/>
+      <circle class="spore s1" cx="300" cy="300" r="2" fill="#7dffb0" opacity=".6"/>
+      <circle class="spore s2" cx="550" cy="200" r="1.5" fill="#a0ffc0" opacity=".5"/>
+      <circle class="spore s3" cx="750" cy="350" r="2.5" fill="#7dffb0" opacity=".45"/>
+      <circle class="spore s4" cx="900" cy="180" r="1.8" fill="#c8ffd8" opacity=".55"/>
+      <circle class="spore s5" cx="450" cy="420" r="1.2" fill="#7dffb0" opacity=".4"/>
+      <circle class="spore s6" cx="680" cy="150" r="2" fill="#a0ffc0" opacity=".5"/>
+      <circle class="spore s7" cx="150" cy="250" r="1.5" fill="#7dffb0" opacity=".45"/>
+      <circle class="spore s8" cx="1020" cy="280" r="2" fill="#c8ffd8" opacity=".4"/>
+    </svg>
+  </div>
+
+  <div class="hero-mist" aria-hidden="true"></div>
+  <div class="hero-noise"></div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">// kacau itu jujur</p>
+    <div class="hero-logo-wrap">
+      <div class="logo-glow" aria-hidden="true"></div>
+      <img class="main-logo" src="logo_text_putih.png" alt="CAPRUX">
+    </div>
+    <p class="hero-sub">Lo belum jadi apa-apa. Gua juga.<br>Itu titik berangkat yang jujur.<br><strong>Berhenti ngebandingin, lo gak lagi di bawah siapa pun.</strong></p>
+    <p class="hero-mantra">// kacau. sadar. berubah.</p>
+    <div class="hero-actions">
       <a href="#products" class="btn-primary">Liat Penanda</a>
+      <a href="#kenapa" class="btn-ghost">Kenapa Kacau</a>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    <span>Gulir</span>
+  </div>
+</section>
+
+<!-- Marquee -->
+<div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-inner">
+<span>Kesepian lahir dari hati yang kosong</span><span class="msep">·</span>
+<span>Jadikan ngaco sebagai hal positiif</span><span class="msep">·</span>
+<span>Akui saja kekurangan jangan di lawan</span><span class="msep">·</span>
+<span>Masalah itu hanya realita tidak sesuai dengan ekspektasi</span><span class="msep">·</span>
+<span>Hilangkan penilaian terhadap realita</span><span class="msep">·</span>
+<span>Selama masih bernafas semua masih aman</span><span class="msep">·</span>
+<span>Selama masih bernyawa semua masih bisa di wujudkan</span><span class="msep">·</span>
+<span>Tidak ada kesusahan yang tidak kita pernah pikirkan</span><span class="msep">·</span>
+<span>Tingkat tinggi ilmu adalah berhenti membandingkan realita</span><span class="msep">·</span>
+<span>Yang terjasi adalah cerminan dari ketakutan kita</span><span class="msep">·</span>
+<span>Terus bergerak atau diam berkedok pasrah</span><span class="msep">·</span>
+<span>Hidup adalah selalu tentang memilih</span><span class="msep">·</span>
+  </div>
+</div>
+
+<!-- Products -->
+<section id="products">
+  <div class="drops-header reveal">
+    <div>
+      <p class="eyebrow">// Penanda</p>
+      <h2 class="sec-title">Pilihan sebuah kejujuran.</h2>
+      <div class="divider"></div>
+    </div>
+    <p class="drops-desc">Bahan yang menyamar.<br>dengan logo bukti anda orang gila yang sadar.</p>
+  </div>
+  <div class="drops-grid" id="productGrid"></div>
+
+  <div class="carousel-wrap reveal-scale">
+    <div class="carousel-track" id="productCarousel"></div>
+    <div class="carousel-dots" id="carouselDots"></div>
+  </div>
+</section>
+
+<!-- Jiwa Brand -->
+<section id="kenapa">
+  <div class="about-phil-banner reveal-scale">
+    <span class="phil-watermark">CAPRUX</span>
+    <p class="phil-label">// soul</p>
+    <p class="phil-quote">NGACO<br>TAPI<br>SADAR</p>
+    <p class="phil-sub">Berubah dimulai dari sadar kita masih bernyawa.</p>
+  </div>
+
+  <p class="eyebrow reveal">// Arti</p>
+  <h2 class="sec-title reveal">Why name is <span class="title-strike">CAPRUK</span> jadi CAPRUX?</h2>
+  <div class="divider reveal"></div>
+
+<p class="about-body">Kejujuran dari orang yang belum jadi apa apa.</p>
+
+<p class="about-body">Dalam bahasa sunda capruk itu ucapan ngaco.<br>
+Tapi enstain, elon musk, bahkan rosul...<br>
+Di cap orang yang omonganya tidak masuk akal.</p>
+
+<p class="about-body">Tapi lihat mereka...<br>
+Yang mereka ucapkan semua jadi kenyataan.</p>
+
+<p class="about-body">Mereka sama dengan kita.<br>
+Mereka manusia.<br>
+Mereka bernafas.<br>
+Mereka bernyawa.</p>
+
+<p class="about-body">Lalu kenapa kita tidak coba bergerak sedikit.?<br>
+Dengan sadar bahwa kita manusia.<br>
+Menggunakan rumus CAPRUX.</p>
+
+<div class="about-values">
+  <div class="val">
+    <span class="val-n">C </span>
+    <div class="val-t"><strong>Consciousness.</strong> Kesadaran bawhwa saat ini lo hadir, lo banyak masalah, lo beum jadi apa apa,lo masih di remehkan banyak orang dan mulai dari sini.</div>
+  </div>
+  <div class="val">
+    <span class="val-n">A </span>
+    <div class="val-t"><strong>Abundance.</strong> Sebenernya kita udah berkelimpahan, modalnya nafas dari tuhan. Tinggal dipake.</div>
+  </div>
+  <div class="val">
+    <span class="val-n">P </span>
+    <div class="val-t"><strong>Power.</strong> Lo udah punya kekuatan yaitu nyawa, otak, dan tubuh buat mulai semua.</div>
+  </div>
+  <div class="val">
+    <span class="val-n">R </span>
+    <div class="val-t"><strong>Resonance.</strong> Lalu coba berpikir dan berprasangka baik ke diri sendiri,stop menjelek jelekan diri sendiri.</div>
+  </div>
+  <div class="val">
+    <span class="val-n">U </span>
+    <div class="val-t"><strong>Unlimited.</strong> Saat semua udah lo lakuin lo mulai mikir semesta ngasih kita harta cinta dan kebahagian itu tidak terbatas.</div>
+  </div>
+  <div class="val">
+    <span class="val-n">X </span>
+    <div class="val-t"><strong>Xecution.</strong> Dan semua hanya akan jadi wacana jika tidak di kerjakan dan mulai dari sekarang,lakuin aja dulu, gerak aja dulu, masalah hasil seperti selogan <strong>Being the impossible with God's help.</strong></div>
+  </div>
+</div>
+
+<p class="about-body">Mulai hari ini STOP ngeluh,<br>
+STOP membandingkan dengan orang lain,<br>
+Mulai dengan kata "APA YANG BISA AKU LAKUIN SEKARANG"</p>
+
+<p class="about-quote">
+"ubahlah sudut pandang hidup ini dengan sudut pandang kita sendiri jangan meminjam sudut pandang orang lain, karena belum tentu orang lain melihat kita dengan sudut pandang yang selalu mengganggu kita...."
+</p>
+<p class="about-quote" style="margin-top:12px;font-size:.82rem;opacity:.55">
+"lakukanlah hal kecil dan kau puji sendiri,tanpa harus melakukan hal besar hanya untuk di puji orang lain"
+</p>
+
+    <div class="about-right reveal-right" style="--reveal-delay:.15s">
+      <div class="about-visual">
+        <img class="about-logo-float" src="LOGO_TRANSPARAN_PUTIH.png" alt="CAPRUX Logo">
+      </div>
+    </div>
+</section>
+
+<!-- Nobody Sound -->
+<section id="nobody-sound" style="padding:80px 0 60px;text-align:center;">
+  <p class="eyebrow reveal">// Podcast</p>
+  <h2 class="sec-title reveal">Nobody Sound</h2>
+  <div class="divider reveal"></div>
+  <p class="about-body reveal" style="max-width:540px;margin:0 auto 36px;">
+    Suara manusia yang tidak di kenal dunia,<br>
+    tapi mereka mulai sadar bahwa mereka bagian dari semesta.<br>
+    <strong>Nobody Sound</strong> adalah ruang saat dimana orang lain tidak mendengar jeritan mereka.
+  </p>
+  <a href="nobody-sound.html" class="btn-primary reveal" style="display:inline-block;margin-top:8px;">
+    Dengerin Mereka →
+  </a>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+  <div>
+    <p class="eyebrow reveal">// Cerita</p>
+    <h2 class="sec-title reveal">Share pengalaman dan cerita lo yang susah. Tulis apa adanya.</h2>
+    <div class="divider reveal"></div>
+    <p class="c-intro reveal">Gak perlu rapi, gak perlu ada kesimpulan.<br>Pas lo nulis, lo ngeluarin 20% dari masalah yang lo hadepin.<br>Tag kita untuk pengalaman hidup lo yang berantakan jadi rapi.</p>
+    <div class="c-links reveal" style="--reveal-delay:.1s">
+      <a href="https://instagram.com/caprux.id" class="c-link" target="_blank"><span class="c-icon">↗</span> Instagram</a>
+      <a href="https://www.tiktok.com/@caprux.id" class="c-link" target="_blank"><span class="c-icon">↗</span> TikTok</a>
+      <a href="https://www.x.com/caprux_official" class="c-link" target="_blank"><span class="c-icon">↗</span> X</a>
+      <a href="https://www.youtube.com/@caprux_id" class="c-link" target="_blank"><span class="c-icon">↗</span> YouTube</a>
+      <a href="https://www.shopee.co.id/caprux.id" class="c-link" target="_blank"><span class="c-icon">↗</span> Shopee</a>
+      <a href="https://www.facebook.com/profile.php?id=61570786385157" class="c-link" target="_blank"><span class="c-icon">↗</span> Facebook</a>
+    </div>
+
+    <!-- Visitor Counter -->
+    <div class="visitor-counter reveal" style="--reveal-delay:.2s">
+      <div class="vc-label">// Yang udah mampir ke sini...</div>
+      <div class="vc-display">
+        <span class="vc-icon">🌿</span>
+        <span class="vc-number" id="visitorCount">—</span>
+        <span class="vc-unit">jiwa</span>
+      </div>
+      <div class="vc-note" id="visitorNote">Menusia yang tercerahkan...</div>
     </div>
   </div>
 </section>
 
-<div class="marquee-strip"><div class="marquee-inner">
-<span>CAPRUX</span><span class="msep">·</span>
-<span>Dari Tanah Kita Tumbuh</span><span class="msep">·</span>
-<span>Jahitannya gak rapi, potongannya gak simetris</span><span class="msep">·</span>
-<span>Ini penanda, bukan produk sempurna</span><span class="msep">·</span>
-</div></div>
-
-<section id="products" style="padding:60px 6vw">
-  <p class="eyebrow">// penanda</p>
-  <h2 class="sec-title">Yang gak rapi. Kita jujur dari awal.</h2>
-  <div class="drops-grid" id="productGrid"></div>
-  <div class="carousel-wrap"><div class="carousel-track" id="productCarousel"></div><div class="carousel-dots" id="carouselDots"></div></div>
-</section>
-
-<section id="kenapa" style="padding:70px 6vw;max-width:900px;margin:0 auto">
-  <p class="eyebrow">// kenapa</p>
-  <h2 class="sec-title">CAPRUX itu apa?</h2>
-  <div class="divider"></div>
-  <p class="about-body">Bukan brand baju sempurna. Ini penanda. Lo lagi kacau tapi sadar, ya pake aja.</p>
-  <p class="about-body">Kainnya Micro Cotton Danbowl 210 GSM, jaketnya parasut crinkle. Ada benang sisa, strap gak sama, tali serut coplok. Ya terima aja.</p>
-  <div class="about-values" style="margin-top:30px">
-    <div class="val"><span class="val-n" style="color:#D8B26A">C</span><div class="val-t"><strong>Consistens.</strong> Yang lo ulang tiap hari itu frekuensi lo.</div></div>
-    <div class="val"><span class="val-n" style="color:#D8B26A">A</span><div class="val-t"><strong>Abundance.</strong> Modal udah ada: napas, badan, otak, waktu.</div></div>
-    <div class="val"><span class="val-n" style="color:#D8B26A">P</span><div class="val-t"><strong>Power.</strong> Power gak maksa, Force yang maksa.</div></div>
-    <div class="val"><span class="val-n" style="color:#D8B26A">R</span><div class="val-t"><strong>Resonance.</strong> Tubuh pemancar.</div></div>
-    <div class="val"><span class="val-n" style="color:#D8B26A">U</span><div class="val-t"><strong>Unlimited.</strong> Gak ada batas kecuali yang lo pasang.</div></div>
-    <div class="val"><span class="val-n" style="color:#A05A2C">X</span><div class="val-t"><strong>XECUTION.</strong> Eksekusi. Satu tindakan kecil hari ini.</div></div>
-  </div>
-</section>
-
-<footer style="padding:40px;text-align:center;color:#5a6a5a;border-top:1px solid #1a1a1a">
-  <div class="f-logo"><img src="logo_text_putih.png" alt="CAPRUX" style="width:120px;opacity:.7"></div>
-  <div class="f-copy" style="margin-top:12px;font-size:.75rem">© 2026 CAPRUX — Dari Tanah, Kita Tumbuh.<br>Being the Impossible with God's Help</div>
+<!-- Footer -->
+<footer class="reveal">
+  <div class="f-logo"><img src="logo_text_putih.png" alt="CAPRUX"></div>
+  <div class="f-copy">© 2024 - CAPRUX <br><span style="color:#2a4a30;font-size:.58rem">Being the Impossible with God's Help</span></div>
 </footer>
+
+<!-- Email Contact FAB -->
+<a href="mailto:caprux.official@gmail.com?subject=SAPA CAPRUX" class="email-fab" aria-label="Kirim pesan" title="Kirim pesan">
+  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M3 6.5C3 5.67157 3.67157 5 4.5 5H19.5C20.3284 5 21 5.67157 21 6.5V17.5C21 18.3284 20.3284 19 19.5 19H4.5C3.67157 19 3 18.3284 3 17.5V6.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M4 6.5L11.2865 12.0433C11.7051 12.3626 12.2949 12.3626 12.7135 12.0433L20 6.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <span class="email-fab-ping"></span>
+</a>
 
 <script src="caprux-data.js?v=11" defer></script>
 <script src="script.js?v=11" defer></script>
