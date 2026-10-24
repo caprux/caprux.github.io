@@ -1,5 +1,5 @@
 /* ================================================================
-   CAPRUX — style.css v13 "7-LAYER NEON CANOPY"
+   CAPRUX — style.css v14 "7-LAYER PARALLAX FIXED"
    Palet: Hitam · Putih · Abu · #00ff00
    ================================================================ */
 :root {
@@ -14,10 +14,6 @@
   --grey:     #7a7a7a;
   --grey-lt:  #b8b8b8;
   --grey-xlt: #e0e0e0;
-  
-  --forest:   #0d3d14;
-  --moss:     #2e7d3a;
-  --leaf:     #00ff33;
   
   --glow:     0 0 20px rgba(0,255,51,.35), 0 0 60px rgba(0,255,51,.15);
   --glow-sm:  0 0 12px rgba(0,255,51,.3);
@@ -76,36 +72,49 @@ nav.scrolled { background: rgba(0, 0, 0, 0.95); border-bottom-color: rgba(0,255,
 
 /* ── HERO PARALLAX (7 LAYERS) ── */
 #home {
-  position: relative; height: 100vh; min-height: 600px;
-  overflow: hidden; background: #050505;
-  display: flex; align-items: center; justify-content: center;
+  position: relative; 
+  height: 100vh; 
+  min-height: 600px;
+  overflow: hidden; 
+  background: #050505;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
 }
+
 .parallax-wrap { 
   position: absolute; 
-  top: -10%; left: -5%; 
-  width: 110%; height: 120%; 
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100%; 
   z-index: 1; 
   pointer-events: none; 
+  overflow: hidden;
 }
+
 .parallax-layer { 
   position: absolute; 
-  inset: 0; 
+  top: 0; 
+  left: 0;
   width: 100%; 
   height: 100%; 
   object-fit: cover; 
   object-position: bottom center; 
-  will-change: transform; 
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
 }
 
-/* Kecepatan Parallax via CSS Variables */
-.layer-1 { transform: translateY(var(--scroll-l1, 0px)) scale(1.05); z-index: 1; }
-.layer-2 { transform: translateY(var(--scroll-l2, 0px)) scale(1.02); z-index: 2; }
-.layer-3 { transform: translateY(var(--scroll-l3, 0px)) scale(1.01); z-index: 3; }
-.layer-4 { transform: translateY(var(--scroll-l4, 0px)); z-index: 4; }
-.layer-5 { transform: translateY(var(--scroll-l5, 0px)); z-index: 5; }
-.layer-6 { transform: translateY(var(--scroll-l6, 0px)); z-index: 6; }
-.layer-7 { transform: translateY(var(--scroll-l7, 0px)); z-index: 7; }
+/* Layer 1-7: hanya translateY, tanpa scale */
+.layer-1 { transform: translate3d(0, var(--scroll-l1, 0px), 0) scale(1.1); z-index: 1; }
+.layer-2 { transform: translate3d(0, var(--scroll-l2, 0px), 0) scale(1.08); z-index: 2; }
+.layer-3 { transform: translate3d(0, var(--scroll-l3, 0px), 0) scale(1.06); z-index: 3; }
+.layer-4 { transform: translate3d(0, var(--scroll-l4, 0px), 0) scale(1.04); z-index: 4; }
+.layer-5 { transform: translate3d(0, var(--scroll-l5, 0px), 0) scale(1.02); z-index: 5; }
+.layer-6 { transform: translate3d(0, var(--scroll-l6, 0px), 0); z-index: 6; }
+.layer-7 { transform: translate3d(0, var(--scroll-l7, 0px), 0); z-index: 7; }
 
+/* Overlay gradien gelap agar teks CAPRUX tetap kontras */
 #home::after {
   content: '';
   position: absolute;
@@ -114,6 +123,7 @@ nav.scrolled { background: rgba(0, 0, 0, 0.95); border-bottom-color: rgba(0,255,
   z-index: 8;
   pointer-events: none;
 }
+
 .hero-content { 
   position: relative; 
   z-index: 10; 
@@ -370,7 +380,6 @@ footer { background: var(--black); border-top: 1px solid rgba(255,255,255,0.05);
   .product-grid { grid-template-columns: 1fr; gap: 40px; }
   .drops-header { flex-direction: column; align-items: flex-start; }
   .drops-desc { text-align: left; }
-  .parallax-wrap { inset: 0; width: 100%; height: 100%; }
 }
 @media (max-width: 600px) {
   footer { flex-direction: column; align-items: flex-start; }
