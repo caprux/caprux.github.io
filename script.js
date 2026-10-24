@@ -1,5 +1,5 @@
 // ================================================================
-// CAPRUX — script.js v13 "7-Layer Parallax"
+// CAPRUX — script.js v14 "7-Layer Parallax Fixed"
 // ================================================================
 
 let PRODUCTS = [];
@@ -193,40 +193,47 @@ document.addEventListener('DOMContentLoaded', function() {
   const nav = document.querySelector('nav');
   window.addEventListener('scroll', () => {
     if (nav) nav.classList.toggle('scrolled', window.scrollY > 60);
-    updateParallax();
     updateScrollProgress();
   }, { passive: true });
 
   // ── PARALLAX EFFECT (7 LAYERS) ──
+  const parallaxLayers = {
+    1: document.querySelector('.layer-1'),
+    2: document.querySelector('.layer-2'),
+    3: document.querySelector('.layer-3'),
+    4: document.querySelector('.layer-4'),
+    5: document.querySelector('.layer-5'),
+    6: document.querySelector('.layer-6'),
+    7: document.querySelector('.layer-7')
+  };
+
+  let ticking = false;
+
   function updateParallax() {
-    const hero = document.getElementById('home');
-    if (!hero) return;
-    
-    // Cek apakah user di HP atau pakai "reduced motion" (biar ga lag)
-    const isMobile = window.innerWidth < 900;
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (isMobile || reduceMotion) return;
-
     const y = window.scrollY;
-    
-    // Rumus pengali: Semakin jauh (layer 1), semakin kecil angkanya
-    const l1 = y * 0.05;  // Awan (Paling lambat)
-    const l2 = y * 0.15;  // Gunung jauh
-    const l3 = y * 0.30;  // Gunung dekat
-    const l4 = y * 0.45;  // Hutan jauh
-    const l5 = y * 0.65;  // Hutan tengah
-    const l6 = y * 0.85;  // Semak dekat
-    const l7 = y * 1.10;  // Tanah (Paling cepat)
+    const isMobile = window.innerWidth < 900;
+    if (isMobile) return; // Skip parallax di HP biar ga lag
 
-    const root = document.documentElement;
-    root.style.setProperty('--scroll-l1', `${l1}px`);
-    root.style.setProperty('--scroll-l2', `${l2}px`);
-    root.style.setProperty('--scroll-l3', `${l3}px`);
-    root.style.setProperty('--scroll-l4', `${l4}px`);
-    root.style.setProperty('--scroll-l5', `${l5}px`);
-    root.style.setProperty('--scroll-l6', `${l6}px`);
-    root.style.setProperty('--scroll-l7', `${l7}px`);
+    if (parallaxLayers[1]) parallaxLayers[1].style.transform = `translate3d(0, ${y * 0.05}px, 0) scale(1.1)`;
+    if (parallaxLayers[2]) parallaxLayers[2].style.transform = `translate3d(0, ${y * 0.15}px, 0) scale(1.08)`;
+    if (parallaxLayers[3]) parallaxLayers[3].style.transform = `translate3d(0, ${y * 0.30}px, 0) scale(1.06)`;
+    if (parallaxLayers[4]) parallaxLayers[4].style.transform = `translate3d(0, ${y * 0.45}px, 0) scale(1.04)`;
+    if (parallaxLayers[5]) parallaxLayers[5].style.transform = `translate3d(0, ${y * 0.65}px, 0) scale(1.02)`;
+    if (parallaxLayers[6]) parallaxLayers[6].style.transform = `translate3d(0, ${y * 0.85}px, 0)`;
+    if (parallaxLayers[7]) parallaxLayers[7].style.transform = `translate3d(0, ${y * 1.10}px, 0)`;
+
+    ticking = false;
   }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(updateParallax);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  // Jalankan sekali saat load (kalau user refresh di tengah halaman)
+  updateParallax();
 
   // ── SCROLL PROGRESS ──
   function updateScrollProgress() {
