@@ -1,6 +1,5 @@
 /* ================================================================
-   CAPRUX — style.css v14 "7-LAYER PARALLAX FIXED"
-   Palet: Hitam · Putih · Abu · #00ff00
+   CAPRUX — style.css v15 "PERFECT FIT PARALLAX"
    ================================================================ */
 :root {
   --black:    #000000;
@@ -70,7 +69,7 @@ nav.scrolled { background: rgba(0, 0, 0, 0.95); border-bottom-color: rgba(0,255,
 .mobile-menu a { font-family: var(--font-head); font-weight: 700; font-size: 1.8rem; text-transform: uppercase; color: var(--white); }
 .mobile-menu a:hover { color: var(--green); }
 
-/* ── HERO PARALLAX (7 LAYERS) ── */
+/* ── HERO PARALLAX (7 LAYERS BACKGROUND) ── */
 #home {
   position: relative; 
   height: 100vh; 
@@ -84,37 +83,34 @@ nav.scrolled { background: rgba(0, 0, 0, 0.95); border-bottom-color: rgba(0,255,
 
 .parallax-wrap { 
   position: absolute; 
-  top: 0; 
-  left: 0; 
-  width: 100%; 
-  height: 100%; 
+  top: 0; left: 0; 
+  width: 100%; height: 100%; 
   z-index: 1; 
   pointer-events: none; 
   overflow: hidden;
 }
 
+/* Trik Background: Menjamin Fit & Awan Mepet Atas */
 .parallax-layer { 
   position: absolute; 
-  top: 0; 
-  left: 0;
+  top: 0; left: 0;
   width: 100%; 
   height: 100%; 
-  object-fit: cover; 
-  object-position: bottom center; 
+  background-size: cover;
+  background-repeat: no-repeat;
   will-change: transform;
   transform: translate3d(0, 0, 0);
 }
 
-/* Layer 1-7: hanya translateY, tanpa scale */
-.layer-1 { transform: translate3d(0, var(--scroll-l1, 0px), 0) scale(1.1); z-index: 1; }
-.layer-2 { transform: translate3d(0, var(--scroll-l2, 0px), 0) scale(1.08); z-index: 2; }
-.layer-3 { transform: translate3d(0, var(--scroll-l3, 0px), 0) scale(1.06); z-index: 3; }
-.layer-4 { transform: translate3d(0, var(--scroll-l4, 0px), 0) scale(1.04); z-index: 4; }
-.layer-5 { transform: translate3d(0, var(--scroll-l5, 0px), 0) scale(1.02); z-index: 5; }
-.layer-6 { transform: translate3d(0, var(--scroll-l6, 0px), 0); z-index: 6; }
-.layer-7 { transform: translate3d(0, var(--scroll-l7, 0px), 0); z-index: 7; }
+/* Atur posisi background agar pas di bawah */
+.layer-1 { background-position: top center; z-index: 1; } /* Awan mepet atas */
+.layer-2 { background-position: bottom center; z-index: 2; }
+.layer-3 { background-position: bottom center; z-index: 3; }
+.layer-4 { background-position: bottom center; z-index: 4; }
+.layer-5 { background-position: bottom center; z-index: 5; }
+.layer-6 { background-position: bottom center; z-index: 6; }
+.layer-7 { background-position: bottom center; z-index: 7; }
 
-/* Overlay gradien gelap agar teks CAPRUX tetap kontras */
 #home::after {
   content: '';
   position: absolute;
