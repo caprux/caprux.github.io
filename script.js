@@ -1,5 +1,5 @@
 // ================================================================
-// CAPRUX — script.js v19 "HYBRID PARALLAX"
+// CAPRUX — script.js v20 "CONTINUOUS REVEAL PARALLAX"
 // ================================================================
 
 let PRODUCTS = [];
@@ -197,7 +197,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }, { passive: true });
 
   // ==============================================================
-  // PARALLAX EFFECT (HYBRID 3D DEPTH)
+  // PARALLAX EFFECT (CONTINUOUS REVEAL - MATEMATIKA)
   // ==============================================================
   const parallaxLayers = {
     1: document.querySelector('.layer-1'),
@@ -209,22 +209,47 @@ document.addEventListener('DOMContentLoaded', function() {
     7: document.querySelector('.layer-7')
   };
   const heroContent = document.querySelector('.hero-content');
+  const heroSection = document.getElementById('home');
 
   let ticking = false;
 
   function updateParallax() {
-    const y = window.scrollY;
+    if (!heroSection) return;
     
-    // Kecepatan drastis untuk efek 3D mendalam
-    if (parallaxLayers[1]) parallaxLayers[1].style.transform = `translate3d(0, ${y * 0.1}px, 0)`;
-    if (parallaxLayers[2]) parallaxLayers[2].style.transform = `translate3d(0, ${y * 0.25}px, 0)`;
-    if (parallaxLayers[3]) parallaxLayers[3].style.transform = `translate3d(0, ${y * 0.45}px, 0)`;
-    if (parallaxLayers[4]) parallaxLayers[4].style.transform = `translate3d(0, ${y * 0.70}px, 0)`;
-    if (parallaxLayers[5]) parallaxLayers[5].style.transform = `translate3d(0, ${y * 0.95}px, 0)`;
-    if (parallaxLayers[6]) parallaxLayers[6].style.transform = `translate3d(0, ${y * 1.25}px, 0)`;
-    if (parallaxLayers[7]) parallaxLayers[7].style.transform = `translate3d(0, ${y * 1.60}px, 0)`;
+    const scrollY = window.scrollY;
+    const heroHeight = heroSection.offsetHeight;
+    
+    // Hitung progress scroll dari 0.0 sampai 1.0 (saat scroll mencapai tinggi hero)
+    const progress = Math.max(0, Math.min(1, scrollY / heroHeight));
+    const vw = window.innerWidth; // Lebar layar
 
-    if (heroContent) heroContent.style.transform = `translateY(${y * 0.6}px)`;
+    // Berdasarkan permintaan Anda:
+    // 0% scroll  -> Layer 1 = 0vw, Layer 2 = 100vw, Layer 3 = 200vw, dst.
+    // 100% scroll -> Semua layer berbaris rapi menutupi layar (Total tinggi tumpukan gambar)
+    
+    // Konstanta jarak awal (dalam satuan lebar layar / vw)
+    const offset1 = 0;
+    const offset2 = 1; // 100vw
+    const offset3 = 2; // 200vw
+    const offset4 = 3;
+    const offset5 = 4;
+    const offset6 = 5;
+    const offset7 = 6;
+
+    // Semakin di-scroll (progress mendekati 1), posisi Y akan semakin naik ke 0.
+    // Rumus: Y = (1 - progress) * offset * lebar layar.
+    // Kita beri pengali -1 agar arah geraknya ke atas.
+    if (parallaxLayers[1]) parallaxLayers[1].style.transform = `translate3d(0, ${(1 - progress) * offset1 * vw * -1}px, 0)`;
+    if (parallaxLayers[2]) parallaxLayers[2].style.transform = `translate3d(0, ${(1 - progress) * offset2 * vw * -1}px, 0)`;
+    if (parallaxLayers[3]) parallaxLayers[3].style.transform = `translate3d(0, ${(1 - progress) * offset3 * vw * -1}px, 0)`;
+    if (parallaxLayers[4]) parallaxLayers[4].style.transform = `translate3d(0, ${(1 - progress) * offset4 * vw * -1}px, 0)`;
+    if (parallaxLayers[5]) parallaxLayers[5].style.transform = `translate3d(0, ${(1 - progress) * offset5 * vw * -1}px, 0)`;
+    if (parallaxLayers[6]) parallaxLayers[6].style.transform = `translate3d(0, ${(1 - progress) * offset6 * vw * -1}px, 0)`;
+    if (parallaxLayers[7]) parallaxLayers[7].style.transform = `translate3d(0, ${(1 - progress) * offset7 * vw * -1}px, 0)`;
+
+    // Teks hero menghilang lebih cepat (opsional)
+    if (heroContent) heroContent.style.transform = `translateY(${scrollY * 0.5}px)`;
+    if (heroContent) heroContent.style.opacity = Math.max(0, 1 - (scrollY / (heroHeight * 0.4)));
 
     ticking = false;
   }
@@ -235,8 +260,10 @@ document.addEventListener('DOMContentLoaded', function() {
       ticking = true;
     }
   }, { passive: true });
-
+  
+  // Panggil saat load & resize
   updateParallax();
+  window.addEventListener('resize', updateParallax);
 
   // ── SCROLL PROGRESS ──
   function updateScrollProgress() {
