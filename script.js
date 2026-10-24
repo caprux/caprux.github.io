@@ -1,5 +1,5 @@
 // ================================================================
-// CAPRUX — script.js v15 "PERFECT FIT & PERFORMANCE"
+// CAPRUX — script.js v16 "FIT WIDTH PARALLAX"
 // ================================================================
 
 let PRODUCTS = [];
@@ -212,11 +212,8 @@ document.addEventListener('DOMContentLoaded', function() {
   function updateParallax() {
     const y = window.scrollY;
     
-    // Deteksi apakah layar kecil (HP/Tablet Portrait)
-    const isMobile = window.innerWidth < 900;
-    
-    // Kecepatan parallax (dibuat lebih kecil di HP agar tidak berat)
-    const speed = isMobile ? 0.5 : 1; 
+    // Kecepatan parallax (dibuat lebih kecil di HP)
+    const speed = window.innerWidth < 900 ? 0.5 : 1; 
 
     if (parallaxLayers[1]) parallaxLayers[1].style.transform = `translate3d(0, ${y * 0.05 * speed}px, 0)`;
     if (parallaxLayers[2]) parallaxLayers[2].style.transform = `translate3d(0, ${y * 0.15 * speed}px, 0)`;
