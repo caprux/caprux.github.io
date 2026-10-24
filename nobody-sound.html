@@ -2,98 +2,71 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nobody Sound — CAPRUX</title>
-  <meta name="description" content="Direktori tamu podcast Nobody Sound by CAPRUX — orang-orang biasa dengan keahlian luar biasa.">
   <link rel="icon" type="image/png" href="LOGO_TRANSPARAN_HITAM.png">
-  <link rel="shortcut icon" type="image/png" href="LOGO_TRANSPARAN_HITAM.png">
-  <link rel="apple-touch-icon" href="LOGO_TRANSPARAN_HITAM.png">
-  <meta name="theme-color" content="#010602">
+  <meta name="theme-color" content="#000000">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&family=Inter:wght@300;400;500&family=Share+Tech+Mono&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-  <noscript><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&family=Inter:wght@300;400;500&family=Share+Tech+Mono&display=swap" rel="stylesheet"></noscript>
-  <link rel="stylesheet" href="style.css?v=10">
-  <script src="perf-patch.js?v=10"></script>
+  <link rel="stylesheet" href="style.css?v=12">
 </head>
 <body>
 
 <div class="scroll-progress" id="scrollProgress"></div>
-<div class="cursor-glow" id="cursorGlow"></div>
 
-<!-- Mobile Menu -->
 <div class="mobile-menu" id="mobileMenu">
-  <a href="index.html#products" onclick="closeMenu()">Koleksi</a>
-  <a href="index.html#kenapa" onclick="closeMenu()">Jiwa Brand</a>
-  <a href="nobody-sound.html" onclick="closeMenu()">Nobody Sound</a>
-  <a href="index.html#contact" onclick="closeMenu()">Terhubung</a>
-  <a href="index.html#products" class="m-cta" onclick="closeMenu()">Lihat Koleksi</a>
+  <a href="index.html#products" onclick="closeMenu()">Artefak</a>
+  <a href="index.html#kenapa" onclick="closeMenu()">Lore</a>
+  <a href="nobody-sound.html" onclick="closeMenu()">Radio</a>
+  <a href="index.html#contact" onclick="closeMenu()">Signal</a>
 </div>
 
-<!-- Nav -->
 <nav>
   <a href="index.html" class="nav-logo"><img src="logo_text_putih.png" alt="CAPRUX"></a>
   <ul class="nav-links">
-    <li><a href="index.html#products">Koleksi</a></li>
-    <li><a href="index.html#kenapa">Jiwa Brand</a></li>
-    <li><a href="nobody-sound.html" class="active-nav">Nobody Sound</a></li>
-    <li><a href="index.html#contact">Terhubung</a></li>
+    <li><a href="index.html#products">Artefak</a></li>
+    <li><a href="index.html#kenapa">Lore</a></li>
+    <li><a href="nobody-sound.html">Radio</a></li>
+    <li><a href="index.html#contact">Signal</a></li>
   </ul>
-  <a href="index.html#products" class="nav-cta">Lihat Koleksi</a>
+  <a href="index.html#products" class="nav-cta">Mulai Eksplorasi</a>
   <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 
-<!-- Hero -->
-<div class="ns-hero">
-  <p class="ns-hero-eyebrow">// Podcast · CAPRUX</p>
+<div class="ns-hero" style="padding-top: 140px;">
+  <p class="ns-hero-eyebrow">// RADIO STATION · CAPRUX</p>
   <h1 class="ns-hero-title">NOBODY<br><span>SOUND</span></h1>
   <p class="ns-hero-sub">
     Mereka bukan siapa-siapa di mata dunia —<br>
-    tapi punya ilmu, cerita, dan tangan yang bisa diandalkan.<br>
-    Pilih karakter, kenali mereka.
+    tapi punya ilmu, cerita, dan tangan yang bisa diandalkan.
   </p>
 </div>
 
-<!-- Filter Kategori -->
 <div class="ns-filters-wrap">
-  <div class="ns-filters" id="nsFilters">
-    <button class="ns-filter-btn active" data-cat="semua">Semua</button>
-  </div>
+  <div class="ns-filters" id="nsFilters"></div>
 </div>
 
-<!-- Character Carousel -->
 <div class="ns-carousel-wrap">
   <div class="ns-carousel-track" id="nsCarousel"></div>
   <div class="ns-carousel-dots" id="nsDots"></div>
 </div>
 
-<!-- Info Panel -->
 <div class="ns-info-panel" id="nsInfoPanel"></div>
 
-<!-- Footer -->
-<footer class="reveal">
+<footer>
   <div class="f-logo"><img src="logo_text_putih.png" alt="CAPRUX"></div>
-  <div class="f-copy">© 2024 CAPRUX — Dari Lumpur ke Langit<br><span style="color:#2a4a30;font-size:.58rem">Akar Bumi · Jiwa Semesta · Being the Impossible with God's Help</span></div>
-  <div class="f-socials">
-    <a href="https://instagram.com/caprux.id" target="_blank">IG</a>
-    <a href="https://tiktok.com/@caprux.id" target="_blank">TT</a>
-    <a href="https://www.x.com/caprux_official" target="_blank">X</a>
-    <a href="https://www.youtube.com/@caprux_id" target="_blank">YT</a>
-    <a href="https://shopee.co.id/caprux.id" target="_blank">SP</a>
-    <a href="https://www.facebook.com/profile.php?id=61570786385157" target="_blank">FB</a>
-  </div>
+  <div class="f-copy">© 2024 CAPRUX <br><span style="color:#555;font-size:.6rem">Being the Impossible with God's Help</span></div>
 </footer>
 
-<a href="mailto:caprux.official@gmail.com?subject=NOBODY SOUND" class="email-fab" aria-label="Tanya via Email" title="Tanya via Email">
+<a href="mailto:caprux.official@gmail.com?subject=NOBODY SOUND" class="email-fab" aria-label="Kirim pesan">
   <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M3 6.5C3 5.67157 3.67157 5 4.5 5H19.5C20.3284 5 21 5.67157 21 6.5V17.5C21 18.3284 20.3284 19 19.5 19H4.5C3.67157 19 3 18.3284 3 17.5V6.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
-    <path d="M4 6.5L11.2865 12.0433C11.7051 12.3626 12.2949 12.3626 12.7135 12.0433L20 6.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M3 6.5C3 5.67157 3.67157 5 4.5 5H19.5C20.3284 5 21 5.67157 21 6.5V17.5C21 18.3284 20.3284 19 19.5 19H4.5C3.67157 19 3 18.3284 3 17.5V6.5Z" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M4 6.5L11.2865 12.0433C11.7051 12.3626 12.2949 12.3626 12.7135 12.0433L20 6.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
   </svg>
-  <span class="email-fab-ping"></span>
 </a>
 
-<script src="caprux-data.js?v=10" defer></script>
-<script src="script.js?v=10" defer></script>
-<script src="nobody-sound.js?v=10" defer></script>
+<script src="caprux-data.js?v=12" defer></script>
+<script src="script.js?v=12" defer></script>
+<script src="nobody-sound.js?v=12" defer></script>
 </body>
 </html>
