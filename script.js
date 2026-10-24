@@ -1,5 +1,5 @@
 // ================================================================
-// CAPRUX — script.js v14 "7-Layer Parallax Fixed"
+// CAPRUX — script.js v15 "PERFECT FIT & PERFORMANCE"
 // ================================================================
 
 let PRODUCTS = [];
@@ -196,7 +196,7 @@ document.addEventListener('DOMContentLoaded', function() {
     updateScrollProgress();
   }, { passive: true });
 
-  // ── PARALLAX EFFECT (7 LAYERS) ──
+  // ── PARALLAX EFFECT (7 LAYERS BACKGROUND) ──
   const parallaxLayers = {
     1: document.querySelector('.layer-1'),
     2: document.querySelector('.layer-2'),
@@ -211,16 +211,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function updateParallax() {
     const y = window.scrollY;
+    
+    // Deteksi apakah layar kecil (HP/Tablet Portrait)
     const isMobile = window.innerWidth < 900;
-    if (isMobile) return; // Skip parallax di HP biar ga lag
+    
+    // Kecepatan parallax (dibuat lebih kecil di HP agar tidak berat)
+    const speed = isMobile ? 0.5 : 1; 
 
-    if (parallaxLayers[1]) parallaxLayers[1].style.transform = `translate3d(0, ${y * 0.05}px, 0) scale(1.1)`;
-    if (parallaxLayers[2]) parallaxLayers[2].style.transform = `translate3d(0, ${y * 0.15}px, 0) scale(1.08)`;
-    if (parallaxLayers[3]) parallaxLayers[3].style.transform = `translate3d(0, ${y * 0.30}px, 0) scale(1.06)`;
-    if (parallaxLayers[4]) parallaxLayers[4].style.transform = `translate3d(0, ${y * 0.45}px, 0) scale(1.04)`;
-    if (parallaxLayers[5]) parallaxLayers[5].style.transform = `translate3d(0, ${y * 0.65}px, 0) scale(1.02)`;
-    if (parallaxLayers[6]) parallaxLayers[6].style.transform = `translate3d(0, ${y * 0.85}px, 0)`;
-    if (parallaxLayers[7]) parallaxLayers[7].style.transform = `translate3d(0, ${y * 1.10}px, 0)`;
+    if (parallaxLayers[1]) parallaxLayers[1].style.transform = `translate3d(0, ${y * 0.05 * speed}px, 0)`;
+    if (parallaxLayers[2]) parallaxLayers[2].style.transform = `translate3d(0, ${y * 0.15 * speed}px, 0)`;
+    if (parallaxLayers[3]) parallaxLayers[3].style.transform = `translate3d(0, ${y * 0.30 * speed}px, 0)`;
+    if (parallaxLayers[4]) parallaxLayers[4].style.transform = `translate3d(0, ${y * 0.45 * speed}px, 0)`;
+    if (parallaxLayers[5]) parallaxLayers[5].style.transform = `translate3d(0, ${y * 0.65 * speed}px, 0)`;
+    if (parallaxLayers[6]) parallaxLayers[6].style.transform = `translate3d(0, ${y * 0.85 * speed}px, 0)`;
+    if (parallaxLayers[7]) parallaxLayers[7].style.transform = `translate3d(0, ${y * 1.10 * speed}px, 0)`;
 
     ticking = false;
   }
@@ -232,7 +236,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }, { passive: true });
 
-  // Jalankan sekali saat load (kalau user refresh di tengah halaman)
+  // Jalankan sekali saat load
   updateParallax();
 
   // ── SCROLL PROGRESS ──
