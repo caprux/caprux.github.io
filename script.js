@@ -1,5 +1,5 @@
 // ================================================================
-// CAPRUX — script.js v21 "CLEAN & SOLID"
+// CAPRUX — script.js v23 "SIMPLE BACKGROUND PARALLAX"
 // ================================================================
 
 let PRODUCTS = [];
@@ -195,6 +195,49 @@ document.addEventListener('DOMContentLoaded', function() {
     if (nav) nav.classList.toggle('scrolled', window.scrollY > 60);
     updateScrollProgress();
   }, { passive: true });
+
+  // ==============================================================
+  // BACKGROUND POSITION PARALLAX (SUPER SIMPLE & COMPATIBLE)
+  // ==============================================================
+  const parallaxLayers = {
+    1: document.querySelector('.l-1'),
+    2: document.querySelector('.l-2'),
+    3: document.querySelector('.l-3'),
+    4: document.querySelector('.l-4'),
+    5: document.querySelector('.l-5'),
+    6: document.querySelector('.l-6'),
+    7: document.querySelector('.l-7')
+  };
+
+  let ticking = false;
+
+  function updateParallax() {
+    const y = window.scrollY;
+    
+    // Mengubah posisi background, bukan transform
+    // Angka 0.1 sampai 0.8 menentukan kecepatan (semakin besar semakin cepat)
+    if (parallaxLayers[1]) parallaxLayers[1].style.backgroundPositionY = `calc(0% + ${y * 0.1}px)`;
+    if (parallaxLayers[2]) parallaxLayers[2].style.backgroundPositionY = `calc(0% + ${y * 0.2}px)`;
+    if (parallaxLayers[3]) parallaxLayers[3].style.backgroundPositionY = `calc(0% + ${y * 0.35}px)`;
+    if (parallaxLayers[4]) parallaxLayers[4].style.backgroundPositionY = `calc(0% + ${y * 0.5}px)`;
+    if (parallaxLayers[5]) parallaxLayers[5].style.backgroundPositionY = `calc(0% + ${y * 0.65}px)`;
+    
+    // Layer 6 dan 7 (Tanah) menggunakan bottom center, jadi kita geser sedikit saja agar tidak naik meninggalkan layar
+    if (parallaxLayers[6]) parallaxLayers[6].style.backgroundPositionY = `calc(100% + ${y * 0.8}px)`;
+    if (parallaxLayers[7]) parallaxLayers[7].style.backgroundPositionY = `calc(100% + ${y * 1.0}px)`;
+
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(updateParallax);
+      ticking = true;
+    }
+  }, { passive: true });
+  
+  // Panggil sekali saat load
+  updateParallax();
 
   // ── SCROLL PROGRESS ──
   function updateScrollProgress() {
