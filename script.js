@@ -1,5 +1,5 @@
 // ================================================================
-// CAPRUX — script.js v12 "NEON CANOPY"
+// CAPRUX — script.js v13 "7-Layer Parallax"
 // ================================================================
 
 let PRODUCTS = [];
@@ -197,22 +197,35 @@ document.addEventListener('DOMContentLoaded', function() {
     updateScrollProgress();
   }, { passive: true });
 
-  // ── PARALLAX EFFECT (SVG) ──
+  // ── PARALLAX EFFECT (7 LAYERS) ──
   function updateParallax() {
     const hero = document.getElementById('home');
     if (!hero) return;
+    
+    // Cek apakah user di HP atau pakai "reduced motion" (biar ga lag)
+    const isMobile = window.innerWidth < 900;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (isMobile || reduceMotion) return;
+
     const y = window.scrollY;
     
-    // Kecepatan layer (semakin besar, semakin cepat bergerak)
-    const sky = y * 0.1;
-    const mount = y * 0.25;
-    const trees = y * 0.45;
-    const fg = y * 0.7;
+    // Rumus pengali: Semakin jauh (layer 1), semakin kecil angkanya
+    const l1 = y * 0.05;  // Awan (Paling lambat)
+    const l2 = y * 0.15;  // Gunung jauh
+    const l3 = y * 0.30;  // Gunung dekat
+    const l4 = y * 0.45;  // Hutan jauh
+    const l5 = y * 0.65;  // Hutan tengah
+    const l6 = y * 0.85;  // Semak dekat
+    const l7 = y * 1.10;  // Tanah (Paling cepat)
 
-    document.documentElement.style.setProperty('--scroll-sky', `${sky}px`);
-    document.documentElement.style.setProperty('--scroll-mount', `${mount}px`);
-    document.documentElement.style.setProperty('--scroll-trees', `${trees}px`);
-    document.documentElement.style.setProperty('--scroll-fg', `${fg}px`);
+    const root = document.documentElement;
+    root.style.setProperty('--scroll-l1', `${l1}px`);
+    root.style.setProperty('--scroll-l2', `${l2}px`);
+    root.style.setProperty('--scroll-l3', `${l3}px`);
+    root.style.setProperty('--scroll-l4', `${l4}px`);
+    root.style.setProperty('--scroll-l5', `${l5}px`);
+    root.style.setProperty('--scroll-l6', `${l6}px`);
+    root.style.setProperty('--scroll-l7', `${l7}px`);
   }
 
   // ── SCROLL PROGRESS ──
