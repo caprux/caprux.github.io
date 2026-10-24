@@ -1,5 +1,5 @@
 // ================================================================
-// CAPRUX — script.js v23 "SIMPLE BACKGROUND PARALLAX"
+// CAPRUX — script.js v24 "TOP-ALIGNED PARALLAX"
 // ================================================================
 
 let PRODUCTS = [];
@@ -197,7 +197,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }, { passive: true });
 
   // ==============================================================
-  // BACKGROUND POSITION PARALLAX (SUPER SIMPLE & COMPATIBLE)
+  // BACKGROUND POSITION PARALLAX (MEPET ATAS)
   // ==============================================================
   const parallaxLayers = {
     1: document.querySelector('.l-1'),
@@ -214,17 +214,16 @@ document.addEventListener('DOMContentLoaded', function() {
   function updateParallax() {
     const y = window.scrollY;
     
-    // Mengubah posisi background, bukan transform
-    // Angka 0.1 sampai 0.8 menentukan kecepatan (semakin besar semakin cepat)
-    if (parallaxLayers[1]) parallaxLayers[1].style.backgroundPositionY = `calc(0% + ${y * 0.1}px)`;
-    if (parallaxLayers[2]) parallaxLayers[2].style.backgroundPositionY = `calc(0% + ${y * 0.2}px)`;
-    if (parallaxLayers[3]) parallaxLayers[3].style.backgroundPositionY = `calc(0% + ${y * 0.35}px)`;
-    if (parallaxLayers[4]) parallaxLayers[4].style.backgroundPositionY = `calc(0% + ${y * 0.5}px)`;
-    if (parallaxLayers[5]) parallaxLayers[5].style.backgroundPositionY = `calc(0% + ${y * 0.65}px)`;
+    // Semua layer mulai dari 0% (Paling Atas)
+    if (parallaxLayers[1]) parallaxLayers[1].style.backgroundPosition = `center calc(0% + ${y * 0.1}px)`;
+    if (parallaxLayers[2]) parallaxLayers[2].style.backgroundPosition = `center calc(0% + ${y * 0.2}px)`;
+    if (parallaxLayers[3]) parallaxLayers[3].style.backgroundPosition = `center calc(0% + ${y * 0.35}px)`;
+    if (parallaxLayers[4]) parallaxLayers[4].style.backgroundPosition = `center calc(0% + ${y * 0.5}px)`;
+    if (parallaxLayers[5]) parallaxLayers[5].style.backgroundPosition = `center calc(0% + ${y * 0.65}px)`;
     
-    // Layer 6 dan 7 (Tanah) menggunakan bottom center, jadi kita geser sedikit saja agar tidak naik meninggalkan layar
-    if (parallaxLayers[6]) parallaxLayers[6].style.backgroundPositionY = `calc(100% + ${y * 0.8}px)`;
-    if (parallaxLayers[7]) parallaxLayers[7].style.backgroundPositionY = `calc(100% + ${y * 1.0}px)`;
+    // Layer 6 & 7 (Tanah) tetap menempel di bawah (100%) agar tidak naik
+    if (parallaxLayers[6]) parallaxLayers[6].style.backgroundPosition = `center calc(100% + ${y * 0.8}px)`;
+    if (parallaxLayers[7]) parallaxLayers[7].style.backgroundPosition = `center calc(100% + ${y * 1.0}px)`;
 
     ticking = false;
   }
@@ -236,7 +235,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }, { passive: true });
   
-  // Panggil sekali saat load
   updateParallax();
 
   // ── SCROLL PROGRESS ──
