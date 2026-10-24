@@ -1,5 +1,5 @@
 // ================================================================
-// CAPRUX — script.js v18 "TRUE 3D PARALLAX"
+// CAPRUX — script.js v19 "HYBRID PARALLAX"
 // ================================================================
 
 let PRODUCTS = [];
@@ -197,7 +197,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }, { passive: true });
 
   // ==============================================================
-  // PARALLAX EFFECT (TRUE 3D DEPTH)
+  // PARALLAX EFFECT (HYBRID 3D DEPTH)
   // ==============================================================
   const parallaxLayers = {
     1: document.querySelector('.layer-1'),
@@ -215,8 +215,7 @@ document.addEventListener('DOMContentLoaded', function() {
   function updateParallax() {
     const y = window.scrollY;
     
-    // Skala parallax drastis untuk efek 3D yang sangat kuat
-    // Semakin jauh layer (angka kecil), semakin lambat.
+    // Kecepatan drastis untuk efek 3D mendalam
     if (parallaxLayers[1]) parallaxLayers[1].style.transform = `translate3d(0, ${y * 0.1}px, 0)`;
     if (parallaxLayers[2]) parallaxLayers[2].style.transform = `translate3d(0, ${y * 0.25}px, 0)`;
     if (parallaxLayers[3]) parallaxLayers[3].style.transform = `translate3d(0, ${y * 0.45}px, 0)`;
@@ -225,7 +224,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if (parallaxLayers[6]) parallaxLayers[6].style.transform = `translate3d(0, ${y * 1.25}px, 0)`;
     if (parallaxLayers[7]) parallaxLayers[7].style.transform = `translate3d(0, ${y * 1.60}px, 0)`;
 
-    // Teks Hero ikut bergerak ke atas lebih cepat
     if (heroContent) heroContent.style.transform = `translateY(${y * 0.6}px)`;
 
     ticking = false;
