@@ -10,8 +10,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&family=Inter:wght@300;400;500&family=Share+Tech+Mono&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-  <link rel="stylesheet" href="style.css?v=14">
-  <script src="perf-patch.js?v=14"></script>
+  <link rel="stylesheet" href="style.css?v=15">
+  <script src="perf-patch.js?v=15"></script>
 </head>
 <body>
 
@@ -40,18 +40,18 @@
 </nav>
 
 <!-- ========================================== -->
-<!-- HERO: 7-LAYER PARALLAX                     -->
+<!-- HERO: 7-LAYER PARALLAX (BACKGROUND DIVS)   -->
 <!-- ========================================== -->
 <section id="home">
   <div class="parallax-wrap" id="parallaxHero">
-    <!-- Pastikan nama file sama persis dengan yang ada di folder -->
-    <img class="parallax-layer layer-1" src="layer 1.png" alt="Sky">
-    <img class="parallax-layer layer-2" src="layer 2.png" alt="Far Mountains">
-    <img class="parallax-layer layer-3" src="layer 3.png" alt="Mid Mountains">
-    <img class="parallax-layer layer-4" src="layer 4.png" alt="Far Trees">
-    <img class="parallax-layer layer-5" src="layer 5.png" alt="Mid Trees">
-    <img class="parallax-layer layer-6" src="layer 6.png" alt="Near Trees">
-    <img class="parallax-layer layer-7" src="layer 7.png" alt="Foreground">
+    <!-- Menggunakan DIV dengan style background-image -->
+    <div class="parallax-layer layer-1" style="background-image: url('layer 1.png');"></div>
+    <div class="parallax-layer layer-2" style="background-image: url('layer 2.png');"></div>
+    <div class="parallax-layer layer-3" style="background-image: url('layer 3.png');"></div>
+    <div class="parallax-layer layer-4" style="background-image: url('layer 4.png');"></div>
+    <div class="parallax-layer layer-5" style="background-image: url('layer 5.png');"></div>
+    <div class="parallax-layer layer-6" style="background-image: url('layer 6.png');"></div>
+    <div class="parallax-layer layer-7" style="background-image: url('layer 7.png');"></div>
   </div>
 
   <div class="hero-content">
@@ -182,7 +182,7 @@
   <div class="f-copy">© 2024 CAPRUX <br><span style="color:#555;font-size:.6rem">Being the Impossible with God's Help</span></div>
   <div class="f-socials">
     <a href="https://instagram.com/caprux.id" target="_blank">IG</a>
-    <a href="https://tiktok.com/@caprux.id" target="_blank">TT</a>
+    <a href="https://www.tiktok.com/@caprux.id" target="_blank">TT</a>
     <a href="https://www.x.com/caprux_official" target="_blank">X</a>
     <a href="https://www.youtube.com/@caprux_id" target="_blank">YT</a>
   </div>
@@ -195,7 +195,7 @@
   </svg>
 </a>
 
-<script src="caprux-data.js?v=14" defer></script>
-<script src="script.js?v=14" defer></script>
+<script src="caprux-data.js?v=15" defer></script>
+<script src="script.js?v=15" defer></script>
 </body>
 </html>
