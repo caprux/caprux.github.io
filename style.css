@@ -1,5 +1,5 @@
 /* ================================================================
-   CAPRUX — style.css v21 "GOONIES ADVENTURE STYLE"
+   CAPRUX — style.css v23 "BACK-TO-BASICS PARALLAX"
    ================================================================ */
 :root {
   --black:    #000000;
@@ -70,70 +70,66 @@ nav.scrolled { background: rgba(0, 0, 0, 0.95); border-bottom-color: rgba(0,255,
 .mobile-menu a:hover { color: var(--green); }
 
 /* ================================================================
-   HERO SECTION (GOONIES STYLE - FIXED PARALLAX)
+   HERO SECTION (7 LAYER TRUE PARALLAX)
    ================================================================ */
 #home {
   position: relative; 
   height: 100vh; 
   min-height: 600px;
+  overflow: hidden; 
+  background: #000;
   display: flex; 
   align-items: center; 
   justify-content: center;
   text-align: center;
-  /* Gambar latar digabung menjadi satu (pakai layer 1 sebagai background utama) */
-  background-image: url('layer 1.webp');
-  background-size: cover;
-  background-position: center center;
-  background-attachment: fixed; /* EFEK PARALLAX SEDERHANA & PASTI JALAN */
-  background-repeat: no-repeat;
 }
 
-/* Overlay gelap agar teks terbaca */
-#home::before {
+.parallax-container { 
+  position: absolute; 
+  top: 0; left: 0; 
+  width: 100%; height: 100%; 
+  z-index: 1; 
+  pointer-events: none; 
+  overflow: hidden;
+}
+
+.p-layer { 
+  position: absolute; 
+  top: 0; left: 0;
+  width: 100%; 
+  height: 100%; 
+  background-repeat: no-repeat;
+  background-position: center top;
+  will-change: background-position;
+}
+
+/* LAYER 1: Langit (Cover) */
+.l-1 { background-size: cover; z-index: 1; }
+/* LAYER 2-5: Gunung (Cover) */
+.l-2 { background-size: cover; z-index: 2; }
+.l-3 { background-size: cover; z-index: 3; }
+.l-4 { background-size: cover; z-index: 4; }
+.l-5 { background-size: cover; z-index: 5; }
+/* LAYER 6-7: Tanah (Fit Width) */
+.l-6 { background-size: 100% auto; background-position: bottom center; z-index: 6; }
+.l-7 { background-size: 100% auto; background-position: bottom center; z-index: 7; }
+
+/* Overlay Gelap */
+#home::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.7) 100%);
-  z-index: 1;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.8) 100%);
+  z-index: 8;
+  pointer-events: none;
 }
 
-.hero-content { 
-  position: relative; 
-  z-index: 2; 
-  padding: 0 var(--pad-x);
-  max-width: 800px;
-}
-.hero-eyebrow { 
-  font-family: var(--font-mono); 
-  font-size: clamp(.65rem, .9vw, .75rem); 
-  letter-spacing: .3em; 
-  color: var(--green); 
-  text-transform: uppercase; 
-  margin-bottom: 20px; 
-  text-shadow: 0 2px 10px rgba(0,0,0,0.9);
-}
-.main-logo { 
-  width: clamp(260px, 50vw, 500px); 
-  margin: 0 auto 24px auto; 
-  filter: drop-shadow(0 0 24px rgba(0,255,51,.4)) drop-shadow(0 15px 30px rgba(0,0,0,0.9)); 
-}
-.hero-sub { 
-  font-family: var(--font-head); 
-  font-weight: 500; 
-  font-size: clamp(1.1rem, 2.5vw, 1.5rem); 
-  color: var(--white); 
-  line-height: 1.6; 
-  text-shadow: 0 2px 10px rgba(0,0,0,0.9);
-}
-.hero-mantra { 
-  font-family: var(--font-mono); 
-  font-size: 0.75rem; 
-  letter-spacing: .2em; 
-  color: var(--grey-lt); 
-  margin-top: 20px; 
-  text-shadow: 0 2px 10px rgba(0,0,0,0.9);
-}
-.scroll-hint { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 10px; z-index: 2; }
+.hero-content { position: relative; z-index: 10; padding: 0 var(--pad-x); max-width: 800px; }
+.hero-eyebrow { font-family: var(--font-mono); font-size: clamp(.65rem, .9vw, .75rem); letter-spacing: .3em; color: var(--green); text-transform: uppercase; margin-bottom: 20px; }
+.main-logo { width: clamp(260px, 50vw, 500px); margin: 0 auto 24px auto; filter: drop-shadow(0 0 24px rgba(0,255,51,.4)) drop-shadow(0 15px 30px rgba(0,0,0,0.9)); }
+.hero-sub { font-family: var(--font-head); font-weight: 500; font-size: clamp(1.1rem, 2.5vw, 1.5rem); color: var(--white); line-height: 1.6; text-shadow: 0 2px 10px rgba(0,0,0,0.9); }
+.hero-mantra { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: .2em; color: var(--grey-lt); margin-top: 20px; text-shadow: 0 2px 10px rgba(0,0,0,0.9); }
+.scroll-hint { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 10px; z-index: 10; }
 .scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--green), transparent); animation: scroll-drop 2s infinite; }
 @keyframes scroll-drop { 0% { transform: scaleY(0); transform-origin: top; opacity: 0; } 50% { transform: scaleY(1); transform-origin: top; opacity: 1; } 100% { transform: scaleY(1); transform-origin: bottom; opacity: 0; } }
 .scroll-hint span { font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: .25em; color: var(--grey-lt); text-transform: uppercase; }
@@ -183,7 +179,7 @@ section { padding: clamp(80px, 12vh, 140px) var(--pad-x); }
 @keyframes shake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
 .pcard.shake { animation: shake .35s ease; }
 
-/* ── LORE (GOONIES STORYTELLING) ── */
+/* ── LORE ── */
 #kenapa { background: var(--surf2); border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); }
 .about-phil-banner { position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); background: var(--black); padding: 80px 40px; margin-bottom: 60px; border-radius: 4px; text-align: center; }
 .phil-watermark { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: var(--font-head); font-weight: 900; font-size: 14rem; color: rgba(255,255,255,0.02); pointer-events: none; }
@@ -352,7 +348,6 @@ footer { background: var(--black); border-top: 1px solid rgba(255,255,255,0.05);
   .product-grid { grid-template-columns: 1fr; gap: 40px; }
   .drops-header { flex-direction: column; align-items: flex-start; }
   .drops-desc { text-align: left; }
-  #home { background-attachment: scroll; } /* Fix background lag di iOS */
 }
 @media (max-width: 600px) {
   footer { flex-direction: column; align-items: flex-start; }
