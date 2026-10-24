@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CAPRUX — Kacau Tapi Sadar.</title>
-  <meta name="description" content="CAPRUX itu soul buat yang lagi kacau tapi sadar. Kaos dan jaket yang jujur: gak sempurna, dan kita bilang apa adanya. Being the impossible with God's help.">
+  <meta name="description" content="CAPRUX itu soul buat yang lagi kacau tapi sadar. Kaos dan jaket yang jujur: gak sempurna, dan kita bilang apa adanya.">
   <link rel="icon" type="image/png" href="LOGO_TRANSPARAN_HITAM.png">
   <meta name="theme-color" content="#000000">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&family=Inter:wght@300;400;500&family=Share+Tech+Mono&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-  <link rel="stylesheet" href="style.css?v=21">
-  <script src="perf-patch.js?v=21"></script>
+  <link rel="stylesheet" href="style.css?v=23">
+  <script src="perf-patch.js?v=23"></script>
 </head>
 <body>
 
@@ -37,10 +37,21 @@
   <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 
-<!-- HERO SECTION (Cuma 1 Background, Parallax Otomatis) -->
+<!-- HERO SECTION (7 LAYER PARALLAX) -->
 <section id="home">
+  <div class="parallax-container" id="parallaxHero">
+    <!-- Pastikan file .webp ini ada di folder Anda -->
+    <div class="p-layer l-1" style="background-image: url('layer 1.webp');"></div>
+    <div class="p-layer l-2" style="background-image: url('layer 2.webp');"></div>
+    <div class="p-layer l-3" style="background-image: url('layer 3.webp');"></div>
+    <div class="p-layer l-4" style="background-image: url('layer 4.webp');"></div>
+    <div class="p-layer l-5" style="background-image: url('layer 5.webp');"></div>
+    <div class="p-layer l-6" style="background-image: url('layer 6.webp');"></div>
+    <div class="p-layer l-7" style="background-image: url('layer 7.webp');"></div>
+  </div>
+
   <div class="hero-content">
-    <p class="hero-eyebrow">// THE ADVENTURE BEGINS</p>
+    <p class="hero-eyebrow">// SECTOR 01 · BALEENDAH</p>
     <img class="main-logo" src="logo_text_putih.png" alt="CAPRUX">
     <p class="hero-sub">Lo belum jadi apa-apa. Gua juga.<br>Itu titik berangkat yang jujur.</p>
     <p class="hero-mantra">// kacau. sadar. berubah.</p>
@@ -61,11 +72,6 @@
     <span>Hilangkan penilaian terhadap realita</span><span class="msep">✦</span>
     <span>Selama masih bernafas semua masih aman</span><span class="msep">✦</span>
     <span>Selama masih bernyawa semua masih bisa di wujudkan</span><span class="msep">✦</span>
-    <span>Tidak ada kesusahan yang tidak kita pernah pikirkan</span><span class="msep">✦</span>
-    <span>Tingkat tinggi ilmu adalah berhenti membandingkan realita</span><span class="msep">✦</span>
-    <span>Yang terjadi adalah cerminan dari ketakutan kita</span><span class="msep">✦</span>
-    <span>Terus bergerak atau diam berkedok pasrah</span><span class="msep">✦</span>
-    <span>Hidup adalah selalu tentang memilih</span><span class="msep">✦</span>
   </div>
 </div>
 
@@ -174,7 +180,7 @@
   </svg>
 </a>
 
-<script src="caprux-data.js?v=21" defer></script>
-<script src="script.js?v=21" defer></script>
+<script src="caprux-data.js?v=23" defer></script>
+<script src="script.js?v=23" defer></script>
 </body>
 </html>
