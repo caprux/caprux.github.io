@@ -1,6 +1,5 @@
 /* ================================================================
-   CAPRUX — style.css v18 "TRUE 3D PARALLAX"
-   Palet: Hitam · Putih · Abu · #00ff00
+   CAPRUX — style.css v19 "HYBRID PARALLAX"
    ================================================================ */
 :root {
   --black:    #000000;
@@ -71,7 +70,7 @@ nav.scrolled { background: rgba(0, 0, 0, 0.95); border-bottom-color: rgba(0,255,
 .mobile-menu a:hover { color: var(--green); }
 
 /* ================================================================
-   HERO PARALLAX (7 LAYERS) - TRUE 3D DEPTH
+   HERO PARALLAX (HYBRID)
    ================================================================ */
 #home {
   position: relative; 
@@ -93,26 +92,40 @@ nav.scrolled { background: rgba(0, 0, 0, 0.95); border-bottom-color: rgba(0,255,
   overflow: hidden;
 }
 
-/* Base Parallax: Cover sempurna, tanpa ruang kosong */
 .parallax-layer { 
   position: absolute; 
   top: 0; left: 0;
   width: 100%; 
   height: 100%; 
-  background-size: cover;
   background-repeat: no-repeat;
   will-change: transform;
   transform-origin: center center;
 }
 
-/* Posisi Anchor Pintar untuk HP & Desktop */
-.layer-1 { background-position: top center; z-index: 1; } /* Awan mepet atas */
-.layer-2 { background-position: center 20%; z-index: 2; } 
-.layer-3 { background-position: center 30%; z-index: 3; } 
-.layer-4 { background-position: center 40%; z-index: 4; } 
-.layer-5 { background-position: center 50%; z-index: 5; } 
-.layer-6 { background-position: bottom center; z-index: 6; } 
-.layer-7 { background-position: bottom center; z-index: 7; } 
+/* --- LAYER 1: LANGIT (Mepet Kanan Atas) --- */
+.layer-1 { 
+  background-size: cover;
+  background-position: right top; /* Agar matahari di kanan tidak hilang */
+  z-index: 1; 
+}
+
+/* --- LAYER 2 - 5: GUNUNG & HUTAN (Cover Penuh) --- */
+.layer-2 { background-size: cover; background-position: center 20%; z-index: 2; } 
+.layer-3 { background-size: cover; background-position: center 30%; z-index: 3; } 
+.layer-4 { background-size: cover; background-position: center 40%; z-index: 4; } 
+.layer-5 { background-size: cover; background-position: center 50%; z-index: 5; } 
+
+/* --- LAYER 6 & 7: TANAH (Fit Width, Menempel Bawah) --- */
+.layer-6 { 
+  background-size: 100% auto; /* Fit Lebar */
+  background-position: bottom center; 
+  z-index: 6; 
+} 
+.layer-7 { 
+  background-size: 100% auto; /* Fit Lebar */
+  background-position: bottom center; 
+  z-index: 7; 
+} 
 
 #home::after {
   content: '';
