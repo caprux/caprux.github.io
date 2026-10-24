@@ -10,8 +10,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&family=Inter:wght@300;400;500&family=Share+Tech+Mono&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-  <link rel="stylesheet" href="style.css?v=16">
-  <script src="perf-patch.js?v=16"></script>
+  <link rel="stylesheet" href="style.css?v=17">
+  <script src="perf-patch.js?v=17"></script>
 </head>
 <body>
 
@@ -40,18 +40,21 @@
 </nav>
 
 <!-- ========================================== -->
-<!-- HERO: 7-LAYER PARALLAX (BACKGROUND DIVS)   -->
+<!-- HERO: 7-LAYER PARALLAX (WEBP VERSION)      -->
 <!-- ========================================== -->
 <section id="home">
   <div class="parallax-wrap" id="parallaxHero">
-    <!-- Menggunakan DIV dengan style background-image -->
-    <div class="parallax-layer layer-1" style="background-image: url('layer 1.png');"></div>
-    <div class="parallax-layer layer-2" style="background-image: url('layer 2.png');"></div>
-    <div class="parallax-layer layer-3" style="background-image: url('layer 3.png');"></div>
-    <div class="parallax-layer layer-4" style="background-image: url('layer 4.png');"></div>
-    <div class="parallax-layer layer-5" style="background-image: url('layer 5.png');"></div>
-    <div class="parallax-layer layer-6" style="background-image: url('layer 6.png');"></div>
-    <div class="parallax-layer layer-7" style="background-image: url('layer 7.png');"></div>
+    <!-- 
+      PENTING: Pastikan nama file .webp di bawah ini SAMA PERSIS dengan yang kamu upload.
+      Jika file kamu bernama "layer1.webp" (tanpa spasi), ubah teks di url() menjadi url('layer1.webp')
+    -->
+    <div class="parallax-layer layer-1" style="background-image: url('layer 1.webp');"></div>
+    <div class="parallax-layer layer-2" style="background-image: url('layer 2.webp');"></div>
+    <div class="parallax-layer layer-3" style="background-image: url('layer 3.webp');"></div>
+    <div class="parallax-layer layer-4" style="background-image: url('layer 4.webp');"></div>
+    <div class="parallax-layer layer-5" style="background-image: url('layer 5.webp');"></div>
+    <div class="parallax-layer layer-6" style="background-image: url('layer 6.webp');"></div>
+    <div class="parallax-layer layer-7" style="background-image: url('layer 7.webp');"></div>
   </div>
 
   <div class="hero-content">
@@ -195,7 +198,7 @@
   </svg>
 </a>
 
-<script src="caprux-data.js?v=16" defer></script>
-<script src="script.js?v=16" defer></script>
+<script src="caprux-data.js?v=17" defer></script>
+<script src="script.js?v=17" defer></script>
 </body>
 </html>
