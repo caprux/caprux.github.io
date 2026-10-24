@@ -1,5 +1,5 @@
 // ================================================================
-// CAPRUX — script.js v16 "FIT WIDTH PARALLAX"
+// CAPRUX — script.js v18 "TRUE 3D PARALLAX"
 // ================================================================
 
 let PRODUCTS = [];
@@ -196,7 +196,9 @@ document.addEventListener('DOMContentLoaded', function() {
     updateScrollProgress();
   }, { passive: true });
 
-  // ── PARALLAX EFFECT (7 LAYERS BACKGROUND) ──
+  // ==============================================================
+  // PARALLAX EFFECT (TRUE 3D DEPTH)
+  // ==============================================================
   const parallaxLayers = {
     1: document.querySelector('.layer-1'),
     2: document.querySelector('.layer-2'),
@@ -206,22 +208,25 @@ document.addEventListener('DOMContentLoaded', function() {
     6: document.querySelector('.layer-6'),
     7: document.querySelector('.layer-7')
   };
+  const heroContent = document.querySelector('.hero-content');
 
   let ticking = false;
 
   function updateParallax() {
     const y = window.scrollY;
     
-    // Kecepatan parallax (dibuat lebih kecil di HP)
-    const speed = window.innerWidth < 900 ? 0.5 : 1; 
+    // Skala parallax drastis untuk efek 3D yang sangat kuat
+    // Semakin jauh layer (angka kecil), semakin lambat.
+    if (parallaxLayers[1]) parallaxLayers[1].style.transform = `translate3d(0, ${y * 0.1}px, 0)`;
+    if (parallaxLayers[2]) parallaxLayers[2].style.transform = `translate3d(0, ${y * 0.25}px, 0)`;
+    if (parallaxLayers[3]) parallaxLayers[3].style.transform = `translate3d(0, ${y * 0.45}px, 0)`;
+    if (parallaxLayers[4]) parallaxLayers[4].style.transform = `translate3d(0, ${y * 0.70}px, 0)`;
+    if (parallaxLayers[5]) parallaxLayers[5].style.transform = `translate3d(0, ${y * 0.95}px, 0)`;
+    if (parallaxLayers[6]) parallaxLayers[6].style.transform = `translate3d(0, ${y * 1.25}px, 0)`;
+    if (parallaxLayers[7]) parallaxLayers[7].style.transform = `translate3d(0, ${y * 1.60}px, 0)`;
 
-    if (parallaxLayers[1]) parallaxLayers[1].style.transform = `translate3d(0, ${y * 0.05 * speed}px, 0)`;
-    if (parallaxLayers[2]) parallaxLayers[2].style.transform = `translate3d(0, ${y * 0.15 * speed}px, 0)`;
-    if (parallaxLayers[3]) parallaxLayers[3].style.transform = `translate3d(0, ${y * 0.30 * speed}px, 0)`;
-    if (parallaxLayers[4]) parallaxLayers[4].style.transform = `translate3d(0, ${y * 0.45 * speed}px, 0)`;
-    if (parallaxLayers[5]) parallaxLayers[5].style.transform = `translate3d(0, ${y * 0.65 * speed}px, 0)`;
-    if (parallaxLayers[6]) parallaxLayers[6].style.transform = `translate3d(0, ${y * 0.85 * speed}px, 0)`;
-    if (parallaxLayers[7]) parallaxLayers[7].style.transform = `translate3d(0, ${y * 1.10 * speed}px, 0)`;
+    // Teks Hero ikut bergerak ke atas lebih cepat
+    if (heroContent) heroContent.style.transform = `translateY(${y * 0.6}px)`;
 
     ticking = false;
   }
@@ -233,7 +238,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }, { passive: true });
 
-  // Jalankan sekali saat load
   updateParallax();
 
   // ── SCROLL PROGRESS ──
