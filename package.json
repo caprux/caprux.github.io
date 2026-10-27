@@ -1,0 +1,7 @@
+{
+  "name": "caprux-site",
+  "private": true,
+  "description": "Build cerita (docx -> html) untuk caprux.id",
+  "scripts": { "build:stories": "node scripts/build-stories.js" },
+  "dependencies": { "mammoth": "1.8.0" }
+}

@@ -7,28 +7,17 @@
   <link rel="icon" type="image/png" href="LOGO_TRANSPARAN_HITAM.png">
   <meta name="theme-color" content="#000000">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&family=Inter:wght@300;400;500&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=12">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&family=Inter:wght@300;400;500&family=Share+Tech+Mono&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&family=Inter:wght@300;400;500&family=Share+Tech+Mono&display=swap" rel="stylesheet"></noscript>
+  <link rel="stylesheet" href="style.css?v=25">
+  <script src="perf-patch.js?v=25"></script>
 </head>
-<body>
-
-<div class="scroll-progress" id="scrollProgress"></div>
-
-<nav>
-  <a href="index.html" class="nav-logo"><img src="logo_text_putih.png" alt="CAPRUX"></a>
-  <ul class="nav-links">
-    <li><a href="index.html#products">Artefak</a></li>
-    <li><a href="index.html#kenapa">Lore</a></li>
-    <li><a href="nobody-sound.html">Radio</a></li>
-    <li><a href="index.html#contact">Signal</a></li>
-  </ul>
-  <a href="index.html#products" class="nav-cta">Mulai Eksplorasi</a>
-  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
-</nav>
+<body data-page="product">
 
 <div class="breadcrumb">
   <a href="index.html">Beranda</a><span class="bc-sep">›</span>
-  <a href="index.html#products">Artefak</a><span class="bc-sep">›</span>
+  <a href="produk.html">Artefak</a><span class="bc-sep">›</span>
   <span class="bc-cur">Memuat...</span>
 </div>
 
@@ -38,12 +27,7 @@
       <div class="gallery-main">
         <img src="" alt="Product" id="mainImg">
       </div>
-      <div class="thumbs">
-        <div class="thumb active"><img src="" alt=""></div>
-        <div class="thumb"><img src="" alt=""></div>
-        <div class="thumb"><img src="" alt=""></div>
-        <div class="thumb"><img src="" alt=""></div>
-      </div>
+      <div class="thumbs"></div>
     </div>
 
     <div class="prod-info reveal-right">
@@ -59,14 +43,14 @@
 
       <div class="cta-block">
         <button class="btn-primary" disabled>◇ Segera Tiba</button>
-        <a href="index.html#products" class="btn-ghost">← Koleksi Lainnya</a>
+        <a href="produk.html" class="btn-ghost">← Koleksi Lainnya</a>
       </div>
 
       <div class="notify-block">
         <div class="block-label">// Ingin tahu saat tersedia?</div>
         <div class="notify-row">
-          <input class="notify-in" type="email" placeholder="email@kamu.com" id="notifyEmail">
-          <button class="notify-btn" onclick="handleNotify()">Beritahu</button>
+          <input class="notify-in" type="email" placeholder="email@kamu.com" id="notifyEmail" autocomplete="email">
+          <button class="notify-btn" type="button" onclick="handleNotify()">Beritahu</button>
         </div>
       </div>
     </div>
@@ -80,12 +64,7 @@
   <div class="rel-grid reveal-scale"></div>
 </section>
 
-<footer>
-  <div class="f-logo"><img src="logo_text_putih.png" alt="CAPRUX"></div>
-  <div class="f-copy">© 2024 CAPRUX <br><span style="color:#555;font-size:.6rem">Being the Impossible with God's Help</span></div>
-</footer>
-
-<script src="caprux-data.js?v=12" defer></script>
-<script src="script.js?v=12" defer></script>
+<script src="caprux-data.js?v=25" defer></script>
+<script src="script.js?v=25" defer></script>
 </body>
 </html>

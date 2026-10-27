@@ -1,6 +1,7 @@
 // ================================================================
-// CAPRUX — caprux-data.js  v3.0 FINAL
-// Baca data dari products.csv dan nobody-sound.csv (root folder)
+// CAPRUX — caprux-data.js  v3.1
+// Baca data dari products.csv, nobody-sound.csv (root folder)
+// dan stories/stories.json (dibuat otomatis dari file Word)
 // Support separator ; (semicolon) & , (koma)
 // Skip baris komentar otomatis
 // ================================================================
@@ -132,7 +133,7 @@ window.CAPRUX_DATA = (function () {
   function rowToGuest(row) {
     var socials = [];
     if (row.ig)       socials.push({ platform: 'Instagram', url: 'https://instagram.com/' + row.ig.replace('@', '') });
-    if (row.tiktok)   socials.push({ platform: 'TikTok',    url: 'https://tiktok.com/'    + row.tiktok.replace('@', '') });
+    if (row.tiktok)   socials.push({ platform: 'TikTok',    url: 'https://tiktok.com/@'   + row.tiktok.replace('@', '') });
     if (row.whatsapp) socials.push({ platform: 'WhatsApp',  url: 'https://wa.me/'         + row.whatsapp.replace(/[^0-9]/g, '') });
 
     return {
@@ -150,6 +151,15 @@ window.CAPRUX_DATA = (function () {
     loadProducts: function () {
       return fetchCSV('products.csv').then(function (text) {
         return parseCSV(text).map(rowToProduct);
+      });
+    },
+    // Daftar cerita: { v: 'hash', stories: [{id, num, title, file, words}] }
+    loadStories: function () {
+      return fetch('stories/stories.json', { cache: 'no-cache' }).then(function (r) {
+        if (!r.ok) throw new Error('Gagal fetch stories.json (' + r.status + ')');
+        return r.json();
+      }).then(function (data) {
+        return { v: data.v || '', stories: data.stories || [] };
       });
     },
     loadGuests: function () {
