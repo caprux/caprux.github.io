@@ -1,5 +1,5 @@
 {
-  "v": "d7c1cbf2",
+  "v": "125923c6",
   "stories": [
     {
       "id": "000",
@@ -7,6 +7,13 @@
       "title": "The Strong Princess",
       "file": "000.html",
       "words": 1124
+    },
+    {
+      "id": "001",
+      "num": 1,
+      "title": "Malam Seorang Pria",
+      "file": "001.html",
+      "words": 651
     }
   ]
 }
