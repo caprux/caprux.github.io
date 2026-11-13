@@ -1,5 +1,5 @@
 {
-  "v": "125923c6",
+  "v": "47ed9e4c",
   "stories": [
     {
       "id": "000",
@@ -14,6 +14,13 @@
       "title": "Malam Seorang Pria",
       "file": "001.html",
       "words": 651
+    },
+    {
+      "id": "002",
+      "num": 2,
+      "title": "Widow Revenge",
+      "file": "002.html",
+      "words": 603
     }
   ]
 }
